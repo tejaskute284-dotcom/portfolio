@@ -1,0 +1,44 @@
+/* Animations & Keyframes - Clean & Immediate */
+
+/* Reveal on Scroll - Instant Visibility */
+.reveal,
+.stagger-child {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Typewriter blinking cursor */
+.typewriter-cursor {
+  display: inline-block;
+  background-color: var(--accent-violet);
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Active Nav Link Underline Glow */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-cyan));
+  transition: width 0.2s ease;
+}
+.nav-link.active::after, .nav-link:hover::after {
+  width: 100%;
+}
+
+
