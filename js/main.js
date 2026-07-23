@@ -7,6 +7,7 @@ import { initCounter } from './counter.js';
 import { initContact } from './contact.js';
 import { initMobileNav } from './mobile-nav.js';
 import { initCarousel } from './carousel.js';
+import { initCertificateModal } from './certificate-modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all interactive modules
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact();
   initMobileNav();
   initCarousel();
+  initCertificateModal();
 });
 
 
