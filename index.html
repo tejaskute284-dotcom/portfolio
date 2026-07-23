@@ -349,19 +349,28 @@
         </div>
       </div>
 
-      <!-- Card 2: Hackathons -->
-      <div class="dev-code-card p-6 flex flex-col justify-between h-full border border-white/10 rounded-xl bg-bgSecondary">
+      <!-- Card 2: Hackathons (Clickable Trigger to Certificates) -->
+      <a href="#hackathons" class="dev-code-card p-6 flex flex-col justify-between h-full border border-white/10 rounded-xl bg-bgSecondary hover:border-accentViolet/50 hover:bg-white/5 transition duration-300 hover:scale-[1.02] cursor-pointer group" title="Click to view all Hackathon Certificates">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10 text-textSecondary font-medium">SIH & Beyond</span>
-            <i data-lucide="hourglass" class="w-4 h-4 text-textSecondary opacity-60"></i>
+            <span class="text-xs font-mono px-3 py-1 rounded bg-accentViolet/10 border border-accentViolet/30 text-accentViolet font-semibold">SIH &amp; Beyond</span>
+            <span class="text-xs font-mono text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i> 6 Certificates
+            </span>
           </div>
-          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3">Hackathons</h4>
-          <p class="text-textSecondary text-sm leading-relaxed">
+          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3 group-hover:text-accentViolet transition flex items-center justify-between">
+            <span>Hackathons</span>
+            <i data-lucide="arrow-right" class="w-5 h-5 text-accentViolet opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+          </h4>
+          <p class="text-textSecondary text-sm leading-relaxed mb-4">
             Consistently building and iterating prototypes targeting Smart India Hackathon.
           </p>
         </div>
-      </div>
+        <div class="border-t border-white/5 pt-3 flex items-center justify-between text-xs font-mono text-accentViolet font-semibold">
+          <span>View All Certificates</span>
+          <span class="group-hover:underline flex items-center gap-1">Browse 🏆 &rarr;</span>
+        </div>
+      </a>
 
       <!-- Card 3: Research -->
       <div class="dev-code-card p-6 flex flex-col justify-between h-full border border-white/10 rounded-xl bg-bgSecondary">
