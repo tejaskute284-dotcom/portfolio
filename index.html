@@ -689,190 +689,214 @@
       </span>
     </div>
 
-    <!-- Hackathons Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Hackathons Carousel Container -->
+    <div class="carousel-container relative" data-items-lg="3" data-items-md="2" data-items-sm="1">
+      <div class="carousel-viewport py-4">
+        <div class="carousel-content flex transition-transform duration-500 ease-out">
 
-      <!-- 1. Cyber Cypher 5.0 -->
-      <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/cyber_cypher_finalist_nmims.png" data-cert-title="Cyber Cypher 5.0 — Finalist Certificate" data-cert-subtitle="NMIMS Mukesh Patel School of Technology Management & Engineering">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">NMIMS MUMBAI</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">FINALIST</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Cyber Cypher 5.0</h3>
-            <p class="text-xs text-accentViolet font-mono mb-4">18-Hour Cybersecurity Hackathon · Taqneq 18.0</p>
-            
-            <!-- Certificate Photo Preview Thumbnail -->
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/cyber_cypher_finalist_nmims.png" alt="Cyber Cypher 5.0 Finalist Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+          <!-- Slide 1 — Cyber Cypher 5.0 -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/cyber_cypher_finalist_nmims.png" data-cert-title="Cyber Cypher 5.0 — Finalist Certificate" data-cert-subtitle="NMIMS Mukesh Patel School of Technology Management & Engineering">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">NMIMS MUMBAI</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">FINALIST</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Cyber Cypher 5.0</h3>
+                  <p class="text-xs text-accentViolet font-mono mb-4">18-Hour Cybersecurity Hackathon · Taqneq 18.0</p>
+                  
+                  <!-- Certificate Photo Preview Thumbnail -->
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/cyber_cypher_finalist_nmims.png" alt="Cyber Cypher 5.0 Finalist Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Qualified for and completed Round 2 (Final Round) of Cyber Cypher 5.0 at NMIMS MPSTME, Mumbai on 7th &amp; 8th March.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">Date: 7-8 March</span>
+                  <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Qualified for and completed Round 2 (Final Round) of Cyber Cypher 5.0 at NMIMS MPSTME, Mumbai on 7th &amp; 8th March.
-            </p>
           </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">Date: 7-8 March</span>
-            <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
+
+          <!-- Slide 2 — IEEE Techithon '26 -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-accentCyan/40 transition cursor-pointer" data-cert-img="assets/certificates/ieee_techithon_hackdeck_atharva.png" data-cert-title="IEEE Techithon '26 Hackdeck 2.0 Certificate" data-cert-subtitle="Atharva University Mumbai & IEEE Atharva SBC">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest font-bold">ATHARVA UNIV</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">FINAL ROUND</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentCyan transition">IEEE Techithon '26</h3>
+                  <p class="text-xs text-accentCyan font-mono mb-4">Hackdeck 2.0 · All India Techfest</p>
+                  
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/ieee_techithon_hackdeck_atharva.png" alt="IEEE Techithon '26 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Participated in the final round of Hackdeck 2.0 hackathon conducted at Atharva University Mumbai by IEEE SBC62431.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">Atharva University</span>
+                  <button class="text-xs font-mono text-accentCyan flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- Slide 3 — LOC 8.0 Hackathon -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-amber-500/40 transition cursor-pointer" data-cert-img="assets/certificates/loc_8_hackathon_djsce.jpg" data-cert-title="LOC 8.0 Hackathon Certificate" data-cert-subtitle="DJ Sanghvi College of Engineering (DJSCE ACM & IIC)">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold">DJSCE MUMBAI</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">ROUND 1</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-amber-400 transition">LOC 8.0 Hackathon</h3>
+                  <p class="text-xs text-amber-400 font-mono mb-4">ACM DJSCE &amp; IIC Innovation Council</p>
+                  
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/loc_8_hackathon_djsce.jpg" alt="LOC 8.0 Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Participated in LOC 8.0 flagship hackathon held on 21st-22nd February 2026 at Dwarkadas J. Sanghvi College of Engineering.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">Date: 21-22 Feb 2026</span>
+                  <button class="text-xs font-mono text-amber-400 flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 — SPIT Hackathon -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-accentBlue/40 transition cursor-pointer" data-cert-img="assets/certificates/spit_hackathon_spce.png" data-cert-title="SPIT Hackathon Round 1 Certificate" data-cert-subtitle="Sardar Patel College of Engineering & SPIT">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-accentBlue uppercase tracking-widest font-bold">SPCE / SPIT</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold">ROUND 1</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentBlue transition">SPIT Hackathon</h3>
+                  <p class="text-xs text-accentBlue font-mono mb-4">Sardar Patel College of Engineering</p>
+                  
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/spit_hackathon_spce.png" alt="SPIT Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Qualified Round 1 of national level SPIT Hackathon at Sardar Patel College of Engineering, building scalable tech solutions.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">SPCE Mumbai</span>
+                  <button class="text-xs font-mono text-accentBlue flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5 — Google Student Ambassador Pitch Night -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-emerald-400/40 transition cursor-pointer" data-cert-img="assets/certificates/google_ambassador_pitch_night.png" data-cert-title="Google Ambassador Pitch Night Certificate" data-cert-subtitle="Google Student Ambassador Program 2026">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">GOOGLE</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">PITCH NIGHT</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-emerald-400 transition">Google Student Ambassador</h3>
+                  <p class="text-xs text-emerald-400 font-mono mb-4">Pitch Night Edition · Google Program</p>
+                  
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/google_ambassador_pitch_night.png" alt="Google Ambassador Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Actively participated in Pitch Night Edition organized under Google Student Ambassador Program on 20th May 2026.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">Date: 20 May 2026</span>
+                  <button class="text-xs font-mono text-emerald-400 flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6 — Hackprep 7.0 Workshop -->
+          <div class="carousel-item px-3">
+            <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/hackprep_7_workshop_djsce.png" data-cert-title="Hackprep 7.0 Workshop Certificate" data-cert-subtitle="DJS Unicode & HOD Computer Dept, DJSCE">
+              <div class="dev-code-card-inner flex flex-col justify-between h-full">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">DJS UNICODE</span>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold">WORKSHOP</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Hackprep 7.0</h3>
+                  <p class="text-xs text-accentViolet font-mono mb-4">2-Day Tech Workshop by DJS Unicode</p>
+                  
+                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
+                    <img src="assets/certificates/hackprep_7_workshop_djsce.png" alt="Hackprep 7.0 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+                    </div>
+                  </div>
+                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
+                    Participated in HACKPREP 2026 2-day technical workshop conducted on 20th-21st April 2026 at DJ Sanghvi College.
+                  </p>
+                </div>
+                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
+                  <span class="text-[10px] text-textSecondary font-mono">Date: 20-21 April 2026</span>
+                  <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
+                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- 2. IEEE Techithon '26 -->
-      <div class="dev-code-card h-full group hover:border-accentCyan/40 transition cursor-pointer" data-cert-img="assets/certificates/ieee_techithon_hackdeck_atharva.png" data-cert-title="IEEE Techithon '26 Hackdeck 2.0 Certificate" data-cert-subtitle="Atharva University Mumbai & IEEE Atharva SBC">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest font-bold">ATHARVA UNIV</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">FINAL ROUND</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentCyan transition">IEEE Techithon '26</h3>
-            <p class="text-xs text-accentCyan font-mono mb-4">Hackdeck 2.0 · All India Techfest</p>
-            
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/ieee_techithon_hackdeck_atharva.png" alt="IEEE Techithon '26 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-              </div>
-            </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Participated in the final round of Hackdeck 2.0 hackathon conducted at Atharva University Mumbai by IEEE SBC62431.
-            </p>
-          </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">Atharva University</span>
-            <button class="text-xs font-mono text-accentCyan flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. LOC 8.0 Hackathon -->
-      <div class="dev-code-card h-full group hover:border-amber-500/40 transition cursor-pointer" data-cert-img="assets/certificates/loc_8_hackathon_djsce.jpg" data-cert-title="LOC 8.0 Hackathon Certificate" data-cert-subtitle="DJ Sanghvi College of Engineering (DJSCE ACM & IIC)">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold">DJSCE MUMBAI</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">ROUND 1</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-amber-400 transition">LOC 8.0 Hackathon</h3>
-            <p class="text-xs text-amber-400 font-mono mb-4">ACM DJSCE &amp; IIC Innovation Council</p>
-            
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/loc_8_hackathon_djsce.jpg" alt="LOC 8.0 Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-              </div>
-            </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Participated in LOC 8.0 flagship hackathon held on 21st-22nd February 2026 at Dwarkadas J. Sanghvi College of Engineering.
-            </p>
-          </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">Date: 21-22 Feb 2026</span>
-            <button class="text-xs font-mono text-amber-400 flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. SPIT Hackathon -->
-      <div class="dev-code-card h-full group hover:border-accentBlue/40 transition cursor-pointer" data-cert-img="assets/certificates/spit_hackathon_spce.png" data-cert-title="SPIT Hackathon Round 1 Certificate" data-cert-subtitle="Sardar Patel College of Engineering & SPIT">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-accentBlue uppercase tracking-widest font-bold">SPCE / SPIT</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold">ROUND 1</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentBlue transition">SPIT Hackathon</h3>
-            <p class="text-xs text-accentBlue font-mono mb-4">Sardar Patel College of Engineering</p>
-            
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/spit_hackathon_spce.png" alt="SPIT Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-              </div>
-            </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Qualified Round 1 of national level SPIT Hackathon at Sardar Patel College of Engineering, building scalable tech solutions.
-            </p>
-          </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">SPCE Mumbai</span>
-            <button class="text-xs font-mono text-accentBlue flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Google Student Ambassador Pitch Night -->
-      <div class="dev-code-card h-full group hover:border-emerald-400/40 transition cursor-pointer" data-cert-img="assets/certificates/google_ambassador_pitch_night.png" data-cert-title="Google Ambassador Pitch Night Certificate" data-cert-subtitle="Google Student Ambassador Program 2026">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">GOOGLE</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">PITCH NIGHT</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-emerald-400 transition">Google Student Ambassador</h3>
-            <p class="text-xs text-emerald-400 font-mono mb-4">Pitch Night Edition · Google Program</p>
-            
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/google_ambassador_pitch_night.png" alt="Google Ambassador Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-              </div>
-            </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Actively participated in Pitch Night Edition organized under Google Student Ambassador Program on 20th May 2026.
-            </p>
-          </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">Date: 20 May 2026</span>
-            <button class="text-xs font-mono text-emerald-400 flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Hackprep 7.0 Workshop -->
-      <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/hackprep_7_workshop_djsce.png" data-cert-title="Hackprep 7.0 Workshop Certificate" data-cert-subtitle="DJS Unicode & HOD Computer Dept, DJSCE">
-        <div class="dev-code-card-inner flex flex-col justify-between h-full">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">DJS UNICODE</span>
-              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold">WORKSHOP</span>
-            </div>
-            <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Hackprep 7.0</h3>
-            <p class="text-xs text-accentViolet font-mono mb-4">2-Day Tech Workshop by DJS Unicode</p>
-            
-            <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-              <img src="assets/certificates/hackprep_7_workshop_djsce.png" alt="Hackprep 7.0 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-              </div>
-            </div>
-            <p class="text-textSecondary text-xs leading-relaxed mb-4">
-              Participated in HACKPREP 2026 2-day technical workshop conducted on 20th-21st April 2026 at DJ Sanghvi College.
-            </p>
-          </div>
-          <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-            <span class="text-[10px] text-textSecondary font-mono">Date: 20-21 April 2026</span>
-            <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
-              View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <!-- Carousel Navigation Controls -->
+      <button class="carousel-control carousel-prev" aria-label="Previous Slide">
+        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+      </button>
+      <button class="carousel-control carousel-next" aria-label="Next Slide">
+        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+      </button>
     </div>
   </section>
 
