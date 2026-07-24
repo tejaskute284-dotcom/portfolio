@@ -49,38 +49,16 @@
 </head>
 <body class="bg-bgPrimary text-textPrimary selection:bg-accentViolet selection:text-white">
 
-  <!-- Mobile Menu Backdrop -->
-  <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+  <!-- Custom Cursor Elements (Desktop Only) -->
+  <div class="custom-cursor-dot" style="position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:var(--accent-cyan);pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.3s ease;"></div>
+  <div class="custom-cursor-ring" style="position:fixed;top:0;left:0;width:32px;height:32px;border-radius:50%;border:2px solid var(--accent-cyan);pointer-events:none;z-index:9998;opacity:0;transition:opacity 0.3s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;"></div>
 
-  <!-- Mobile Drawer Menu -->
-  <div id="mobile-menu-drawer" class="fixed right-0 top-0 h-full w-80 bg-bgSecondary border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between">
-    <div>
-      <div class="flex items-center justify-between mb-8">
-        <span class="text-xl font-bold text-accentViolet font-heading">&lt;TK /&gt;</span>
-        <button id="mobile-menu-close" class="p-2 text-textSecondary hover:text-textPrimary">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
-      </div>
-      <nav class="flex flex-col gap-6 text-lg font-medium font-heading">
-        <a href="#about" class="hover:text-accentViolet transition">About</a>
-        <a href="#education" class="hover:text-accentViolet transition">Education</a>
-        <a href="#projects" class="hover:text-accentViolet transition">Projects</a>
-        <a href="#hackathons" class="hover:text-accentViolet transition">Hackathons</a>
-        <a href="#experience" class="hover:text-accentViolet transition">Experience</a>
-        <a href="#certifications" class="hover:text-accentViolet transition">Certifications</a>
-        <a href="#skills" class="hover:text-accentViolet transition">Skills</a>
-        <a href="#contact" class="hover:text-accentViolet transition">Contact</a>
-      </nav>
-    </div>
-    <div class="border-t border-white/5 pt-6 flex items-center justify-around">
-      <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="text-textSecondary hover:text-textPrimary transition" aria-label="GitHub">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="text-textSecondary hover:text-textPrimary transition" aria-label="LinkedIn">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-      </a>
-    </div>
-  </div>
+  <!-- Shared SVG icon symbols — defined once, reused via <use href="#id"> -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></symbol>
+  </svg>
+
 
   <!-- 1. NAVBAR -->
   <header class="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-300">
@@ -111,12 +89,12 @@
           <svg id="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
-        <!-- Social Icons -->
+        <!-- Social Icons (SVG via shared symbol) -->
         <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="hidden sm:inline-flex p-2 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-textPrimary transition duration-300" aria-label="GitHub Profile">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <svg class="w-5 h-5 fill-current"><use href="#icon-github"/></svg>
         </a>
         <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="hidden sm:inline-flex p-2 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-textPrimary transition duration-300" aria-label="LinkedIn Profile">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <svg class="w-5 h-5 fill-current"><use href="#icon-linkedin"/></svg>
         </a>
 
         <!-- Hamburger Mobile button -->
@@ -149,11 +127,11 @@
       </nav>
     </div>
     <div class="pt-6 border-t border-white/5 flex items-center justify-around">
-      <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentCyan transition">
-        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentCyan transition" aria-label="GitHub">
+        <svg class="w-5 h-5 fill-current"><use href="#icon-github"/></svg>
       </a>
-      <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentBlue transition">
-        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentBlue transition" aria-label="LinkedIn">
+        <svg class="w-5 h-5 fill-current"><use href="#icon-linkedin"/></svg>
       </a>
     </div>
   </div>
@@ -193,7 +171,7 @@
           <a href="#projects" class="px-8 py-3.5 rounded-full bg-accentViolet hover:bg-opacity-90 text-white font-medium shadow-lg shadow-accentViolet/20 hover:shadow-accentViolet/40 hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center font-heading">
             View My Work
           </a>
-          <a href="assets/Tejas_Kute_CV.pdf" download class="px-8 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentBlue text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading">
+          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="px-8 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentBlue text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading">
             <i data-lucide="download" class="w-4 h-4"></i> Download CV
           </a>
         </div>
@@ -201,10 +179,10 @@
         <!-- Social Row -->
         <div class="flex flex-wrap justify-center gap-6 mt-12 hero-anim-social">
           <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentCyan transition duration-300">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> <span>GitHub</span>
+            <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg> <span>GitHub</span>
           </a>
           <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentBlue transition duration-300">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <span>LinkedIn</span>
+            <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg> <span>LinkedIn</span>
           </a>
         </div>
       </div>
@@ -376,230 +354,11 @@
     </div>
     <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Production & Internship Projects</h2>
 
-    <!-- Project Carousel Container -->
-    <div class="carousel-container" data-items-lg="2" data-items-md="2" data-items-sm="1">
-      <div class="carousel-viewport py-4">
-        <div class="carousel-content">
-          
-          <!-- Slide 1 — FlowState -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-bold font-heading text-textPrimary">FlowState</h3>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">LIVE</span>
-                  </div>
-                  <p class="text-sm font-semibold text-accentViolet mb-4">"Premium, intent-focused operating system concept."</p>
-                  <div class="mb-4 overflow-hidden rounded-lg border border-white/10 aspect-video bg-bgTertiary">
-                    <img src="assets/flowstate.png" alt="FlowState UI Preview" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <p class="text-textSecondary text-sm leading-relaxed mb-6">
-                    FlowState is a premium, intent-focused operating system concept designed to help professionals regain control over focus by unifying emails, meetings, and commitments into a visually stunning interface. Employs cinematic lighting and organic curves.
-                  </p>
-
-                  <!-- Contributors -->
-                  <div class="mb-6">
-                    <span class="text-xs font-mono text-textSecondary block mb-2 font-bold uppercase tracking-wider">Collaborators</span>
-                    <div class="flex flex-wrap gap-2">
-                      <a href="https://github.com/tejaskute284" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textPrimary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Mr. Tejas Sharad Kute</a>
-                      <a href="https://github.com/shreyaaspires-cloud" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Miss Shreya Desai</a>
-                      <a href="https://github.com/WisdomKingAR" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Mr. Aaryan Raorane</a>
-                    </div>
-                  </div>
-
-                  <!-- Tech pills -->
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag">React 18</span>
-                    <span class="tech-tag">Vite 6</span>
-                    <span class="tech-tag">Tailwind CSS 4</span>
-                    <span class="tech-tag">Framer Motion 12</span>
-                    <span class="tech-tag">Lenis</span>
-                    <span class="tech-tag">Lucide React</span>
-                    <span class="tech-tag">Inter</span>
-                  </div>
-                </div>
-
-                <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-                  <div class="flex items-center gap-4">
-                    <a href="https://github.com/tejaskute284-dotcom/flowstate.git" target="_blank" class="flex items-center gap-1.5 text-xs text-textPrimary hover:text-accentViolet transition">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> GitHub
-                    </a>
-                  </div>
-                  <span class="text-[10px] text-textSecondary font-mono block text-right">Intent OS · Cinematic Shadows</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2 — CryoNex -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-bold font-heading text-textPrimary">CryoNex</h3>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">LIVE</span>
-                  </div>
-                  <p class="text-sm font-semibold text-accentCyan mb-4">"Next-generation cold-chain logistics for pharma."</p>
-                  <div class="mb-4 overflow-hidden rounded-lg border border-white/10 aspect-video bg-bgTertiary">
-                    <img src="assets/cryonex.jpg" alt="CryoNex UI Preview" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <p class="text-textSecondary text-sm leading-relaxed mb-6">
-                    CryoNex is a full-featured cold-chain logistics platform for critical pharmaceutical shipments — Stem Cells, Gene Therapies, and Monoclonal Antibodies. It delivers real-time telemetry, an interactive global shipment map (Leaflet.js), a guided procurement wizard, and an automated risk management engine. Persists states via browser local storage.
-                  </p>
-
-                  <!-- Contributors -->
-                  <div class="mb-6">
-                    <span class="text-xs font-mono text-textSecondary block mb-2 font-bold uppercase tracking-wider">Collaborators</span>
-                    <div class="flex flex-wrap gap-2">
-                      <a href="https://github.com/tejaskute284" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textPrimary hover:border-accentCyan hover:text-accentCyan transition hover:scale-105 inline-block">Mr. Tejas Sharad Kute</a>
-                      <a href="https://github.com/shreyaaspires-cloud" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentCyan hover:text-accentCyan transition hover:scale-105 inline-block">Miss Shreya Desai</a>
-                      <a href="https://github.com/WisdomKingAR" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentCyan hover:text-accentCyan transition hover:scale-105 inline-block">Mr. Aaryan Raorane</a>
-                    </div>
-                  </div>
-
-                  <!-- Tech pills -->
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript ES6</span>
-                    <span class="tech-tag">Tailwind CSS</span>
-                    <span class="tech-tag">Leaflet.js</span>
-                    <span class="tech-tag">Anime.js</span>
-                    <span class="tech-tag">Chart.js</span>
-                    <span class="tech-tag">Lenis</span>
-                  </div>
-                </div>
-
-                <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-                  <div class="flex items-center gap-4">
-                    <a href="https://github.com/WisdomKingAR/Cryonex" target="_blank" class="flex items-center gap-1.5 text-xs text-textPrimary hover:text-accentCyan transition">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> GitHub
-                    </a>
-                    <a href="#" class="flex items-center gap-1.5 text-xs text-textPrimary hover:text-accentCyan transition">
-                      <i data-lucide="external-link" class="w-4 h-4"></i> Demo
-                    </a>
-                  </div>
-                  <span class="text-[10px] text-textSecondary font-mono block text-right">Telemetry · Global map · Procurement Wizard</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 — NexusChat -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-bold font-heading text-textPrimary">NexusChat</h3>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">IN PROGRESS</span>
-                  </div>
-                  <p class="text-sm font-semibold text-accentViolet mb-4">"Real-time chat with JWT auth and WebSocket messaging."</p>
-                  <div class="mb-4 overflow-hidden rounded-lg border border-white/10 aspect-video bg-bgTertiary">
-                    <img src="assets/nexuschat.jpg" alt="NexusChat UI Preview" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <p class="text-textSecondary text-sm leading-relaxed mb-6">
-                    NexusChat is a modern messaging app with a Python FastAPI backend and React frontend. It implements secure JWT authentication, Bcrypt password hashing, instant WebSocket messaging, and MongoDB for persistent storage.
-                  </p>
-
-                  <!-- Contributors -->
-                  <div class="mb-6">
-                    <span class="text-xs font-mono text-textSecondary block mb-2 font-bold uppercase tracking-wider">Collaborators</span>
-                    <div class="flex flex-wrap gap-2">
-                      <a href="https://github.com/tejaskute284" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textPrimary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Mr. Tejas Sharad Kute</a>
-                      <a href="https://github.com/shreyaaspires-cloud" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Miss Shreya Desai</a>
-                      <a href="https://github.com/WisdomKingAR" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentViolet hover:text-accentViolet transition hover:scale-105 inline-block">Mr. Aaryan Raorane</a>
-                    </div>
-                  </div>
-
-                  <!-- Tech pills -->
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">WebSockets</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Vite</span>
-                    <span class="tech-tag">Tailwind CSS</span>
-                    <span class="tech-tag">PyJWT</span>
-                    <span class="tech-tag">Bcrypt</span>
-                    <span class="tech-tag">Motor</span>
-                  </div>
-                </div>
-
-                <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-                  <div class="flex items-center gap-4">
-                    <a href="#" class="flex items-center gap-1.5 text-xs text-textSecondary cursor-not-allowed">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg> Private
-                    </a>
-                  </div>
-                  <span class="text-[10px] text-textSecondary font-mono block text-right">JWT Security · Encrypted persistence</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 4 — HSMMS -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-2xl font-bold font-heading text-textPrimary">HSMMS</h3>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">IN PROGRESS</span>
-                  </div>
-                  <p class="text-sm font-semibold text-accentBlue mb-4">"Housing Society Maintenance Management System."</p>
-                  <p class="text-textSecondary text-sm leading-relaxed mb-6">
-                    Built during the internship at Aerus Infotech Solutions, HSMMS is a role-based society management platform covering 8 functional modules for Admin, Resident, Staff, and Security Guard personas. Integrates Express REST API and a MySQL database.
-                  </p>
-
-                  <!-- Contributors -->
-                  <div class="mb-6">
-                    <span class="text-xs font-mono text-textSecondary block mb-2 font-bold uppercase tracking-wider">Collaborators</span>
-                    <div class="flex flex-wrap gap-2">
-                      <a href="https://github.com/tejaskute284" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textPrimary hover:border-accentBlue hover:text-accentBlue transition hover:scale-105 inline-block">Mr. Tejas Sharad Kute</a>
-                      <a href="https://github.com/shreyaaspires-cloud" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentBlue hover:text-accentBlue transition hover:scale-105 inline-block">Miss Shreya Desai</a>
-                      <a href="https://github.com/WisdomKingAR" target="_blank" rel="noopener noreferrer" class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 text-textSecondary hover:border-accentBlue hover:text-accentBlue transition hover:scale-105 inline-block">Mr. Aaryan Raorane</a>
-                    </div>
-                  </div>
-
-                  <!-- Tech pills -->
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">MySQL</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">REST API</span>
-                  </div>
-                </div>
-
-                <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-                  <div class="flex items-center gap-4">
-                    <span class="text-xs text-textSecondary font-mono italic">
-                      Private (Internship Project @ Aerus Infotech Solutions)
-                    </span>
-                  </div>
-                  <span class="text-[10px] text-textSecondary font-mono block text-right">8 Role Modules · MySQL Relations</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <button class="carousel-control carousel-prev" aria-label="Previous Slide">
-        <i data-lucide="chevron-left" class="w-5 h-5"></i>
-      </button>
-      <button class="carousel-control carousel-next" aria-label="Next Slide">
-        <i data-lucide="chevron-right" class="w-5 h-5"></i>
-      </button>
-    </div>
+    <!-- Projects rendered by js/render.js from js/data/projects.js -->
+    <div id="projects-carousel-mount"></div>
   </section>
+
+
 
   <!-- 5.5 HACKATHONS & CERTIFICATES SECTION -->
   <section id="hackathons" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
@@ -618,215 +377,9 @@
       </span>
     </div>
 
-    <!-- Hackathons Carousel Container -->
-    <div class="carousel-container relative" data-items-lg="3" data-items-md="2" data-items-sm="1">
-      <div class="carousel-viewport py-4">
-        <div class="carousel-content flex transition-transform duration-500 ease-out">
 
-          <!-- Slide 1 — Cyber Cypher 5.0 -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/cyber_cypher_finalist_nmims.png" data-cert-title="Cyber Cypher 5.0 — Finalist Certificate" data-cert-subtitle="NMIMS Mukesh Patel School of Technology Management & Engineering">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">NMIMS MUMBAI</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">FINALIST</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Cyber Cypher 5.0</h3>
-                  <p class="text-xs text-accentViolet font-mono mb-4">18-Hour Cybersecurity Hackathon · Taqneq 18.0</p>
-                  
-                  <!-- Certificate Photo Preview Thumbnail -->
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/cyber_cypher_finalist_nmims.png" alt="Cyber Cypher 5.0 Finalist Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Qualified for and completed Round 2 (Final Round) of Cyber Cypher 5.0 at NMIMS MPSTME, Mumbai on 7th &amp; 8th March.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">Date: 7-8 March</span>
-                  <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2 — IEEE Techithon '26 -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-accentCyan/40 transition cursor-pointer" data-cert-img="assets/certificates/ieee_techithon_hackdeck_atharva.png" data-cert-title="IEEE Techithon '26 Hackdeck 2.0 Certificate" data-cert-subtitle="Atharva University Mumbai & IEEE Atharva SBC">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest font-bold">ATHARVA UNIV</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">FINAL ROUND</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentCyan transition">IEEE Techithon '26</h3>
-                  <p class="text-xs text-accentCyan font-mono mb-4">Hackdeck 2.0 · All India Techfest</p>
-                  
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/ieee_techithon_hackdeck_atharva.png" alt="IEEE Techithon '26 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Participated in the final round of Hackdeck 2.0 hackathon conducted at Atharva University Mumbai by IEEE SBC62431.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">Atharva University</span>
-                  <button class="text-xs font-mono text-accentCyan flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 — LOC 8.0 Hackathon -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-amber-500/40 transition cursor-pointer" data-cert-img="assets/certificates/loc_8_hackathon_djsce.jpg" data-cert-title="LOC 8.0 Hackathon Certificate" data-cert-subtitle="DJ Sanghvi College of Engineering (DJSCE ACM & IIC)">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold">DJSCE MUMBAI</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">ROUND 1</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-amber-400 transition">LOC 8.0 Hackathon</h3>
-                  <p class="text-xs text-amber-400 font-mono mb-4">ACM DJSCE &amp; IIC Innovation Council</p>
-                  
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/loc_8_hackathon_djsce.jpg" alt="LOC 8.0 Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Participated in LOC 8.0 flagship hackathon held on 21st-22nd February 2026 at Dwarkadas J. Sanghvi College of Engineering.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">Date: 21-22 Feb 2026</span>
-                  <button class="text-xs font-mono text-amber-400 flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 4 — SPIT Hackathon -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-accentBlue/40 transition cursor-pointer" data-cert-img="assets/certificates/spit_hackathon_spce.png" data-cert-title="SPIT Hackathon Round 1 Certificate" data-cert-subtitle="Sardar Patel College of Engineering & SPIT">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-accentBlue uppercase tracking-widest font-bold">SPCE / SPIT</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold">ROUND 1</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentBlue transition">SPIT Hackathon</h3>
-                  <p class="text-xs text-accentBlue font-mono mb-4">Sardar Patel College of Engineering</p>
-                  
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/spit_hackathon_spce.png" alt="SPIT Hackathon Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Qualified Round 1 of national level SPIT Hackathon at Sardar Patel College of Engineering, building scalable tech solutions.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">SPCE Mumbai</span>
-                  <button class="text-xs font-mono text-accentBlue flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 5 — Google Student Ambassador Pitch Night -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-emerald-400/40 transition cursor-pointer" data-cert-img="assets/certificates/google_ambassador_pitch_night.png" data-cert-title="Google Ambassador Pitch Night Certificate" data-cert-subtitle="Google Student Ambassador Program 2026">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">GOOGLE</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">PITCH NIGHT</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-emerald-400 transition">Google Student Ambassador</h3>
-                  <p class="text-xs text-emerald-400 font-mono mb-4">Pitch Night Edition · Google Program</p>
-                  
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/google_ambassador_pitch_night.png" alt="Google Ambassador Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Actively participated in Pitch Night Edition organized under Google Student Ambassador Program on 20th May 2026.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">Date: 20 May 2026</span>
-                  <button class="text-xs font-mono text-emerald-400 flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 6 — Hackprep 7.0 Workshop -->
-          <div class="carousel-item px-3">
-            <div class="dev-code-card h-full group hover:border-accentViolet/40 transition cursor-pointer" data-cert-img="assets/certificates/hackprep_7_workshop_djsce.png" data-cert-title="Hackprep 7.0 Workshop Certificate" data-cert-subtitle="DJS Unicode & HOD Computer Dept, DJSCE">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-3">
-                    <span class="text-[10px] font-mono text-accentViolet uppercase tracking-widest font-bold">DJS UNICODE</span>
-                    <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold">WORKSHOP</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-textPrimary mb-2 group-hover:text-accentViolet transition">Hackprep 7.0</h3>
-                  <p class="text-xs text-accentViolet font-mono mb-4">2-Day Tech Workshop by DJS Unicode</p>
-                  
-                  <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-                    <img src="assets/certificates/hackprep_7_workshop_djsce.png" alt="Hackprep 7.0 Certificate Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                      <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
-                    </div>
-                  </div>
-                  <p class="text-textSecondary text-xs leading-relaxed mb-4">
-                    Participated in HACKPREP 2026 2-day technical workshop conducted on 20th-21st April 2026 at DJ Sanghvi College.
-                  </p>
-                </div>
-                <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-                  <span class="text-[10px] text-textSecondary font-mono">Date: 20-21 April 2026</span>
-                  <button class="text-xs font-mono text-accentViolet flex items-center gap-1 group-hover:underline">
-                    View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Carousel Navigation Controls -->
-      <button class="carousel-control carousel-prev" aria-label="Previous Slide">
-        <i data-lucide="chevron-left" class="w-5 h-5"></i>
-      </button>
-      <button class="carousel-control carousel-next" aria-label="Next Slide">
-        <i data-lucide="chevron-right" class="w-5 h-5"></i>
-      </button>
-    </div>
+    <!-- Hackathons rendered by js/render.js from js/data/hackathons.js -->
+    <div id="hackathons-carousel-mount"></div>
   </section>
 
   <!-- 6. EXPERIENCE SECTION -->
@@ -875,142 +428,9 @@
     </div>
     <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Coursera Academic Credentials</h2>
 
-    <!-- Certifications Carousel Container -->
-    <div class="carousel-container" data-items-lg="3" data-items-md="2" data-items-sm="1">
-      <div class="carousel-viewport py-4">
-        <div class="carousel-content">
-          
-          <!-- Slide 1 — Computational Thinking -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-                    <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
-                    </span>
-                  </div>
-                  <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">Computational Thinking for Problem Solving</h3>
-                  <p class="text-xs text-textSecondary font-mono mt-1">Domain: Logic, Algorithms & Data Representation</p>
-                </div>
-                <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-                  <span class="text-[9px] text-textSecondary font-mono block">ID: CT-COURSERA</span>
-                  <a href="https://coursera.org/share/aa28683b1f8e4d50f80720ea5076f061" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
-                    Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Slide 2 — Grow as a Manager -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-                    <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
-                    </span>
-                  </div>
-                  <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">Grow as a Manager</h3>
-                  <p class="text-xs text-textSecondary font-mono mt-1">Domain: Management & Career Growth</p>
-                </div>
-                <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-                  <span class="text-[9px] text-textSecondary font-mono block">ID: GM-COURSERA</span>
-                  <a href="https://coursera.org/share/c6f7e99db33c170b80c67bbf71cce9c3" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
-                    Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 — Teamwork Skills -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-                    <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
-                    </span>
-                  </div>
-                  <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">Teamwork Skills: Communicating Effectively in Groups</h3>
-                  <p class="text-xs text-textSecondary font-mono mt-1">Domain: Team Collaboration & Communication</p>
-                </div>
-                <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-                  <span class="text-[9px] text-textSecondary font-mono block">ID: TS-COURSERA</span>
-                  <a href="https://coursera.org/share/1187a0b7dc1ff48c11ad03edc00d813d" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
-                    Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 4 — Management Skills -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-                    <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
-                    </span>
-                  </div>
-                  <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">Management Skills for New Managers</h3>
-                  <p class="text-xs text-textSecondary font-mono mt-1">Domain: Leadership & Management Foundations</p>
-                </div>
-                <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-                  <span class="text-[9px] text-textSecondary font-mono block">ID: MN-COURSERA</span>
-                  <a href="https://coursera.org/share/5ddef23b7e9e059c29717fd84819d59e" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
-                    Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 5 — Python Data Structures -->
-          <div class="carousel-item">
-            <div class="dev-code-card h-full">
-              <div class="dev-code-card-inner flex flex-col justify-between h-full">
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-                    <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-                      <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
-                    </span>
-                  </div>
-                  <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">Python Data Structures</h3>
-                  <p class="text-xs text-textSecondary font-mono mt-1">Domain: Computational Structures & Algorithms</p>
-                </div>
-                <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-                  <span class="text-[9px] text-textSecondary font-mono block">ID: PY-COURSERA</span>
-                  <a href="https://coursera.org/share/fc39ed31a05c150b28cec5387ee7bfd5" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
-                    Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <button class="carousel-control carousel-prev" aria-label="Previous Slide">
-        <i data-lucide="chevron-left" class="w-5 h-5"></i>
-      </button>
-      <button class="carousel-control carousel-next" aria-label="Next Slide">
-        <i data-lucide="chevron-right" class="w-5 h-5"></i>
-      </button>
-    </div>
+    <!-- Certifications rendered by js/render.js from js/data/certifications.js -->
+    <div id="certifications-carousel-mount"></div>
   </section>
 
   <!-- 8. SKILLS SECTION -->
