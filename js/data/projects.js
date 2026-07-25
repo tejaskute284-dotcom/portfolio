@@ -10,7 +10,9 @@ export const PROJECTS = [
     imgAlt: 'FlowState UI Preview',
     desc: 'FlowState is a next-generation productivity dashboard that combines a Kanban task manager, a fully custom Pomodoro timer, rich-text note-taking, and a live habit tracker — all rendered with cinematic depth via custom CSS shadows and intentional micro-interactions.',
     collaborators: [
-      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284', owner: true }
+      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
+      { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
+      { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
     tags: ['React 18', 'Vite 6', 'Tailwind CSS 4', 'Framer Motion 12', 'Lenis', 'Lucide React', 'Inter'],
     github: 'https://github.com/tejaskute284-dotcom/flowstate.git',

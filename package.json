@@ -1,0 +1,13 @@
+{
+  "name": "tejas-kute-portfolio",
+  "version": "1.0.0",
+  "description": "Personal Portfolio Website for Tejas Sharad Kute",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve . -l 3000",
+    "start": "npx -y serve . -l 3000"
+  },
+  "keywords": [],
+  "author": "Tejas Sharad Kute",
+  "license": "ISC"
+}

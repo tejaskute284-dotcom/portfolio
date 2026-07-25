@@ -49,10 +49,6 @@
 </head>
 <body class="bg-bgPrimary text-textPrimary selection:bg-accentViolet selection:text-white">
 
-  <!-- Custom Cursor Elements (Desktop Only) -->
-  <div class="custom-cursor-dot" style="position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:var(--accent-cyan);pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.3s ease;"></div>
-  <div class="custom-cursor-ring" style="position:fixed;top:0;left:0;width:32px;height:32px;border-radius:50%;border:2px solid var(--accent-cyan);pointer-events:none;z-index:9998;opacity:0;transition:opacity 0.3s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;"></div>
-
   <!-- Shared SVG icon symbols — defined once, reused via <use href="#id"> -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></symbol>
@@ -124,6 +120,10 @@
         <a href="#certifications" class="hover:text-accentCyan transition py-2 border-b border-white/5">Certifications</a>
         <a href="#skills" class="hover:text-accentCyan transition py-2 border-b border-white/5">Skills</a>
         <a href="#contact" class="hover:text-accentCyan transition py-2 border-b border-white/5">Contact</a>
+        <button type="button" class="js-open-resume-modal text-left hover:text-accentViolet transition py-2 border-b border-white/5 flex items-center justify-between font-heading">
+          <span>Resume / CV</span>
+          <i data-lucide="eye" class="w-4 h-4 text-accentViolet"></i>
+        </button>
       </nav>
     </div>
     <div class="pt-6 border-t border-white/5 flex items-center justify-around">
@@ -168,11 +168,14 @@
 
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center hero-anim-cta">
-          <a href="#projects" class="px-8 py-3.5 rounded-full bg-accentViolet hover:bg-opacity-90 text-white font-medium shadow-lg shadow-accentViolet/20 hover:shadow-accentViolet/40 hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center font-heading">
+          <a href="#projects" class="px-7 py-3.5 rounded-full bg-accentViolet hover:bg-opacity-90 text-white font-medium shadow-lg shadow-accentViolet/20 hover:shadow-accentViolet/40 hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center font-heading">
             View My Work
           </a>
-          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="px-8 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentBlue text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading">
-            <i data-lucide="download" class="w-4 h-4"></i> Download CV
+          <button type="button" class="js-open-resume-modal px-7 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentViolet text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading cursor-pointer">
+            <i data-lucide="eye" class="w-4 h-4 text-accentViolet"></i> View Resume
+          </button>
+          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="px-7 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentBlue text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading">
+            <i data-lucide="download" class="w-4 h-4 text-accentBlue"></i> Download CV
           </a>
         </div>
 
@@ -780,6 +783,48 @@
         </span>
         <a id="modal-cert-download" href="" download class="inline-flex items-center gap-1.5 text-xs font-mono px-4 py-2 rounded-lg bg-accentViolet/20 border border-accentViolet/40 text-accentViolet hover:bg-accentViolet hover:text-white transition">
           <i data-lucide="download" class="w-4 h-4"></i> Download Photo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUME LIGHTBOX / VIEWER MODAL OVERLAY -->
+  <div id="resume-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6 transition-opacity duration-300">
+    <div class="relative max-w-5xl w-full h-[90vh] bg-bgSecondary border border-white/15 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between w-full mb-3 pb-3 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-accentViolet/10 text-accentViolet border border-accentViolet/20">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold font-heading text-textPrimary">Tejas Sharad Kute — Resume / CV</h3>
+            <p class="text-xs text-textSecondary font-mono mt-0.5">B.Tech (AI & ML) · Full-Stack Developer</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-2 rounded-lg bg-accentViolet text-white hover:bg-opacity-90 transition shadow-md">
+            <i data-lucide="download" class="w-4 h-4"></i> Download PDF
+          </a>
+          <button id="close-resume-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary hover:bg-white/10 transition" aria-label="Close Resume Modal">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Embedded Document View -->
+      <div class="w-full flex-1 rounded-xl bg-black/50 border border-white/10 overflow-hidden relative">
+        <iframe src="assets/Tejas_Kute_CV.pdf#toolbar=1" class="w-full h-full border-0" title="Tejas Sharad Kute Resume PDF"></iframe>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="w-full flex items-center justify-between mt-3 pt-3 border-t border-white/10 text-xs font-mono text-textSecondary">
+        <span class="flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Official Document
+        </span>
+        <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accentViolet text-white hover:bg-opacity-90 transition">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
         </a>
       </div>
     </div>

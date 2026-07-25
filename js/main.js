@@ -9,7 +9,7 @@ import { initContact }         from './contact.js';
 import { initMobileNav }       from './mobile-nav.js';
 import { initCarousel }        from './carousel.js';
 import { initCertificateModal }from './certificate-modal.js';
-import { initCursor }          from './cursor.js';
+import { initResumeModal }      from './resume-modal.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initCarousel();       // picks up newly-rendered carousels
   initCertificateModal();
-  initCursor();
-
+  initResumeModal();
 });
 
 

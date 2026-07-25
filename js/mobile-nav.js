@@ -26,7 +26,9 @@ export function initMobileNav() {
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
   if (backdrop) backdrop.addEventListener('click', closeDrawer);
 
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
+  const drawerItems = document.querySelectorAll('#mobile-menu-drawer a, #mobile-menu-drawer button.js-open-resume-modal');
+
+  drawerItems.forEach(item => {
+    item.addEventListener('click', closeDrawer);
   });
 }

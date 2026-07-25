@@ -37,7 +37,7 @@ export function initContact() {
     });
   });
 
-  // 2. Form Submission to POST /api/contact
+  // 2. Form Submission with Email Notification to Admin (tejaskute284@gmail.com)
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
 
@@ -45,42 +45,66 @@ export function initContact() {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
       const formData = new FormData(contactForm);
       const payload = Object.fromEntries(formData.entries());
 
-      // Update UI state
-      formStatus.textContent = "Sending message...";
-      formStatus.className = "mt-4 text-sm font-medium text-accent-blue";
+      // Add target recipient for email service
+      payload.access_key = '9b2c39fa-5b12-4217-a068-07e3a9fa05f4'; // Public contact submission handler key
+      payload.to_email = 'tejaskute284@gmail.com';
+      payload.subject = `[Portfolio Contact] ${payload.subject || 'New Inquiry'}`;
+
+      // Update UI status
+      formStatus.classList.remove('hidden');
+      formStatus.textContent = "Sending message to Tejas...";
+      formStatus.className = "text-xs font-mono text-accentBlue flex items-center gap-2";
 
       try {
-        const response = await fetch('/api/contact', {
+        // Send request to Web3Forms free contact API
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            access_key: '9b2c39fa-5b12-4217-a068-07e3a9fa05f4',
+            name: payload.name,
+            email: payload.email,
+            subject: payload.subject,
+            message: payload.message,
+            from_name: `${payload.name} (Portfolio Website)`
+          })
         });
 
-        if (response.ok) {
-          formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
-          formStatus.className = "mt-4 text-sm font-medium text-green-500";
+        const result = await response.json();
+
+        if (response.ok || result.success) {
+          formStatus.textContent = "✓ Message sent successfully! Notification delivered to Tejas.";
+          formStatus.className = "text-xs font-mono text-emerald-400 font-semibold";
           contactForm.reset();
         } else {
-          throw new Error('Server responded with an error');
+          throw new Error(result.message || 'Failed to dispatch email');
         }
       } catch (error) {
-        console.error('Contact submission error:', error);
-        // Fallback for mock/local frontend-only environment
-        formStatus.textContent = "Message simulated successfully (Local Fallback)! I'll get back to you soon.";
-        formStatus.className = "mt-4 text-sm font-medium text-green-400";
-        contactForm.reset();
-      }
+        console.warn('Form API attempt fallback:', error);
+        // Fallback email link trigger if API endpoint blocked
+        const mailtoUrl = `mailto:tejaskute284@gmail.com?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(`From: ${payload.name} (${payload.email})\n\nMessage:\n${payload.message}`)}`;
+        window.open(mailtoUrl, '_blank');
 
-      // Clear status after 5 seconds
-      setTimeout(() => {
-        formStatus.className = "hidden";
-        formStatus.textContent = "";
-      }, 5000);
+        formStatus.textContent = "✓ Message formatted and opened in your email client to send to tejaskute284@gmail.com!";
+        formStatus.className = "text-xs font-mono text-emerald-400 font-semibold";
+        contactForm.reset();
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        
+        setTimeout(() => {
+          formStatus.className = "hidden";
+          formStatus.textContent = "";
+        }, 8000);
+      }
     });
   }
 }
