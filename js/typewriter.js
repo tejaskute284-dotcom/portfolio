@@ -47,7 +47,7 @@ export function initTypewriter() {
   
   if (greetingPrefixEl && nameEl) {
     const prefixText = "Hi, I'm";
-    const nameText = " Tejas Sharad Kute";
+    const nameText = " Mr. Tejas Sharad Kute";
     let index = 0;
 
     function typePrefix() {
