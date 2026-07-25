@@ -10,7 +10,7 @@ export const PROJECTS = [
     imgAlt: 'FlowState UI Preview',
     desc: 'FlowState is a next-generation productivity dashboard that combines a Kanban task manager, a fully custom Pomodoro timer, rich-text note-taking, and a live habit tracker — all rendered with cinematic depth via custom CSS shadows and intentional micro-interactions.',
     collaborators: [
-      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
+      { name: 'Tejas Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
       { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
       { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
@@ -28,7 +28,7 @@ export const PROJECTS = [
     imgAlt: 'CryoNex UI Preview',
     desc: 'CryoNex is a full-featured cold-chain logistics platform for critical pharmaceutical shipments — Stem Cells, Gene Therapies, and Monoclonal Antibodies. It delivers real-time telemetry, an interactive global shipment map (Leaflet.js), a guided procurement wizard, and an automated risk management engine. Persists states via browser local storage.',
     collaborators: [
-      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284', owner: true },
+      { name: 'Tejas Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
       { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
       { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
@@ -47,7 +47,7 @@ export const PROJECTS = [
     imgAlt: 'NexusChat UI Preview',
     desc: 'NexusChat is a modern messaging app with a Python FastAPI backend and React frontend. It implements secure JWT authentication, Bcrypt password hashing, instant WebSocket messaging, and MongoDB for persistent storage.',
     collaborators: [
-      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284', owner: true },
+      { name: 'Tejas Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
       { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
       { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
@@ -65,7 +65,7 @@ export const PROJECTS = [
     imgAlt: null,
     desc: 'Built during the internship at Aerus Infotech Solutions, HSMMS is a role-based society management platform covering 8 functional modules for Admin, Resident, Staff, and Security Guard personas. Integrates Express REST API and a MySQL database.',
     collaborators: [
-      { name: 'Mr. Tejas Sharad Kute', url: 'https://github.com/tejaskute284', owner: true },
+      { name: 'Tejas Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },
       { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
       { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
