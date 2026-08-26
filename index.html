@@ -145,6 +145,12 @@
       <div></div> <!-- Spacer -->
       
       <div class="flex flex-col items-center">
+        <!-- Availability Badge -->
+        <div class="mb-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Available for Internships &amp; AI/ML Projects</span>
+        </div>
+
         <!-- Greeting Typing -->
         <div class="text-accentCyan font-mono text-sm md:text-base mb-4 tracking-wider uppercase font-semibold">
           <span id="typewriter-greeting-prefix"></span><span class="typewriter-cursor"></span>
@@ -179,13 +185,19 @@
           </a>
         </div>
 
-        <!-- Social Row -->
-        <div class="flex flex-wrap justify-center gap-6 mt-12 hero-anim-social">
+        <!-- Social & Quick Contact Row -->
+        <div class="flex flex-wrap justify-center items-center gap-6 mt-12 hero-anim-social">
           <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentCyan transition duration-300">
             <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg> <span>GitHub</span>
           </a>
           <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentBlue transition duration-300">
             <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg> <span>LinkedIn</span>
+          </a>
+          <a href="mailto:tejaskute284@gmail.com" class="flex items-center gap-2 text-sm text-textSecondary hover:text-emerald-400 transition duration-300">
+            <i data-lucide="mail" class="w-4 h-4"></i> <span>tejaskute284@gmail.com</span>
+          </a>
+          <a href="tel:+918976550171" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentViolet transition duration-300">
+            <i data-lucide="phone" class="w-4 h-4"></i> <span>+91 8976550171</span>
           </a>
         </div>
       </div>
@@ -231,11 +243,11 @@
             <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Years Coding</div>
           </div>
           <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-accentCyan">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-accentCyan mb-1 flex items-center justify-center"><span class="counter-value" data-target="5">00</span><span>+</span></div>
+            <div class="text-3xl md:text-4xl font-bold font-heading text-accentCyan mb-1 flex items-center justify-center"><span class="counter-value" data-target="4">00</span><span>+</span></div>
             <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Projects Shipped</div>
           </div>
           <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-accentBlue">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-accentBlue mb-1 counter-value" data-target="5">00</div>
+            <div class="text-3xl md:text-4xl font-bold font-heading text-accentBlue mb-1 counter-value" data-target="8">00</div>
             <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Certifications</div>
           </div>
           <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-purple-400">
@@ -273,17 +285,19 @@
           <div class="p-6 flex gap-4 text-textSecondary overflow-x-auto">
             <!-- Line Numbers -->
             <div class="text-right select-none opacity-30 text-[10px] space-y-1">
-              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
             </div>
             <!-- Syntax highlighted Json properties -->
             <div class="space-y-1 text-[#E0E0FF] whitespace-nowrap">
               <div>{</div>
               <div class="pl-4">"<span class="code-keyword">name</span>": <span class="code-string">"Mr. Tejas Sharad Kute"</span>,</div>
               <div class="pl-4">"<span class="code-keyword">role</span>": <span class="code-string">"AI/ML Developer & Student"</span>,</div>
+              <div class="pl-4">"<span class="code-keyword">year</span>": <span class="code-string">"2nd Year (2026)"</span>,</div>
               <div class="pl-4">"<span class="code-keyword">institution</span>": <span class="code-string">"Atharva University Mumbai"</span>,</div>
               <div class="pl-4">"<span class="code-keyword">internship</span>": <span class="code-string">"Aerus Infotech Solutions"</span>,</div>
               <div class="pl-4">"<span class="code-keyword">location</span>": <span class="code-string">"Mumbai, India"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">focus</span>": [<span class="code-string">"Open Source"</span>, <span class="code-string">"SIH"</span>, <span class="code-string">"AI Research"</span>]</div>
+              <div class="pl-4">"<span class="code-keyword">status</span>": <span class="code-string">"open_for_internships"</span>,</div>
+              <div class="pl-4">"<span class="code-keyword">focus</span>": [<span class="code-string">"Open Source"</span>, <span class="code-string">"SIH 2026"</span>, <span class="code-string">"AI Research"</span>]</div>
               <div>}</div>
             </div>
           </div>
@@ -319,10 +333,17 @@
       <div class="timeline-item relative stagger-child">
         <span class="text-xs font-mono px-3 py-1 rounded-full bg-accentViolet/10 text-accentViolet border border-accentViolet/20">2025 – 2029 (2nd Year)</span>
         <h3 class="text-xl font-bold font-heading mt-3 text-textPrimary">🎓 B.Tech — Artificial Intelligence & Machine Learning</h3>
-        <p class="text-sm text-textSecondary font-semibold mt-1">Atharva University Mumbai School of Engineering and Technology</p>
+        <p class="text-sm text-textSecondary font-semibold mt-1">Atharva College of Engineering, Atharva University Mumbai</p>
         <p class="text-textSecondary text-sm mt-2 leading-relaxed">
           Core studies in deep neural networks, computational logic, statistical modeling, and ML system architectures.
         </p>
+        <div class="flex flex-wrap gap-2 mt-3.5">
+          <span class="tech-tag text-[11px]">Machine Learning</span>
+          <span class="tech-tag text-[11px]">Deep Learning</span>
+          <span class="tech-tag text-[11px]">Data Structures &amp; Algorithms</span>
+          <span class="tech-tag text-[11px]">Python Programming</span>
+          <span class="tech-tag text-[11px]">Cybersecurity Fundamentals</span>
+        </div>
       </div>
 
       <!-- HSC Card -->
@@ -398,21 +419,42 @@
             <span class="text-accentBlue font-heading font-medium text-sm">Aerus Infotech Solutions Pvt. Ltd.</span>
           </div>
           <div class="text-right">
-            <span class="text-xs font-mono text-accentCyan border border-accentCyan/20 px-3 py-1 rounded-full bg-accentCyan/10">June 2025 – Present</span>
-            <p class="text-xs text-textSecondary mt-1 font-mono">Mumbai, India</p>
+            <span class="text-xs font-mono text-accentCyan border border-accentCyan/20 px-3 py-1 rounded-full bg-accentCyan/10">Nov 2025 – Present</span>
+            <p class="text-xs text-textSecondary mt-1 font-mono">Navi Mumbai, India</p>
           </div>
         </div>
         
-        <p class="text-textSecondary text-sm leading-relaxed mb-6">
-          Working on HSMMS (Housing Society Maintenance Management System) features. Deliver full-stack features, integrate REST APIs, implement role-based access control, and construct user interfaces for both React and plain client platforms. Drafted engineering specification files (PRD, TRD, and schema blueprints).
-        </p>
+        <ul class="space-y-3 mb-6 text-sm text-textSecondary list-none pl-0">
+          <li class="flex items-start gap-2.5">
+            <span class="text-accentBlue mt-1 font-mono">▸</span>
+            <span>Led development of a Housing Society Maintenance Management System (HSMMS) covering 8 modules — resident management, maintenance billing, complaint tracking, and security gate management.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accentBlue mt-1 font-mono">▸</span>
+            <span>Built role-based access control (RBAC) for 4 user personas (Admin, Resident, Staff, Security Guard) using Node.js/Express and React.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accentBlue mt-1 font-mono">▸</span>
+            <span>Designed and integrated RESTful APIs connecting MySQL to both React and vanilla JS clients, ensuring consistent data across interfaces.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accentBlue mt-1 font-mono">▸</span>
+            <span>Authored full project documentation — PRD, TRD, backend/frontend guidelines — compiled into a developer-facing Markdown guide.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-accentBlue mt-1 font-mono">▸</span>
+            <span>Resolved Node.js backend and React environment setup issues collaboratively, improving team onboarding efficiency.</span>
+          </li>
+        </ul>
 
         <div class="flex flex-wrap gap-2">
           <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express.js</span>
           <span class="tech-tag">React</span>
           <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">Express</span>
-          <span class="tech-tag">Technical Writing</span>
+          <span class="tech-tag">REST APIs</span>
+          <span class="tech-tag">RBAC Security</span>
+          <span class="tech-tag">Technical Docs</span>
         </div>
       </div>
     </div>
@@ -454,11 +496,15 @@
             <span class="text-accentViolet">●●●●○</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="text-textSecondary">JavaScript</span>
+            <span class="text-textSecondary">JavaScript / TypeScript</span>
             <span class="text-accentViolet">●●●●○</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="text-textSecondary">HTML/CSS</span>
+            <span class="text-textSecondary">C / C++</span>
+            <span class="text-accentViolet">●●●○○</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-textSecondary">HTML5 / CSS3</span>
             <span class="text-accentViolet">●●●●●</span>
           </li>
           <li class="flex items-center justify-between">
@@ -474,9 +520,11 @@
           <i data-lucide="layout" class="w-5 h-5 text-accentCyan"></i> Frontend
         </h3>
         <div class="flex flex-wrap gap-2.5">
-          <span class="tech-tag">React</span>
+          <span class="tech-tag">React 18</span>
+          <span class="tech-tag">TypeScript</span>
           <span class="tech-tag">Vite</span>
           <span class="tech-tag">Tailwind CSS</span>
+          <span class="tech-tag">Framer Motion</span>
           <span class="tech-tag">Leaflet.js</span>
           <span class="tech-tag">Chart.js</span>
           <span class="tech-tag">Anime.js</span>
@@ -491,10 +539,11 @@
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">FastAPI</span>
           <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express</span>
+          <span class="tech-tag">Express.js</span>
           <span class="tech-tag">REST APIs</span>
           <span class="tech-tag">WebSockets</span>
-          <span class="tech-tag">Uvicorn</span>
+          <span class="tech-tag">JWT Auth</span>
+          <span class="tech-tag">Bcrypt</span>
         </div>
       </div>
 
@@ -506,34 +555,37 @@
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">MongoDB</span>
           <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">MongoDB Atlas</span>
         </div>
       </div>
 
       <!-- Category 5: ML/AI -->
       <div class="premium-card p-6 stagger-child border-t-2 border-t-pink-400">
         <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="brain" class="w-5 h-5 text-pink-400"></i> ML/AI
+          <i data-lucide="brain" class="w-5 h-5 text-pink-400"></i> ML / AI &amp; Math
         </h3>
         <div class="flex flex-wrap gap-2.5">
-          <span class="tech-tag">NumPy</span>
+          <span class="tech-tag">TensorFlow</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">Scikit-Learn</span>
           <span class="tech-tag">Pandas</span>
-          <span class="tech-tag">Scikit-learn (learning)</span>
-          <span class="tech-tag">PyTorch (learning)</span>
+          <span class="tech-tag">NumPy</span>
+          <span class="tech-tag">DSA Algorithms</span>
         </div>
       </div>
 
       <!-- Category 6: Tools -->
       <div class="premium-card p-6 stagger-child border-t-2 border-t-emerald-400">
         <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i> Tools
+          <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i> Tools &amp; Environment
         </h3>
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">Git</span>
           <span class="tech-tag">GitHub</span>
           <span class="tech-tag">VS Code</span>
           <span class="tech-tag">Postman</span>
-          <span class="tech-tag">MongoDB Atlas</span>
-          <span class="tech-tag">MCP Servers</span>
+          <span class="tech-tag">Vite</span>
+          <span class="tech-tag">Linux</span>
         </div>
       </div>
 
@@ -544,24 +596,25 @@
   <section id="roadmap" class="py-12 max-w-[1200px] mx-auto px-6 reveal">
     <div class="premium-card p-6 md:p-8 bg-gradient-to-r from-accentBlue/10 to-accentViolet/10 border border-accentViolet/25 rounded-xl stagger-child">
       <h3 class="text-xl font-bold font-heading mb-4 flex items-center gap-2 text-textPrimary">
-        <i data-lucide="compass" class="w-5 h-5 text-accentViolet animate-spin-slow"></i> Currently Mastering
+        <i data-lucide="compass" class="w-5 h-5 text-accentViolet animate-spin-slow"></i> Active 2026 Learning Roadmap
       </h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 text-sm font-mono text-textSecondary">
         <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>NumPy & Pandas (mastery)</span>
+          <span class="text-accentCyan">→</span> <span>Deep Learning &amp; PyTorch</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-accentCyan">→</span> <span>Andrew Ng's ML Specialization</span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>PyTorch deep learning</span>
+          <span class="text-accentCyan">→</span> <span>DSA (LeetCode &amp; Codeforces)</span>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>Math for ML (Algebra, Prob)</span>
+          <span class="text-accentCyan">→</span> <span>Smart India Hackathon 2026</span>
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- 3.5. FUTURE VISION SECTION -->
   <section id="future-vision" class="py-16 max-w-[1200px] mx-auto px-6 reveal">
@@ -653,9 +706,9 @@
         <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">Contact</span>
         <span class="font-mono text-xs text-accentViolet">/&gt;</span>
       </div>
-      <h2 class="text-4xl font-bold font-heading mb-4">Let's Build Something.</h2>
+      <h2 class="text-4xl font-bold font-heading mb-4">Let's Build Something Remarkable.</h2>
       <p class="text-textSecondary">
-        Open to internships, collaborations, and project programming work.
+        Open to internships, AI/ML engineering roles, software development collaborations, and technical opportunities.
       </p>
     </div>
 
@@ -677,6 +730,17 @@
             Click to Copy
           </span>
         </div>
+
+        <!-- Phone Contact Card -->
+        <a href="tel:+918976550171" class="premium-card p-6 flex items-center gap-4 relative block">
+          <div class="p-3.5 rounded-lg bg-bgTertiary text-emerald-400 border border-white/5">
+            <i data-lucide="phone" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-xs text-textSecondary font-mono uppercase tracking-wider">Phone / WhatsApp</p>
+            <p class="font-medium text-textPrimary text-base">+91 8976550171</p>
+          </div>
+        </a>
 
         <!-- LinkedIn Card -->
         <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="premium-card p-6 flex items-center gap-4 relative block">
