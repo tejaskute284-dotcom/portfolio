@@ -6,7 +6,7 @@ export function initContact() {
   
   copyElements.forEach(el => {
     el.addEventListener('click', async (e) => {
-      e.preventDefault();
+      // Do NOT preventDefault — allow mailto: to navigate
       const textToCopy = el.getAttribute('data-copy');
       const tooltip = el.querySelector('.copy-tooltip');
 

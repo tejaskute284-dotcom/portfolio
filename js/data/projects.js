@@ -69,7 +69,7 @@ export const PROJECTS = [
       { name: 'Miss Shreya Desai', url: 'https://github.com/shreyaaspires-cloud' },
       { name: 'Mr. Aaryan Raorane', url: 'https://github.com/WisdomKingAR' }
     ],
-    tags: ['Node.js', 'Express', 'MySQL', 'React', 'JavaScript', 'REST API'],
+    tags: ['Node.js', 'Express', 'MySQL', 'React', 'JavaScript', 'REST API', 'Technical Docs'],
     internship: 'Private (Internship Project @ Aerus Infotech Solutions)',
     footer: '8 Role Modules · MySQL Relations'
   }

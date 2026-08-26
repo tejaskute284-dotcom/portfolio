@@ -65,6 +65,7 @@ portfolio/
     ├── carousel.js             # Projects & Hackathons carousel slider
     ├── certificate-modal.js    # Certificate photo lightbox modal
     ├── resume-modal.js         # Resume PDF viewer modal
+    ├── verify-modal.js         # Certification verification modal
     └── data/                   # Single source of truth data modules
         ├── projects.js         # Production & internship projects data
         ├── hackathons.js       # Hackathons & certificate credentials data

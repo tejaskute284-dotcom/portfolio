@@ -110,9 +110,9 @@ function certCard(c) {
         </div>
         <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
           <span class="text-[9px] text-textSecondary font-mono block">ID: ${c.id}</span>
-          <a href="${c.url}" target="_blank" class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition">
+          <button class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition js-verify-cert" data-cert-url="${c.url}" data-cert-id="${c.id}" data-cert-title="${c.title}">
             Verify <i data-lucide="external-link" class="w-3 h-3"></i>
-          </a>
+          </button>
         </div>
       </div>
     </div>

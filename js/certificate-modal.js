@@ -45,9 +45,9 @@ export function initCertificateModal() {
     });
   }
 
-  // Backdrop click listener
+  // Backdrop click listener — closes when click lands OUTSIDE the card panel
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (!e.target.closest('.relative.max-w-4xl')) {
       window.closeCertificateModal();
     }
   });

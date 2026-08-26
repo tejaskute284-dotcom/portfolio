@@ -717,7 +717,7 @@
       <div class="lg:col-span-5 space-y-6 stagger-child">
         
         <!-- Email Copy Card -->
-        <div class="premium-card p-6 flex items-center gap-4 cursor-pointer copy-trigger relative" data-copy="tejaskute284@gmail.com">
+        <a href="mailto:tejaskute284@gmail.com" class="premium-card p-6 flex items-center gap-4 cursor-pointer copy-trigger relative block" data-copy="tejaskute284@gmail.com">
           <div class="p-3.5 rounded-lg bg-bgTertiary text-accentViolet border border-white/5">
             <i data-lucide="mail" class="w-6 h-6"></i>
           </div>
@@ -729,7 +729,7 @@
           <span class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentViolet text-white text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none">
             Click to Copy
           </span>
-        </div>
+        </a>
 
         <!-- Phone Contact Card -->
         <a href="tel:+918976550171" class="premium-card p-6 flex items-center gap-4 relative block">
@@ -816,6 +816,42 @@
         </a>
       </div>
     </div>
+  <!-- CERTIFICATION VERIFY MODAL -->
+  <div id="verify-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-6 transition-opacity duration-300">
+    <div class="relative max-w-lg w-full bg-bgSecondary border border-white/15 rounded-2xl p-6 shadow-2xl">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-accentCyan/10 text-accentCyan border border-accentCyan/20">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="verify-modal-title" class="text-lg font-bold font-heading text-textPrimary">Certificate Verification</h3>
+            <p class="text-xs text-textSecondary font-mono mt-0.5">
+              ID: <span id="verify-modal-id" class="text-accentCyan"></span>
+            </p>
+          </div>
+        </div>
+        <button id="close-verify-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary hover:bg-white/10 transition" aria-label="Close Verification Modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <p class="text-sm text-textSecondary leading-relaxed mb-6">
+        This credential is verified and hosted on Coursera. Click the button below to view the official certificate on the Coursera platform.
+      </p>
+      <!-- Action -->
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+          <i data-lucide="check-circle" class="w-4 h-4"></i> Verified Credential
+        </span>
+        <a id="verify-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accentViolet text-white text-xs font-mono font-semibold hover:bg-opacity-90 transition shadow-md">
+          Open on Coursera <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- CERTIFICATE LIGHTBOX MODAL OVERLAY -->
   <div id="certificate-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300">
     <div class="relative max-w-4xl w-full bg-bgSecondary border border-white/15 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col items-center">

@@ -10,6 +10,7 @@ import { initMobileNav }       from './mobile-nav.js';
 import { initCarousel }        from './carousel.js';
 import { initCertificateModal }from './certificate-modal.js';
 import { initResumeModal }      from './resume-modal.js';
+import { initVerifyModal }      from './verify-modal.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();       // picks up newly-rendered carousels
   initCertificateModal();
   initResumeModal();
+  initVerifyModal();
 });
 
 
