@@ -18,7 +18,7 @@ export const HACKATHONS = [
     certSubtitle: 'NMIMS Mukesh Patel School of Technology Management & Engineering'
   },
   {
-    org: 'ATHARVA UNIV',
+    org: 'ATHARVA UNIVERSITY MUMBAI',
     orgColor: 'text-accentCyan',
     hoverBorder: 'hover:border-accentCyan/40',
     hoverTitle: 'group-hover:text-accentCyan',
