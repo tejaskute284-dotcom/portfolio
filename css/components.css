@@ -184,3 +184,39 @@
   }
 }
 
+
+/* -- Unified hover colour system -----------------------------------------------
+   .hov-card-border and .hov-card-title pick up --card-accent injected by JS.
+   Replaces all per-card arbitrary Tailwind hover classes. Zero rainbow risk.
+------------------------------------------------------------------------------- */
+.hov-card-border {
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hov-card-border:hover {
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent-violet)) 40%, transparent);
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--card-accent, var(--accent-violet)) 30%, transparent);
+}
+.hov-card-title {
+  transition: color 0.3s ease;
+}
+.group:hover .hov-card-title {
+  color: var(--card-accent, var(--accent-violet));
+}
+
+/* -- AntiGravity card wrapper --------------------------------------------------
+   .ag-card provides 3-D perspective for the JS tilt effect.
+   Layers on .dev-code-card without overriding existing styles.
+------------------------------------------------------------------------------- */
+.ag-card {
+  perspective: 800px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.ag-card .ag-inner {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: relative;
+  z-index: 2;
+}

@@ -11,6 +11,8 @@ import { initCarousel }        from './carousel.js';
 import { initCertificateModal }from './certificate-modal.js';
 import { initResumeModal }      from './resume-modal.js';
 import { initVerifyModal }      from './verify-modal.js';
+import { initAntiGravity }     from './antigravity.js';
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertificateModal();
   initResumeModal();
   initVerifyModal();
+  initAntiGravity();    // physics tilt + repulsion on all .ag-card elements
+
 });
 
 

@@ -19,6 +19,28 @@ export const PROJECTS = [
     footer: 'Intent OS · Cinematic Shadows'
   },
   {
+    name: 'CivicFix',
+    accent: 'accentCyan',
+    accentClass: 'text-accentCyan',
+    badge: { label: 'HACKATHON', cls: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
+    tagline: '"End-to-end intelligence platform bridging citizens and municipal workforces."',
+    img: 'assets/civicfix.jpg',
+    imgAlt: 'CivicFix Platform Preview',
+    desc: 'CivicFix is a full-stack civic issue reporting platform where citizens photograph urban problems (potholes, broken streetlights, overflowing bins) and get a 60-second submission flow. The backend auto-deduplicates reports using PostGIS geospatial clustering (500 m radius), scores complaint priority 1–100 via a 4-factor model (Hazard Baseline 35 %, Volume Log-Curve 25 %, Proximity to Schools/Hospitals 25 %, SLA Breach Progression 15 %), and requires Gemini Vision before-after photo verification before marking an issue resolved. Includes an anti-spam engine and clustered GeoJSON map feeds.',
+    collaborators: [
+      { name: 'Tejas Kute',      url: 'https://github.com/tejaskute284-dotcom', owner: true },
+      { name: 'Shreya Desai',    url: 'https://github.com/shreyaaspires-cloud' },
+      { name: 'Aaryan Raorane',  url: 'https://github.com/WisdomKingAR' }
+    ],
+    tags: [
+      'Node.js v20', 'TypeScript 5.5', 'Express 4.19',
+      'PostgreSQL', 'Supabase', 'PostGIS', 'Prisma 5.22',
+      'Gemini 2.0 Flash', 'Cloudinary', 'JWT', 'Zod', 'Helmet.js'
+    ],
+    github: 'https://github.com/WisdomKingAR/CivicFix',
+    footer: 'PostGIS Deduplication · Gemini Vision · Priority Scoring'
+  },
+  {
     name: 'CryoNex',
     accent: 'accentCyan',
     accentClass: 'text-accentCyan',

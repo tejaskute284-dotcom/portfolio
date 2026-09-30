@@ -34,8 +34,8 @@ function projectCard(p) {
 
   return `
   <div class="carousel-item">
-    <div class="dev-code-card h-full">
-      <div class="dev-code-card-inner flex flex-col justify-between h-full">
+    <div class="ag-card dev-code-card h-full">
+      <div class="ag-inner dev-code-card-inner flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-2xl font-bold font-heading text-textPrimary">${p.name}</h3>
@@ -62,17 +62,18 @@ function projectCard(p) {
 function hackathonCard(h) {
   return `
   <div class="carousel-item px-3">
-    <div class="dev-code-card h-full group ${h.hoverBorder} transition cursor-pointer"
+    <div class="ag-card dev-code-card h-full group hov-card-border transition cursor-pointer"
+         style="--card-accent: ${h.accentHex}"
          data-cert-img="${h.img}"
          data-cert-title="${h.certTitle}"
          data-cert-subtitle="${h.certSubtitle}">
-      <div class="dev-code-card-inner flex flex-col justify-between h-full">
+      <div class="ag-inner dev-code-card-inner flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-3">
             <span class="text-[10px] font-mono ${h.orgColor} uppercase tracking-widest font-bold">${h.org}</span>
             <span class="text-xs font-mono px-2 py-0.5 rounded-full border font-semibold ${h.badge.cls}">${h.badge.label}</span>
           </div>
-          <h3 class="text-xl font-bold text-textPrimary mb-2 ${h.hoverTitle} transition">${h.title}</h3>
+          <h3 class="text-xl font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
           <p class="text-xs ${h.subtitleColor} font-mono mb-4">${h.subtitle}</p>
           <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
             <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">

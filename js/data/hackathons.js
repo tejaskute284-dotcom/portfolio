@@ -1,10 +1,27 @@
 // Hackathon / certificate data — single source of truth
+// accentHex drives --card-accent CSS custom property (set by render.js)
+// All hover classes use var(--card-accent) to stay 100% in-theme
 export const HACKATHONS = [
+  {
+    org: 'SVKM — SBMP',
+    orgColor: 'text-accentBlue',
+    accentHex: '#4F8EF7',
+    badge: { label: 'PARTICIPATED', cls: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
+    title: 'IGNITE IT 8.0',
+    subtitle: "18-Hour Hackathon · SVKM's Shri Bhagubhai Mafatlal Polytechnic",
+    subtitleColor: 'text-accentBlue',
+    img: 'assets/certificates/ignite_it_8_sbmp_svkm.png',
+    imgAlt: 'IGNITE IT 8.0 Certificate — Tejas Sharad Kute',
+    desc: "Successfully participated in the 18-Hour Hackathon — IGNITE IT 8.0, organised by the Information Technology Department of SVKM's Shri Bhagubhai Mafatlal Polytechnic and College of Engineering, held on 3rd–4th September 2026.",
+    footerLeft: 'Date: 3–4 Sep 2026',
+    btnColor: 'text-accentBlue',
+    certTitle: 'IGNITE IT 8.0 — Certificate of Participation',
+    certSubtitle: "SVKM's Shri Bhagubhai Mafatlal Polytechnic and College of Engineering"
+  },
   {
     org: 'NMIMS MUMBAI',
     orgColor: 'text-accentViolet',
-    hoverBorder: 'hover:border-accentViolet/40',
-    hoverTitle: 'group-hover:text-accentViolet',
+    accentHex: '#8B5CF6',
     badge: { label: 'FINALIST', cls: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
     title: 'Cyber Cypher 5.0',
     subtitle: '18-Hour Cybersecurity Hackathon · Taqneq 18.0',
@@ -15,13 +32,12 @@ export const HACKATHONS = [
     footerLeft: 'Date: 7-8 March',
     btnColor: 'text-accentViolet',
     certTitle: 'Cyber Cypher 5.0 — Finalist Certificate',
-    certSubtitle: 'NMIMS Mukesh Patel School of Technology Management & Engineering'
+    certSubtitle: 'NMIMS Mukesh Patel School of Technology Management &amp; Engineering'
   },
   {
     org: 'ATHARVA UNIVERSITY MUMBAI',
     orgColor: 'text-accentCyan',
-    hoverBorder: 'hover:border-accentCyan/40',
-    hoverTitle: 'group-hover:text-accentCyan',
+    accentHex: '#22D3EE',
     badge: { label: 'FINAL ROUND', cls: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
     title: "IEEE Techithon '26",
     subtitle: 'Hackdeck 2.0 · All India Techfest',
@@ -32,30 +48,28 @@ export const HACKATHONS = [
     footerLeft: 'Atharva University',
     btnColor: 'text-accentCyan',
     certTitle: "IEEE Techithon '26 Hackdeck 2.0 Certificate",
-    certSubtitle: 'Atharva University Mumbai & IEEE Atharva SBC'
+    certSubtitle: 'Atharva University Mumbai &amp; IEEE Atharva SBC'
   },
   {
     org: 'DJSCE MUMBAI',
-    orgColor: 'text-amber-400',
-    hoverBorder: 'hover:border-amber-500/40',
-    hoverTitle: 'group-hover:text-amber-400',
-    badge: { label: 'ROUND 1', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+    orgColor: 'text-accentBlue',
+    accentHex: '#4F8EF7',
+    badge: { label: 'ROUND 1', cls: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
     title: 'LOC 8.0 Hackathon',
     subtitle: 'ACM DJSCE &amp; IIC Innovation Council',
-    subtitleColor: 'text-amber-400',
+    subtitleColor: 'text-accentBlue',
     img: 'assets/certificates/loc_8_hackathon_djsce.jpg',
     imgAlt: 'LOC 8.0 Hackathon Certificate Photo',
     desc: 'Participated in LOC 8.0 flagship hackathon held on 21st-22nd February 2026 at Dwarkadas J. Sanghvi College of Engineering.',
     footerLeft: 'Date: 21-22 Feb 2026',
-    btnColor: 'text-amber-400',
+    btnColor: 'text-accentBlue',
     certTitle: 'LOC 8.0 Hackathon Certificate',
-    certSubtitle: 'DJ Sanghvi College of Engineering (DJSCE ACM & IIC)'
+    certSubtitle: 'DJ Sanghvi College of Engineering (DJSCE ACM &amp; IIC)'
   },
   {
     org: 'SPCE / SPIT',
     orgColor: 'text-accentBlue',
-    hoverBorder: 'hover:border-accentBlue/40',
-    hoverTitle: 'group-hover:text-accentBlue',
+    accentHex: '#4F8EF7',
     badge: { label: 'ROUND 1', cls: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
     title: 'SPIT Hackathon',
     subtitle: 'Sardar Patel College of Engineering',
@@ -66,30 +80,28 @@ export const HACKATHONS = [
     footerLeft: 'SPCE Mumbai',
     btnColor: 'text-accentBlue',
     certTitle: 'SPIT Hackathon Round 1 Certificate',
-    certSubtitle: 'Sardar Patel College of Engineering & SPIT'
+    certSubtitle: 'Sardar Patel College of Engineering &amp; SPIT'
   },
   {
     org: 'GOOGLE',
-    orgColor: 'text-emerald-400',
-    hoverBorder: 'hover:border-emerald-400/40',
-    hoverTitle: 'group-hover:text-emerald-400',
-    badge: { label: 'PITCH NIGHT', cls: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
+    orgColor: 'text-accentCyan',
+    accentHex: '#22D3EE',
+    badge: { label: 'PITCH NIGHT', cls: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
     title: 'Google Student Ambassador',
     subtitle: 'Pitch Night Edition · Google Program',
-    subtitleColor: 'text-emerald-400',
+    subtitleColor: 'text-accentCyan',
     img: 'assets/certificates/google_ambassador_pitch_night.png',
     imgAlt: 'Google Ambassador Certificate Photo',
     desc: 'Actively participated in Pitch Night Edition organized under Google Student Ambassador Program on 20th May 2026.',
     footerLeft: 'Date: 20 May 2026',
-    btnColor: 'text-emerald-400',
+    btnColor: 'text-accentCyan',
     certTitle: 'Google Ambassador Pitch Night Certificate',
     certSubtitle: 'Google Student Ambassador Program 2026'
   },
   {
     org: 'DJS UNICODE',
     orgColor: 'text-accentViolet',
-    hoverBorder: 'hover:border-accentViolet/40',
-    hoverTitle: 'group-hover:text-accentViolet',
+    accentHex: '#8B5CF6',
     badge: { label: 'WORKSHOP', cls: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
     title: 'Hackprep 7.0',
     subtitle: '2-Day Tech Workshop by DJS Unicode',
@@ -100,6 +112,6 @@ export const HACKATHONS = [
     footerLeft: 'Date: 20-21 April 2026',
     btnColor: 'text-accentViolet',
     certTitle: 'Hackprep 7.0 Workshop Certificate',
-    certSubtitle: 'DJS Unicode & HOD Computer Dept, DJSCE'
+    certSubtitle: 'DJS Unicode &amp; HOD Computer Dept, DJSCE'
   }
 ];
