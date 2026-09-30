@@ -220,3 +220,21 @@
   position: relative;
   z-index: 2;
 }
+
+/* -- Vision / Goal cards (Future Vision section) --------------------------------
+   Standalone card style for static (non-carousel) informational cards.
+   Uses only a subtle border glow on hover -- NO gradient background fill.
+   This prevents the rainbow flash caused by dev-code-card's gradient trick
+   bleeding through cards that lack a .dev-code-card-inner wrapper.
+------------------------------------------------------------------------------- */
+.vision-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.vision-card:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 8px 24px -8px rgba(139, 92, 246, 0.2);
+  transform: translateY(-3px);
+}
