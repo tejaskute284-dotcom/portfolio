@@ -202,10 +202,10 @@
             <span>Available for Internships &amp; AI/ML Projects</span>
           </div>
 
-          <!-- Clean, Dominant Editorial Headline -->
+          <!-- Clean, Dominant Editorial Headline with 3D Embossed Depth -->
           <div class="mb-5">
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-              Hi, I'm <span class="gold-gradient-text">Tejas Sharad Kute</span>
+              Hi, I'm <span class="gold-gradient-text hero-name-3d" id="hero-name-target">Tejas Sharad Kute</span>
             </h1>
           </div>
 
@@ -319,7 +319,7 @@
       <div class="stat-strip grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
         
         <!-- Stat 1: Shipped Projects -->
-        <div class="stat-item p-6 text-center">
+        <div class="stat-item stat-3d-card p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="folder-git-2" class="w-4 h-4"></i>
             <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Projects</span>
@@ -331,7 +331,7 @@
         </div>
 
         <!-- Stat 2: Hackathon Credentials -->
-        <div class="stat-item p-6 text-center">
+        <div class="stat-item stat-3d-card p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="trophy" class="w-4 h-4"></i>
             <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Hackathons</span>
@@ -343,7 +343,7 @@
         </div>
 
         <!-- Stat 3: Academic Certifications -->
-        <div class="stat-item p-6 text-center">
+        <div class="stat-item stat-3d-card p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
             <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Certifications</span>
@@ -355,7 +355,7 @@
         </div>
 
         <!-- Stat 4: Academic Performance -->
-        <div class="stat-item p-6 text-center">
+        <div class="stat-item stat-3d-card p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
             <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Academic Score</span>
@@ -714,9 +714,16 @@
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">08 / Capabilities</span>
           <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Technical Competencies</h2>
+          <p class="section-intro-text">
+            Explore core systems and frameworks via interactive 3D constellation.
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Interactive 3D Technology Sphere (Desktop Constellation) -->
+        <div id="skills-sphere-mount" class="mb-12"></div>
+
+        <!-- Responsive Structured Competencies Grid (Mobile & Desktop Reference) -->
+        <div id="skills-fallback-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Category 1: Languages -->
           <div class="premium-card stagger-child">
@@ -1141,6 +1148,9 @@
   </div>
 
   <!-- Scripts -->
+  <!-- Three.js CDN (Lightweight Build for 3D Neural Constellation) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   

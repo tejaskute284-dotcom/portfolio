@@ -1,10 +1,43 @@
 /* Animations & Keyframes — Quiet Luxury & Fluid Transitions */
 
-/* Clean reveal states */
-.reveal,
-.stagger-child {
-  opacity: 1 !important;
-  transform: none !important;
+/* 3D Hero Name Typography & Letterpress */
+.hero-name-3d {
+  display: inline-block;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  text-shadow: 0 1px 0 rgba(213, 178, 107, 0.4),
+               0 2px 0 rgba(213, 178, 107, 0.25),
+               0 6px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
+}
+[data-theme="dark"] .hero-name-3d {
+  text-shadow: 0 1px 0 rgba(213, 178, 107, 0.35),
+               0 2px 4px rgba(0, 0, 0, 0.8),
+               0 8px 24px rgba(0, 0, 0, 0.9);
+}
+
+/* 3D Floating Stat Cards */
+.stat-3d-card {
+  perspective: 800px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.stat-3d-card:hover {
+  transform: translateY(-5px) rotateX(3deg);
+  box-shadow: 0 20px 45px -12px rgba(213, 178, 107, 0.25);
+  border-color: var(--accent-gold-muted);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .hero-name-3d,
+  .stat-3d-card,
+  .portrait-arch-frame,
+  .skills-sphere-container {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* Subtle Shimmer for Champagne Accents */

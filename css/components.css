@@ -104,10 +104,16 @@
   border-radius: 200px 200px 20px 20px;
   padding: 8px;
   background: linear-gradient(180deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, var(--accent-gold-dark) 100%);
-  box-shadow: 0 20px 50px -15px rgba(197, 168, 128, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(213, 178, 107, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+.portrait-container:hover .portrait-arch-frame {
+  transform: translateY(-6px) rotateY(-3deg) rotateX(2deg);
+  box-shadow: 0 35px 70px -18px rgba(213, 178, 107, 0.45);
 }
 @media (max-width: 768px) {
   .portrait-arch-frame {

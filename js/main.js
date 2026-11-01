@@ -15,6 +15,8 @@ import { initResumeModal }      from './resume-modal.js';
 import { initVerifyModal }      from './verify-modal.js';
 import { initAntiGravity }     from './antigravity.js';
 import { initStepNavigation }  from './step-nav.js';
+import { initNeural3D }        from './neural-3d.js';
+import { initSkillsSphere }    from './skills-sphere.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAll();          // inject data-driven cards before anything else
@@ -32,4 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initVerifyModal();
   initAntiGravity();    // physics tilt + repulsion on all .ag-card elements
   initStepNavigation(); // step-by-step navigation controller
+  initNeural3D();       // 3D neural constellation in hero (Three.js)
+  initSkillsSphere();   // 3D interactive Fibonacci technology sphere in skills
 });
