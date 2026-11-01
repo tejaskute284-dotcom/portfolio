@@ -1,58 +1,189 @@
-/* Custom Component Styles */
+/* Custom Component Styles — Classic Luxury Editorial × Modern Minimal */
 
-/* Frosted glass utility */
+/* Editorial Header & Glass Nav */
 .frosted-glass {
-  background: rgba(10, 10, 15, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
-[data-theme="light"] .frosted-glass {
-  background: rgba(245, 245, 249, 0.7);
+[data-theme="dark"] .frosted-glass {
+  background: rgba(12, 12, 14, 0.88);
   border-bottom: 1px solid var(--border);
 }
 
-/* Premium Card & Hover Lift + Glow */
-.premium-card {
+/* Luxury Monogram */
+.monogram-mark {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.monogram-mark span.gold {
+  color: var(--accent-gold);
+}
+
+/* Classic Luxury Editorial Cards */
+.premium-card,
+.luxury-card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  box-shadow: var(--shadow-luxury);
 }
-.premium-card:hover {
+.premium-card:hover,
+.luxury-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent-violet);
-  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.25);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
 }
 
-/* Developer-style code card (Gradient border) */
+/* Editorial subtle gold corner accent */
+.editorial-frame {
+  position: relative;
+}
+.editorial-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-top: 1px solid var(--accent-gold);
+  border-left: 1px solid var(--accent-gold);
+  pointer-events: none;
+}
+.editorial-frame::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border-bottom: 1px solid var(--accent-gold);
+  border-right: 1px solid var(--accent-gold);
+  pointer-events: none;
+}
+
+/* Hero Portrait Frame */
+.portrait-container {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.portrait-backdrop-organic {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle at 50% 50%, var(--accent-gold-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(28px);
+  z-index: 0;
+  pointer-events: none;
+}
+.portrait-arch-frame {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 5;
+  border-radius: 220px 220px 24px 24px;
+  padding: 10px;
+  background: linear-gradient(180deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, var(--accent-gold-dark) 100%);
+  box-shadow: 0 24px 60px -15px rgba(197, 168, 128, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.portrait-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 212px 212px 18px 18px;
+  background: var(--bg-tertiary);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.portrait-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.portrait-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: radial-gradient(circle at top, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  height: 100%;
+  width: 100%;
+}
+.portrait-ornament-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  position: relative;
+  background: rgba(197, 168, 128, 0.08);
+}
+.portrait-ornament-circle::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px dashed var(--accent-gold-border);
+}
+
+/* Developer-style code card (Retained for functionality, restyled to quiet luxury) */
 .dev-code-card {
   position: relative;
   background-color: var(--bg-secondary);
   border-radius: 12px;
-  padding: 1px; /* space for gradient */
-  background-image: linear-gradient(135deg, var(--border), var(--border));
-  transition: background-image 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow-luxury);
 }
 .dev-code-card:hover {
-  background-image: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
-  box-shadow: 0 12px 40px -12px rgba(139, 92, 246, 0.3);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
 }
 .dev-code-card-inner {
   background-color: var(--bg-secondary);
   border-radius: 11px;
-  padding: 1.5rem;
+  padding: 1.75rem;
   height: 100%;
 }
 
-/* Custom stats layout */
-.stat-card {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
+/* Luxury Statistics Strip */
+.stat-strip {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  box-shadow: var(--shadow-luxury);
+}
+.stat-item {
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+.stat-item:hover {
+  background-color: var(--accent-gold-glow);
 }
 
 /* Timeline Components */
@@ -61,15 +192,15 @@
   position: absolute;
   left: -25px;
   top: 6px;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background-color: var(--accent-violet);
+  background-color: var(--accent-gold);
   border: 2px solid var(--bg-primary);
   z-index: 10;
 }
 .timeline-container {
-  border-left: 2px solid var(--border);
+  border-left: 1px solid var(--accent-gold-border);
 }
 
 /* Input Fields styling */
@@ -77,49 +208,90 @@
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-primary);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .form-input:focus {
-  border-color: var(--accent-violet);
+  border-color: var(--accent-gold);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 0 3px var(--accent-gold-glow);
 }
 
-/* Color badges/pills */
+/* Tech tag pills */
 .tech-tag {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
-  transition: all 0.2s ease;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
 }
 .tech-tag:hover {
-  border-color: var(--accent-violet);
-  color: var(--text-primary);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold-dark);
+  background-color: var(--bg-secondary);
+}
+[data-theme="dark"] .tech-tag:hover {
+  color: var(--accent-gold-light);
 }
 
-/* Particles background container - replaced with CSS dot-grid */
+/* Buttons — Luxury Styling */
+.btn-luxury-primary {
+  background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
+  color: #1A1A1C;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 25px -8px rgba(197, 168, 128, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-luxury-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -6px rgba(197, 168, 128, 0.6);
+  filter: brightness(1.05);
+}
+
+.btn-luxury-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-gold);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+.btn-luxury-secondary:hover {
+  background-color: var(--accent-gold-glow);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+/* Particles / subtle canvas overlay */
 #particles-js {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
-  background-size: 24px 24px;
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-image: radial-gradient(var(--accent-gold-border) 0.8px, transparent 0.8px);
+  opacity: 0.65;
 }
-
-/* Code Syntax & IDE Theme Styling */
-.code-keyword { color: #F472B6; } /* Pink */
-.code-type { color: #60A5FA; }    /* Blue */
-.code-string { color: #34D399; }  /* Green */
-.code-num { color: #F59E0B; }     /* Orange */
-.code-comment { color: #6B7280; } /* Gray */
-.code-fn { color: #8B5CF6; }      /* Violet */
-.code-label { color: #A7F3D0; }   /* Mint */
 
 /* Carousel Layout & Control Styles */
 .carousel-container {
@@ -136,15 +308,15 @@
   will-change: transform;
 }
 .carousel-item {
-  padding: 0 10px;
+  padding: 0 12px;
   box-sizing: border-box;
 }
 .carousel-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
   color: var(--text-primary);
   width: 44px;
   height: 44px;
@@ -155,12 +327,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-luxury);
 }
 .carousel-control:hover {
-  background-color: var(--accent-violet);
-  border-color: var(--accent-violet);
-  color: white;
+  background-color: var(--accent-gold);
+  color: #1A1A1C;
+  border-color: var(--accent-gold);
 }
 .carousel-prev {
   left: -22px;
@@ -184,57 +356,35 @@
   }
 }
 
-
-/* -- Unified hover colour system -----------------------------------------------
-   .hov-card-border and .hov-card-title pick up --card-accent injected by JS.
-   Replaces all per-card arbitrary Tailwind hover classes. Zero rainbow risk.
-------------------------------------------------------------------------------- */
+/* Unified card border styling */
 .hov-card-border {
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .hov-card-border:hover {
-  border-color: color-mix(in srgb, var(--card-accent, var(--accent-violet)) 40%, transparent);
-  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--card-accent, var(--accent-violet)) 30%, transparent);
+  border-color: var(--accent-gold);
+  box-shadow: 0 12px 32px -10px var(--accent-gold-glow);
 }
 .hov-card-title {
   transition: color 0.3s ease;
 }
-.group:hover .hov-card-title {
-  color: var(--card-accent, var(--accent-violet));
+.hov-card-border:hover .hov-card-title {
+  color: var(--accent-gold-dark);
+}
+[data-theme="dark"] .hov-card-border:hover .hov-card-title {
+  color: var(--accent-gold-light);
 }
 
-/* -- AntiGravity card wrapper --------------------------------------------------
-   .ag-card provides 3-D perspective for the JS tilt effect.
-   Layers on .dev-code-card without overriding existing styles.
-------------------------------------------------------------------------------- */
-.ag-card {
-  perspective: 800px;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.ag-card .ag-inner {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  position: relative;
-  z-index: 2;
-}
-
-/* -- Vision / Goal cards (Future Vision section) --------------------------------
-   Standalone card style for static (non-carousel) informational cards.
-   Uses only a subtle border glow on hover -- NO gradient background fill.
-   This prevents the rainbow flash caused by dev-code-card's gradient trick
-   bleeding through cards that lack a .dev-code-card-inner wrapper.
-------------------------------------------------------------------------------- */
+/* Vision / Trajectory Card */
 .vision-card {
-  background-color: var(--bg-secondary);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 12px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: var(--shadow-luxury);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .vision-card:hover {
-  border-color: rgba(139, 92, 246, 0.45);
-  box-shadow: 0 8px 24px -8px rgba(139, 92, 246, 0.2);
   transform: translateY(-3px);
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
 }

@@ -1,30 +1,57 @@
-/* CSS Custom Properties & Design Tokens */
+/* CSS Custom Properties & Design Tokens — Classic Luxury Editorial x Modern Minimal */
 :root {
-  --bg-primary: #0A0A0F;
-  --bg-secondary: #12121A;
-  --bg-tertiary: #1A1A28;
-  --accent-blue: #4F8EF7;
-  --accent-violet: #8B5CF6;
-  --accent-cyan: #22D3EE;
-  --text-primary: #F0F0FF;
-  --text-secondary: #A0A0C0;
-  --border: rgba(255, 255, 255, 0.08);
+  /* Warm Ivory Editorial Light Mode (Default Luxury Baseline) */
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F3EFEA;
+  --bg-elevated: #FFFFFF;
+  
+  /* Champagne Gold & Muted Metallic Accents */
+  --accent-gold: #C5A880;
+  --accent-gold-light: #DFC7A5;
+  --accent-gold-dark: #9A7B56;
+  --accent-gold-glow: rgba(197, 168, 128, 0.2);
+  --accent-gold-border: rgba(197, 168, 128, 0.35);
 
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
+  /* Deep Charcoal & Editorial Black Typography */
+  --text-primary: #1A1A1C;
+  --text-secondary: #5C5854;
+  --text-muted: #8E8A84;
+
+  /* Refined Hairline Borders & Shadows */
+  --border: rgba(26, 26, 28, 0.08);
+  --border-gold: rgba(197, 168, 128, 0.35);
+  --shadow-luxury: 0 16px 40px -12px rgba(26, 26, 28, 0.06);
+  --shadow-gold: 0 20px 48px -12px rgba(197, 168, 128, 0.22);
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
-[data-theme="light"] {
-  --bg-primary: #F5F5F9;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #EAEAEF;
-  --accent-blue: #1D4ED8;
-  --accent-violet: #6D28D9;
-  --accent-cyan: #0E7490;
-  --text-primary: #0F0F1A;
-  --text-secondary: #4F4F6A;
-  --border: rgba(0, 0, 0, 0.08);
+[data-theme="dark"] {
+  /* Deep Noir Obsidian Luxury Dark Mode */
+  --bg-primary: #0C0C0E;
+  --bg-secondary: #141418;
+  --bg-tertiary: #1C1C22;
+  --bg-elevated: #181820;
+
+  --accent-gold: #D4AF37;
+  --accent-gold-light: #E7C968;
+  --accent-gold-dark: #A98322;
+  --accent-gold-glow: rgba(212, 175, 55, 0.18);
+  --accent-gold-border: rgba(212, 175, 55, 0.3);
+
+  --text-primary: #F5F2EB;
+  --text-secondary: #A8A49C;
+  --text-muted: #6E6A63;
+
+  --border: rgba(245, 242, 235, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.3);
+  --shadow-luxury: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 20px 48px -12px rgba(212, 175, 55, 0.15);
 }
 
 /* Base Styles */
@@ -37,15 +64,19 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+h1, h2, h3, h4, .font-serif-luxury {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
-code, .tech-tag {
-  font-family: var(--font-mono);
+.font-editorial-heading {
+  font-family: var(--font-display);
 }
 
 /* Custom Scrollbar */
@@ -56,15 +87,15 @@ code, .tech-tag {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-tertiary);
+  background: var(--accent-gold-border);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-violet);
+  background: var(--accent-gold);
 }
 
 /* Selection highlight */
 ::selection {
-  background-color: var(--accent-violet);
-  color: #FFFFFF;
+  background-color: var(--accent-gold);
+  color: #1A1A1C;
 }

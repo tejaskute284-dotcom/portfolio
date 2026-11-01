@@ -1,38 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mr. Tejas Sharad Kute — AI/ML Developer & Programmer</title>
+  <title>Tejas Sharad Kute — AI/ML Enthusiast & Full-Stack Developer</title>
   
   <!-- SEO & Open Graph Meta Tags -->
-  <meta name="description" content="Portfolio of Mr. Tejas Sharad Kute - B.Tech (AI & ML) student, full-stack developer, and programmer. Specialising in intelligent systems, full-stack web development, and cloud services.">
-  <meta property="og:title" content="Mr. Tejas Sharad Kute — AI/ML Developer">
-  <meta property="og:description" content="Explore projects, certifications, and technical skills of Tejas Sharad Kute.">
+  <meta name="description" content="Personal portfolio of Tejas Sharad Kute: B.Tech student specializing in Artificial Intelligence & Machine Learning, Full-Stack Developer, and Web Development Intern.">
+  <meta property="og:title" content="Tejas Sharad Kute — AI/ML Enthusiast & Full-Stack Developer">
+  <meta property="og:description" content="Classic luxury editorial portfolio showcasing AI/ML architectures, production systems, and academic achievements.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://github.com/tejaskute284-dotcom">
   
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury Serif) + Playfair Display + Plus Jakarta Sans + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
+      darkMode: ['class', '[data-theme="dark"]'],
       theme: {
         extend: {
           colors: {
             bgPrimary: 'var(--bg-primary)',
             bgSecondary: 'var(--bg-secondary)',
             bgTertiary: 'var(--bg-tertiary)',
-            accentBlue: 'var(--accent-blue)',
-            accentViolet: 'var(--accent-violet)',
-            accentCyan: 'var(--accent-cyan)',
+            bgElevated: 'var(--bg-elevated)',
+            accentGold: 'var(--accent-gold)',
+            accentGoldLight: 'var(--accent-gold-light)',
+            accentGoldDark: 'var(--accent-gold-dark)',
             textPrimary: 'var(--text-primary)',
             textSecondary: 'var(--text-secondary)',
+            textMuted: 'var(--text-muted)',
+            borderBase: 'var(--border)',
+            borderGold: 'var(--border-gold)',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
@@ -47,50 +57,57 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
 </head>
-<body class="bg-bgPrimary text-textPrimary selection:bg-accentViolet selection:text-white">
+<body class="bg-bgPrimary text-textPrimary selection:bg-accentGold selection:text-textPrimary">
 
-  <!-- Shared SVG icon symbols — defined once, reused via <use href="#id"> -->
+  <!-- Shared SVG icon symbols -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></symbol>
     <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></symbol>
   </svg>
 
-
-  <!-- 1. NAVBAR -->
-  <header class="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-300">
-    <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-      <!-- Monogram Logo -->
-      <a href="#" class="text-2xl font-bold font-heading text-accentViolet tracking-wider hover:scale-105 transition-transform flex items-center gap-1.5">
-        <span class="text-accentCyan">&lt;</span>TK <span class="text-accentViolet">/&gt;</span>
+  <!-- 1. NAVIGATION BAR -->
+  <header class="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-400">
+    <div class="max-w-[1280px] mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Refined Monogram / Brand -->
+      <a href="#" class="monogram-mark text-xl tracking-wider hover:opacity-90 transition">
+        <span class="w-8 h-8 rounded-full border border-accentGold/50 flex items-center justify-center text-xs font-serif font-bold text-accentGold">TK</span>
+        <span class="font-serif font-semibold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-8 font-heading text-sm font-medium text-textSecondary">
-        <a href="#about" class="nav-link transition-colors duration-300 hover:text-textPrimary">About</a>
-        <a href="#education" class="nav-link transition-colors duration-300 hover:text-textPrimary">Education</a>
-        <a href="#projects" class="nav-link transition-colors duration-300 hover:text-textPrimary">Projects</a>
-        <a href="#hackathons" class="nav-link transition-colors duration-300 hover:text-textPrimary">Hackathons</a>
-        <a href="#experience" class="nav-link transition-colors duration-300 hover:text-textPrimary">Experience</a>
-        <a href="#certifications" class="nav-link transition-colors duration-300 hover:text-textPrimary">Certifications</a>
-        <a href="#skills" class="nav-link transition-colors duration-300 hover:text-textPrimary">Skills</a>
-        <a href="#future-vision" class="nav-link transition-colors duration-300 hover:text-textPrimary">Future Vision</a>
-        <a href="#contact" class="nav-link transition-colors duration-300 hover:text-textPrimary">Contact</a>
+      <!-- Desktop Editorial Navigation -->
+      <nav class="hidden lg:flex items-center gap-7 font-sans text-xs tracking-widest uppercase font-medium text-textSecondary">
+        <a href="#about" class="nav-link hover:text-textPrimary transition">About</a>
+        <a href="#projects" class="nav-link hover:text-textPrimary transition">Projects</a>
+        <a href="#experience" class="nav-link hover:text-textPrimary transition">Experience</a>
+        <a href="#hackathons" class="nav-link hover:text-textPrimary transition">Achievements</a>
+        <a href="#education" class="nav-link hover:text-textPrimary transition">Education</a>
+        <a href="#certifications" class="nav-link hover:text-textPrimary transition">Credentials</a>
+        <a href="#skills" class="nav-link hover:text-textPrimary transition">Skills</a>
+        <a href="#future-vision" class="nav-link hover:text-textPrimary transition">Research</a>
+        <a href="#contact" class="nav-link hover:text-textPrimary transition">Contact</a>
       </nav>
 
-      <!-- Right Nav controls -->
-      <div class="flex items-center gap-4">
-        <!-- Theme Toggle -->
-        <button id="theme-toggle" class="p-2 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-textPrimary transition duration-300" aria-label="Toggle Theme">
-          <svg id="theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg id="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <!-- Right Navigation Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Resume Trigger Button -->
+        <button type="button" class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md border border-accentGold/40 text-xs font-sans tracking-wider uppercase font-semibold text-textPrimary hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-accentGold"></i>
+          <span>Resume</span>
         </button>
 
-        <!-- Social Icons (SVG via shared symbol) -->
-        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="hidden sm:inline-flex p-2 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-textPrimary transition duration-300" aria-label="GitHub Profile">
-          <svg class="w-5 h-5 fill-current"><use href="#icon-github"/></svg>
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="Toggle Theme">
+          <svg id="theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg id="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <!-- Social Icons -->
+        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="hidden md:inline-flex p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="GitHub Profile">
+          <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
         </a>
-        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="hidden sm:inline-flex p-2 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-textPrimary transition duration-300" aria-label="LinkedIn Profile">
-          <svg class="w-5 h-5 fill-current"><use href="#icon-linkedin"/></svg>
+        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="hidden md:inline-flex p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="LinkedIn Profile">
+          <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg>
         </a>
 
         <!-- Hamburger Mobile button -->
@@ -103,421 +120,499 @@
 
   <!-- Mobile Navigation Drawer -->
   <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
-  <div id="mobile-menu-drawer" class="fixed top-0 right-0 h-full w-72 bg-bgSecondary border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between">
+  <div id="mobile-menu-drawer" class="fixed top-0 right-0 h-full w-80 bg-bgSecondary border-l border-border z-50 transform translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between">
     <div>
-      <div class="flex items-center justify-between pb-6 border-b border-white/5">
-        <span class="text-xl font-bold font-heading text-accentViolet">&lt; TK /&gt;</span>
+      <div class="flex items-center justify-between pb-6 border-b border-border">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-full border border-accentGold flex items-center justify-center text-xs font-serif font-bold text-accentGold">TK</span>
+          <span class="font-serif font-bold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
+        </div>
         <button id="mobile-menu-close" class="p-2 text-textSecondary hover:text-textPrimary transition" aria-label="Close Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
       </div>
-      <nav class="flex flex-col gap-4 mt-8 font-heading text-lg font-medium text-textSecondary">
-        <a href="#about" class="hover:text-accentCyan transition py-2 border-b border-white/5">About</a>
-        <a href="#future-vision" class="hover:text-accentCyan transition py-2 border-b border-white/5">Future Vision</a>
-        <a href="#education" class="hover:text-accentCyan transition py-2 border-b border-white/5">Education</a>
-        <a href="#projects" class="hover:text-accentCyan transition py-2 border-b border-white/5">Projects</a>
-        <a href="#experience" class="hover:text-accentCyan transition py-2 border-b border-white/5">Experience</a>
-        <a href="#certifications" class="hover:text-accentCyan transition py-2 border-b border-white/5">Certifications</a>
-        <a href="#skills" class="hover:text-accentCyan transition py-2 border-b border-white/5">Skills</a>
-        <a href="#contact" class="hover:text-accentCyan transition py-2 border-b border-white/5">Contact</a>
-        <button type="button" class="js-open-resume-modal text-left hover:text-accentViolet transition py-2 border-b border-white/5 flex items-center justify-between font-heading">
-          <span>Resume / CV</span>
-          <i data-lucide="eye" class="w-4 h-4 text-accentViolet"></i>
+      <nav class="flex flex-col gap-3 mt-6 font-sans text-sm tracking-wider uppercase font-medium text-textSecondary">
+        <a href="#about" class="hover:text-accentGold transition py-2 border-b border-border/50">About</a>
+        <a href="#projects" class="hover:text-accentGold transition py-2 border-b border-border/50">Projects</a>
+        <a href="#experience" class="hover:text-accentGold transition py-2 border-b border-border/50">Experience</a>
+        <a href="#hackathons" class="hover:text-accentGold transition py-2 border-b border-border/50">Achievements</a>
+        <a href="#education" class="hover:text-accentGold transition py-2 border-b border-border/50">Education</a>
+        <a href="#certifications" class="hover:text-accentGold transition py-2 border-b border-border/50">Credentials</a>
+        <a href="#skills" class="hover:text-accentGold transition py-2 border-b border-border/50">Skills</a>
+        <a href="#future-vision" class="hover:text-accentGold transition py-2 border-b border-border/50">Research & Vision</a>
+        <a href="#contact" class="hover:text-accentGold transition py-2 border-b border-border/50">Contact</a>
+        <button type="button" class="js-open-resume-modal text-left hover:text-accentGold transition py-2.5 border-b border-border/50 flex items-center justify-between font-medium">
+          <span>View Resume / CV</span>
+          <i data-lucide="file-text" class="w-4 h-4 text-accentGold"></i>
         </button>
       </nav>
     </div>
-    <div class="pt-6 border-t border-white/5 flex items-center justify-around">
-      <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentCyan transition" aria-label="GitHub">
+    <div class="pt-6 border-t border-border flex items-center justify-around">
+      <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-3 rounded-md bg-bgTertiary border border-border text-textSecondary hover:text-accentGold transition" aria-label="GitHub">
         <svg class="w-5 h-5 fill-current"><use href="#icon-github"/></svg>
       </a>
-      <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-2.5 rounded-lg bg-bgTertiary border border-white/5 text-textSecondary hover:text-accentBlue transition" aria-label="LinkedIn">
+      <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-3 rounded-md bg-bgTertiary border border-border text-textSecondary hover:text-accentGold transition" aria-label="LinkedIn">
         <svg class="w-5 h-5 fill-current"><use href="#icon-linkedin"/></svg>
       </a>
     </div>
   </div>
 
-  <!-- 2. HERO SECTION -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-    <!-- Particles Grid Background -->
+  <!-- 2. HERO SECTION — CLASSIC LUXURY EDITORIAL × MODERN MINIMAL (50/50 SPLIT) -->
+  <section id="hero" class="relative min-h-[92vh] flex flex-col justify-center overflow-hidden pt-28 pb-16">
+    <!-- Subtle architectural dot pattern -->
     <div id="particles-js"></div>
 
-    <div class="max-w-[1200px] w-full mx-auto px-6 text-center z-10 flex flex-col items-center justify-between min-h-[75vh]">
-      <div></div> <!-- Spacer -->
-      
-      <div class="flex flex-col items-center">
-        <!-- Availability Badge -->
-        <div class="mb-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Available for Internships &amp; AI/ML Projects</span>
-        </div>
-
-        <!-- Greeting Typing -->
-        <div class="text-accentCyan font-mono text-sm md:text-base mb-4 tracking-wider uppercase font-semibold">
-          <span id="typewriter-greeting-prefix"></span><span class="typewriter-cursor"></span>
-        </div>
+    <div class="max-w-[1280px] w-full mx-auto px-6 z-10 my-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
-        <!-- Main Big Heading -->
-        <h1 class="text-4xl md:text-7xl font-bold font-heading mb-4 tracking-tight leading-none bg-gradient-to-r from-textPrimary via-accentBlue to-accentViolet bg-clip-text text-transparent hero-anim-title">
-          <span id="typewriter-name"></span>
-        </h1>
-        
-        <!-- Subheading -->
-        <p class="text-lg md:text-2xl font-medium text-textSecondary mb-6 hero-anim-sub">
-          AI/ML Engineer <span class="text-accentViolet">·</span> Full-Stack Developer
-        </p>
+        <!-- Left Side: Editorial Typography & Introduction -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          
+          <!-- Availability Badge -->
+          <div class="mb-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bgSecondary border border-accentGold/30 text-textPrimary text-xs font-mono tracking-wider shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-accentGold animate-pulse"></span>
+            <span class="text-[11px] uppercase text-textSecondary">Available for Internships &amp; AI/ML Projects</span>
+          </div>
 
-        <!-- Tagline Typewriter -->
-        <div class="h-8 mb-10 flex items-center justify-center">
-          <span class="font-mono text-sm md:text-lg text-accentBlue" id="typewriter-tagline"></span>
-          <span class="typewriter-cursor"></span>
+          <!-- Editorial Greeting & Dominant Serif Headline -->
+          <div class="mb-4">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-textPrimary tracking-tight leading-[1.08]">
+              <span id="typewriter-greeting-prefix">Hi, I'm </span><span id="typewriter-name" class="gold-gradient-text">Tejas Sharad Kute</span><span class="typewriter-cursor"></span>
+            </h1>
+          </div>
+
+          <!-- Professional Role Line -->
+          <div class="flex items-center gap-3 mb-6">
+            <div class="h-[1px] w-8 bg-accentGold"></div>
+            <p class="font-sans text-sm md:text-base font-semibold tracking-widest uppercase text-accentGold">
+              B.Tech <span class="opacity-50">|</span> AI/ML Enthusiast <span class="opacity-50">|</span> Full-Stack Developer
+            </p>
+          </div>
+
+          <!-- Impactful Introduction Paragraph -->
+          <p class="text-base sm:text-lg text-textSecondary leading-relaxed mb-6 max-w-2xl font-sans">
+            Specialising in deep neural systems, intelligent algorithms, and production software architectures at Atharva University Mumbai. As a Web Developer Intern at Aerus Infotech Solutions, I blend mathematical rigor with modern minimal engineering to create impactful, real-world solutions.
+          </p>
+
+          <!-- Dynamic Tagline Typewriter -->
+          <div class="h-8 mb-8 flex items-center">
+            <span class="font-mono text-xs sm:text-sm text-textMuted tracking-wider" id="typewriter-tagline"></span>
+          </div>
+
+          <!-- Premium CTA Buttons -->
+          <div class="flex flex-wrap gap-4 items-center mb-10 w-full sm:w-auto">
+            <a href="#projects" class="btn-luxury-primary w-full sm:w-auto text-center font-sans">
+              <span>View My Projects</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#contact" class="btn-luxury-secondary w-full sm:w-auto text-center font-sans">
+              <span>Get in Touch</span>
+            </a>
+            <button type="button" class="js-open-resume-modal btn-luxury-secondary w-full sm:w-auto text-center font-sans cursor-pointer">
+              <i data-lucide="file-text" class="w-4 h-4 text-accentGold"></i>
+              <span>View Resume</span>
+            </button>
+          </div>
+
+          <!-- Social Profiles & Quick Contact Row -->
+          <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-border/80 w-full max-w-xl text-xs font-mono text-textSecondary">
+            <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="flex items-center gap-2 hover:text-accentGold transition">
+              <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
+              <span>GitHub</span>
+            </a>
+            <span class="opacity-30">/</span>
+            <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="flex items-center gap-2 hover:text-accentGold transition">
+              <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <span class="opacity-30">/</span>
+            <a href="mailto:tejaskute284@gmail.com" class="flex items-center gap-2 hover:text-accentGold transition">
+              <i data-lucide="mail" class="w-4 h-4 text-accentGold"></i>
+              <span>tejaskute284@gmail.com</span>
+            </a>
+          </div>
+
         </div>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center hero-anim-cta">
-          <a href="#projects" class="px-7 py-3.5 rounded-full bg-accentViolet hover:bg-opacity-90 text-white font-medium shadow-lg shadow-accentViolet/20 hover:shadow-accentViolet/40 hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center font-heading">
-            View My Work
-          </a>
-          <button type="button" class="js-open-resume-modal px-7 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentViolet text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading cursor-pointer">
-            <i data-lucide="eye" class="w-4 h-4 text-accentViolet"></i> View Resume
-          </button>
-          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="px-7 py-3.5 rounded-full bg-bgSecondary border border-white/10 hover:border-accentBlue text-textPrimary font-medium hover:-translate-y-0.5 transition duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-2 font-heading">
-            <i data-lucide="download" class="w-4 h-4 text-accentBlue"></i> Download CV
-          </a>
+        <!-- Right Side: Professional Portrait & Champagne-Gold Framing -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="portrait-container">
+            <!-- Subtle organic ambient gold glow -->
+            <div class="portrait-backdrop-organic"></div>
+
+            <!-- Arched gold frame -->
+            <div class="portrait-arch-frame">
+              <div class="portrait-inner">
+                
+                <!-- Editorial Placeholder Frame with Monogram & Drop-in slot -->
+                <div class="portrait-placeholder">
+                  <!-- Decorative circular gold crest -->
+                  <div class="portrait-ornament-circle">
+                    <span class="font-serif font-bold text-3xl gold-gradient-text tracking-widest">TK</span>
+                  </div>
+
+                  <span class="text-[11px] font-mono tracking-widest uppercase text-accentGold mb-1">PORTRAIT ARCHIVE</span>
+                  <h3 class="font-serif font-bold text-xl text-textPrimary mb-2">Tejas Sharad Kute</h3>
+                  <p class="text-xs text-textSecondary max-w-xs leading-relaxed mb-4">
+                    AI/ML Developer &amp; Programmer
+                  </p>
+                  
+                  <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-bgSecondary border border-border text-[10px] font-mono text-textMuted">
+                    <span>Atharva University Mumbai</span>
+                    <span>·</span>
+                    <span>2026</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Floating editorial badge -->
+            <div class="absolute -bottom-4 right-2 sm:right-6 bg-bgSecondary border border-borderGold px-4 py-2.5 rounded-lg shadow-xl z-10 flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-accentGold/10 flex items-center justify-center text-accentGold">
+                <i data-lucide="award" class="w-4 h-4"></i>
+              </div>
+              <div class="text-left">
+                <div class="text-[10px] uppercase font-mono tracking-wider text-textMuted">Internship &amp; Research</div>
+                <div class="text-xs font-serif font-bold text-textPrimary">Aerus Infotech Solutions</div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <!-- Social & Quick Contact Row -->
-        <div class="flex flex-wrap justify-center items-center gap-6 mt-12 hero-anim-social">
-          <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentCyan transition duration-300">
-            <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg> <span>GitHub</span>
-          </a>
-          <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentBlue transition duration-300">
-            <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg> <span>LinkedIn</span>
-          </a>
-          <a href="mailto:tejaskute284@gmail.com" class="flex items-center gap-2 text-sm text-textSecondary hover:text-emerald-400 transition duration-300">
-            <i data-lucide="mail" class="w-4 h-4"></i> <span>tejaskute284@gmail.com</span>
-          </a>
-          <a href="tel:+918976550171" class="flex items-center gap-2 text-sm text-textSecondary hover:text-accentViolet transition duration-300">
-            <i data-lucide="phone" class="w-4 h-4"></i> <span>+91 8976550171</span>
-          </a>
+      </div>
+
+      <!-- 4. BOTTOM HERO STATISTICS STRIP (100% Verified from Existing Codebase) -->
+      <div class="mt-16 sm:mt-20">
+        <div class="stat-strip grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
+          
+          <!-- Stat 1: Shipped Projects -->
+          <div class="stat-item p-6 text-center">
+            <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
+              <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+              <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Projects</span>
+            </div>
+            <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+              <span class="counter-value" data-target="5">00</span><span>+</span>
+            </div>
+            <p class="text-xs text-textSecondary font-sans">Full-Stack &amp; AI Systems</p>
+          </div>
+
+          <!-- Stat 2: Hackathon Credentials -->
+          <div class="stat-item p-6 text-center">
+            <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
+              <i data-lucide="trophy" class="w-4 h-4"></i>
+              <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Hackathons</span>
+            </div>
+            <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+              <span class="counter-value" data-target="6">00</span>
+            </div>
+            <p class="text-xs text-textSecondary font-sans">Verified Badges &amp; Finals</p>
+          </div>
+
+          <!-- Stat 3: Academic Certifications -->
+          <div class="stat-item p-6 text-center">
+            <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Certifications</span>
+            </div>
+            <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+              <span class="counter-value" data-target="5">00</span>
+            </div>
+            <p class="text-xs text-textSecondary font-sans">Coursera Credentials</p>
+          </div>
+
+          <!-- Stat 4: Academic Performance -->
+          <div class="stat-item p-6 text-center">
+            <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
+              <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+              <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Academic Score</span>
+            </div>
+            <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+              <span class="counter-value" data-target="86">00</span><span>%</span>
+            </div>
+            <p class="text-xs text-textSecondary font-sans">Board SSC &amp; 81% HSC Science</p>
+          </div>
+
         </div>
       </div>
 
-      <!-- Bottom Animated Scroll Indicator -->
-      <div class="mt-8 scroll-indicator">
-        <a href="#about" aria-label="Scroll Down">
-          <i data-lucide="chevron-down" class="w-6 h-6 text-textSecondary hover:text-accentViolet transition duration-300 cursor-pointer"></i>
-        </a>
-      </div>
     </div>
   </section>
 
   <!-- 3. ABOUT SECTION -->
-  <section id="about" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
+  <section id="about" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
       <!-- Left Bio Content -->
       <div class="lg:col-span-7 stagger-child">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-xs text-accentViolet">&lt;</span>
-          <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">About.js</span>
-          <span class="font-mono text-xs text-accentViolet">/&gt;</span>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-xs font-mono uppercase tracking-widest text-accentGold">01 / Profile</span>
+          <div class="h-[1px] w-12 bg-accentGold/40"></div>
         </div>
-        <h2 class="text-3xl md:text-4xl font-bold font-heading mb-6">
-          <span class="text-accentBlue">const</span> <span class="text-accentViolet">getProfile</span> = () =&gt; {
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-textPrimary">
+          Engineering Intelligence with Editorial Precision.
         </h2>
-        <p class="text-textSecondary leading-relaxed mb-6 ml-0 md:ml-4 border-l-2 border-accentBlue/20 pl-4">
-          I'm <span class="text-textPrimary font-bold">Mr. Tejas Sharad Kute</span>, a 2nd-year B.Tech student specialising in Artificial Intelligence & Machine Learning at <span class="text-textPrimary font-semibold">Atharva University Mumbai School of Engineering and Technology</span>. I build full-stack applications, program production backend systems, and serve as a Web Developer Intern at <span class="text-accentCyan font-semibold">Aerus Infotech Solutions</span>.
+        <p class="text-textSecondary leading-relaxed mb-6 font-sans">
+          I'm <span class="text-textPrimary font-semibold">Tejas Sharad Kute</span>, currently pursuing my B.Tech in Artificial Intelligence &amp; Machine Learning at <span class="text-textPrimary font-semibold">Atharva University Mumbai School of Engineering and Technology</span>. Concurrently, I serve as a Web Developer Intern at <span class="text-accentGold font-semibold">Aerus Infotech Solutions</span>, where I architect high-concurrency role-based platforms and robust REST APIs.
         </p>
 
-        <!-- Quick info highlights -->
-        <div class="flex flex-wrap gap-2.5 mb-8 ml-0 md:ml-4">
-          <span class="text-xs font-mono px-3 py-1 rounded-md bg-bgTertiary border border-white/5 text-textPrimary flex items-center gap-1.5"><span class="text-accentCyan">🎓</span> B.Tech AI/ML</span>
-          <span class="text-xs font-mono px-3 py-1 rounded-md bg-bgTertiary border border-white/5 text-textPrimary flex items-center gap-1.5"><span class="text-accentViolet">💼</span> Aerus Infotech Intern</span>
-          <span class="text-xs font-mono px-3 py-1 rounded-md bg-bgTertiary border border-white/5 text-textPrimary flex items-center gap-1.5"><span class="text-accentBlue">📍</span> Mumbai, India</span>
-          <span class="text-xs font-mono px-3 py-1 rounded-md bg-bgTertiary border border-white/5 text-textPrimary flex items-center gap-1.5"><span class="text-emerald-400">✉️</span> tejaskute284@gmail.com</span>
+        <!-- Quick Info Highlights -->
+        <div class="flex flex-wrap gap-2.5 mb-8">
+          <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+            <span class="text-accentGold">🎓</span> B.Tech AI &amp; ML (2nd Year)
+          </span>
+          <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+            <span class="text-accentGold">💼</span> Aerus Infotech Solutions Intern
+          </span>
+          <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+            <span class="text-accentGold">📍</span> Mumbai, India
+          </span>
+          <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+            <span class="text-accentGold">✉️</span> tejaskute284@gmail.com
+          </span>
         </div>
 
-        <!-- Stat Cards Container -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 ml-0 md:ml-4">
-          <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-accentViolet">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-accentViolet mb-1 counter-value" data-target="2">00</div>
-            <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Years Coding</div>
+        <!-- Academic & Experience Micro Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+          <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+            <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="2">00</div>
+            <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Years Coding</div>
           </div>
-          <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-accentCyan">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-accentCyan mb-1 flex items-center justify-center"><span class="counter-value" data-target="4">00</span><span>+</span></div>
-            <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Projects Shipped</div>
+          <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+            <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5"><span class="counter-value" data-target="5">00</span><span>+</span></div>
+            <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Shipped Works</div>
           </div>
-          <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-accentBlue">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-accentBlue mb-1 counter-value" data-target="8">00</div>
-            <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Certifications</div>
+          <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+            <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="6">00</div>
+            <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Hackathons</div>
           </div>
-          <div class="stat-card p-4 rounded-xl text-center border-l-2 border-l-purple-400">
-            <div class="text-3xl md:text-4xl font-bold font-heading text-purple-400 mb-1 counter-value" data-target="1">00</div>
-            <div class="text-xs text-textSecondary uppercase tracking-wider font-mono">Internship</div>
+          <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+            <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="1">00</div>
+            <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Internship</div>
           </div>
         </div>
       </div>
 
-      <!-- Right VS Code Editor Mockup Card -->
+      <!-- Right Editorial Code Specimen -->
       <div class="lg:col-span-5 stagger-child">
-        <div class="w-full bg-[#0E0E15] border border-white/10 rounded-xl overflow-hidden shadow-2xl font-mono text-xs leading-relaxed">
-          <!-- IDE Header Tabs -->
-          <div class="bg-[#12121A] border-b border-white/5 flex items-center justify-between">
-            <div class="flex items-center">
-              <!-- Tab active -->
-              <div class="px-4 py-2.5 bg-[#0E0E15] border-t-2 border-accentViolet text-textPrimary flex items-center gap-2 border-r border-white/5">
-                <span class="text-yellow-400 text-[10px]">{}</span>
-                <span>whoami.json</span>
-              </div>
-              <!-- Tab inactive -->
-              <div class="px-4 py-2.5 text-textSecondary flex items-center gap-2 border-r border-white/5 opacity-60">
-                <span class="text-accentBlue text-[10px]">JS</span>
-                <span>bio.js</span>
-              </div>
-            </div>
-            <!-- Window Circles -->
-            <div class="flex items-center gap-1.5 px-4">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-            </div>
+        <div class="premium-card p-6 border-borderGold">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-border">
+            <span class="text-xs font-mono text-accentGold uppercase tracking-widest font-semibold">ARCHITECTURAL MANIFEST</span>
+            <span class="w-2 h-2 rounded-full bg-accentGold"></span>
           </div>
-          <!-- VS Code Editor Body -->
-          <div class="p-6 flex gap-4 text-textSecondary overflow-x-auto">
-            <!-- Line Numbers -->
-            <div class="text-right select-none opacity-30 text-[10px] space-y-1">
-              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
-            </div>
-            <!-- Syntax highlighted Json properties -->
-            <div class="space-y-1 text-[#E0E0FF] whitespace-nowrap">
-              <div>{</div>
-              <div class="pl-4">"<span class="code-keyword">name</span>": <span class="code-string">"Mr. Tejas Sharad Kute"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">role</span>": <span class="code-string">"AI/ML Developer & Student"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">year</span>": <span class="code-string">"2nd Year (2026)"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">institution</span>": <span class="code-string">"Atharva University Mumbai"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">internship</span>": <span class="code-string">"Aerus Infotech Solutions"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">location</span>": <span class="code-string">"Mumbai, India"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">status</span>": <span class="code-string">"open_for_internships"</span>,</div>
-              <div class="pl-4">"<span class="code-keyword">focus</span>": [<span class="code-string">"Open Source"</span>, <span class="code-string">"SIH 2026"</span>, <span class="code-string">"AI Research"</span>]</div>
-              <div>}</div>
-            </div>
+          <div class="font-mono text-xs leading-relaxed space-y-2 text-textSecondary">
+            <p><span class="text-accentGold font-bold">name:</span> "Tejas Sharad Kute"</p>
+            <p><span class="text-accentGold font-bold">role:</span> "AI/ML Enthusiast &amp; Full-Stack Dev"</p>
+            <p><span class="text-accentGold font-bold">degree:</span> "B.Tech in Artificial Intelligence"</p>
+            <p><span class="text-accentGold font-bold">institution:</span> "Atharva University Mumbai"</p>
+            <p><span class="text-accentGold font-bold">internship:</span> "Aerus Infotech Solutions"</p>
+            <p><span class="text-accentGold font-bold">focusAreas:</span> ["Deep Learning", "PostGIS", "System Design"]</p>
+            <p><span class="text-accentGold font-bold">status:</span> "Available for Internships"</p>
           </div>
-          <!-- Status Bar -->
-          <div class="bg-[#12121A] px-4 py-1.5 border-t border-white/5 flex items-center justify-between text-[9px] text-textSecondary font-sans">
-            <div class="flex items-center gap-3">
-              <span class="flex items-center gap-1 text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Profile</span>
-              <span>UTF-8</span>
-            </div>
-            <span>JSON</span>
+          <div class="mt-6 pt-4 border-t border-border flex items-center justify-between text-[11px] font-sans text-textMuted">
+            <span>Verified System Record</span>
+            <span class="text-accentGold font-mono">Mumbai, IN</span>
           </div>
         </div>
       </div>
-    </div>
 
     </div>
   </section>
 
-
-  <!-- 4. EDUCATION SECTION -->
-  <section id="education" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentCyan">&lt;</span>
-      <span class="font-mono text-sm text-accentCyan tracking-widest uppercase font-semibold">Education</span>
-      <span class="font-mono text-xs text-accentCyan">/&gt;</span>
+  <!-- 4. PROJECTS SECTION -->
+  <section id="projects" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-xs font-mono uppercase tracking-widest text-accentGold">02 / Portfolio</span>
+          <div class="h-[1px] w-12 bg-accentGold/40"></div>
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary">Production &amp; Research Works</h2>
+      </div>
+      <p class="text-textSecondary text-sm max-w-md font-sans">
+        End-to-end full stack applications, intelligence platforms, and high-performance services.
+      </p>
     </div>
-    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Academic Timeline</h2>
 
-    <!-- Timeline Wrapper -->
+    <!-- Rendered dynamically by js/render.js from js/data/projects.js -->
+    <div id="projects-carousel-mount"></div>
+  </section>
+
+  <!-- 5. EXPERIENCE SECTION -->
+  <section id="experience" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-accentGold">03 / Experience</span>
+      <div class="h-[1px] w-12 bg-accentGold/40"></div>
+    </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Professional Experience</h2>
+
+    <div class="premium-card p-8 md:p-10 stagger-child max-w-4xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-border">
+        <div>
+          <h3 class="text-2xl font-serif font-bold text-textPrimary">Web Development Intern</h3>
+          <p class="text-accentGold font-medium text-sm mt-0.5">Aerus Infotech Solutions Pvt. Ltd.</p>
+        </div>
+        <div class="text-left md:text-right">
+          <span class="text-xs font-mono px-3 py-1 rounded-full border border-accentGold/30 text-accentGold bg-bgTertiary">Nov 2025 – Present</span>
+          <p class="text-xs text-textMuted mt-1 font-mono">Navi Mumbai, India</p>
+        </div>
+      </div>
+      
+      <ul class="space-y-4 mb-8 text-sm text-textSecondary list-none pl-0 leading-relaxed font-sans">
+        <li class="flex items-start gap-3">
+          <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+          <span>Led development of the Housing Society Maintenance Management System (HSMMS) covering 8 core modules — resident management, billing engine, complaint workflows, and security gate access.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+          <span>Architected Role-Based Access Control (RBAC) security for 4 distinct personas (Admin, Resident, Staff, Security Guard) using Node.js, Express, and React.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+          <span>Designed and integrated RESTful APIs linking MySQL relational persistence to React and vanilla JavaScript frontends, maintaining strict transactional consistency.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+          <span>Compiled comprehensive engineering documentation — PRD, TRD, and architecture specifications — for cross-team development alignment.</span>
+        </li>
+      </ul>
+
+      <div class="flex flex-wrap gap-2 pt-4 border-t border-border">
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">Express.js</span>
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">REST APIs</span>
+        <span class="tech-tag">RBAC Security</span>
+        <span class="tech-tag">System Specs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. HACKATHONS & ACHIEVEMENTS SECTION -->
+  <section id="hackathons" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-xs font-mono uppercase tracking-widest text-accentGold">04 / Honors</span>
+          <div class="h-[1px] w-12 bg-accentGold/40"></div>
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary">Hackathon &amp; Workshop Credentials</h2>
+        <p class="text-textSecondary text-sm mt-2 font-sans">Click on any card to view the official verified certificate photograph.</p>
+      </div>
+      <span class="text-xs font-mono px-3.5 py-1.5 rounded-full border border-accentGold/30 text-accentGold bg-bgSecondary self-start md:self-auto">
+        🏆 6 Verified Badges
+      </span>
+    </div>
+
+    <!-- Rendered dynamically by js/render.js from js/data/hackathons.js -->
+    <div id="hackathons-carousel-mount"></div>
+  </section>
+
+  <!-- 7. EDUCATION SECTION -->
+  <section id="education" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-accentGold">05 / Academics</span>
+      <div class="h-[1px] w-12 bg-accentGold/40"></div>
+    </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Academic Journey</h2>
+
     <div class="timeline-container ml-6 pl-8 space-y-12 relative max-w-3xl">
       
       <!-- B.Tech Card -->
       <div class="timeline-item relative stagger-child">
-        <span class="text-xs font-mono px-3 py-1 rounded-full bg-accentViolet/10 text-accentViolet border border-accentViolet/20">2025 – 2029 (2nd Year)</span>
-        <h3 class="text-xl font-bold font-heading mt-3 text-textPrimary">🎓 B.Tech — Artificial Intelligence & Machine Learning</h3>
-        <p class="text-sm text-textSecondary font-semibold mt-1">Atharva College of Engineering, Atharva University Mumbai</p>
-        <p class="text-textSecondary text-sm mt-2 leading-relaxed">
-          Core studies in deep neural networks, computational logic, statistical modeling, and ML system architectures.
+        <span class="text-xs font-mono px-3 py-1 rounded-full border border-accentGold/40 text-accentGold bg-bgSecondary">2025 – 2029 (2nd Year)</span>
+        <h3 class="text-2xl font-serif font-bold mt-3 text-textPrimary">B.Tech — Artificial Intelligence &amp; Machine Learning</h3>
+        <p class="text-sm text-accentGold font-medium mt-1 font-sans">Atharva College of Engineering, Atharva University Mumbai</p>
+        <p class="text-textSecondary text-sm mt-2 leading-relaxed font-sans">
+          Rigorous curriculum across deep learning architectures, computational logic, linear algebra, discrete mathematics, and software design.
         </p>
-        <div class="flex flex-wrap gap-2 mt-3.5">
-          <span class="tech-tag text-[11px]">Machine Learning</span>
-          <span class="tech-tag text-[11px]">Deep Learning</span>
-          <span class="tech-tag text-[11px]">Data Structures &amp; Algorithms</span>
-          <span class="tech-tag text-[11px]">Python Programming</span>
-          <span class="tech-tag text-[11px]">Cybersecurity Fundamentals</span>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="tech-tag">Deep Learning</span>
+          <span class="tech-tag">Data Structures &amp; Algorithms</span>
+          <span class="tech-tag">Python &amp; ML Toolchains</span>
+          <span class="tech-tag">System Architectures</span>
         </div>
       </div>
 
       <!-- HSC Card -->
       <div class="timeline-item relative stagger-child">
-        <span class="text-xs font-mono px-3 py-1 rounded-full bg-accentCyan/10 text-accentCyan border border-accentCyan/20">Year: 2025</span>
-        <h3 class="text-xl font-bold font-heading mt-3 text-textPrimary">📋 HSC (12th Grade) — Science</h3>
-        <p class="text-sm text-textSecondary font-semibold mt-1">Swarajya Senior College</p>
-        <p class="text-textSecondary text-sm mt-2 font-mono">Score: <span class="text-accentCyan font-bold">81%</span></p>
+        <span class="text-xs font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2025</span>
+        <h3 class="text-xl font-serif font-bold mt-3 text-textPrimary">HSC (12th Grade) — Science Stream</h3>
+        <p class="text-sm text-textSecondary font-medium mt-1">Swarajya Senior College</p>
+        <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">81%</span></p>
       </div>
 
       <!-- SSC Card -->
       <div class="timeline-item relative stagger-child">
-        <span class="text-xs font-mono px-3 py-1 rounded-full bg-accentBlue/10 text-accentBlue border border-accentBlue/20">Year: 2023</span>
-        <h3 class="text-xl font-bold font-heading mt-3 text-textPrimary">📋 SSC (10th Grade)</h3>
-        <p class="text-sm text-textSecondary font-semibold mt-1">St. Arnold High School</p>
-        <p class="text-textSecondary text-sm mt-2 font-mono">Score: <span class="text-accentBlue font-bold">86%</span></p>
+        <span class="text-xs font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2023</span>
+        <h3 class="text-xl font-serif font-bold mt-3 text-textPrimary">SSC (10th Grade)</h3>
+        <p class="text-sm text-textSecondary font-medium mt-1">St. Arnold High School</p>
+        <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">86%</span></p>
       </div>
 
     </div>
   </section>
 
-  <!-- 5. PROJECTS SECTION -->
-  <section id="projects" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentViolet">&lt;</span>
-      <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">Works</span>
-      <span class="font-mono text-xs text-accentViolet">/&gt;</span>
+  <!-- 8. CERTIFICATIONS SECTION -->
+  <section id="certifications" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-accentGold">06 / Credentials</span>
+      <div class="h-[1px] w-12 bg-accentGold/40"></div>
     </div>
-    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Production & Internship Projects</h2>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Coursera Academic Credentials</h2>
 
-    <!-- Projects rendered by js/render.js from js/data/projects.js -->
-    <div id="projects-carousel-mount"></div>
-  </section>
-
-
-
-  <!-- 5.5 HACKATHONS & CERTIFICATES SECTION -->
-  <section id="hackathons" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentViolet">&lt;</span>
-      <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">Hackathons.log</span>
-      <span class="font-mono text-xs text-accentViolet">/&gt;</span>
-    </div>
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-      <div>
-        <h2 class="text-3xl md:text-4xl font-bold font-heading">Hackathon &amp; Workshop Credentials</h2>
-        <p class="text-textSecondary text-sm font-mono mt-2">Click on any hackathon card or certificate image to view the full verification photo.</p>
-      </div>
-      <span class="text-xs font-mono px-3 py-1.5 rounded-full bg-accentViolet/10 text-accentViolet border border-accentViolet/20 self-start md:self-auto">
-        🏆 6 Verified Badges
-      </span>
-    </div>
-
-
-    <!-- Hackathons rendered by js/render.js from js/data/hackathons.js -->
-    <div id="hackathons-carousel-mount"></div>
-  </section>
-
-  <!-- 6. EXPERIENCE SECTION -->
-  <section id="experience" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentCyan">&lt;</span>
-      <span class="font-mono text-sm text-accentCyan tracking-widest uppercase font-semibold">Career</span>
-      <span class="font-mono text-xs text-accentCyan">/&gt;</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Professional Experience</h2>
-
-    <div class="dev-code-card stagger-child max-w-4xl">
-      <div class="dev-code-card-inner">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div>
-            <h3 class="text-xl font-bold text-textPrimary">Web Development Intern</h3>
-            <span class="text-accentBlue font-heading font-medium text-sm">Aerus Infotech Solutions Pvt. Ltd.</span>
-          </div>
-          <div class="text-right">
-            <span class="text-xs font-mono text-accentCyan border border-accentCyan/20 px-3 py-1 rounded-full bg-accentCyan/10">Nov 2025 – Present</span>
-            <p class="text-xs text-textSecondary mt-1 font-mono">Navi Mumbai, India</p>
-          </div>
-        </div>
-        
-        <ul class="space-y-3 mb-6 text-sm text-textSecondary list-none pl-0">
-          <li class="flex items-start gap-2.5">
-            <span class="text-accentBlue mt-1 font-mono">▸</span>
-            <span>Led development of a Housing Society Maintenance Management System (HSMMS) covering 8 modules — resident management, maintenance billing, complaint tracking, and security gate management.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-accentBlue mt-1 font-mono">▸</span>
-            <span>Built role-based access control (RBAC) for 4 user personas (Admin, Resident, Staff, Security Guard) using Node.js/Express and React.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-accentBlue mt-1 font-mono">▸</span>
-            <span>Designed and integrated RESTful APIs connecting MySQL to both React and vanilla JS clients, ensuring consistent data across interfaces.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-accentBlue mt-1 font-mono">▸</span>
-            <span>Authored full project documentation — PRD, TRD, backend/frontend guidelines — compiled into a developer-facing Markdown guide.</span>
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-accentBlue mt-1 font-mono">▸</span>
-            <span>Resolved Node.js backend and React environment setup issues collaboratively, improving team onboarding efficiency.</span>
-          </li>
-        </ul>
-
-        <div class="flex flex-wrap gap-2">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express.js</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">REST APIs</span>
-          <span class="tech-tag">RBAC Security</span>
-          <span class="tech-tag">Technical Docs</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. CERTIFICATIONS SECTION -->
-  <section id="certifications" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentViolet">&lt;</span>
-      <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">Certifications.db</span>
-      <span class="font-mono text-xs text-accentViolet">/&gt;</span>
-    </div>
-    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Coursera Academic Credentials</h2>
-
-
-    <!-- Certifications rendered by js/render.js from js/data/certifications.js -->
+    <!-- Rendered dynamically by js/render.js from js/data/certifications.js -->
     <div id="certifications-carousel-mount"></div>
   </section>
 
-  <!-- 8. SKILLS SECTION -->
-  <section id="skills" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="flex items-center gap-3 mb-4">
-      <span class="font-mono text-xs text-accentCyan">&lt;</span>
-      <span class="font-mono text-sm text-accentCyan tracking-widest uppercase font-semibold">Capabilities</span>
-      <span class="font-mono text-xs text-accentCyan">/&gt;</span>
+  <!-- 9. SKILLS SECTION -->
+  <section id="skills" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-mono uppercase tracking-widest text-accentGold">07 / Capabilities</span>
+      <div class="h-[1px] w-12 bg-accentGold/40"></div>
     </div>
-    <h2 class="text-3xl md:text-4xl font-bold font-heading mb-12">Technical Skill Matrix</h2>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Technical Competencies</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       
       <!-- Category 1: Languages -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-accentViolet">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="code-2" class="w-5 h-5 text-accentViolet"></i> Languages
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>Core Languages</span>
+          <i data-lucide="code-2" class="w-5 h-5 text-accentGold"></i>
         </h3>
-        <ul class="space-y-4 font-mono text-sm">
-          <li class="flex items-center justify-between">
+        <ul class="space-y-4 font-mono text-xs">
+          <li class="flex items-center justify-between pb-2 border-b border-border/50">
             <span class="text-textSecondary">Python</span>
-            <span class="text-accentViolet">●●●●○</span>
+            <span class="text-accentGold font-bold">Proficient</span>
           </li>
-          <li class="flex items-center justify-between">
+          <li class="flex items-center justify-between pb-2 border-b border-border/50">
             <span class="text-textSecondary">JavaScript / TypeScript</span>
-            <span class="text-accentViolet">●●●●○</span>
+            <span class="text-accentGold font-bold">Proficient</span>
           </li>
-          <li class="flex items-center justify-between">
+          <li class="flex items-center justify-between pb-2 border-b border-border/50">
             <span class="text-textSecondary">C / C++</span>
-            <span class="text-accentViolet">●●●○○</span>
+            <span class="text-accentGold font-bold">Intermediate</span>
+          </li>
+          <li class="flex items-center justify-between pb-2 border-b border-border/50">
+            <span class="text-textSecondary">SQL (MySQL, PostGIS)</span>
+            <span class="text-accentGold font-bold">Intermediate</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="text-textSecondary">HTML5 / CSS3</span>
-            <span class="text-accentViolet">●●●●●</span>
-          </li>
-          <li class="flex items-center justify-between">
-            <span class="text-textSecondary">SQL</span>
-            <span class="text-accentViolet">●●●○○</span>
+            <span class="text-textSecondary">HTML5 / Modern CSS</span>
+            <span class="text-accentGold font-bold">Advanced</span>
           </li>
         </ul>
       </div>
 
-      <!-- Category 2: Frontend -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-accentCyan">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="layout" class="w-5 h-5 text-accentCyan"></i> Frontend
+      <!-- Category 2: Frontend Engineering -->
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>Frontend Architecture</span>
+          <i data-lucide="layout" class="w-5 h-5 text-accentGold"></i>
         </h3>
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">React 18</span>
@@ -527,14 +622,15 @@
           <span class="tech-tag">Framer Motion</span>
           <span class="tech-tag">Leaflet.js</span>
           <span class="tech-tag">Chart.js</span>
-          <span class="tech-tag">Anime.js</span>
+          <span class="tech-tag">Lenis Scroll</span>
         </div>
       </div>
 
-      <!-- Category 3: Backend -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-accentBlue">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="server" class="w-5 h-5 text-accentBlue"></i> Backend
+      <!-- Category 3: Backend & Services -->
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>Backend &amp; Services</span>
+          <i data-lucide="server" class="w-5 h-5 text-accentGold"></i>
         </h3>
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">FastAPI</span>
@@ -542,225 +638,204 @@
           <span class="tech-tag">Express.js</span>
           <span class="tech-tag">REST APIs</span>
           <span class="tech-tag">WebSockets</span>
-          <span class="tech-tag">JWT Auth</span>
-          <span class="tech-tag">Bcrypt</span>
+          <span class="tech-tag">JWT Security</span>
+          <span class="tech-tag">RBAC</span>
         </div>
       </div>
 
       <!-- Category 4: Databases -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-purple-400">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="database" class="w-5 h-5 text-purple-400"></i> Databases
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>Persistence &amp; Storage</span>
+          <i data-lucide="database" class="w-5 h-5 text-accentGold"></i>
         </h3>
         <div class="flex flex-wrap gap-2.5">
-          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">PostGIS (Geospatial)</span>
           <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">MongoDB Atlas</span>
+          <span class="tech-tag">MongoDB &amp; Atlas</span>
+          <span class="tech-tag">Prisma ORM</span>
+          <span class="tech-tag">Supabase</span>
         </div>
       </div>
 
-      <!-- Category 5: ML/AI -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-pink-400">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="brain" class="w-5 h-5 text-pink-400"></i> ML / AI &amp; Math
+      <!-- Category 5: AI & Machine Learning -->
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>AI / ML &amp; Mathematics</span>
+          <i data-lucide="brain" class="w-5 h-5 text-accentGold"></i>
         </h3>
         <div class="flex flex-wrap gap-2.5">
           <span class="tech-tag">TensorFlow</span>
           <span class="tech-tag">PyTorch</span>
           <span class="tech-tag">Scikit-Learn</span>
-          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Gemini Vision AI</span>
           <span class="tech-tag">NumPy</span>
+          <span class="tech-tag">Pandas</span>
           <span class="tech-tag">DSA Algorithms</span>
         </div>
       </div>
 
-      <!-- Category 6: Tools -->
-      <div class="premium-card p-6 stagger-child border-t-2 border-t-emerald-400">
-        <h3 class="text-lg font-bold font-heading text-textPrimary mb-6 flex items-center gap-2">
-          <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i> Tools &amp; Environment
+      <!-- Category 6: Toolchains -->
+      <div class="premium-card p-7 stagger-child">
+        <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
+          <span>Toolchain &amp; Workflow</span>
+          <i data-lucide="terminal" class="w-5 h-5 text-accentGold"></i>
         </h3>
         <div class="flex flex-wrap gap-2.5">
-          <span class="tech-tag">Git</span>
-          <span class="tech-tag">GitHub</span>
-          <span class="tech-tag">VS Code</span>
+          <span class="tech-tag">Git &amp; GitHub</span>
           <span class="tech-tag">Postman</span>
-          <span class="tech-tag">Vite</span>
           <span class="tech-tag">Linux</span>
+          <span class="tech-tag">VS Code</span>
+          <span class="tech-tag">Cloudinary</span>
+          <span class="tech-tag">Zod</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- 9. CURRENTLY LEARNING -->
-  <section id="roadmap" class="py-12 max-w-[1200px] mx-auto px-6 reveal">
-    <div class="premium-card p-6 md:p-8 bg-gradient-to-r from-accentBlue/10 to-accentViolet/10 border border-accentViolet/25 rounded-xl stagger-child">
-      <h3 class="text-xl font-bold font-heading mb-4 flex items-center gap-2 text-textPrimary">
-        <i data-lucide="compass" class="w-5 h-5 text-accentViolet animate-spin-slow"></i> Active 2026 Learning Roadmap
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 text-sm font-mono text-textSecondary">
-        <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>Deep Learning &amp; PyTorch</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>Andrew Ng's ML Specialization</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>DSA (LeetCode &amp; Codeforces)</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-accentCyan">→</span> <span>Smart India Hackathon 2026</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- 3.5. FUTURE VISION SECTION -->
-  <section id="future-vision" class="py-16 max-w-[1200px] mx-auto px-6 reveal">
+  <!-- 10. RESEARCH & FUTURE VISION -->
+  <section id="future-vision" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
     <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-xs text-accentViolet">&lt;</span>
-      <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">FutureVision</span>
-      <span class="font-mono text-xs text-accentViolet">/&gt;</span>
+      <span class="text-xs font-mono uppercase tracking-widest text-accentGold">08 / Research &amp; Trajectory</span>
+      <div class="h-[1px] w-12 bg-accentGold/40"></div>
     </div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Research &amp; Strategic Trajectory</h2>
 
-    <div class="flex items-center gap-3 mb-8">
-      <span class="w-1 h-6 bg-accentViolet rounded-full"></span>
-      <h3 class="text-xs font-mono text-textSecondary uppercase tracking-widest font-bold">| TRAJECTORY & FOCUS</h3>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Card 1: Open Source -->
-      <div class="vision-card p-6 flex flex-col justify-between h-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Card 1: Open Source Depth -->
+      <div class="vision-card p-8 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10 text-textSecondary font-medium">Preparation</span>
-            <i data-lucide="hourglass" class="w-4 h-4 text-textSecondary opacity-60"></i>
+            <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Trajectory</span>
+            <i data-lucide="git-branch" class="w-4 h-4 text-accentGold"></i>
           </div>
-          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3">Open Source</h4>
-          <p class="text-textSecondary text-sm leading-relaxed">
-            Structuring skills toward GSoC-level project contributions and open source depth.
+          <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">Open Source Ecosystems</h4>
+          <p class="text-textSecondary text-sm leading-relaxed font-sans">
+            Expanding core system competencies toward large-scale open-source architectures, deep framework contributions, and community-driven tools.
           </p>
         </div>
       </div>
 
-      <!-- Card 2: Hackathons (Clickable Trigger to Certificates) -->
-      <a href="#hackathons" class="vision-card p-6 flex flex-col justify-between h-full cursor-pointer group" title="Click to view all Hackathon Certificates">
+      <!-- Card 2: Hackathon Prototypes (Links to Hackathons) -->
+      <a href="#hackathons" class="vision-card p-8 flex flex-col justify-between group">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono px-3 py-1 rounded bg-accentViolet/10 border border-accentViolet/30 text-accentViolet font-semibold">SIH &amp; Beyond</span>
-            <span class="text-xs font-mono text-emerald-400 flex items-center gap-1 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-              <i data-lucide="award" class="w-3.5 h-3.5"></i> 6 Certificates
+            <span class="text-xs font-mono px-3 py-1 rounded border border-accentGold/40 text-accentGold uppercase">SIH &amp; Hackathons</span>
+            <span class="text-xs font-mono text-accentGold flex items-center gap-1">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i> 6 Badges
             </span>
           </div>
-          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3 group-hover:text-accentViolet transition flex items-center justify-between">
-            <span>Hackathons</span>
-            <i data-lucide="arrow-right" class="w-5 h-5 text-accentViolet opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+          <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3 group-hover:text-accentGold transition flex items-center justify-between">
+            <span>Competitive Prototypes</span>
+            <i data-lucide="arrow-right" class="w-5 h-5 text-accentGold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
           </h4>
-          <p class="text-textSecondary text-sm leading-relaxed mb-4">
-            Consistently building and iterating prototypes targeting Smart India Hackathon.
+          <p class="text-textSecondary text-sm leading-relaxed font-sans mb-4">
+            Rapid prototyping under high-pressure competitive sprints, targeting Smart India Hackathon and all-India tech challenges.
           </p>
         </div>
-        <div class="border-t border-white/5 pt-3 flex items-center justify-between text-xs font-mono text-accentViolet font-semibold">
-          <span>View All Certificates</span>
-          <span class="group-hover:underline flex items-center gap-1">Browse 🏆 &rarr;</span>
+        <div class="border-t border-border pt-4 flex items-center justify-between text-xs font-medium text-accentGold">
+          <span>Browse All Verified Badges</span>
+          <span>&rarr;</span>
         </div>
       </a>
 
-      <!-- Card 3: Research -->
-      <div class="vision-card p-6 flex flex-col justify-between h-full">
+      <!-- Card 3: AI & Cybersecurity Research -->
+      <div class="vision-card p-8 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10 text-textSecondary font-medium">AI & Security</span>
-            <i data-lucide="hourglass" class="w-4 h-4 text-textSecondary opacity-60"></i>
+            <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Research Inquiries</span>
+            <i data-lucide="lock" class="w-4 h-4 text-accentGold"></i>
           </div>
-          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3">Research</h4>
-          <p class="text-textSecondary text-sm leading-relaxed">
-            Investigating intersection of AI models and defensive cybersecurity for a first publication.
+          <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">AI &amp; Defensive Cybersecurity</h4>
+          <p class="text-textSecondary text-sm leading-relaxed font-sans">
+            Investigating intersections between generative neural models and proactive anomaly detection for cyber-defense applications toward a first academic publication.
           </p>
         </div>
       </div>
 
-      <!-- Card 4: DSA & CP -->
-      <div class="vision-card p-6 flex flex-col justify-between h-full">
+      <!-- Card 4: Algorithms & CP -->
+      <div class="vision-card p-8 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono px-3 py-1 rounded bg-white/5 border border-white/10 text-textSecondary font-medium">Competitive Programming</span>
-            <i data-lucide="hourglass" class="w-4 h-4 text-textSecondary opacity-60"></i>
+            <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Analytical Rigor</span>
+            <i data-lucide="cpu" class="w-4 h-4 text-accentGold"></i>
           </div>
-          <h4 class="text-xl font-bold font-heading text-textPrimary mb-3">DSA & CP</h4>
-          <p class="text-textSecondary text-sm leading-relaxed">
-            Cultivating daily coding consistency and building algorithms rating on platforms.
+          <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">Data Structures &amp; Complexity</h4>
+          <p class="text-textSecondary text-sm leading-relaxed font-sans">
+            Cultivating daily problem-solving depth on LeetCode and competitive programming platforms, focusing on tree/graph traversals and dynamic programming.
           </p>
         </div>
       </div>
+
     </div>
   </section>
 
-
-  <!-- 10. CONTACT SECTION -->
-  <section id="contact" class="py-24 max-w-[1200px] mx-auto px-6 reveal">
+  <!-- 11. CONTACT SECTION -->
+  <section id="contact" class="py-24 max-w-[1280px] mx-auto px-6 reveal">
     <div class="text-center max-w-2xl mx-auto mb-16">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <span class="font-mono text-xs text-accentViolet">&lt;</span>
-        <span class="font-mono text-sm text-accentViolet tracking-widest uppercase font-semibold">Contact</span>
-        <span class="font-mono text-xs text-accentViolet">/&gt;</span>
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">09 / Connect</span>
+        <div class="h-[1px] w-12 bg-accentGold/40"></div>
       </div>
-      <h2 class="text-4xl font-bold font-heading mb-4">Let's Build Something Remarkable.</h2>
-      <p class="text-textSecondary">
-        Open to internships, AI/ML engineering roles, software development collaborations, and technical opportunities.
+      <h2 class="text-4xl sm:text-5xl font-serif font-bold mb-4 text-textPrimary">Let's Build Something Enduring.</h2>
+      <p class="text-textSecondary font-sans">
+        Open to AI/ML engineering roles, internships, full-stack collaborations, and technical discussions.
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
       <!-- Contact Cards -->
-      <div class="lg:col-span-5 space-y-6 stagger-child">
+      <div class="lg:col-span-5 space-y-5 stagger-child">
         
         <!-- Email Copy Card -->
         <a href="mailto:tejaskute284@gmail.com" class="premium-card p-6 flex items-center gap-4 cursor-pointer copy-trigger relative block" data-copy="tejaskute284@gmail.com">
-          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentViolet border border-white/5">
-            <i data-lucide="mail" class="w-6 h-6"></i>
+          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+            <i data-lucide="mail" class="w-5 h-5"></i>
           </div>
           <div>
-            <p class="text-xs text-textSecondary font-mono uppercase tracking-wider">Email</p>
-            <p class="font-medium text-textPrimary text-base break-all">tejaskute284@gmail.com</p>
+            <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Email Address</p>
+            <p class="font-medium text-textPrimary text-sm break-all font-sans">tejaskute284@gmail.com</p>
           </div>
           <!-- Tooltip -->
-          <span class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentViolet text-white text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none">
+          <span class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#1A1A1C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
             Click to Copy
           </span>
         </a>
 
-        <!-- Phone Contact Card -->
+        <!-- Phone Card -->
         <a href="tel:+918976550171" class="premium-card p-6 flex items-center gap-4 relative block">
-          <div class="p-3.5 rounded-lg bg-bgTertiary text-emerald-400 border border-white/5">
-            <i data-lucide="phone" class="w-6 h-6"></i>
+          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+            <i data-lucide="phone" class="w-5 h-5"></i>
           </div>
           <div>
-            <p class="text-xs text-textSecondary font-mono uppercase tracking-wider">Phone / WhatsApp</p>
-            <p class="font-medium text-textPrimary text-base">+91 8976550171</p>
+            <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Direct Line / WhatsApp</p>
+            <p class="font-medium text-textPrimary text-sm font-sans">+91 8976550171</p>
           </div>
         </a>
 
         <!-- LinkedIn Card -->
         <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="premium-card p-6 flex items-center gap-4 relative block">
-          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentBlue border border-white/5">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </div>
           <div>
-            <p class="text-xs text-textSecondary font-mono uppercase tracking-wider">LinkedIn</p>
-            <p class="font-medium text-textPrimary text-base">linkedin.com/in/tejas-kute-512aa2363</p>
+            <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">LinkedIn Network</p>
+            <p class="font-medium text-textPrimary text-sm font-sans">tejas-kute-512aa2363</p>
           </div>
         </a>
 
         <!-- GitHub Card -->
         <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="premium-card p-6 flex items-center gap-4 relative block">
-          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentCyan border border-white/5">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           </div>
           <div>
-            <p class="text-xs text-textSecondary font-mono uppercase tracking-wider">GitHub</p>
-            <p class="font-medium text-textPrimary text-base">github.com/tejaskute284-dotcom</p>
+            <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">GitHub Repositories</p>
+            <p class="font-medium text-textPrimary text-sm font-sans">tejaskute284-dotcom</p>
           </div>
         </a>
 
@@ -768,117 +843,117 @@
 
       <!-- Contact Form -->
       <div class="lg:col-span-7 stagger-child">
-        <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="space-y-6 premium-card p-8 md:p-10">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label for="name-input" class="block text-xs font-mono text-textSecondary uppercase tracking-wider mb-2">Name</label>
-              <input type="text" id="name-input" name="name" required class="form-input w-full px-4 py-3 rounded-lg text-sm transition" placeholder="John Doe">
+              <label for="name-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Name</label>
+              <input type="text" id="name-input" name="name" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Your Name">
             </div>
             <div>
-              <label for="email-input" class="block text-xs font-mono text-textSecondary uppercase tracking-wider mb-2">Email Address</label>
-              <input type="email" id="email-input" name="email" required class="form-input w-full px-4 py-3 rounded-lg text-sm transition" placeholder="john@example.com">
+              <label for="email-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Email Address</label>
+              <input type="email" id="email-input" name="email" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="your@email.com">
             </div>
           </div>
           <div>
-            <label for="subject-input" class="block text-xs font-mono text-textSecondary uppercase tracking-wider mb-2">Subject</label>
-            <input type="text" id="subject-input" name="subject" required class="form-input w-full px-4 py-3 rounded-lg text-sm transition" placeholder="Collab / Internship Opportunity">
+            <label for="subject-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Subject</label>
+            <input type="text" id="subject-input" name="subject" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Internship Opportunity / Project Collaboration">
           </div>
           <div>
-            <label for="message-input" class="block text-xs font-mono text-textSecondary uppercase tracking-wider mb-2">Your Message</label>
-            <textarea id="message-input" name="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg text-sm transition resize-none" placeholder="Write your message here..."></textarea>
+            <label for="message-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Your Message</label>
+            <textarea id="message-input" name="message" rows="5" required class="form-input w-full px-4 py-3 text-sm transition resize-none font-sans" placeholder="Write your message here..."></textarea>
           </div>
           
-          <div class="flex items-center justify-between flex-wrap gap-4">
-            <button type="submit" class="px-8 py-3.5 rounded-lg bg-accentViolet hover:bg-opacity-90 text-white font-medium shadow-md shadow-accentViolet/10 hover:shadow-accentViolet/25 hover:-translate-y-0.5 transition duration-300 flex items-center gap-2 text-sm font-heading">
-              Send Message <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
+            <button type="submit" class="btn-luxury-primary text-sm font-sans">
+              <span>Send Message</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
-            <span id="form-status" class="hidden"></span>
+            <span id="form-status" class="hidden text-xs font-mono"></span>
           </div>
         </form>
       </div>
+
     </div>
   </section>
 
-  <!-- 11. FOOTER -->
-  <footer class="border-t border-white/5 py-12 bg-black/20">
-    <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <p class="text-xs text-textSecondary text-center md:text-left">
-        Designed & developed by <span class="text-textPrimary font-medium">Tejas Sharad Kute</span> · &copy; 2026
-      </p>
+  <!-- 12. FOOTER -->
+  <footer class="border-t border-border py-12 bg-bgSecondary">
+    <div class="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="w-6 h-6 rounded-full border border-accentGold/60 flex items-center justify-center text-[10px] font-serif font-bold text-accentGold">TK</span>
+        <p class="text-xs text-textSecondary font-sans">
+          Designed &amp; developed by <span class="text-textPrimary font-semibold">Tejas Sharad Kute</span> · &copy; 2026
+        </p>
+      </div>
       
       <!-- Footer Social Icons -->
       <div class="flex gap-4">
-        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-accentCyan transition border border-white/5" aria-label="GitHub">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-2.5 rounded-md bg-bgTertiary text-textSecondary hover:text-accentGold transition border border-border" aria-label="GitHub">
+          <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
         </a>
-        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-accentBlue transition border border-white/5" aria-label="LinkedIn">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="p-2.5 rounded-md bg-bgTertiary text-textSecondary hover:text-accentGold transition border border-border" aria-label="LinkedIn">
+          <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg>
         </a>
       </div>
     </div>
+  </footer>
+
   <!-- CERTIFICATION VERIFY MODAL -->
   <div id="verify-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-6 transition-opacity duration-300">
-    <div class="relative max-w-lg w-full bg-bgSecondary border border-white/15 rounded-2xl p-6 shadow-2xl">
-      <!-- Header -->
-      <div class="flex items-center justify-between mb-5 pb-4 border-b border-white/10">
+    <div class="relative max-w-lg w-full bg-bgSecondary border border-borderGold rounded-2xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-5 pb-4 border-b border-border">
         <div class="flex items-center gap-3">
-          <div class="p-2 rounded-lg bg-accentCyan/10 text-accentCyan border border-accentCyan/20">
+          <div class="p-2.5 rounded-lg bg-accentGold/10 text-accentGold border border-accentGold/30">
             <i data-lucide="shield-check" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 id="verify-modal-title" class="text-lg font-bold font-heading text-textPrimary">Certificate Verification</h3>
-            <p class="text-xs text-textSecondary font-mono mt-0.5">
-              ID: <span id="verify-modal-id" class="text-accentCyan"></span>
+            <h3 id="verify-modal-title" class="text-lg font-serif font-bold text-textPrimary">Certificate Verification</h3>
+            <p class="text-xs text-textMuted font-mono mt-0.5">
+              ID: <span id="verify-modal-id" class="text-accentGold"></span>
             </p>
           </div>
         </div>
-        <button id="close-verify-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary hover:bg-white/10 transition" aria-label="Close Verification Modal">
+        <button id="close-verify-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary transition" aria-label="Close Verification Modal">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <!-- Body -->
-      <p class="text-sm text-textSecondary leading-relaxed mb-6">
-        This credential is verified and hosted on Coursera. Click the button below to view the official certificate on the Coursera platform.
+      <p class="text-sm text-textSecondary leading-relaxed mb-6 font-sans">
+        This credential is authenticated and hosted on the official Coursera academic verification ledger.
       </p>
-      <!-- Action -->
       <div class="flex items-center justify-between">
-        <span class="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-          <i data-lucide="check-circle" class="w-4 h-4"></i> Verified Credential
+        <span class="text-xs font-mono text-accentGold flex items-center gap-1.5 font-semibold">
+          <i data-lucide="check-circle" class="w-4 h-4"></i> Verified Record
         </span>
-        <a id="verify-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accentViolet text-white text-xs font-mono font-semibold hover:bg-opacity-90 transition shadow-md">
-          Open on Coursera <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <a id="verify-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-luxury-primary text-xs font-sans">
+          <span>Open on Coursera</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
         </a>
       </div>
     </div>
   </div>
 
   <!-- CERTIFICATE LIGHTBOX MODAL OVERLAY -->
-  <div id="certificate-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300">
-    <div class="relative max-w-4xl w-full bg-bgSecondary border border-white/15 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col items-center">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between w-full mb-4 pb-3 border-b border-white/10">
+  <div id="certificate-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300">
+    <div class="relative max-w-4xl w-full bg-bgSecondary border border-borderGold rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col items-center">
+      <div class="flex items-center justify-between w-full mb-4 pb-3 border-b border-border">
         <div>
-          <h3 id="modal-cert-title" class="text-lg sm:text-xl font-bold font-heading text-textPrimary">Certificate Title</h3>
-          <p id="modal-cert-subtitle" class="text-xs sm:text-sm text-textSecondary font-mono mt-0.5">Issuing Organization / College</p>
+          <h3 id="modal-cert-title" class="text-lg sm:text-xl font-serif font-bold text-textPrimary">Certificate Title</h3>
+          <p id="modal-cert-subtitle" class="text-xs sm:text-sm text-textMuted font-mono mt-0.5">Issuing Organization</p>
         </div>
-        <button id="close-cert-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary hover:bg-white/10 transition" aria-label="Close Modal">
+        <button id="close-cert-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary transition" aria-label="Close Modal">
           <i data-lucide="x" class="w-6 h-6"></i>
         </button>
       </div>
-
-      <!-- Modal Image View -->
-      <div class="w-full flex items-center justify-center max-h-[75vh] overflow-auto rounded-lg bg-black/40 p-2 border border-white/5">
-        <img id="modal-cert-image" src="" alt="Certificate Verification Photo" class="max-w-full max-h-[70vh] object-contain rounded-md shadow-lg">
+      <div class="w-full flex items-center justify-center max-h-[75vh] overflow-auto rounded-lg bg-black/30 p-2 border border-border">
+        <img id="modal-cert-image" src="" alt="Certificate Verification Photo" class="max-w-full max-h-[70vh] object-contain rounded shadow-lg">
       </div>
-
-      <!-- Modal Footer -->
-      <div class="w-full flex items-center justify-between mt-4 pt-3 border-t border-white/10">
-        <span class="text-xs font-mono text-textSecondary flex items-center gap-1.5">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Verified Official Photo
+      <div class="w-full flex items-center justify-between mt-4 pt-3 border-t border-border">
+        <span class="text-xs font-mono text-accentGold flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> Verified Official Photo
         </span>
-        <a id="modal-cert-download" href="" download class="inline-flex items-center gap-1.5 text-xs font-mono px-4 py-2 rounded-lg bg-accentViolet/20 border border-accentViolet/40 text-accentViolet hover:bg-accentViolet hover:text-white transition">
-          <i data-lucide="download" class="w-4 h-4"></i> Download Photo
+        <a id="modal-cert-download" href="" download class="btn-luxury-secondary text-xs font-sans py-2 px-4">
+          <i data-lucide="download" class="w-4 h-4 text-accentGold"></i>
+          <span>Download Photo</span>
         </a>
       </div>
     </div>
@@ -886,47 +961,41 @@
 
   <!-- RESUME LIGHTBOX / VIEWER MODAL OVERLAY -->
   <div id="resume-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6 transition-opacity duration-300">
-    <div class="relative max-w-5xl w-full h-[90vh] bg-bgSecondary border border-white/15 rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between w-full mb-3 pb-3 border-b border-white/10">
+    <div class="relative max-w-5xl w-full h-[90vh] bg-bgSecondary border border-borderGold rounded-2xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col">
+      <div class="flex items-center justify-between w-full mb-3 pb-3 border-b border-border">
         <div class="flex items-center gap-3">
-          <div class="p-2 rounded-lg bg-accentViolet/10 text-accentViolet border border-accentViolet/20">
+          <div class="p-2.5 rounded-lg bg-accentGold/10 text-accentGold border border-accentGold/30">
             <i data-lucide="file-text" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="text-lg sm:text-xl font-bold font-heading text-textPrimary">Tejas Sharad Kute — Resume / CV</h3>
-            <p class="text-xs text-textSecondary font-mono mt-0.5">B.Tech (AI & ML) · Full-Stack Developer</p>
+            <h3 class="text-lg sm:text-xl font-serif font-bold text-textPrimary">Tejas Sharad Kute — Resume / CV</h3>
+            <p class="text-xs text-textMuted font-mono mt-0.5">B.Tech (AI &amp; ML) · Full-Stack Developer</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono px-3.5 py-2 rounded-lg bg-accentViolet text-white hover:bg-opacity-90 transition shadow-md">
-            <i data-lucide="download" class="w-4 h-4"></i> Download PDF
+          <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="btn-luxury-primary hidden sm:inline-flex text-xs font-sans py-2 px-4">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span>Download PDF</span>
           </a>
-          <button id="close-resume-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary hover:bg-white/10 transition" aria-label="Close Resume Modal">
+          <button id="close-resume-modal" class="p-2 rounded-lg bg-bgTertiary text-textSecondary hover:text-textPrimary transition" aria-label="Close Resume Modal">
             <i data-lucide="x" class="w-6 h-6"></i>
           </button>
         </div>
       </div>
-
-      <!-- Modal Embedded Document View -->
-      <div class="w-full flex-1 rounded-xl bg-black/50 border border-white/10 overflow-hidden relative">
+      <div class="w-full flex-1 rounded-xl bg-black/20 border border-border overflow-hidden relative">
         <iframe src="assets/Tejas_Kute_CV.pdf#toolbar=1" class="w-full h-full border-0" title="Tejas Sharad Kute Resume PDF"></iframe>
       </div>
-
-      <!-- Modal Footer -->
-      <div class="w-full flex items-center justify-between mt-3 pt-3 border-t border-white/10 text-xs font-mono text-textSecondary">
-        <span class="flex items-center gap-1.5">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Official Document
+      <div class="w-full flex items-center justify-between mt-3 pt-3 border-t border-border text-xs font-mono text-textMuted">
+        <span class="flex items-center gap-1.5 text-accentGold">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> Official Document
         </span>
-        <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accentViolet text-white hover:bg-opacity-90 transition">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+        <a href="assets/Tejas_Kute_CV.pdf" download="Tejas_Kute_CV.pdf" target="_blank" class="sm:hidden btn-luxury-primary text-xs font-sans py-1.5 px-3">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>Download</span>
         </a>
       </div>
     </div>
   </div>
-
-  </footer>
 
   <!-- Scripts -->
   <!-- GSAP CDN -->
@@ -935,7 +1004,6 @@
   <!-- Config Initialization -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Initialize Lucide Icons
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }

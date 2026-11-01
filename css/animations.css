@@ -1,21 +1,48 @@
-/* Animations & Keyframes - Clean & Immediate */
+/* Animations & Keyframes — Quiet Luxury & Fluid Transitions */
 
-/* Reveal on Scroll - Instant Visibility */
+/* Clean reveal states */
 .reveal,
 .stagger-child {
   opacity: 1 !important;
   transform: none !important;
 }
 
-/* Typewriter blinking cursor */
+/* Subtle Shimmer for Champagne Accents */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(120deg, #9A7B56 0%, #C5A880 25%, #EEDBBF 50%, #C5A880 75%, #9A7B56 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+[data-theme="dark"] .gold-gradient-text {
+  background: linear-gradient(120deg, #D4AF37 0%, #F5E1A4 30%, #FFF3D1 50%, #F5E1A4 70%, #D4AF37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Editorial Typewriter cursor */
 .typewriter-cursor {
   display: inline-block;
-  background-color: var(--accent-violet);
+  background-color: var(--accent-gold);
   width: 2px;
   height: 1.1em;
   margin-left: 2px;
   vertical-align: middle;
-  animation: blink 1s infinite;
+  animation: blink 1.1s infinite;
 }
 
 @keyframes blink {
@@ -23,9 +50,11 @@
   50% { opacity: 1; }
 }
 
-/* Active Nav Link Underline Glow */
+/* Nav Link Underline — Hairline Champagne */
 .nav-link {
   position: relative;
+  letter-spacing: 0.04em;
+  font-weight: 500;
 }
 .nav-link::after {
   content: '';
@@ -33,19 +62,18 @@
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-violet), var(--accent-cyan));
-  transition: width 0.2s ease;
+  height: 1px;
+  background-color: var(--accent-gold);
+  transition: width 0.3s ease;
 }
-.nav-link.active::after, .nav-link:hover::after {
+.nav-link.active::after,
+.nav-link:hover::after {
   width: 100%;
 }
 
-
-
-/* -- AntiGravity 3-D perspective context --------------------------------------- */
+/* AntiGravity 3D Cards */
 .ag-card {
-  perspective: 800px;
+  perspective: 1000px;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -55,11 +83,13 @@
   -webkit-backface-visibility: hidden;
 }
 
-/* -- Accessibility: respect reduced motion ------------------------------------- */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .ag-card,
-  .ag-inner {
+  .ag-inner,
+  .gold-gradient-text {
     transform: none !important;
     transition: none !important;
+    animation: none !important;
   }
 }

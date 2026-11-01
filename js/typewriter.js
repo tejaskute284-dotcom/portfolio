@@ -1,38 +1,38 @@
-// Typewriter Animation Module
+// Typewriter Animation Module — Classic Luxury Editorial Edition
 
 export function initTypewriter() {
-  // 1. Tagline typewriter (infinite cycle)
+  // 1. Tagline typewriter (infinite cycle with refined typography)
   const taglineEl = document.getElementById('typewriter-tagline');
   if (taglineEl) {
     const taglines = [
-      "Building intelligent systems.",
-      "Turning data into decisions.",
-      "Shipping production-grade code."
+      "Crafting intelligent AI/ML systems with architectural precision.",
+      "Architecting robust full-stack software & high-throughput backends.",
+      "Transforming complex mathematical models into production realities."
     ];
     let tagIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let typingSpeed = 100;
+    let typingSpeed = 70;
 
     function typeTagline() {
       const currentText = taglines[tagIndex];
       if (isDeleting) {
         taglineEl.textContent = currentText.substring(0, charIndex - 1);
         charIndex--;
-        typingSpeed = 50; // faster delete
+        typingSpeed = 35; // faster delete
       } else {
         taglineEl.textContent = currentText.substring(0, charIndex + 1);
         charIndex++;
-        typingSpeed = 100; // standard typing
+        typingSpeed = 70; // measured, elegant typing pace
       }
 
       if (!isDeleting && charIndex === currentText.length) {
         isDeleting = true;
-        typingSpeed = 2000; // pause at full text
+        typingSpeed = 2400; // pause at full text
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         tagIndex = (tagIndex + 1) % taglines.length;
-        typingSpeed = 500; // pause before next word
+        typingSpeed = 600; // pause before next statement
       }
 
       setTimeout(typeTagline, typingSpeed);
@@ -41,22 +41,21 @@ export function initTypewriter() {
     typeTagline();
   }
 
-  // 2. Greeting typewriter ("Hi, I'm" -> Name)
+  // 2. Headline typewriter: Types greeting prefix and name
   const greetingPrefixEl = document.getElementById('typewriter-greeting-prefix');
   const nameEl = document.getElementById('typewriter-name');
   
   if (greetingPrefixEl && nameEl) {
-    const prefixText = "Hi, I'm";
-    const nameText = " Mr. Tejas Sharad Kute";
+    const prefixText = "Hi, I'm ";
+    const nameText = "Tejas Sharad Kute";
     let index = 0;
 
     function typePrefix() {
       if (index < prefixText.length) {
         greetingPrefixEl.textContent += prefixText.charAt(index);
         index++;
-        setTimeout(typePrefix, 120);
+        setTimeout(typePrefix, 90);
       } else {
-        // start typing name after prefix is done
         index = 0;
         typeName();
       }
@@ -66,11 +65,10 @@ export function initTypewriter() {
       if (index < nameText.length) {
         nameEl.textContent += nameText.charAt(index);
         index++;
-        setTimeout(typeName, 100);
+        setTimeout(typeName, 85);
       }
     }
 
-    // Initialize greeting typing
     typePrefix();
   }
 }

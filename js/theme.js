@@ -1,10 +1,11 @@
-// Theme Toggle & Persistence Module
+// Theme Toggle & Persistence Module — Warm Ivory Editorial (Light) & Obsidian Noir (Dark)
 
 export function initTheme() {
   const themeToggleBtn = document.getElementById('theme-toggle');
   if (!themeToggleBtn) return;
 
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  // Default to ivory editorial light theme for classic luxury, while respecting existing preference
+  const currentTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   updateToggleIcon(currentTheme);
 

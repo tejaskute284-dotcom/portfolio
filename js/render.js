@@ -1,58 +1,57 @@
-// render.js — data-driven card renderer (Ponytail: one template, not N copies)
+// render.js — data-driven card renderer with Classic Luxury Editorial styling
 import { PROJECTS }       from './data/projects.js';
 import { HACKATHONS }     from './data/hackathons.js';
 import { CERTIFICATIONS } from './data/certifications.js';
 
 // Shared SVG paths via <use> — defined once in index.html as <symbol>
 const githubUse  = `<svg class="w-4 h-4 fill-current" aria-hidden="true"><use href="#icon-github"/></svg>`;
-const githubUseSm = `<svg class="w-5 h-5 fill-current" aria-hidden="true"><use href="#icon-github"/></svg>`;
 
 function tags(arr) {
   return arr.map(t => `<span class="tech-tag">${t}</span>`).join('');
 }
 
-function collaborators(list, accentClass) {
+function collaborators(list) {
   return list.map(c => `
     <a href="${c.url}" target="_blank" rel="noopener noreferrer"
-       class="text-xs font-mono px-2.5 py-1 rounded bg-bgTertiary border border-white/5 ${c.owner ? 'text-textPrimary' : 'text-textSecondary'} hover:border-current hover:${accentClass} ${accentClass.replace('text-','hover:text-')} transition hover:scale-105 inline-block">
+       class="text-xs px-2.5 py-1 rounded border border-border bg-bgTertiary ${c.owner ? 'text-textPrimary font-semibold' : 'text-textSecondary'} hover:border-accentGold hover:text-accentGoldDark transition inline-block">
       ${c.name}
     </a>`).join('');
 }
 
 function projectCard(p) {
   const imgBlock = p.img ? `
-    <div class="mb-4 overflow-hidden rounded-lg border border-white/10 aspect-video bg-bgTertiary">
-      <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+    <div class="mb-5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary">
+      <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
   const footerLinks = p.internship
-    ? `<span class="text-xs text-textSecondary font-mono italic">${p.internship}</span>`
+    ? `<span class="text-xs text-textSecondary italic">${p.internship}</span>`
     : p.private
-      ? `<a href="#" class="flex items-center gap-1.5 text-xs text-textSecondary cursor-not-allowed">${githubUse} Private</a>`
-      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs text-textPrimary hover:${p.accentClass.replace('text-','text-')} transition">${githubUse} GitHub</a>
-         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs text-textPrimary hover:${p.accentClass} transition"><i data-lucide="external-link" class="w-4 h-4"></i> Demo</a>` : ''}`;
+      ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private Repository</span>`
+      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>
+         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>` : ''}`;
 
   return `
   <div class="carousel-item">
-    <div class="ag-card dev-code-card h-full">
-      <div class="ag-inner dev-code-card-inner flex flex-col justify-between h-full">
+    <div class="ag-card premium-card h-full">
+      <div class="ag-inner p-6 md:p-8 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold font-heading text-textPrimary">${p.name}</h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded-full border ${p.badge.cls}">${p.badge.label}</span>
+            <h3 class="text-2xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
+            <span class="text-xs px-2.5 py-1 rounded-full border border-accentGold/40 text-accentGold font-mono text-[11px]">${p.badge.label}</span>
           </div>
-          <p class="text-sm font-semibold ${p.accentClass} mb-4">${p.tagline}</p>
+          <p class="text-sm font-medium text-accentGold mb-4">${p.tagline}</p>
           ${imgBlock}
           <p class="text-textSecondary text-sm leading-relaxed mb-6">${p.desc}</p>
           <div class="mb-6">
-            <span class="text-xs font-mono text-textSecondary block mb-2 font-bold uppercase tracking-wider">Collaborators</span>
-            <div class="flex flex-wrap gap-2">${collaborators(p.collaborators, p.accentClass)}</div>
+            <span class="text-[11px] font-mono text-textMuted block mb-2 uppercase tracking-wider">Collaborators</span>
+            <div class="flex flex-wrap gap-2">${collaborators(p.collaborators)}</div>
           </div>
           <div class="flex flex-wrap gap-2 mb-6">${tags(p.tags)}</div>
         </div>
-        <div class="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-          <div class="flex items-center gap-4">${footerLinks}</div>
-          <span class="text-[10px] text-textSecondary font-mono block text-right">${p.footer}</span>
+        <div class="border-t border-border pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
+          <div class="flex items-center gap-5">${footerLinks}</div>
+          <span class="text-[11px] text-textMuted font-mono block text-right">${p.footer}</span>
         </div>
       </div>
     </div>
@@ -61,32 +60,31 @@ function projectCard(p) {
 
 function hackathonCard(h) {
   return `
-  <div class="carousel-item px-3">
-    <div class="ag-card dev-code-card h-full group hov-card-border transition cursor-pointer"
-         style="--card-accent: ${h.accentHex}"
+  <div class="carousel-item px-2">
+    <div class="ag-card premium-card h-full group hov-card-border transition cursor-pointer"
          data-cert-img="${h.img}"
          data-cert-title="${h.certTitle}"
          data-cert-subtitle="${h.certSubtitle}">
-      <div class="ag-inner dev-code-card-inner flex flex-col justify-between h-full">
+      <div class="ag-inner p-6 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-3">
-            <span class="text-[10px] font-mono ${h.orgColor} uppercase tracking-widest font-bold">${h.org}</span>
-            <span class="text-xs font-mono px-2 py-0.5 rounded-full border font-semibold ${h.badge.cls}">${h.badge.label}</span>
+            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${h.badge.label}</span>
           </div>
-          <h3 class="text-xl font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
-          <p class="text-xs ${h.subtitleColor} font-mono mb-4">${h.subtitle}</p>
-          <div class="relative overflow-hidden rounded-lg border border-white/10 aspect-video mb-4 bg-bgTertiary">
-            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-              <i data-lucide="maximize-2" class="w-4 h-4"></i> View Certificate Photo
+          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
+          <p class="text-xs text-textSecondary mb-4">${h.subtitle}</p>
+          <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-4 bg-bgTertiary">
+            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+              <i data-lucide="maximize-2" class="w-4 h-4 text-accentGold"></i> View Certificate
             </div>
           </div>
           <p class="text-textSecondary text-xs leading-relaxed mb-4">${h.desc}</p>
         </div>
-        <div class="border-t border-white/5 pt-4 flex items-center justify-between mt-auto">
-          <span class="text-[10px] text-textSecondary font-mono">${h.footerLeft}</span>
-          <button class="text-xs font-mono ${h.btnColor} flex items-center gap-1 group-hover:underline">
-            View Photo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <div class="border-t border-border pt-4 flex items-center justify-between mt-auto">
+          <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
+          <button class="text-xs font-medium text-accentGold flex items-center gap-1.5 group-hover:underline">
+            View Certificate <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
       </div>
@@ -96,23 +94,23 @@ function hackathonCard(h) {
 
 function certCard(c) {
   return `
-  <div class="carousel-item">
-    <div class="dev-code-card h-full">
-      <div class="dev-code-card-inner flex flex-col justify-between h-full">
+  <div class="carousel-item px-2">
+    <div class="premium-card h-full">
+      <div class="p-6 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-4">
-            <span class="text-[10px] font-mono text-accentCyan uppercase tracking-widest">COURSERA</span>
-            <span class="text-emerald-400 text-xs font-mono flex items-center gap-1 font-semibold">
-              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified
+            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">COURSERA ACADEMIC</span>
+            <span class="text-accentGold text-xs font-mono flex items-center gap-1 font-semibold">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified
             </span>
           </div>
-          <h3 class="text-base font-bold text-textPrimary leading-tight mb-2">${c.title}</h3>
-          <p class="text-xs text-textSecondary font-mono mt-1">Domain: ${c.domain}</p>
+          <h3 class="text-base font-serif font-bold text-textPrimary leading-snug mb-2">${c.title}</h3>
+          <p class="text-xs text-textSecondary font-sans mt-1">Domain: ${c.domain}</p>
         </div>
-        <div class="border-t border-white/5 pt-4 mt-6 flex justify-between items-center mt-auto">
-          <span class="text-[9px] text-textSecondary font-mono block">ID: ${c.id}</span>
-          <button class="text-[10px] font-mono text-accentCyan hover:text-textPrimary hover:underline flex items-center gap-1 transition js-verify-cert" data-cert-url="${c.url}" data-cert-id="${c.id}" data-cert-title="${c.title}">
-            Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+        <div class="border-t border-border pt-4 mt-6 flex justify-between items-center mt-auto">
+          <span class="text-[10px] text-textMuted font-mono">ID: ${c.id}</span>
+          <button class="text-xs font-semibold text-accentGold hover:text-accentGoldDark hover:underline flex items-center gap-1.5 transition js-verify-cert" data-cert-url="${c.url}" data-cert-id="${c.id}" data-cert-title="${c.title}">
+            Verify Credential <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </button>
         </div>
       </div>
