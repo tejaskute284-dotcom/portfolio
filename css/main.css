@@ -56,7 +56,7 @@
 
 /* Base Styles */
 html {
-  scroll-behavior: initial; /* Lenis handles smooth scroll */
+  scroll-behavior: smooth;
 }
 
 body {

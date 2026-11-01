@@ -13,11 +13,11 @@
  */
 
 const CONFIG = {
-  tiltMax:       12,    // degrees — max tilt at card edge
-  repelRadius:   80,    // px    — distance at which repulsion begins
+  tiltMax: 12,    // degrees — max tilt at card edge
+  repelRadius: 80,    // px    — distance at which repulsion begins
   repelStrength: 14,    // px    — max XY shift during repulsion
-  glowOpacity:   0.18,  // 0–1   — spotlight opacity at cursor centre
-  spring:        0.08,  // lerp factor (lower = more springy / laggier)
+  glowOpacity: 0.18,  // 0–1   — spotlight opacity at cursor centre
+  spring: 0.08,  // lerp factor (lower = more springy / laggier)
   resetDuration: 0.6,   // seconds for GSAP elastic snap-back on leave
 };
 
@@ -59,8 +59,8 @@ export function initAntiGravity() {
     let isHovered = false;
 
     // GSAP quickSetters — bypass tween overhead for per-frame rAF updates
-    const setRotX   = gsap.quickSetter(inner, 'rotationX', 'deg');
-    const setRotY   = gsap.quickSetter(inner, 'rotationY', 'deg');
+    const setRotX = gsap.quickSetter(inner, 'rotationX', 'deg');
+    const setRotY = gsap.quickSetter(inner, 'rotationY', 'deg');
     const setTransX = gsap.quickSetter(inner, 'x', 'px');
     const setTransY = gsap.quickSetter(inner, 'y', 'px');
 
@@ -68,18 +68,18 @@ export function initAntiGravity() {
     card.addEventListener('mousemove', (e) => {
       isHovered = true;
 
-      const rect  = card.getBoundingClientRect();
-      const cx    = rect.left + rect.width  / 2;
-      const cy    = rect.top  + rect.height / 2;
-      const mx    = e.clientX - cx; // offset from card centre
-      const my    = e.clientY - cy;
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const mx = e.clientX - cx; // offset from card centre
+      const my = e.clientY - cy;
 
       // Normalise offset to -1 … +1 range
-      const normX =  mx / (rect.width  / 2);
-      const normY =  my / (rect.height / 2);
+      const normX = mx / (rect.width / 2);
+      const normY = my / (rect.height / 2);
 
       // 3-D tilt: cursor right → positive rotationY; cursor down → negative rotationX
-      targetRY =  normX * CONFIG.tiltMax;
+      targetRY = normX * CONFIG.tiltMax;
       targetRX = -normY * CONFIG.tiltMax;
 
       // Magnetic repulsion when cursor enters the inner repel radius
@@ -94,8 +94,8 @@ export function initAntiGravity() {
       }
 
       // Spotlight follows cursor within card bounds
-      const relX = ((e.clientX - rect.left) / rect.width)  * 100;
-      const relY = ((e.clientY - rect.top)  / rect.height) * 100;
+      const relX = ((e.clientX - rect.left) / rect.width) * 100;
+      const relY = ((e.clientY - rect.top) / rect.height) * 100;
       spotlight.style.background =
         'radial-gradient(circle at ' + relX + '% ' + relY + '%,' +
         ' rgba(139,92,246,' + CONFIG.glowOpacity + ') 0%, transparent 65%)';
