@@ -23,7 +23,7 @@
   gap: 0.5rem;
 }
 .monogram-mark span.gold {
-  color: var(--accent-gold);
+  color: var(--accent-gold-muted);
 }
 
 /* Classic Luxury Editorial Cards */
@@ -185,8 +185,9 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background-color: var(--accent-gold);
+  background-color: var(--accent-gold-muted);
   border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--accent-gold-glow);
   z-index: 10;
 }
 .timeline-container {

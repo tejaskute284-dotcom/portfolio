@@ -8,10 +8,11 @@
   
   /* Champagne Gold & Muted Metallic Accents */
   --accent-gold: #C5A880;
+  --accent-gold-muted: #D5B26B;
   --accent-gold-light: #DFC7A5;
   --accent-gold-dark: #9A7B56;
-  --accent-gold-glow: rgba(197, 168, 128, 0.2);
-  --accent-gold-border: rgba(197, 168, 128, 0.35);
+  --accent-gold-glow: rgba(213, 178, 107, 0.22);
+  --accent-gold-border: rgba(213, 178, 107, 0.35);
 
   /* Deep Charcoal & Editorial Black Typography */
   --text-primary: #1A1A1C;
@@ -45,10 +46,11 @@
   --bg-elevated: #181820;
 
   --accent-gold: #D4AF37;
+  --accent-gold-muted: #D5B26B;
   --accent-gold-light: #E7C968;
   --accent-gold-dark: #A98322;
-  --accent-gold-glow: rgba(212, 175, 55, 0.18);
-  --accent-gold-border: rgba(212, 175, 55, 0.3);
+  --accent-gold-glow: rgba(213, 178, 107, 0.22);
+  --accent-gold-border: rgba(213, 178, 107, 0.35);
 
   --text-primary: #F5F2EB;
   --text-secondary: #A8A49C;
