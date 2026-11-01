@@ -4,10 +4,15 @@ export function initScroll() {
   // 1. Native Smooth Scroll for Anchors with Fallback
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
       const targetId = this.getAttribute('href');
       
-      if (targetId === '#') {
+      // If clicking Explore button or navbar while locked, step-nav handles unlocking
+      if (document.body.classList.contains('landing-locked')) {
+        return;
+      }
+
+      e.preventDefault();
+      if (targetId === '#' || targetId === '#hero') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
@@ -98,33 +103,11 @@ export function initScroll() {
   // 4. GSAP Entrance Animations (Hero Section load-in)
   if (typeof gsap !== 'undefined') {
     const tl = gsap.timeline();
-    tl.from('.hero-anim-title', {
-      y: 50,
+    tl.from('#hero .portrait-container', {
       opacity: 0,
+      scale: 0.94,
       duration: 1,
-      ease: 'power4.out',
-      stagger: 0.2
-    })
-    .from('.hero-anim-sub', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
       ease: 'power3.out'
-    }, '-=0.6')
-    .from('.hero-anim-cta', {
-      scale: 0.9,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'back.out(1.7)',
-      stagger: 0.15
-    }, '-=0.4')
-    .from('.hero-anim-social', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power2.out',
-      stagger: 0.1
-    }, '-=0.3');
+    });
   }
 }
-

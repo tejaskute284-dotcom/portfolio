@@ -20,7 +20,6 @@ export function initStepNavigation() {
         floatingStep.classList.add('flex');
       }
 
-      // Re-trigger GSAP or AOS triggers if applicable
       window.dispatchEvent(new Event('resize'));
     }
 
@@ -28,9 +27,14 @@ export function initStepNavigation() {
       setTimeout(() => {
         const targetEl = document.getElementById(targetId);
         if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
+          const navbarHeight = 80;
+          const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 50);
+      }, 100);
     }
   }
 
@@ -48,10 +52,8 @@ export function initStepNavigation() {
       const href = link.getAttribute('href');
       if (href && href !== '#' && href !== '#hero') {
         const targetId = href.substring(1);
-        if (!isUnlocked) {
-          e.preventDefault();
-          unlockPortfolio(targetId);
-        }
+        e.preventDefault();
+        unlockPortfolio(targetId);
       }
     });
   });
@@ -112,7 +114,11 @@ export function initStepNavigation() {
       const idx = getCurrentSectionIndex();
       if (idx > 0) {
         const target = document.getElementById(sections[idx - 1].id);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          const navbarHeight = 80;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
       }
     });
   }
@@ -122,7 +128,11 @@ export function initStepNavigation() {
       const idx = getCurrentSectionIndex();
       if (idx < sections.length - 1) {
         const target = document.getElementById(sections[idx + 1].id);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          const navbarHeight = 80;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
       }
     });
   }
