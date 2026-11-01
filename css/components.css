@@ -388,3 +388,29 @@
   border-color: var(--border-gold);
   box-shadow: var(--shadow-gold);
 }
+
+
+/* Strict Landing Gate Styles */
+body.landing-locked {
+  overflow-y: hidden;
+}
+
+.portfolio-content-gate {
+  display: none !important;
+}
+
+.portfolio-content-active {
+  display: block !important;
+  animation: portfolioReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes portfolioReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
