@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tejas Sharad Kute — AI/ML Enthusiast & Full-Stack Developer</title>
   
+  <!-- Critical Anti-FOUC Paint: Prevents any white flash on refresh -->
+  <style>
+    html, body {
+      background-color: #0C0C0E !important;
+      color: #F5F2EB;
+    }
+    html[data-theme="light"], html[data-theme="light"] body {
+      background-color: #FAF8F5 !important;
+      color: #1A1A1C;
+    }
+  </style>
+  <script>
+    // Synchronous immediate theme restoration before HTML rendering
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- SEO & Open Graph Meta Tags -->
   <meta name="description" content="Personal portfolio of Tejas Sharad Kute: B.Tech student specializing in Artificial Intelligence & Machine Learning, Full-Stack Developer, and Web Development Intern.">
   <meta property="og:title" content="Tejas Sharad Kute — AI/ML Enthusiast & Full-Stack Developer">

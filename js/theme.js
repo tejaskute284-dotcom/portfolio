@@ -11,6 +11,7 @@ export function initTheme() {
   updateGraphColor(currentTheme);
 
   themeToggleBtn.addEventListener('click', () => {
+    document.documentElement.classList.add('theme-transitioning');
     const activeTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
     
@@ -18,6 +19,10 @@ export function initTheme() {
     localStorage.setItem('theme', newTheme);
     updateToggleIcon(newTheme);
     updateGraphColor(newTheme);
+
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 450);
   });
 }
 
