@@ -77,8 +77,14 @@
 .portrait-container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
   margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .portrait-container {
+    max-width: 260px;
+    margin: 1.5rem auto 0;
+  }
 }
 .portrait-backdrop-organic {
   position: absolute;
@@ -93,7 +99,7 @@
   position: relative;
   z-index: 1;
   aspect-ratio: 4 / 5;
-  max-height: 520px;
+  max-height: 480px;
   border-radius: 200px 200px 20px 20px;
   padding: 8px;
   background: linear-gradient(180deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, var(--accent-gold-dark) 100%);
@@ -101,6 +107,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 768px) {
+  .portrait-arch-frame {
+    max-height: 330px;
+    border-radius: 140px 140px 16px 16px;
+    padding: 6px;
+  }
 }
 .portrait-inner {
   width: 100%;
@@ -114,6 +127,11 @@
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+@media (max-width: 768px) {
+  .portrait-inner {
+    border-radius: 134px 134px 12px 12px;
+  }
 }
 .portrait-inner img {
   width: 100%;
@@ -392,13 +410,25 @@
 
 
 /* Strict Landing Gate Styles */
-body.landing-locked {
-  overflow-y: hidden;
-  height: 100vh;
+@media (min-width: 1024px) {
+  body.landing-locked {
+    overflow-y: hidden;
+    height: 100vh;
+  }
+  .portfolio-content-gate {
+    display: none !important;
+  }
 }
 
-.portfolio-content-gate {
-  display: none !important;
+/* Mobile & Tablet: Fluid Native Scrolling by Default */
+@media (max-width: 1023px) {
+  body.landing-locked {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+  .portfolio-content-gate {
+    display: block !important;
+  }
 }
 
 .portfolio-content-active {
