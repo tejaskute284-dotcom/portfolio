@@ -654,24 +654,30 @@
 
         </div>
 
-        <!-- Contribution Graph Embed with 3D Bezel Layering -->
+        <!-- Contribution Graph & Activity Hub -->
         <div class="premium-card overflow-hidden ag-card github-3d-board" style="perspective: 1200px; transform-style: preserve-3d;">
           <div class="ag-inner">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
                 <span class="text-[11px] font-mono text-accentGold uppercase tracking-widest block mb-1">
-                  Contribution Activity
+                  Verified Engineering Activity
                 </span>
                 <h3 id="github-summary-count" class="text-xl font-bold text-textPrimary">
-                  335 contributions in the last year
+                  300 contributions in the last year
                 </h3>
               </div>
-              <a href="https://github.com/tejaskute284-dotcom"
-                 target="_blank" rel="noopener noreferrer"
-                 class="btn-luxury-secondary text-xs px-4 py-2 flex items-center gap-2 self-start sm:self-auto font-mono">
-                <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
-                View GitHub Profile
-              </a>
+              <div class="flex items-center gap-3">
+                <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-mono text-accentGoldMuted px-3 py-1 rounded-full border border-borderGold bg-bgTertiary">
+                  <span class="w-2 h-2 rounded-full bg-accentGoldMuted animate-pulse"></span>
+                  <span>Active Sprint: 260+ Commits</span>
+                </span>
+                <a href="https://github.com/tejaskute284-dotcom"
+                   target="_blank" rel="noopener noreferrer"
+                   class="btn-luxury-secondary text-xs px-4 py-2 flex items-center gap-2 self-start sm:self-auto font-mono">
+                  <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
+                  <span>View GitHub Profile</span>
+                </a>
+              </div>
             </div>
 
             <!-- Self-contained, High-Res Vector Contribution Matrix (Offline-Safe & Theme-Integrated) -->
@@ -693,6 +699,81 @@
                 Verified public commits · <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="text-accentGold hover:underline">github.com/tejaskute284-dotcom</a>
               </p>
             </div>
+
+            <!-- FEATURED ACTIVE REPOSITORIES ROW: Fills space with rich engineering substance -->
+            <div class="mt-8 pt-6 border-t border-border">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono text-accentGold uppercase tracking-wider font-semibold">Featured Public Repositories</span>
+                <span class="text-[11px] font-mono text-textMuted">Live Production &amp; Research</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Repo 1: CivicFix -->
+                <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-4 rounded-lg bg-bgTertiary border border-border hover:border-accentGoldMuted transition group flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm font-bold text-textPrimary font-mono group-hover:text-accentGold transition flex items-center gap-1.5">
+                        <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-accentGold"></i>
+                        <span>CivicFix</span>
+                      </span>
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded border border-accentGold/30 text-accentGold">Public</span>
+                    </div>
+                    <p class="text-xs text-textSecondary leading-relaxed mb-3">
+                      Urban issue reporting platform with PostGIS spatial clustering and automated complaint triage.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 text-[11px] font-mono text-textMuted">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> JavaScript</span>
+                    <span>·</span>
+                    <span>Full-Stack</span>
+                  </div>
+                </a>
+
+                <!-- Repo 2: MUMBAI-express -->
+                <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-4 rounded-lg bg-bgTertiary border border-border hover:border-accentGoldMuted transition group flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm font-bold text-textPrimary font-mono group-hover:text-accentGold transition flex items-center gap-1.5">
+                        <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-accentGold"></i>
+                        <span>MUMBAI-express</span>
+                      </span>
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded border border-accentGold/30 text-accentGold">Public</span>
+                    </div>
+                    <p class="text-xs text-textSecondary leading-relaxed mb-3">
+                      High-performance backend services and automated routing pipelines for transit telemetry.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 text-[11px] font-mono text-textMuted">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Python</span>
+                    <span>·</span>
+                    <span>Backend</span>
+                  </div>
+                </a>
+
+                <!-- Repo 3: studentexpenses -->
+                <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="p-4 rounded-lg bg-bgTertiary border border-border hover:border-accentGoldMuted transition group flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm font-bold text-textPrimary font-mono group-hover:text-accentGold transition flex items-center gap-1.5">
+                        <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-accentGold"></i>
+                        <span>studentexpenses</span>
+                      </span>
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded border border-accentGold/30 text-accentGold">Public</span>
+                    </div>
+                    <p class="text-xs text-textSecondary leading-relaxed mb-3">
+                      Personal finance tracking application built with strict TypeScript typing and transactional math.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 text-[11px] font-mono text-textMuted">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-400"></span> TypeScript</span>
+                    <span>·</span>
+                    <span>Production</span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
           </div>
         </div>
 
