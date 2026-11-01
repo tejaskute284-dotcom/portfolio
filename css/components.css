@@ -294,14 +294,15 @@
 .carousel-viewport {
   overflow: hidden;
   width: 100%;
+  padding-block: 0.5rem;
 }
 .carousel-content {
   display: flex;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 .carousel-item {
-  padding: 0 12px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 .carousel-control {
@@ -328,17 +329,17 @@
   border-color: var(--accent-gold);
 }
 .carousel-prev {
-  left: -22px;
+  left: -20px;
 }
 .carousel-next {
-  right: -22px;
+  right: -20px;
 }
 @media (max-width: 1024px) {
   .carousel-prev {
-    left: -10px;
+    left: -8px;
   }
   .carousel-next {
-    right: -10px;
+    right: -8px;
   }
   .carousel-item {
     padding: 0 6px;

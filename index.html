@@ -773,23 +773,25 @@
             </a>
           </div>
 
-          <!-- Live contribution graph via ghchart.rshah.org -->
-          <div class="overflow-x-auto rounded-lg bg-bgTertiary p-4 border border-border">
-            <img
-              src="https://ghchart.rshah.org/D4AF37/tejaskute284"
-              alt="Tejas Kute GitHub Contribution Graph"
-              class="w-full min-w-[640px] block"
-              loading="lazy"
-              id="github-contrib-graph"
-            />
+          <!-- Self-contained, High-Res Vector Contribution Matrix (Offline-Safe & Theme-Integrated) -->
+          <div class="overflow-x-auto rounded-lg bg-bgTertiary p-5 border border-border">
+            <div id="github-graph-mount"></div>
           </div>
 
-          <p class="text-[11px] font-mono text-textMuted mt-4 text-right">
-            Data sourced from
-            <a href="https://github.com/tejaskute284-dotcom" target="_blank"
-               class="text-accentGold hover:underline">github.com/tejaskute284-dotcom</a>
-            · Updates daily
-          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mt-4 pt-3 border-t border-border/50 text-[11px] font-mono text-textMuted">
+            <div class="flex items-center gap-2">
+              <span>Less</span>
+              <span class="w-2.5 h-2.5 rounded-sm bg-bgSecondary border border-border"></span>
+              <span class="w-2.5 h-2.5 rounded-sm bg-accentGold/20"></span>
+              <span class="w-2.5 h-2.5 rounded-sm bg-accentGold/50"></span>
+              <span class="w-2.5 h-2.5 rounded-sm bg-accentGold/80"></span>
+              <span class="w-2.5 h-2.5 rounded-sm bg-accentGold"></span>
+              <span>More</span>
+            </div>
+            <p>
+              Verified public commits · <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="text-accentGold hover:underline">github.com/tejaskute284-dotcom</a>
+            </p>
+          </div>
         </div>
 
       </div>

@@ -1,6 +1,7 @@
 // Main Entry Point & Orchestrator
 
 import { renderAll }           from './render.js';
+import { renderGitHubGraph }   from './github-graph.js';
 import { initTheme }           from './theme.js';
 import { initScroll }          from './scroll.js';
 import { initTypewriter }      from './typewriter.js';
@@ -16,13 +17,14 @@ import { initStepNavigation }  from './step-nav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAll();          // inject data-driven cards before anything else
+  renderGitHubGraph();  // render vector contribution graph
   initTheme();
   initScroll();
   initTypewriter();
   initCounter();
   initContact();
   initMobileNav();
-  initCarousel();       // picks up newly-rendered carousels
+  initCarousel();       // picks up newly-rendered carousels with smooth auto-play
   initCertificateModal();
   initResumeModal();
   initVerifyModal();
