@@ -2,6 +2,7 @@
 
 import { renderAll }           from './render.js';
 import { renderGitHubGraph }   from './github-graph.js';
+import { initGitHubSync }      from './github-api.js';
 import { initTheme }           from './theme.js';
 import { initScroll }          from './scroll.js';
 import { initTypewriter }      from './typewriter.js';
@@ -18,6 +19,7 @@ import { initStepNavigation }  from './step-nav.js';
 document.addEventListener('DOMContentLoaded', () => {
   renderAll();          // inject data-driven cards before anything else
   renderGitHubGraph();  // render vector contribution graph
+  initGitHubSync();     // automate live GitHub sync with fallback
   initTheme();
   initScroll();
   initTypewriter();
