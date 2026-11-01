@@ -226,6 +226,9 @@
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
   transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 .tech-tag:hover {
   border-color: var(--accent-gold);
@@ -234,6 +237,26 @@
 }
 [data-theme="dark"] .tech-tag:hover {
   color: var(--accent-gold-light);
+}
+
+/* Learning in Progress Badge variant */
+.tech-tag-learning {
+  border-style: dashed;
+  border-color: rgba(213, 178, 107, 0.55);
+  color: var(--accent-gold-muted);
+  background-color: rgba(213, 178, 107, 0.08);
+}
+.tech-tag-learning .learning-beacon {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-gold-muted);
+  box-shadow: 0 0 6px var(--accent-gold-muted);
+  animation: pulseBeacon 2s infinite ease-in-out;
+}
+@keyframes pulseBeacon {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* Buttons — Luxury Styling */
