@@ -1,9 +1,11 @@
-// github-graph.js — Accurate 52-Week Rolling GitHub Contribution Calendar
-// Dynamically places true month headers (Nov -> Oct) based on real contribution dates
+// github-graph.js — High-End Tactile Vector GitHub Contribution Matrix
+// Features high-contrast visible grid in both light & dark themes, vibrant champagne gold cells, and interactive hover elevation
 
 export function renderGitHubGraph(liveContributions = null) {
   const container = document.getElementById('github-graph-mount');
   if (!container) return;
+
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
 
   const weeks = 53;
   const days = 7;
@@ -14,17 +16,27 @@ export function renderGitHubGraph(liveContributions = null) {
   const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  const getLevelColor = (level) => {
-    switch (level) {
-      case 1: return 'rgba(213, 178, 107, 0.35)';
-      case 2: return 'rgba(213, 178, 107, 0.60)';
-      case 3: return 'rgba(213, 178, 107, 0.85)';
-      case 4: return 'var(--accent-gold-muted)';
-      default: return 'var(--bg-tertiary)';
+  // Palette: Tactile visible cells in both light and dark modes
+  const getCellStyles = (level) => {
+    if (isDark) {
+      switch (level) {
+        case 1: return { fill: '#6B5424', stroke: 'rgba(213, 178, 107, 0.4)' };
+        case 2: return { fill: '#A37E32', stroke: 'rgba(213, 178, 107, 0.6)' };
+        case 3: return { fill: '#D5B26B', stroke: '#E8C56E' };
+        case 4: return { fill: '#F2D38B', stroke: '#FFF0B8' };
+        default: return { fill: '#1A1A22', stroke: 'rgba(255, 255, 255, 0.05)' };
+      }
+    } else {
+      switch (level) {
+        case 1: return { fill: '#E8D4A8', stroke: '#D5B26B' };
+        case 2: return { fill: '#D5B26B', stroke: '#B88E3E' };
+        case 3: return { fill: '#BA8D36', stroke: '#966D20' };
+        case 4: return { fill: '#8C6415', stroke: '#694705' };
+        default: return { fill: '#E6E0D6', stroke: 'rgba(26, 26, 28, 0.08)' };
+      }
     }
   };
 
-  // If live contributions provided, map them into a 53-week by 7-day matrix
   let grid = [];
   for (let w = 0; w < weeks; w++) {
     grid[w] = new Array(7).fill(null);
@@ -33,7 +45,6 @@ export function renderGitHubGraph(liveContributions = null) {
   const monthHeaderMap = {};
 
   if (Array.isArray(liveContributions) && liveContributions.length > 0) {
-    // Determine start day of week for the first item
     const firstDate = new Date(liveContributions[0].date);
     let startDay = firstDate.getDay(); // 0 = Sun
     
@@ -43,10 +54,8 @@ export function renderGitHubGraph(liveContributions = null) {
 
     liveContributions.forEach((item) => {
       if (currentWeek >= weeks) return;
-      
       grid[currentWeek][currentDay] = item;
 
-      // Track the first time a new month appears in a week column
       const itemDate = new Date(item.date);
       const m = itemDate.getMonth();
       if (m !== lastMonth) {
@@ -63,10 +72,10 @@ export function renderGitHubGraph(liveContributions = null) {
       }
     });
   } else {
-    // Graceful fallback seeded pattern matching 295 contributions
+    // Fallback populated pattern
     let lastMonth = -1;
     for (let w = 0; w < weeks; w++) {
-      const approxMonth = (10 + Math.floor(w / 4.3)) % 12; // starts in Nov (10)
+      const approxMonth = (10 + Math.floor(w / 4.3)) % 12;
       if (approxMonth !== lastMonth) {
         monthHeaderMap[w] = monthNames[approxMonth];
         lastMonth = approxMonth;
@@ -84,22 +93,23 @@ export function renderGitHubGraph(liveContributions = null) {
 
   let svgContent = '';
 
-  // Render Month Headers positioned at exact starting weeks
+  // Month Labels
+  const labelColor = isDark ? '#8E8A84' : '#6A655E';
   Object.keys(monthHeaderMap).forEach((wStr) => {
     const w = parseInt(wStr, 10);
     const x = 32 + w * step;
-    svgContent += `<text x="${x}" y="12" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" letter-spacing="0.05em">${monthHeaderMap[w]}</text>`;
+    svgContent += `<text x="${x}" y="12" fill="${labelColor}" font-family="var(--font-mono)" font-size="9.5" font-weight="600" letter-spacing="0.06em">${monthHeaderMap[w]}</text>`;
   });
 
-  // Render Day Labels
+  // Day Labels
   dayLabels.forEach((d, idx) => {
     if (d) {
       const y = idx * step + 32;
-      svgContent += `<text x="8" y="${y}" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8" letter-spacing="0.05em">${d}</text>`;
+      svgContent += `<text x="6" y="${y}" fill="${labelColor}" font-family="var(--font-mono)" font-size="8.5" font-weight="500" letter-spacing="0.05em">${d}</text>`;
     }
   });
 
-  // Render Squares
+  // Render Grid Squares with visible border & tactile depth
   for (let w = 0; w < weeks; w++) {
     for (let d = 0; d < days; d++) {
       const item = grid[w][d];
@@ -107,11 +117,11 @@ export function renderGitHubGraph(liveContributions = null) {
 
       const x = 32 + w * step;
       const y = 22 + d * step;
-      const fill = getLevelColor(item.level);
+      const { fill, stroke } = getCellStyles(item.level);
       const titleText = item.date ? `${item.count} contribution${item.count === 1 ? '' : 's'} on ${item.date}` : `${item.count} contributions`;
 
       svgContent += `
-        <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${fill}" class="contrib-cell transition-all duration-200" data-count="${item.count}">
+        <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${fill}" stroke="${stroke}" stroke-width="0.75" class="contrib-cell cursor-pointer" data-count="${item.count}">
           <title>${titleText}</title>
         </rect>`;
     }
