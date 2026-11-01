@@ -1,64 +1,6 @@
-// Step-by-Step Interactive Section Navigator & Strict Landing Gate Flow
+// Step-by-Step Interactive Section Navigator
 
 export function initStepNavigation() {
-  const mainContent = document.getElementById('portfolio-main-content');
-  const exploreBtn = document.getElementById('hero-next-step-btn');
-  const floatingStep = document.getElementById('floating-step-guide');
-  let isUnlocked = false;
-
-  function unlockPortfolio(targetId = 'about') {
-    if (!mainContent) return;
-    
-    if (!isUnlocked) {
-      isUnlocked = true;
-      document.body.classList.remove('landing-locked');
-      mainContent.classList.remove('portfolio-content-gate');
-      mainContent.classList.add('portfolio-content-active');
-      
-      if (floatingStep) {
-        floatingStep.classList.remove('hidden');
-        floatingStep.classList.add('flex');
-      }
-
-      window.dispatchEvent(new Event('resize'));
-    }
-
-    if (targetId) {
-      setTimeout(() => {
-        const targetEl = document.getElementById(targetId);
-        if (targetEl) {
-          const navbarHeight = 80;
-          const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 100);
-    }
-  }
-
-  // Explore button triggers unlock and scrolls to About
-  if (exploreBtn) {
-    exploreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      unlockPortfolio('about');
-    });
-  }
-
-  // Any navbar link click also unlocks and navigates to the clicked section
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href && href !== '#' && href !== '#hero') {
-        const targetId = href.substring(1);
-        e.preventDefault();
-        unlockPortfolio(targetId);
-      }
-    });
-  });
-
-  // Floating Step-by-Step progress tracker on scroll
   const sections = [
     { id: 'hero', label: 'Landing' },
     { id: 'about', label: 'About' },
@@ -73,6 +15,23 @@ export function initStepNavigation() {
     { id: 'contact', label: 'Contact' }
   ];
 
+  const exploreBtn = document.getElementById('hero-next-step-btn');
+  if (exploreBtn) {
+    exploreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetEl = document.getElementById('about');
+      if (targetEl) {
+        const navbarHeight = 80;
+        const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  }
+
+  // Floating Step-by-Step progress tracker on scroll
   const stepPrev = document.getElementById('step-nav-prev');
   const stepNext = document.getElementById('step-nav-next');
   const stepCurrentLabel = document.getElementById('step-current-label');
@@ -90,8 +49,6 @@ export function initStepNavigation() {
   }
 
   function updateStepUI() {
-    if (!isUnlocked) return;
-    
     const currentIndex = getCurrentSectionIndex();
     if (stepCurrentLabel) {
       stepCurrentLabel.textContent = sections[currentIndex].label;
@@ -139,4 +96,5 @@ export function initStepNavigation() {
   }
 
   window.addEventListener('scroll', updateStepUI, { passive: true });
+  updateStepUI();
 }
