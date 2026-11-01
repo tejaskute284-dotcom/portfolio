@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
 </head>
-<body class="bg-bgPrimary text-textPrimary selection:bg-accentGold selection:text-textPrimary landing-locked">
+<body class="bg-bgPrimary text-textSecondary selection:bg-accentGold selection:text-textPrimary landing-locked">
 
   <!-- Shared SVG icon symbols -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -67,16 +67,16 @@
 
   <!-- 1. NAVIGATION BAR -->
   <header class="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-400">
-    <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between gap-4">
+    <div class="layout-container h-20 flex items-center justify-between gap-4">
       
       <!-- Refined Monogram / Brand -->
       <a href="#hero" class="monogram-mark text-xl tracking-wider hover:opacity-90 transition shrink-0">
-        <span class="w-8 h-8 rounded-full border border-accentGold/60 flex items-center justify-center text-xs font-serif font-bold text-accentGold">TK</span>
-        <span class="font-serif font-semibold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
+        <span class="w-8 h-8 rounded-full border border-accentGold/60 flex items-center justify-center text-xs font-display font-bold text-accentGold">TK</span>
+        <span class="font-display font-bold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
       </a>
 
       <!-- Desktop Editorial Navigation Links -->
-      <nav class="hidden 2xl:flex items-center gap-6 font-sans text-[11px] tracking-widest uppercase font-medium text-textSecondary shrink">
+      <nav class="hidden 2xl:flex items-center gap-6 font-mono text-[11px] tracking-widest uppercase font-medium text-textSecondary shrink">
         <a href="#about" class="nav-link hover:text-textPrimary transition whitespace-nowrap">About</a>
         <a href="#projects" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Projects</a>
         <a href="#experience" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Experience</a>
@@ -84,6 +84,7 @@
         <a href="#education" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Education</a>
         <a href="#certifications" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Credentials</a>
         <a href="#skills" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Skills</a>
+        <a href="#github-stats" class="nav-link hover:text-textPrimary transition whitespace-nowrap">GitHub</a>
         <a href="#future-vision" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Research</a>
         <a href="#contact" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Contact</a>
       </nav>
@@ -91,7 +92,7 @@
       <!-- Right Navigation Actions -->
       <div class="flex items-center gap-3 shrink-0">
         <!-- Resume Trigger Button -->
-        <button type="button" class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-sans tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
+        <button type="button" class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           <span>Resume</span>
         </button>
@@ -124,14 +125,14 @@
     <div>
       <div class="flex items-center justify-between pb-6 border-b border-border">
         <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded-full border border-accentGold flex items-center justify-center text-xs font-serif font-bold text-accentGold">TK</span>
-          <span class="font-serif font-bold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
+          <span class="w-7 h-7 rounded-full border border-accentGold flex items-center justify-center text-xs font-display font-bold text-accentGold">TK</span>
+          <span class="font-display font-bold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
         </div>
         <button id="mobile-menu-close" class="p-2 text-textSecondary hover:text-textPrimary transition" aria-label="Close Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
       </div>
-      <nav class="flex flex-col gap-3 mt-6 font-sans text-sm tracking-wider uppercase font-medium text-textSecondary">
+      <nav class="flex flex-col gap-3 mt-6 font-mono text-xs tracking-wider uppercase font-medium text-textSecondary">
         <a href="#about" class="hover:text-accentGold transition py-2 border-b border-border/50">About</a>
         <a href="#projects" class="hover:text-accentGold transition py-2 border-b border-border/50">Projects</a>
         <a href="#experience" class="hover:text-accentGold transition py-2 border-b border-border/50">Experience</a>
@@ -139,6 +140,7 @@
         <a href="#education" class="hover:text-accentGold transition py-2 border-b border-border/50">Education</a>
         <a href="#certifications" class="hover:text-accentGold transition py-2 border-b border-border/50">Credentials</a>
         <a href="#skills" class="hover:text-accentGold transition py-2 border-b border-border/50">Skills</a>
+        <a href="#github-stats" class="hover:text-accentGold transition py-2 border-b border-border/50">GitHub</a>
         <a href="#future-vision" class="hover:text-accentGold transition py-2 border-b border-border/50">Research</a>
         <a href="#contact" class="hover:text-accentGold transition py-2 border-b border-border/50">Contact</a>
         <button type="button" class="js-open-resume-modal text-left hover:text-accentGold transition py-2.5 border-b border-border/50 flex items-center justify-between font-medium">
@@ -162,21 +164,21 @@
     <!-- Subtle architectural dot pattern -->
     <div id="particles-js"></div>
 
-    <div class="max-w-[1360px] w-full mx-auto px-6 z-10 my-auto">
+    <div class="layout-container z-10 my-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
         <!-- Left Side: Editorial Typography & Clean Headline -->
         <div class="lg:col-span-7 flex flex-col items-start text-left">
           
           <!-- Availability Badge -->
-          <div class="mb-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bgSecondary border border-accentGold/30 text-textPrimary text-xs font-mono tracking-wider shadow-sm">
+          <div class="mb-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bgSecondary border border-accentGold/30 text-textPrimary text-[11px] font-mono tracking-widest uppercase shadow-sm">
             <span class="w-2 h-2 rounded-full bg-accentGold animate-pulse"></span>
-            <span class="text-[11px] uppercase text-textSecondary">Available for Internships &amp; AI/ML Projects</span>
+            <span>Available for Internships &amp; AI/ML Projects</span>
           </div>
 
           <!-- Clean, Dominant Editorial Headline -->
           <div class="mb-5">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-textPrimary tracking-tight leading-[1.08]">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
               Hi, I'm <span class="gold-gradient-text">Tejas Sharad Kute</span>
             </h1>
           </div>
@@ -184,7 +186,7 @@
           <!-- Professional Role Line -->
           <div class="flex items-center gap-3 mb-6">
             <div class="h-[1px] w-8 bg-accentGold"></div>
-            <p class="font-sans text-xs sm:text-sm md:text-base font-semibold tracking-widest uppercase text-accentGold">
+            <p class="font-mono text-xs sm:text-sm tracking-widest uppercase text-accentGold font-medium">
               B.Tech <span class="opacity-40">|</span> AI/ML Enthusiast <span class="opacity-40">|</span> Full-Stack Developer
             </p>
           </div>
@@ -202,20 +204,20 @@
 
           <!-- Premium CTA Buttons: Explore Portfolio Unlocks Content -->
           <div class="flex flex-wrap gap-4 items-center mb-8 w-full sm:w-auto">
-            <a href="#about" id="hero-next-step-btn" class="btn-luxury-primary w-full sm:w-auto text-center font-sans cursor-pointer">
+            <a href="#about" id="hero-next-step-btn" class="btn-luxury-primary w-full sm:w-auto text-center cursor-pointer">
               <span>Next: Explore Portfolio</span>
               <i data-lucide="arrow-down" class="w-4 h-4"></i>
             </a>
-            <a href="#projects" class="btn-luxury-secondary w-full sm:w-auto text-center font-sans">
+            <a href="#projects" class="btn-luxury-secondary w-full sm:w-auto text-center">
               <span>View My Projects</span>
             </a>
-            <a href="#contact" class="btn-luxury-secondary w-full sm:w-auto text-center font-sans">
+            <a href="#contact" class="btn-luxury-secondary w-full sm:w-auto text-center">
               <span>Get in Touch</span>
             </a>
           </div>
 
           <!-- Social Profiles & Quick Contact Row -->
-          <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-border/80 w-full max-w-xl text-xs font-mono text-textSecondary">
+          <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-border/80 w-full max-w-xl text-[11px] font-mono text-textSecondary">
             <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="flex items-center gap-2 hover:text-accentGold transition">
               <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
               <span>GitHub</span>
@@ -270,7 +272,7 @@
   <aside id="floating-step-guide" aria-label="Section Guide" class="fixed bottom-6 right-6 z-30 hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-full bg-bgSecondary/90 border border-borderGold backdrop-blur-md shadow-2xl">
     <div class="flex items-center gap-2 pr-3 border-r border-border">
       <span class="text-[10px] font-mono text-textMuted uppercase tracking-wider">Step</span>
-      <span id="step-number" class="text-xs font-mono font-bold text-accentGold">01 / 10</span>
+      <span id="step-number" class="text-xs font-mono font-bold text-accentGold">01 / 11</span>
       <span id="step-current-label" class="text-xs font-sans font-semibold text-textPrimary">Landing</span>
     </div>
     <div class="flex items-center gap-1">
@@ -287,16 +289,16 @@
   <main id="portfolio-main-content" class="portfolio-content-gate">
 
     <!-- BOTTOM HERO STATISTICS STRIP -->
-    <section class="max-w-[1360px] mx-auto px-6 py-12">
+    <section class="layout-container py-12">
       <div class="stat-strip grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
         
         <!-- Stat 1: Shipped Projects -->
         <div class="stat-item p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="folder-git-2" class="w-4 h-4"></i>
-            <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Projects</span>
+            <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Projects</span>
           </div>
-          <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+          <div class="stat-strip-number mb-1">
             <span class="counter-value" data-target="5">00</span><span>+</span>
           </div>
           <p class="text-xs text-textSecondary font-sans">Full-Stack &amp; AI Systems</p>
@@ -306,9 +308,9 @@
         <div class="stat-item p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="trophy" class="w-4 h-4"></i>
-            <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Hackathons</span>
+            <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Hackathons</span>
           </div>
-          <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+          <div class="stat-strip-number mb-1">
             <span class="counter-value" data-target="6">00</span>
           </div>
           <p class="text-xs text-textSecondary font-sans">Verified Badges &amp; Finals</p>
@@ -318,9 +320,9 @@
         <div class="stat-item p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
-            <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Certifications</span>
+            <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Certifications</span>
           </div>
-          <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+          <div class="stat-strip-number mb-1">
             <span class="counter-value" data-target="5">00</span>
           </div>
           <p class="text-xs text-textSecondary font-sans">Coursera Credentials</p>
@@ -330,9 +332,9 @@
         <div class="stat-item p-6 text-center">
           <div class="flex items-center justify-center gap-1.5 text-accentGold mb-2">
             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-            <span class="text-xs font-mono tracking-wider uppercase text-textMuted">Academic Score</span>
+            <span class="text-[11px] font-mono tracking-widest uppercase text-textMuted">Academic Score</span>
           </div>
-          <div class="text-3xl sm:text-4xl font-serif font-bold text-textPrimary mb-1">
+          <div class="stat-strip-number mb-1">
             <span class="counter-value" data-target="86">00</span><span>%</span>
           </div>
           <p class="text-xs text-textSecondary font-sans">Board SSC &amp; 81% HSC Science</p>
@@ -342,545 +344,643 @@
     </section>
 
     <!-- 3. ABOUT SECTION -->
-    <section id="about" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Left Bio Content -->
-        <div class="lg:col-span-7 stagger-child">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs font-mono uppercase tracking-widest text-accentGold">01 / Profile</span>
-            <div class="h-[1px] w-12 bg-accentGold/40"></div>
-          </div>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-textPrimary">
-            Engineering Intelligence with Editorial Precision.
-          </h2>
-          <p class="text-textSecondary leading-relaxed mb-6 font-sans">
-            I'm <span class="text-textPrimary font-semibold">Tejas Sharad Kute</span>, currently pursuing my B.Tech in Artificial Intelligence &amp; Machine Learning at <span class="text-textPrimary font-semibold">Atharva University Mumbai School of Engineering and Technology</span>. Concurrently, I serve as a Web Developer Intern at <span class="text-accentGold font-semibold">Aerus Infotech Solutions</span>, where I architect high-concurrency role-based platforms and robust REST APIs.
-          </p>
+    <section id="about" class="reveal">
+      <div class="layout-container">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Bio Content -->
+          <div class="lg:col-span-7 stagger-child">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold">01 / Profile</span>
+              <div class="h-[1px] w-12 bg-accentGold/40"></div>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+              Engineering Intelligence with Editorial Precision.
+            </h2>
+            <p class="text-textSecondary leading-relaxed mb-6 font-sans">
+              I'm <span class="text-textPrimary font-semibold">Tejas Sharad Kute</span>, currently pursuing my B.Tech in Artificial Intelligence &amp; Machine Learning at <span class="text-textPrimary font-semibold">Atharva University Mumbai School of Engineering and Technology</span>. Concurrently, I serve as a Web Developer Intern at <span class="text-accentGold font-semibold">Aerus Infotech Solutions</span>, where I architect high-concurrency role-based platforms and robust REST APIs.
+            </p>
 
-          <!-- Quick Info Highlights -->
-          <div class="flex flex-wrap gap-2.5 mb-8">
-            <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
-              <span class="text-accentGold">🎓</span> B.Tech AI &amp; ML (2nd Year)
-            </span>
-            <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
-              <span class="text-accentGold">💼</span> Aerus Infotech Solutions Intern
-            </span>
-            <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
-              <span class="text-accentGold">📍</span> Mumbai, India
-            </span>
-            <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
-              <span class="text-accentGold">✉️</span> tejaskute284@gmail.com
-            </span>
+            <!-- Quick Info Highlights -->
+            <div class="flex flex-wrap gap-2.5 mb-8">
+              <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+                <span class="text-accentGold">🎓</span> B.Tech AI &amp; ML (2nd Year)
+              </span>
+              <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+                <span class="text-accentGold">💼</span> Aerus Infotech Solutions Intern
+              </span>
+              <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+                <span class="text-accentGold">📍</span> Mumbai, India
+              </span>
+              <span class="text-xs px-3 py-1.5 rounded bg-bgSecondary border border-border text-textPrimary flex items-center gap-1.5">
+                <span class="text-accentGold">✉️</span> tejaskute284@gmail.com
+              </span>
+            </div>
+
+            <!-- Academic & Experience Micro Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+              <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+                <div class="text-2xl sm:text-3xl font-display font-bold text-accentGold mb-0.5 counter-value" data-target="2">00</div>
+                <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Years Coding</div>
+              </div>
+              <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+                <div class="text-2xl sm:text-3xl font-display font-bold text-accentGold mb-0.5"><span class="counter-value" data-target="5">00</span><span>+</span></div>
+                <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Shipped Works</div>
+              </div>
+              <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+                <div class="text-2xl sm:text-3xl font-display font-bold text-accentGold mb-0.5 counter-value" data-target="6">00</div>
+                <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Hackathons</div>
+              </div>
+              <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
+                <div class="text-2xl sm:text-3xl font-display font-bold text-accentGold mb-0.5 counter-value" data-target="1">00</div>
+                <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Internship</div>
+              </div>
+            </div>
           </div>
 
-          <!-- Academic & Experience Micro Cards -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-            <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
-              <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="2">00</div>
-              <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Years Coding</div>
-            </div>
-            <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
-              <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5"><span class="counter-value" data-target="5">00</span><span>+</span></div>
-              <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Shipped Works</div>
-            </div>
-            <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
-              <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="6">00</div>
-              <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Hackathons</div>
-            </div>
-            <div class="p-4 rounded-lg bg-bgSecondary border border-border text-center">
-              <div class="text-2xl sm:text-3xl font-serif font-bold text-accentGold mb-0.5 counter-value" data-target="1">00</div>
-              <div class="text-[10px] text-textMuted uppercase tracking-wider font-mono">Internship</div>
+          <!-- Right Editorial Code Specimen -->
+          <div class="lg:col-span-5 stagger-child">
+            <div class="premium-card border-borderGold">
+              <div class="flex items-center justify-between pb-4 mb-4 border-b border-border">
+                <span class="text-[11px] font-mono text-accentGold uppercase tracking-widest font-semibold">ARCHITECTURAL MANIFEST</span>
+                <span class="w-2 h-2 rounded-full bg-accentGold"></span>
+              </div>
+              <div class="font-mono text-xs leading-relaxed space-y-2 text-textSecondary">
+                <p><span class="text-accentGold font-bold">name:</span> "Tejas Sharad Kute"</p>
+                <p><span class="text-accentGold font-bold">role:</span> "AI/ML Enthusiast &amp; Full-Stack Dev"</p>
+                <p><span class="text-accentGold font-bold">degree:</span> "B.Tech in Artificial Intelligence"</p>
+                <p><span class="text-accentGold font-bold">institution:</span> "Atharva University Mumbai"</p>
+                <p><span class="text-accentGold font-bold">internship:</span> "Aerus Infotech Solutions"</p>
+                <p><span class="text-accentGold font-bold">focusAreas:</span> ["Deep Learning", "PostGIS", "System Design"]</p>
+                <p><span class="text-accentGold font-bold">status:</span> "Available for Internships"</p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-border flex items-center justify-between text-[11px] font-sans text-textMuted">
+                <span>Verified System Record</span>
+                <span class="text-accentGold font-mono">Mumbai, IN</span>
+              </div>
             </div>
           </div>
+
         </div>
-
-        <!-- Right Editorial Code Specimen -->
-        <div class="lg:col-span-5 stagger-child">
-          <div class="premium-card p-6 border-borderGold">
-            <div class="flex items-center justify-between pb-4 mb-4 border-b border-border">
-              <span class="text-xs font-mono text-accentGold uppercase tracking-widest font-semibold">ARCHITECTURAL MANIFEST</span>
-              <span class="w-2 h-2 rounded-full bg-accentGold"></span>
-            </div>
-            <div class="font-mono text-xs leading-relaxed space-y-2 text-textSecondary">
-              <p><span class="text-accentGold font-bold">name:</span> "Tejas Sharad Kute"</p>
-              <p><span class="text-accentGold font-bold">role:</span> "AI/ML Enthusiast &amp; Full-Stack Dev"</p>
-              <p><span class="text-accentGold font-bold">degree:</span> "B.Tech in Artificial Intelligence"</p>
-              <p><span class="text-accentGold font-bold">institution:</span> "Atharva University Mumbai"</p>
-              <p><span class="text-accentGold font-bold">internship:</span> "Aerus Infotech Solutions"</p>
-              <p><span class="text-accentGold font-bold">focusAreas:</span> ["Deep Learning", "PostGIS", "System Design"]</p>
-              <p><span class="text-accentGold font-bold">status:</span> "Available for Internships"</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-border flex items-center justify-between text-[11px] font-sans text-textMuted">
-              <span>Verified System Record</span>
-              <span class="text-accentGold font-mono">Mumbai, IN</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
     <!-- 4. PROJECTS SECTION -->
-    <section id="projects" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs font-mono uppercase tracking-widest text-accentGold">02 / Portfolio</span>
-            <div class="h-[1px] w-12 bg-accentGold/40"></div>
-          </div>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary">Production &amp; Research Works</h2>
+    <section id="projects" class="reveal">
+      <div class="layout-container-carousel">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">02 / Portfolio</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Production &amp; Research Works</h2>
+          <p class="section-intro-text">
+            End-to-end full stack applications, intelligence platforms, and high-performance services.
+          </p>
         </div>
-        <p class="text-textSecondary text-sm max-w-md font-sans">
-          End-to-end full stack applications, intelligence platforms, and high-performance services.
-        </p>
-      </div>
 
-      <!-- Rendered dynamically by js/render.js from js/data/projects.js -->
-      <div id="projects-carousel-mount"></div>
+        <!-- Rendered dynamically by js/render.js from js/data/projects.js -->
+        <div id="projects-carousel-mount"></div>
+      </div>
     </section>
 
     <!-- 5. EXPERIENCE SECTION -->
-    <section id="experience" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">03 / Experience</span>
-        <div class="h-[1px] w-12 bg-accentGold/40"></div>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Professional Experience</h2>
-
-      <div class="premium-card p-8 md:p-10 stagger-child max-w-4xl">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-border">
-          <div>
-            <h3 class="text-2xl font-serif font-bold text-textPrimary">Web Development Intern</h3>
-            <p class="text-accentGold font-medium text-sm mt-0.5">Aerus Infotech Solutions Pvt. Ltd.</p>
-          </div>
-          <div class="text-left md:text-right">
-            <span class="text-xs font-mono px-3 py-1 rounded-full border border-accentGold/30 text-accentGold bg-bgTertiary">Nov 2025 – Present</span>
-            <p class="text-xs text-textMuted mt-1 font-mono">Navi Mumbai, India</p>
-          </div>
+    <section id="experience" class="reveal">
+      <div class="layout-container">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">03 / Experience</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Professional Experience</h2>
         </div>
-        
-        <ul class="space-y-4 mb-8 text-sm text-textSecondary list-none pl-0 leading-relaxed font-sans">
-          <li class="flex items-start gap-3">
-            <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
-            <span>Led development of the Housing Society Maintenance Management System (HSMMS) covering 8 core modules — resident management, billing engine, complaint workflows, and security gate access.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
-            <span>Architected Role-Based Access Control (RBAC) security for 4 distinct personas (Admin, Resident, Staff, Security Guard) using Node.js, Express, and React.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
-            <span>Designed and integrated RESTful APIs linking MySQL relational persistence to React and vanilla JavaScript frontends, maintaining strict transactional consistency.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
-            <span>Compiled comprehensive engineering documentation — PRD, TRD, and architecture specifications — for cross-team development alignment.</span>
-          </li>
-        </ul>
 
-        <div class="flex flex-wrap gap-2 pt-4 border-t border-border">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express.js</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">REST APIs</span>
-          <span class="tech-tag">RBAC Security</span>
-          <span class="tech-tag">System Specs</span>
+        <div class="premium-card stagger-child max-w-4xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-border">
+            <div>
+              <h3 class="text-2xl font-bold text-textPrimary">Web Development Intern</h3>
+              <p class="text-accentGold font-medium text-sm mt-0.5">Aerus Infotech Solutions Pvt. Ltd.</p>
+            </div>
+            <div class="text-left md:text-right">
+              <span class="text-xs font-mono px-3 py-1 rounded-full border border-accentGold/30 text-accentGold bg-bgTertiary">Nov 2025 – Present</span>
+              <p class="text-xs text-textMuted mt-1 font-mono">Navi Mumbai, India</p>
+            </div>
+          </div>
+          
+          <ul class="space-y-4 mb-8 text-sm text-textSecondary list-none pl-0 leading-relaxed font-sans">
+            <li class="flex items-start gap-3">
+              <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+              <span>Led development of the Housing Society Maintenance Management System (HSMMS) covering 8 core modules: resident management, billing engine, complaint workflows, and security gate access.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+              <span>Architected Role-Based Access Control (RBAC) security for 4 distinct personas (Admin, Resident, Staff, Security Guard) using Node.js, Express, and React.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+              <span>Designed and integrated RESTful APIs linking MySQL relational persistence to React and vanilla JavaScript frontends, maintaining strict transactional consistency.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-accentGold mt-1 font-serif text-lg leading-none">✦</span>
+              <span>Compiled comprehensive engineering documentation — PRD, TRD, and architecture specifications — for cross-team development alignment.</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-border">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">RBAC Security</span>
+            <span class="tech-tag">System Specs</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- 6. HACKATHONS & ACHIEVEMENTS SECTION -->
-    <section id="hackathons" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs font-mono uppercase tracking-widest text-accentGold">04 / Honors</span>
-            <div class="h-[1px] w-12 bg-accentGold/40"></div>
-          </div>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary">Hackathon &amp; Workshop Credentials</h2>
-          <p class="text-textSecondary text-sm mt-2 font-sans">Click on any card to view the official verified certificate photograph.</p>
+    <section id="hackathons" class="reveal">
+      <div class="layout-container-carousel">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">04 / Honors</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Hackathon &amp; Workshop Credentials</h2>
+          <p class="section-intro-text">
+            Click on any card to view the official verified certificate photograph.
+          </p>
         </div>
-        <span class="text-xs font-mono px-3.5 py-1.5 rounded-full border border-accentGold/30 text-accentGold bg-bgSecondary self-start md:self-auto">
-          🏆 6 Verified Badges
-        </span>
-      </div>
 
-      <!-- Rendered dynamically by js/render.js from js/data/hackathons.js -->
-      <div id="hackathons-carousel-mount"></div>
+        <!-- Rendered dynamically by js/render.js from js/data/hackathons.js -->
+        <div id="hackathons-carousel-mount"></div>
+      </div>
     </section>
 
     <!-- 7. EDUCATION SECTION -->
-    <section id="education" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">05 / Academics</span>
-        <div class="h-[1px] w-12 bg-accentGold/40"></div>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Academic Journey</h2>
+    <section id="education" class="reveal">
+      <div class="layout-container">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">05 / Academics</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Academic Journey</h2>
+        </div>
 
-      <div class="timeline-container ml-6 pl-8 space-y-12 relative max-w-3xl">
-        
-        <!-- B.Tech Card -->
-        <div class="timeline-item relative stagger-child">
-          <span class="text-xs font-mono px-3 py-1 rounded-full border border-accentGold/40 text-accentGold bg-bgSecondary">2025 – 2029 (2nd Year)</span>
-          <h3 class="text-2xl font-serif font-bold mt-3 text-textPrimary">B.Tech — Artificial Intelligence &amp; Machine Learning</h3>
-          <p class="text-sm text-accentGold font-medium mt-1 font-sans">Atharva College of Engineering, Atharva University Mumbai</p>
-          <p class="text-textSecondary text-sm mt-2 leading-relaxed font-sans">
-            Rigorous curriculum across deep learning architectures, computational logic, linear algebra, discrete mathematics, and software design.
-          </p>
-          <div class="flex flex-wrap gap-2 mt-4">
-            <span class="tech-tag">Deep Learning</span>
-            <span class="tech-tag">Data Structures &amp; Algorithms</span>
-            <span class="tech-tag">Python &amp; ML Toolchains</span>
-            <span class="tech-tag">System Architectures</span>
+        <div class="timeline-container ml-6 pl-8 space-y-12 relative max-w-3xl mx-auto">
+          
+          <!-- B.Tech Card -->
+          <div class="timeline-item relative stagger-child">
+            <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-accentGold/40 text-accentGold bg-bgSecondary">2025 – 2029 (2nd Year)</span>
+            <h3 class="text-2xl font-bold mt-3 text-textPrimary">B.Tech — Artificial Intelligence &amp; Machine Learning</h3>
+            <p class="text-sm text-accentGold font-medium mt-1 font-sans">Atharva College of Engineering, Atharva University Mumbai</p>
+            <p class="text-textSecondary text-sm mt-2 leading-relaxed font-sans">
+              Rigorous curriculum across deep learning architectures, computational logic, linear algebra, discrete mathematics, and software design.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="tech-tag">Deep Learning</span>
+              <span class="tech-tag">Data Structures &amp; Algorithms</span>
+              <span class="tech-tag">Python &amp; ML Toolchains</span>
+              <span class="tech-tag">System Architectures</span>
+            </div>
           </div>
-        </div>
 
-        <!-- HSC Card -->
-        <div class="timeline-item relative stagger-child">
-          <span class="text-xs font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2025</span>
-          <h3 class="text-xl font-serif font-bold mt-3 text-textPrimary">HSC (12th Grade) — Science Stream</h3>
-          <p class="text-sm text-textSecondary font-medium mt-1">Swarajya Senior College</p>
-          <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">81%</span></p>
-        </div>
+          <!-- HSC Card -->
+          <div class="timeline-item relative stagger-child">
+            <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2025</span>
+            <h3 class="text-xl font-bold mt-3 text-textPrimary">HSC (12th Grade) — Science Stream</h3>
+            <p class="text-sm text-textSecondary font-medium mt-1">Swarajya Senior College</p>
+            <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">81%</span></p>
+          </div>
 
-        <!-- SSC Card -->
-        <div class="timeline-item relative stagger-child">
-          <span class="text-xs font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2023</span>
-          <h3 class="text-xl font-serif font-bold mt-3 text-textPrimary">SSC (10th Grade)</h3>
-          <p class="text-sm text-textSecondary font-medium mt-1">St. Arnold High School</p>
-          <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">86%</span></p>
-        </div>
+          <!-- SSC Card -->
+          <div class="timeline-item relative stagger-child">
+            <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-border text-textMuted bg-bgSecondary">Year: 2023</span>
+            <h3 class="text-xl font-bold mt-3 text-textPrimary">SSC (10th Grade)</h3>
+            <p class="text-sm text-textSecondary font-medium mt-1">St. Arnold High School</p>
+            <p class="text-textSecondary text-sm mt-2 font-mono">Academic Score: <span class="text-accentGold font-bold">86%</span></p>
+          </div>
 
+        </div>
       </div>
     </section>
 
     <!-- 8. CERTIFICATIONS SECTION -->
-    <section id="certifications" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">06 / Credentials</span>
-        <div class="h-[1px] w-12 bg-accentGold/40"></div>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Coursera Academic Credentials</h2>
+    <section id="certifications" class="reveal">
+      <div class="layout-container-carousel">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">06 / Credentials</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Coursera Academic Credentials</h2>
+        </div>
 
-      <!-- Rendered dynamically by js/render.js from js/data/certifications.js -->
-      <div id="certifications-carousel-mount"></div>
+        <!-- Rendered dynamically by js/render.js from js/data/certifications.js -->
+        <div id="certifications-carousel-mount"></div>
+      </div>
     </section>
 
     <!-- 9. SKILLS SECTION -->
-    <section id="skills" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">07 / Capabilities</span>
-        <div class="h-[1px] w-12 bg-accentGold/40"></div>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Technical Competencies</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Category 1: Languages -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>Core Languages</span>
-            <i data-lucide="code-2" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <ul class="space-y-4 font-mono text-xs">
-            <li class="flex items-center justify-between pb-2 border-b border-border/50">
-              <span class="text-textSecondary">Python</span>
-              <span class="text-accentGold font-bold">Proficient</span>
-            </li>
-            <li class="flex items-center justify-between pb-2 border-b border-border/50">
-              <span class="text-textSecondary">JavaScript / TypeScript</span>
-              <span class="text-accentGold font-bold">Proficient</span>
-            </li>
-            <li class="flex items-center justify-between pb-2 border-b border-border/50">
-              <span class="text-textSecondary">C / C++</span>
-              <span class="text-accentGold font-bold">Intermediate</span>
-            </li>
-            <li class="flex items-center justify-between pb-2 border-b border-border/50">
-              <span class="text-textSecondary">SQL (MySQL, PostGIS)</span>
-              <span class="text-accentGold font-bold">Intermediate</span>
-            </li>
-            <li class="flex items-center justify-between">
-              <span class="text-textSecondary">HTML5 / Modern CSS</span>
-              <span class="text-accentGold font-bold">Advanced</span>
-            </li>
-          </ul>
+    <section id="skills" class="reveal">
+      <div class="layout-container">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">07 / Capabilities</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Technical Competencies</h2>
         </div>
 
-        <!-- Category 2: Frontend Engineering -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>Frontend Architecture</span>
-            <i data-lucide="layout" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="tech-tag">React 18</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Vite</span>
-            <span class="tech-tag">Tailwind CSS</span>
-            <span class="tech-tag">Framer Motion</span>
-            <span class="tech-tag">Leaflet.js</span>
-            <span class="tech-tag">Chart.js</span>
-            <span class="tech-tag">Lenis Scroll</span>
-          </div>
-        </div>
-
-        <!-- Category 3: Backend & Services -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>Backend &amp; Services</span>
-            <i data-lucide="server" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">Express.js</span>
-            <span class="tech-tag">REST APIs</span>
-            <span class="tech-tag">WebSockets</span>
-            <span class="tech-tag">JWT Security</span>
-            <span class="tech-tag">RBAC</span>
-          </div>
-        </div>
-
-        <!-- Category 4: Databases -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>Persistence &amp; Storage</span>
-            <i data-lucide="database" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">PostGIS (Geospatial)</span>
-            <span class="tech-tag">MySQL</span>
-            <span class="tech-tag">MongoDB &amp; Atlas</span>
-            <span class="tech-tag">Prisma ORM</span>
-            <span class="tech-tag">Supabase</span>
-          </div>
-        </div>
-
-        <!-- Category 5: AI & Machine Learning -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>AI / ML &amp; Mathematics</span>
-            <i data-lucide="brain" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="tech-tag">TensorFlow</span>
-            <span class="tech-tag">PyTorch</span>
-            <span class="tech-tag">Scikit-Learn</span>
-            <span class="tech-tag">Gemini Vision AI</span>
-            <span class="tech-tag">NumPy</span>
-            <span class="tech-tag">Pandas</span>
-            <span class="tech-tag">DSA Algorithms</span>
-          </div>
-        </div>
-
-        <!-- Category 6: Toolchains -->
-        <div class="premium-card p-7 stagger-child">
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-6 flex items-center justify-between">
-            <span>Toolchain &amp; Workflow</span>
-            <i data-lucide="terminal" class="w-5 h-5 text-accentGold"></i>
-          </h3>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="tech-tag">Git &amp; GitHub</span>
-            <span class="tech-tag">Postman</span>
-            <span class="tech-tag">Linux</span>
-            <span class="tech-tag">VS Code</span>
-            <span class="tech-tag">Cloudinary</span>
-            <span class="tech-tag">Zod</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 10. RESEARCH & FUTURE VISION -->
-    <section id="future-vision" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-accentGold">08 / Research &amp; Trajectory</span>
-        <div class="h-[1px] w-12 bg-accentGold/40"></div>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-textPrimary mb-12">Research &amp; Strategic Trajectory</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- Card 1: Open Source Depth -->
-        <div class="vision-card p-8 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Trajectory</span>
-              <i data-lucide="git-branch" class="w-4 h-4 text-accentGold"></i>
-            </div>
-            <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">Open Source Ecosystems</h4>
-            <p class="text-textSecondary text-sm leading-relaxed font-sans">
-              Expanding core system competencies toward large-scale open-source architectures, deep framework contributions, and community-driven tools.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 2: Hackathon Prototypes (Links to Hackathons) -->
-        <a href="#hackathons" class="vision-card p-8 flex flex-col justify-between group">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-3 py-1 rounded border border-accentGold/40 text-accentGold uppercase">SIH &amp; Hackathons</span>
-              <span class="text-xs font-mono text-accentGold flex items-center gap-1">
-                <i data-lucide="award" class="w-3.5 h-3.5"></i> 6 Badges
-              </span>
-            </div>
-            <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3 group-hover:text-accentGold transition flex items-center justify-between">
-              <span>Competitive Prototypes</span>
-              <i data-lucide="arrow-right" class="w-5 h-5 text-accentGold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
-            </h4>
-            <p class="text-textSecondary text-sm leading-relaxed font-sans mb-4">
-              Rapid prototyping under high-pressure competitive sprints, targeting Smart India Hackathon and all-India tech challenges.
-            </p>
-          </div>
-          <div class="border-t border-border pt-4 flex items-center justify-between text-xs font-medium text-accentGold">
-            <span>Browse All Verified Badges</span>
-            <span>&rarr;</span>
-          </div>
-        </a>
-
-        <!-- Card 3: AI & Cybersecurity Research -->
-        <div class="vision-card p-8 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Research Inquiries</span>
-              <i data-lucide="lock" class="w-4 h-4 text-accentGold"></i>
-            </div>
-            <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">AI &amp; Defensive Cybersecurity</h4>
-            <p class="text-textSecondary text-sm leading-relaxed font-sans">
-              Investigating intersections between generative neural models and proactive anomaly detection for cyber-defense applications toward a first academic publication.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 4: Algorithms & CP -->
-        <div class="vision-card p-8 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Analytical Rigor</span>
-              <i data-lucide="cpu" class="w-4 h-4 text-accentGold"></i>
-            </div>
-            <h4 class="text-2xl font-serif font-bold text-textPrimary mb-3">Data Structures &amp; Complexity</h4>
-            <p class="text-textSecondary text-sm leading-relaxed font-sans">
-              Cultivating daily problem-solving depth on LeetCode and competitive programming platforms, focusing on tree/graph traversals and dynamic programming.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 11. CONTACT SECTION -->
-    <section id="contact" class="py-24 max-w-[1360px] mx-auto px-6 reveal">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <div class="flex items-center justify-center gap-3 mb-3">
-          <span class="text-xs font-mono uppercase tracking-widest text-accentGold">09 / Connect</span>
-          <div class="h-[1px] w-12 bg-accentGold/40"></div>
-        </div>
-        <h2 class="text-4xl sm:text-5xl font-serif font-bold mb-4 text-textPrimary">Let's Build Something Enduring.</h2>
-        <p class="text-textSecondary font-sans">
-          Open to AI/ML engineering roles, internships, full-stack collaborations, and technical discussions.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        <!-- Contact Cards -->
-        <div class="lg:col-span-5 space-y-5 stagger-child">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <!-- Email Copy Card -->
-          <a href="mailto:tejaskute284@gmail.com" class="premium-card p-6 flex items-center gap-4 cursor-pointer copy-trigger relative block" data-copy="tejaskute284@gmail.com">
-            <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
-              <i data-lucide="mail" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Email Address</p>
-              <p class="font-medium text-textPrimary text-sm break-all font-sans">tejaskute284@gmail.com</p>
-            </div>
-            <!-- Tooltip -->
-            <span class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#1A1A1C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
-              Click to Copy
-            </span>
-          </a>
+          <!-- Category 1: Languages -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>Core Languages</span>
+              <i data-lucide="code-2" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <ul class="space-y-4 font-mono text-xs">
+              <li class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="text-textSecondary">Python</span>
+                <span class="text-accentGold font-bold">Proficient</span>
+              </li>
+              <li class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="text-textSecondary">JavaScript / TypeScript</span>
+                <span class="text-accentGold font-bold">Proficient</span>
+              </li>
+              <li class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="text-textSecondary">C / C++</span>
+                <span class="text-accentGold font-bold">Intermediate</span>
+              </li>
+              <li class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="text-textSecondary">SQL (MySQL, PostGIS)</span>
+                <span class="text-accentGold font-bold">Intermediate</span>
+              </li>
+              <li class="flex items-center justify-between">
+                <span class="text-textSecondary">HTML5 / Modern CSS</span>
+                <span class="text-accentGold font-bold">Advanced</span>
+              </li>
+            </ul>
+          </div>
 
-          <!-- Phone Card -->
-          <a href="tel:+918976550171" class="premium-card p-6 flex items-center gap-4 relative block">
-            <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
-              <i data-lucide="phone" class="w-5 h-5"></i>
+          <!-- Category 2: Frontend Engineering -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>Frontend Architecture</span>
+              <i data-lucide="layout" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="tech-tag">React 18</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Vite</span>
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Framer Motion</span>
+              <span class="tech-tag">Leaflet.js</span>
+              <span class="tech-tag">Chart.js</span>
+              <span class="tech-tag">Lenis Scroll</span>
             </div>
-            <div>
-              <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Direct Line / WhatsApp</p>
-              <p class="font-medium text-textPrimary text-sm font-sans">+91 8976550171</p>
-            </div>
-          </a>
+          </div>
 
-          <!-- LinkedIn Card -->
-          <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="premium-card p-6 flex items-center gap-4 relative block">
-            <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <!-- Category 3: Backend & Services -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>Backend &amp; Services</span>
+              <i data-lucide="server" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express.js</span>
+              <span class="tech-tag">REST APIs</span>
+              <span class="tech-tag">WebSockets</span>
+              <span class="tech-tag">JWT Security</span>
+              <span class="tech-tag">RBAC</span>
             </div>
-            <div>
-              <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">LinkedIn Network</p>
-              <p class="font-medium text-textPrimary text-sm font-sans">tejas-kute-512aa2363</p>
-            </div>
-          </a>
+          </div>
 
-          <!-- GitHub Card -->
-          <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="premium-card p-6 flex items-center gap-4 relative block">
-            <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <!-- Category 4: Databases -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>Persistence &amp; Storage</span>
+              <i data-lucide="database" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">PostGIS (Geospatial)</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">MongoDB &amp; Atlas</span>
+              <span class="tech-tag">Prisma ORM</span>
+              <span class="tech-tag">Supabase</span>
             </div>
-            <div>
-              <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">GitHub Repositories</p>
-              <p class="font-medium text-textPrimary text-sm font-sans">tejaskute284-dotcom</p>
+          </div>
+
+          <!-- Category 5: AI & Machine Learning -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>AI / ML &amp; Mathematics</span>
+              <i data-lucide="brain" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Scikit-Learn</span>
+              <span class="tech-tag">Gemini Vision AI</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">DSA Algorithms</span>
             </div>
-          </a>
+          </div>
+
+          <!-- Category 6: Toolchains -->
+          <div class="premium-card stagger-child">
+            <h3 class="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
+              <span>Toolchain &amp; Workflow</span>
+              <i data-lucide="terminal" class="w-5 h-5 text-accentGold"></i>
+            </h3>
+            <div class="flex flex-wrap gap-2.5">
+              <span class="tech-tag">Git &amp; GitHub</span>
+              <span class="tech-tag">Postman</span>
+              <span class="tech-tag">Linux</span>
+              <span class="tech-tag">VS Code</span>
+              <span class="tech-tag">Cloudinary</span>
+              <span class="tech-tag">Zod</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. GITHUB STATS SECTION -->
+    <section id="github-stats" class="reveal">
+      <div class="layout-container">
+
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="text-[11px] font-mono text-accentGold uppercase tracking-widest mb-2 block">
+            08 / Open Source Activity
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">
+            GitHub <span class="gold-gradient-text">Contributions</span>
+          </h2>
+          <p class="section-intro-text">
+            A year's worth of code — commits, projects, and consistent daily practice documented in the public record.
+          </p>
+        </div>
+
+        <!-- Stats Strip -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+
+          <div class="premium-card text-center editorial-frame">
+            <p class="text-[11px] font-mono text-accentGold uppercase tracking-widest mb-2">
+              Total Commits
+            </p>
+            <p class="font-display text-4xl font-bold text-textPrimary counter-value"
+               data-target="335">335</p>
+            <p class="text-xs text-textMuted font-mono mt-1">last 12 months</p>
+          </div>
+
+          <div class="premium-card text-center editorial-frame">
+            <p class="text-[11px] font-mono text-accentGold uppercase tracking-widest mb-2">
+              Portfolio Projects
+            </p>
+            <p class="font-display text-4xl font-bold text-textPrimary counter-value"
+               data-target="5">5</p>
+            <p class="text-xs text-textMuted font-mono mt-1">production builds</p>
+          </div>
+
+          <div class="premium-card text-center editorial-frame">
+            <p class="text-[11px] font-mono text-accentGold uppercase tracking-widest mb-2">
+              Public Repos
+            </p>
+            <p class="font-display text-4xl font-bold text-textPrimary counter-value"
+               data-target="12">12</p>
+            <p class="text-xs text-textMuted font-mono mt-1">on GitHub</p>
+          </div>
+
+          <div class="premium-card text-center editorial-frame">
+            <p class="text-[11px] font-mono text-accentGold uppercase tracking-widest mb-2">
+              Longest Streak
+            </p>
+            <p class="font-display text-4xl font-bold text-textPrimary counter-value"
+               data-target="31">31</p>
+            <p class="text-xs text-textMuted font-mono mt-1">consecutive days</p>
+          </div>
 
         </div>
 
-        <!-- Contact Form -->
-        <div class="lg:col-span-7 stagger-child">
-          <form id="contact-form" class="space-y-6 premium-card p-8 md:p-10">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label for="name-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Name</label>
-                <input type="text" id="name-input" name="name" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Your Name">
-              </div>
-              <div>
-                <label for="email-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Email Address</label>
-                <input type="email" id="email-input" name="email" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="your@email.com">
-              </div>
-            </div>
+        <!-- Contribution Graph Embed -->
+        <div class="premium-card overflow-hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
-              <label for="subject-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Subject</label>
-              <input type="text" id="subject-input" name="subject" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Internship Opportunity / Project Collaboration">
+              <span class="text-[11px] font-mono text-accentGold uppercase tracking-widest block mb-1">
+                Contribution Activity
+              </span>
+              <h3 class="text-xl font-bold text-textPrimary">
+                335 contributions in the last year
+              </h3>
             </div>
-            <div>
-              <label for="message-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Your Message</label>
-              <textarea id="message-input" name="message" rows="5" required class="form-input w-full px-4 py-3 text-sm transition resize-none font-sans" placeholder="Write your message here..."></textarea>
-            </div>
-            
-            <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
-              <button type="submit" class="btn-luxury-primary text-sm font-sans">
-                <span>Send Message</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-              </button>
-              <span id="form-status" class="hidden text-xs font-mono"></span>
-            </div>
-          </form>
+            <a href="https://github.com/tejaskute284-dotcom"
+               target="_blank" rel="noopener noreferrer"
+               class="btn-luxury-secondary text-xs px-4 py-2 flex items-center gap-2 self-start sm:self-auto font-mono">
+              <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
+              View GitHub Profile
+            </a>
+          </div>
+
+          <!-- Live contribution graph via ghchart.rshah.org -->
+          <div class="overflow-x-auto rounded-lg bg-bgTertiary p-4 border border-border">
+            <img
+              src="https://ghchart.rshah.org/D4AF37/tejaskute284"
+              alt="Tejas Kute GitHub Contribution Graph"
+              class="w-full min-w-[640px] block"
+              loading="lazy"
+              id="github-contrib-graph"
+            />
+          </div>
+
+          <p class="text-[11px] font-mono text-textMuted mt-4 text-right">
+            Data sourced from
+            <a href="https://github.com/tejaskute284-dotcom" target="_blank"
+               class="text-accentGold hover:underline">github.com/tejaskute284-dotcom</a>
+            · Updates daily
+          </p>
         </div>
 
       </div>
     </section>
 
-    <!-- 12. FOOTER -->
+    <!-- 11. RESEARCH & FUTURE VISION -->
+    <section id="future-vision" class="reveal">
+      <div class="layout-container">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">09 / Research &amp; Trajectory</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl mb-3">Research &amp; Strategic Trajectory</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Card 1: Open Source Depth -->
+          <div class="vision-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[11px] font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Trajectory</span>
+                <i data-lucide="git-branch" class="w-4 h-4 text-accentGold"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-textPrimary mb-3">Open Source Ecosystems</h4>
+              <p class="text-textSecondary text-sm leading-relaxed font-sans">
+                Expanding core system competencies toward large-scale open-source architectures, deep framework contributions, and community-driven tools.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Hackathon Prototypes (Links to Hackathons) -->
+          <a href="#hackathons" class="vision-card flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[11px] font-mono px-3 py-1 rounded border border-accentGold/40 text-accentGold uppercase">SIH &amp; Hackathons</span>
+                <span class="text-[11px] font-mono text-accentGold flex items-center gap-1">
+                  <i data-lucide="award" class="w-3.5 h-3.5"></i> 6 Badges
+                </span>
+              </div>
+              <h4 class="text-2xl font-bold text-textPrimary mb-3 group-hover:text-accentGold transition flex items-center justify-between">
+                <span>Competitive Prototypes</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 text-accentGold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+              </h4>
+              <p class="text-textSecondary text-sm leading-relaxed font-sans mb-4">
+                Rapid prototyping under high-pressure competitive sprints, targeting Smart India Hackathon and all-India tech challenges.
+              </p>
+            </div>
+            <div class="border-t border-border pt-4 flex items-center justify-between text-xs font-medium text-accentGold">
+              <span>Browse All Verified Badges</span>
+              <span>&rarr;</span>
+            </div>
+          </a>
+
+          <!-- Card 3: AI & Cybersecurity Research -->
+          <div class="vision-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[11px] font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Research Inquiries</span>
+                <i data-lucide="lock" class="w-4 h-4 text-accentGold"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-textPrimary mb-3">AI &amp; Defensive Cybersecurity</h4>
+              <p class="text-textSecondary text-sm leading-relaxed font-sans">
+                Investigating intersections between generative neural models and proactive anomaly detection for cyber-defense applications toward a first academic publication.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4: Algorithms & CP -->
+          <div class="vision-card flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[11px] font-mono px-3 py-1 rounded border border-border text-textMuted uppercase">Analytical Rigor</span>
+                <i data-lucide="cpu" class="w-4 h-4 text-accentGold"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-textPrimary mb-3">Data Structures &amp; Complexity</h4>
+              <p class="text-textSecondary text-sm leading-relaxed font-sans">
+                Cultivating daily problem-solving depth on LeetCode and competitive programming platforms, focusing on tree/graph traversals and dynamic programming.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. CONTACT SECTION -->
+    <section id="contact" class="reveal">
+      <div class="layout-container">
+        <div class="section-header">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-accentGold mb-2 block">10 / Connect</span>
+          <h2 class="text-4xl sm:text-5xl mb-3">Let's Build Something Enduring.</h2>
+          <p class="section-intro-text">
+            Open to AI/ML engineering roles, internships, full-stack collaborations, and technical discussions.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Contact Cards -->
+          <div class="lg:col-span-5 space-y-5 stagger-child">
+            
+            <!-- Email Copy Card -->
+            <a href="mailto:tejaskute284@gmail.com" class="premium-card flex items-center gap-4 cursor-pointer copy-trigger relative block" data-copy="tejaskute284@gmail.com">
+              <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Email Address</p>
+                <p class="font-medium text-textPrimary text-sm break-all font-sans">tejaskute284@gmail.com</p>
+              </div>
+              <!-- Tooltip -->
+              <span class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#1A1A1C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
+                Click to Copy
+              </span>
+            </a>
+
+            <!-- Phone Card -->
+            <a href="tel:+918976550171" class="premium-card flex items-center gap-4 relative block">
+              <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">Direct Line / WhatsApp</p>
+                <p class="font-medium text-textPrimary text-sm font-sans">+91 8976550171</p>
+              </div>
+            </a>
+
+            <!-- LinkedIn Card -->
+            <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="premium-card flex items-center gap-4 relative block">
+              <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </div>
+              <div>
+                <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">LinkedIn Network</p>
+                <p class="font-medium text-textPrimary text-sm font-sans">tejas-kute-512aa2363</p>
+              </div>
+            </a>
+
+            <!-- GitHub Card -->
+            <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="premium-card flex items-center gap-4 relative block">
+              <div class="p-3.5 rounded-lg bg-bgTertiary text-accentGold border border-border">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </div>
+              <div>
+                <p class="text-[11px] text-textMuted font-mono uppercase tracking-wider">GitHub Repositories</p>
+                <p class="font-medium text-textPrimary text-sm font-sans">tejaskute284-dotcom</p>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Contact Form -->
+          <div class="lg:col-span-7 stagger-child">
+            <form id="contact-form" class="space-y-6 premium-card">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label for="name-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Name</label>
+                  <input type="text" id="name-input" name="name" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Your Name">
+                </div>
+                <div>
+                  <label for="email-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Email Address</label>
+                  <input type="email" id="email-input" name="email" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="your@email.com">
+                </div>
+              </div>
+              <div>
+                <label for="subject-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Subject</label>
+                <input type="text" id="subject-input" name="subject" required class="form-input w-full px-4 py-3 text-sm transition font-sans" placeholder="Internship Opportunity / Project Collaboration">
+              </div>
+              <div>
+                <label for="message-input" class="block text-[11px] font-mono text-textMuted uppercase tracking-wider mb-2">Your Message</label>
+                <textarea id="message-input" name="message" rows="5" required class="form-input w-full px-4 py-3 text-sm transition resize-none font-sans" placeholder="Write your message here..."></textarea>
+              </div>
+              
+              <div class="flex items-center justify-between flex-wrap gap-4 pt-2">
+                <button type="submit" class="btn-luxury-primary text-sm font-sans">
+                  <span>Send Message</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <span id="form-status" class="hidden text-xs font-mono"></span>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. FOOTER -->
     <footer class="border-t border-border py-12 bg-bgSecondary">
-      <div class="max-w-[1360px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="layout-container flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <span class="w-6 h-6 rounded-full border border-accentGold/60 flex items-center justify-center text-[10px] font-serif font-bold text-accentGold">TK</span>
+          <span class="w-6 h-6 rounded-full border border-accentGold/60 flex items-center justify-center text-[10px] font-display font-bold text-accentGold">TK</span>
           <p class="text-xs text-textSecondary font-sans">
             Designed &amp; developed by <span class="text-textPrimary font-semibold">Tejas Sharad Kute</span> · &copy; 2026
           </p>

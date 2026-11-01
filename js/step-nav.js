@@ -68,6 +68,7 @@ export function initStepNavigation() {
     { id: 'education', label: 'Education' },
     { id: 'certifications', label: 'Credentials' },
     { id: 'skills', label: 'Skills' },
+    { id: 'github-stats', label: 'GitHub' },
     { id: 'future-vision', label: 'Research' },
     { id: 'contact', label: 'Contact' }
   ];

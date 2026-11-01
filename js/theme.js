@@ -5,9 +5,10 @@ export function initTheme() {
   if (!themeToggleBtn) return;
 
   // Default to ivory editorial light theme for classic luxury, while respecting existing preference
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  const currentTheme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', currentTheme);
   updateToggleIcon(currentTheme);
+  updateGraphColor(currentTheme);
 
   themeToggleBtn.addEventListener('click', () => {
     const activeTheme = document.documentElement.getAttribute('data-theme');
@@ -16,6 +17,7 @@ export function initTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateToggleIcon(newTheme);
+    updateGraphColor(newTheme);
   });
 }
 
@@ -31,5 +33,14 @@ function updateToggleIcon(theme) {
   } else {
     moonIcon.classList.add('hidden');
     sunIcon.classList.remove('hidden');
+  }
+}
+
+function updateGraphColor(theme) {
+  const graph = document.getElementById('github-contrib-graph');
+  if (graph) {
+    const goldLight = 'C5A880';
+    const goldDark  = 'D4AF37';
+    graph.src = `https://ghchart.rshah.org/${theme === 'dark' ? goldDark : goldLight}/tejaskute284`;
   }
 }

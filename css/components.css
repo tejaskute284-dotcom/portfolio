@@ -2,20 +2,20 @@
 
 /* Editorial Header & Glass Nav */
 .frosted-glass {
-  background: rgba(250, 248, 245, 0.88);
+  background: rgba(250, 248, 245, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
 [data-theme="dark"] .frosted-glass {
-  background: rgba(12, 12, 14, 0.88);
+  background: rgba(12, 12, 14, 0.9);
   border-bottom: 1px solid var(--border);
 }
 
 /* Luxury Monogram */
 .monogram-mark {
-  font-family: var(--font-serif);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--text-primary);
   display: inline-flex;
@@ -34,6 +34,7 @@
   border-radius: 12px;
   position: relative;
   overflow: hidden;
+  padding: var(--card-padding);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.4s ease,
               box-shadow 0.4s ease;
@@ -139,38 +140,8 @@
   object-fit: cover;
   object-position: center top;
 }
-.portrait-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2.5rem 1.5rem;
-  background: radial-gradient(circle at top, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-  height: 100%;
-  width: 100%;
-}
-.portrait-ornament-circle {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 1px solid var(--accent-gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-  position: relative;
-  background: rgba(197, 168, 128, 0.08);
-}
-.portrait-ornament-circle::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  border: 1px dashed var(--accent-gold-border);
-}
 
-/* Developer-style code card (Retained for functionality, restyled to quiet luxury) */
+/* Developer-style code card */
 .dev-code-card {
   position: relative;
   background-color: var(--bg-secondary);
@@ -186,7 +157,7 @@
 .dev-code-card-inner {
   background-color: var(--bg-secondary);
   border-radius: 11px;
-  padding: 1.75rem;
+  padding: var(--card-padding);
   height: 100%;
 }
 
@@ -220,6 +191,7 @@
 }
 .timeline-container {
   border-left: 1px solid var(--accent-gold-border);
+  padding-left: 1.75rem;
 }
 
 /* Input Fields styling */
@@ -241,12 +213,12 @@
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
   border-radius: 6px;
   transition: all 0.25s ease;
-  font-family: var(--font-sans);
-  letter-spacing: 0.02em;
 }
 .tech-tag:hover {
   border-color: var(--accent-gold);
@@ -261,6 +233,7 @@
 .btn-luxury-primary {
   background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 100%);
   color: #1A1A1C;
+  font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: 0.04em;
   padding: 0.875rem 2rem;
@@ -282,6 +255,7 @@
   background-color: transparent;
   color: var(--text-primary);
   border: 1px solid var(--border-gold);
+  font-family: var(--font-sans);
   font-weight: 500;
   letter-spacing: 0.04em;
   padding: 0.875rem 2rem;
@@ -399,6 +373,7 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 12px;
+  padding: var(--card-padding);
   box-shadow: var(--shadow-luxury);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -407,7 +382,6 @@
   border-color: var(--border-gold);
   box-shadow: var(--shadow-gold);
 }
-
 
 /* Strict Landing Gate Styles */
 @media (min-width: 1024px) {
