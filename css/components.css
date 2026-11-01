@@ -147,26 +147,6 @@
   object-position: center top;
 }
 
-/* Developer-style code card */
-.dev-code-card {
-  position: relative;
-  background-color: var(--bg-secondary);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: var(--shadow-luxury);
-}
-.dev-code-card:hover {
-  border-color: var(--border-gold);
-  box-shadow: var(--shadow-gold);
-}
-.dev-code-card-inner {
-  background-color: var(--bg-secondary);
-  border-radius: 11px;
-  padding: var(--card-padding);
-  height: 100%;
-}
-
 /* Luxury Statistics Strip */
 .stat-strip {
   background: var(--bg-secondary);
