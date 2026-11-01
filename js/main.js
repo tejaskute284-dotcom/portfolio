@@ -12,8 +12,7 @@ import { initCertificateModal }from './certificate-modal.js';
 import { initResumeModal }      from './resume-modal.js';
 import { initVerifyModal }      from './verify-modal.js';
 import { initAntiGravity }     from './antigravity.js';
-
-
+import { initStepNavigation }  from './step-nav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAll();          // inject data-driven cards before anything else
@@ -28,7 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeModal();
   initVerifyModal();
   initAntiGravity();    // physics tilt + repulsion on all .ag-card elements
-
+  initStepNavigation(); // step-by-step navigation controller
 });
-
-
