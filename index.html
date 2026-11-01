@@ -67,51 +67,51 @@
 
   <!-- 1. NAVIGATION BAR -->
   <header class="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-400">
-    <div class="max-w-[1360px] mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between gap-4">
       
       <!-- Refined Monogram / Brand -->
-      <a href="#hero" class="monogram-mark text-xl tracking-wider hover:opacity-90 transition">
+      <a href="#hero" class="monogram-mark text-xl tracking-wider hover:opacity-90 transition shrink-0">
         <span class="w-8 h-8 rounded-full border border-accentGold/60 flex items-center justify-center text-xs font-serif font-bold text-accentGold">TK</span>
         <span class="font-serif font-semibold text-lg text-textPrimary tracking-widest uppercase">Tejas Kute</span>
       </a>
 
       <!-- Desktop Editorial Navigation Links -->
-      <nav class="hidden xl:flex items-center gap-7 font-sans text-xs tracking-widest uppercase font-medium text-textSecondary">
-        <a href="#about" class="nav-link hover:text-textPrimary transition">About</a>
-        <a href="#projects" class="nav-link hover:text-textPrimary transition">Projects</a>
-        <a href="#experience" class="nav-link hover:text-textPrimary transition">Experience</a>
-        <a href="#hackathons" class="nav-link hover:text-textPrimary transition">Achievements</a>
-        <a href="#education" class="nav-link hover:text-textPrimary transition">Education</a>
-        <a href="#certifications" class="nav-link hover:text-textPrimary transition">Credentials</a>
-        <a href="#skills" class="nav-link hover:text-textPrimary transition">Skills</a>
-        <a href="#future-vision" class="nav-link hover:text-textPrimary transition">Research</a>
-        <a href="#contact" class="nav-link hover:text-textPrimary transition">Contact</a>
+      <nav class="hidden 2xl:flex items-center gap-6 font-sans text-[11px] tracking-widest uppercase font-medium text-textSecondary shrink">
+        <a href="#about" class="nav-link hover:text-textPrimary transition whitespace-nowrap">About</a>
+        <a href="#projects" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Projects</a>
+        <a href="#experience" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Experience</a>
+        <a href="#hackathons" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Achievements</a>
+        <a href="#education" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Education</a>
+        <a href="#certifications" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Credentials</a>
+        <a href="#skills" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Skills</a>
+        <a href="#future-vision" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Research</a>
+        <a href="#contact" class="nav-link hover:text-textPrimary transition whitespace-nowrap">Contact</a>
       </nav>
 
       <!-- Right Navigation Actions -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 shrink-0">
         <!-- Resume Trigger Button -->
-        <button type="button" class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md border border-accentGold text-xs font-sans tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
+        <button type="button" class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-sans tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           <span>Resume</span>
         </button>
 
         <!-- Theme Toggle -->
-        <button id="theme-toggle" class="p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="Toggle Theme">
+        <button id="theme-toggle" class="p-2 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="Toggle Theme">
           <svg id="theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg id="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
 
         <!-- Social Icons -->
-        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="hidden sm:inline-flex p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="GitHub Profile">
+        <a href="https://github.com/tejaskute284-dotcom" target="_blank" class="hidden sm:inline-flex p-2 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="GitHub Profile">
           <svg class="w-4 h-4 fill-current"><use href="#icon-github"/></svg>
         </a>
-        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="hidden sm:inline-flex p-2.5 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="LinkedIn Profile">
+        <a href="https://linkedin.com/in/tejas-kute-512aa2363" target="_blank" class="hidden sm:inline-flex p-2 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300" aria-label="LinkedIn Profile">
           <svg class="w-4 h-4 fill-current"><use href="#icon-linkedin"/></svg>
         </a>
 
         <!-- Hamburger Mobile button -->
-        <button id="mobile-menu-btn" class="xl:hidden p-2 text-textSecondary hover:text-textPrimary transition" aria-label="Open Navigation Menu">
+        <button id="mobile-menu-btn" class="2xl:hidden p-2 text-textSecondary hover:text-textPrimary transition" aria-label="Open Navigation Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
