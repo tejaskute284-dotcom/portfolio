@@ -419,3 +419,46 @@ section[id],
 main[id] {
   scroll-margin-top: 5.5rem;
 }
+
+/* Landing Locked / Unlocked States */
+body.landing-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+body.landing-locked #hero {
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden;
+}
+
+body.landing-locked #portfolio-main-content {
+  display: none !important;
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.landing-locked #floating-step-guide {
+  display: none !important;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Unlocked Transition */
+body:not(.landing-locked) #portfolio-main-content {
+  display: block;
+  animation: luxuryContentFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes luxuryContentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

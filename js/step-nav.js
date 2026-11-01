@@ -1,35 +1,70 @@
-// Step-by-Step Interactive Section Navigator
+// Step-by-Step Interactive Section Navigator & Landing Gate Controller
 
 export function initStepNavigation() {
   const sections = [
     { id: 'hero', label: 'Landing' },
     { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
     { id: 'hackathons', label: 'Achievements' },
     { id: 'education', label: 'Education' },
     { id: 'github-stats', label: 'GitHub' },
     { id: 'certifications', label: 'Credentials' },
-    { id: 'skills', label: 'Skills' },
     { id: 'future-vision', label: 'Research' },
     { id: 'contact', label: 'Contact' }
   ];
 
+  // Helper function to unlock the portfolio content
+  function unlockPortfolio(targetId) {
+    if (document.body.classList.contains('landing-locked')) {
+      document.body.classList.remove('landing-locked');
+      
+      // Refresh icon rendering and trigger observers if needed
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      // Re-trigger window resize to recalculate canvas & animations
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    if (targetId) {
+      setTimeout(() => {
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          const navbarHeight = 80;
+          const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 60);
+    }
+  }
+
+  // Explore button triggers unlock and scrolls to projects
   const exploreBtn = document.getElementById('hero-next-step-btn');
   if (exploreBtn) {
     exploreBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetEl = document.getElementById('about');
-      if (targetEl) {
-        const navbarHeight = 80;
-        const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
+      unlockPortfolio('#projects');
     });
   }
+
+  // Any navbar or mobile navigation clicks unlock the portfolio
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href !== '#' && href !== '#hero') {
+        if (document.body.classList.contains('landing-locked')) {
+          e.preventDefault();
+          unlockPortfolio(href);
+        }
+      }
+    });
+  });
 
   // Floating Step-by-Step progress tracker on scroll
   const stepPrev = document.getElementById('step-nav-prev');
