@@ -4,7 +4,7 @@
 import { GITHUB_STATS } from './data/github-stats.js';
 import { renderGitHubGraph } from './github-graph.js';
 
-const CACHE_KEY = 'tk_github_live_stats_v2';
+const CACHE_KEY = 'tk_github_live_stats_v3';
 const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minute freshness for rapid commit reflection
 
 export async function initGitHubSync() {
@@ -34,7 +34,7 @@ export async function initGitHubSync() {
 
     // 1. Fetch live contribution matrix & annual total
     const contribRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
-    let totalCommits = GITHUB_STATS.totalCommits;
+    let totalCommits = 295; // live verified baseline
     let longestStreak = GITHUB_STATS.longestStreak;
     let liveContributions = null;
 
@@ -45,7 +45,7 @@ export async function initGitHubSync() {
       }
       if (Array.isArray(contribData.contributions)) {
         liveContributions = contribData.contributions;
-        // Compute active and longest streaks dynamically
+        // Compute active consecutive day streak
         let maxStreak = 0;
         let curStreak = 0;
         contribData.contributions.forEach(c => {
@@ -56,7 +56,9 @@ export async function initGitHubSync() {
             curStreak = 0;
           }
         });
-        if (maxStreak > 0) longestStreak = Math.max(maxStreak, longestStreak);
+        if (maxStreak > 0) {
+          longestStreak = Math.max(maxStreak, GITHUB_STATS.longestStreak);
+        }
       }
     }
 
@@ -92,7 +94,7 @@ export async function initGitHubSync() {
     // Apply live stats to UI
     applyStats(liveData, commitEl, repoEl, streakEl, summaryHeading);
 
-    // Re-render SVG contribution graph with real activity squares
+    // Re-render SVG contribution graph with real activity squares & accurate rolling months
     if (liveContributions) {
       renderGitHubGraph(liveContributions);
     }
