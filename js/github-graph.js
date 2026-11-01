@@ -1,7 +1,7 @@
-// github-graph.js — High-end responsive Vector SVG Contribution Graph generator
-// Renders 52 weeks x 7 days with realistic distribution matching 335 total annual commits
+// github-graph.js — Responsive Vector SVG Contribution Graph generator
+// Supports live daily data array or resilient fallback distribution
 
-export function renderGitHubGraph() {
+export function renderGitHubGraph(liveContributions = null) {
   const container = document.getElementById('github-graph-mount');
   if (!container) return;
 
@@ -13,14 +13,6 @@ export function renderGitHubGraph() {
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const dayNames = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
-
-  // Seeded distribution to yield 335 total contributions
-  const contributionLevels = [
-    0, 0, 1, 0, 2, 0, 0, 1, 3, 0, 1, 2, 0, 1, 4, 2, 0, 1, 0, 2,
-    1, 3, 0, 2, 1, 0, 3, 2, 4, 1, 0, 2, 3, 1, 0, 2, 1, 4, 2, 0,
-    1, 3, 2, 0, 1, 2, 4, 1, 0, 3, 2, 1, 0, 2, 3, 1, 4, 2, 0, 1,
-    2, 0, 3, 1, 2, 4, 0, 1, 2, 3, 1, 0, 2, 4, 1, 3, 0, 2, 1, 0
-  ];
 
   let svgContent = '';
 
@@ -38,32 +30,49 @@ export function renderGitHubGraph() {
     }
   });
 
-  // Level color mapping using theme CSS variables
   const getLevelColor = (level) => {
     switch (level) {
-      case 1: return 'rgba(212, 175, 55, 0.28)';
-      case 2: return 'rgba(212, 175, 55, 0.52)';
-      case 3: return 'rgba(212, 175, 55, 0.78)';
-      case 4: return 'var(--accent-gold)';
+      case 1: return 'rgba(213, 178, 107, 0.32)';
+      case 2: return 'rgba(213, 178, 107, 0.58)';
+      case 3: return 'rgba(213, 178, 107, 0.82)';
+      case 4: return 'var(--accent-gold-muted)';
       default: return 'var(--bg-tertiary)';
     }
   };
 
-  // Render Cells
-  let seedIdx = 0;
+  // If live contributions exist, slice last 364 days (52 * 7)
+  let cellData = [];
+  if (Array.isArray(liveContributions) && liveContributions.length >= 364) {
+    cellData = liveContributions.slice(-364);
+  } else {
+    // Seeded realistic fallback
+    const fallbackLevels = [
+      0, 0, 1, 0, 2, 0, 0, 1, 3, 0, 1, 2, 0, 1, 4, 2, 0, 1, 0, 2,
+      1, 3, 0, 2, 1, 0, 3, 2, 4, 1, 0, 2, 3, 1, 0, 2, 1, 4, 2, 0,
+      1, 3, 2, 0, 1, 2, 4, 1, 0, 3, 2, 1, 0, 2, 3, 1, 4, 2, 0, 1,
+      2, 0, 3, 1, 2, 4, 0, 1, 2, 3, 1, 0, 2, 4, 1, 3, 0, 2, 1, 0
+    ];
+    for (let i = 0; i < 364; i++) {
+      const lvl = fallbackLevels[i % fallbackLevels.length];
+      const count = lvl === 0 ? 0 : lvl === 1 ? 1 : lvl === 2 ? 3 : lvl === 3 ? 6 : 9;
+      cellData.push({ level: lvl, count, date: '' });
+    }
+  }
+
+  let dataIdx = 0;
   for (let w = 0; w < weeks; w++) {
     for (let d = 0; d < days; d++) {
       const x = 32 + w * step;
       const y = 22 + d * step;
-      const level = contributionLevels[seedIdx % contributionLevels.length];
-      seedIdx++;
+      const item = cellData[dataIdx] || { level: 0, count: 0, date: '' };
+      dataIdx++;
 
-      const count = level === 0 ? 0 : level === 1 ? 1 : level === 2 ? 3 : level === 3 ? 6 : 9;
-      const fill = getLevelColor(level);
+      const fill = getLevelColor(item.level);
+      const titleText = item.date ? `${item.count} contributions on ${item.date}` : `${item.count} contributions`;
 
       svgContent += `
-        <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${fill}" class="contrib-cell transition-all duration-200" data-count="${count}">
-          <title>${count} contributions</title>
+        <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${fill}" class="contrib-cell transition-all duration-200" data-count="${item.count}">
+          <title>${titleText}</title>
         </rect>`;
     }
   }
@@ -76,4 +85,3 @@ export function renderGitHubGraph() {
       ${svgContent}
     </svg>`;
 }
-
