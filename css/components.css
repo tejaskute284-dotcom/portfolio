@@ -402,21 +402,37 @@ main[id] {
 
 /* Landing Locked / Unlocked States */
 body.landing-locked {
-  overflow: hidden !important;
-  height: 100vh !important;
+  overflow-x: hidden !important;
 }
 
-body.landing-locked #hero {
-  height: 100vh !important;
-  min-height: 100vh !important;
-  max-height: 100vh !important;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
+/* On mobile/tablets, allow natural vertical scrolling within hero so no content is cut off */
+@media (max-width: 1023px) {
+  body.landing-locked {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-y: auto !important;
+  }
 
-@media (min-width: 1024px) {
   body.landing-locked #hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden;
+  }
+}
+
+/* On desktop, lock to exact viewport height */
+@media (min-width: 1024px) {
+  body.landing-locked {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  body.landing-locked #hero {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
     overflow: hidden;
   }
 }
