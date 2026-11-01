@@ -44,12 +44,12 @@ export function initStepNavigation() {
     }
   }
 
-  // Explore button triggers unlock and scrolls to projects
+  // Explore button triggers unlock and scrolls directly to Profile (#about)
   const exploreBtn = document.getElementById('hero-next-step-btn');
   if (exploreBtn) {
     exploreBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      unlockPortfolio('#projects');
+      unlockPortfolio('#about');
     });
   }
 
