@@ -83,8 +83,8 @@ export const PROJECTS = [
     accentClass: 'text-accentBlue',
     badge: { label: 'IN PROGRESS', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
     tagline: 'Housing Society Maintenance Management System.',
-    img: null,
-    imgAlt: null,
+    img: 'assets/hsmms.png',
+    imgAlt: 'HSMMS — Housing Society Maintenance Management System UI Preview',
     desc: 'Built during the internship at Aerus Infotech Solutions, HSMMS is a role-based society management platform covering 8 functional modules for Admin, Resident, Staff, and Security Guard personas. Integrates Express REST API and a MySQL database.',
     collaborators: [
       { name: 'Tejas Kute', url: 'https://github.com/tejaskute284-dotcom', owner: true },

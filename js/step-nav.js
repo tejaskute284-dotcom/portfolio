@@ -8,9 +8,9 @@ export function initStepNavigation() {
     { id: 'experience', label: 'Experience' },
     { id: 'hackathons', label: 'Achievements' },
     { id: 'education', label: 'Education' },
+    { id: 'github-stats', label: 'GitHub' },
     { id: 'certifications', label: 'Credentials' },
     { id: 'skills', label: 'Skills' },
-    { id: 'github-stats', label: 'GitHub' },
     { id: 'future-vision', label: 'Research' },
     { id: 'contact', label: 'Contact' }
   ];

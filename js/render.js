@@ -7,20 +7,20 @@ import { CERTIFICATIONS } from './data/certifications.js';
 const githubUse  = `<svg class="w-4 h-4 fill-current" aria-hidden="true"><use href="#icon-github"/></svg>`;
 
 function tags(arr) {
-  return arr.map(t => `<span class="tech-tag">${t}</span>`).join('');
+  return arr.map(t => `<span class="tech-tag text-[10px] px-2 py-0.5">${t}</span>`).join('');
 }
 
 function collaborators(list) {
   return list.map(c => `
     <a href="${c.url}" target="_blank" rel="noopener noreferrer"
-       class="text-xs px-2.5 py-1 rounded border border-border bg-bgTertiary ${c.owner ? 'text-textPrimary font-semibold' : 'text-textSecondary'} hover:border-accentGold hover:text-accentGoldDark transition inline-block">
+       class="text-[11px] px-2 py-0.5 rounded border border-border bg-bgTertiary ${c.owner ? 'text-textPrimary font-semibold' : 'text-textSecondary'} hover:border-accentGold hover:text-accentGoldDark transition inline-block">
       ${c.name}
     </a>`).join('');
 }
 
 function projectCard(p) {
   const imgBlock = p.img ? `
-    <div class="mb-5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary">
+    <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary">
       <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
@@ -29,29 +29,29 @@ function projectCard(p) {
     : p.private
       ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private Repository</span>`
       : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>
-         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>` : ''}`;
+         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
 
   return `
-  <div class="carousel-item">
+  <div class="carousel-item px-2">
     <div class="ag-card premium-card h-full">
-      <div class="ag-inner p-6 md:p-8 flex flex-col justify-between h-full">
+      <div class="ag-inner p-5 sm:p-6 flex flex-col justify-between h-full">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
-            <span class="text-xs px-2.5 py-1 rounded-full border border-accentGold/40 text-accentGold font-mono text-[11px]">${p.badge.label}</span>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
           </div>
-          <p class="text-sm font-medium text-accentGold mb-4">${p.tagline}</p>
+          <p class="text-xs font-medium text-accentGold mb-3">${p.tagline}</p>
           ${imgBlock}
-          <p class="text-textSecondary text-sm leading-relaxed mb-6">${p.desc}</p>
-          <div class="mb-6">
-            <span class="text-[11px] font-mono text-textMuted block mb-2 uppercase tracking-wider">Collaborators</span>
-            <div class="flex flex-wrap gap-2">${collaborators(p.collaborators)}</div>
+          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
+          <div class="mb-4">
+            <span class="text-[10px] font-mono text-textMuted block mb-1.5 uppercase tracking-wider">Collaborators</span>
+            <div class="flex flex-wrap gap-1.5">${collaborators(p.collaborators)}</div>
           </div>
-          <div class="flex flex-wrap gap-2 mb-6">${tags(p.tags)}</div>
+          <div class="flex flex-wrap gap-1.5 mb-4">${tags(p.tags)}</div>
         </div>
-        <div class="border-t border-border pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-auto">
-          <div class="flex items-center gap-5">${footerLinks}</div>
-          <span class="text-[11px] text-textMuted font-mono block text-right">${p.footer}</span>
+        <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto">
+          <div class="flex items-center gap-4">${footerLinks}</div>
+          <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@ function carouselShell(id, itemsLg, itemsMd, inner) {
 export function renderAll() {
   const projectsEl = document.getElementById('projects-carousel-mount');
   if (projectsEl) {
-    projectsEl.innerHTML = carouselShell('projects', 2, 1, PROJECTS.map(projectCard).join(''));
+    projectsEl.innerHTML = carouselShell('projects', 3, 2, PROJECTS.map(projectCard).join(''));
   }
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
