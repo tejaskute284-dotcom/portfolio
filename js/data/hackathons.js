@@ -3,6 +3,22 @@
 // All hover classes use var(--card-accent) to stay 100% in-theme
 export const HACKATHONS = [
   {
+    org: 'AERUS INFOTECH SOLUTIONS',
+    orgColor: 'text-accentGold',
+    accentHex: '#D5B26B',
+    badge: { label: 'COMPLETED', cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+    title: 'Web Development Internship',
+    subtitle: 'Aerus Infotech Solutions Pvt. Ltd. · Navi Mumbai',
+    subtitleColor: 'text-accentGold',
+    img: 'assets/certificates/aerus_internship_completion.png',
+    imgAlt: 'Aerus Infotech Solutions Internship Completion Certificate — Tejas Kute',
+    desc: 'Successfully completed the Web Development Internship at Aerus Infotech Solutions Pvt. Ltd., demonstrating commendable technical skills in HSMMS architecture, MySQL persistence, RBAC security, and full-stack engineering.',
+    footerLeft: '25 June – 24 Sep 2026',
+    btnColor: 'text-accentGold',
+    certTitle: 'Aerus Infotech Solutions — Certificate of Completion',
+    certSubtitle: 'Aerus Infotech Solutions Pvt. Ltd. · Airoli, Navi Mumbai'
+  },
+  {
     org: 'SVKM — SBMP',
     orgColor: 'text-accentBlue',
     accentHex: '#4F8EF7',

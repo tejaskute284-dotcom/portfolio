@@ -29,5 +29,17 @@ export const CERTIFICATIONS = [
     domain: 'Computational Structures & Algorithms',
     id: 'PY-COURSERA',
     url: 'https://coursera.org/share/fc39ed31a05c150b28cec5387ee7bfd5'
+  },
+  {
+    title: 'Prompt Engineering for ChatGPT',
+    domain: 'Generative AI & LLM Prompting Architecture',
+    id: 'PE-COURSERA',
+    url: 'https://www.coursera.org/account/accomplishments/records/6ACA0X3N3D9F'
+  },
+  {
+    title: 'Getting Started with Git and GitHub',
+    domain: 'Version Control, CI/CD & Collaboration Workflows',
+    id: 'GIT-COURSERA',
+    url: 'https://www.coursera.org/account/accomplishments/records/PD058ZM3DS6U'
   }
 ];
