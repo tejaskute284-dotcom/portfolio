@@ -1,24 +1,30 @@
-// Vanilla JS Carousel Module with Smooth Auto-Play & Touch Swipe
+// Vanilla JS Infinite Loop Carousel Module with Seamless Cloned Buffers & Touch Support
 
 export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
 
   carousels.forEach(carousel => {
     const content = carousel.querySelector('.carousel-content');
-    const items = carousel.querySelectorAll('.carousel-item');
+    if (!content) return;
+
+    const originalItems = Array.from(content.children).filter(el => !el.classList.contains('carousel-clone'));
+    const totalOriginals = originalItems.length;
+    if (totalOriginals === 0) return;
+
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
-    
-    if (!content || items.length === 0) return;
 
-    let currentIndex = 0;
+    // Clean up any previously created clones (e.g. if re-initialized)
+    content.querySelectorAll('.carousel-clone').forEach(el => el.remove());
+
     let autoplayTimer = null;
     const autoplayInterval = 4200; // 4.2s smooth advance
+    let isTransitioning = false;
 
-    // Calculate items visible based on viewport
+    // Viewport-based items calculation
     const getItemsPerView = () => {
       if (window.innerWidth >= 1024) {
-        return parseInt(carousel.getAttribute('data-items-lg') || '2', 10);
+        return parseInt(carousel.getAttribute('data-items-lg') || '3', 10);
       } else if (window.innerWidth >= 768) {
         return parseInt(carousel.getAttribute('data-items-md') || '2', 10);
       } else {
@@ -26,56 +32,105 @@ export function initCarousel() {
       }
     };
 
-    const updateCarousel = () => {
-      const itemsPerView = getItemsPerView();
-      const maxIndex = Math.max(0, items.length - itemsPerView);
-      
-      if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-      }
+    let itemsPerView = getItemsPerView();
+    // Clones count buffer: clone itemsPerView from head and tail to guarantee infinite seamless wrap
+    let cloneCount = itemsPerView;
 
-      // Calculate width of each item percentage
+    // Clone tail items to prepend
+    const prependClones = [];
+    for (let i = 0; i < cloneCount; i++) {
+      const origIndex = (totalOriginals - cloneCount + i) % totalOriginals;
+      const clone = originalItems[(origIndex + totalOriginals) % totalOriginals].cloneNode(true);
+      clone.classList.add('carousel-clone');
+      prependClones.push(clone);
+    }
+    prependClones.reverse().forEach(clone => {
+      content.insertBefore(clone, content.firstChild);
+    });
+
+    // Clone head items to append
+    for (let i = 0; i < cloneCount; i++) {
+      const origIndex = i % totalOriginals;
+      const clone = originalItems[origIndex].cloneNode(true);
+      clone.classList.add('carousel-clone');
+      content.appendChild(clone);
+    }
+
+    // Refresh icons inside clones
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+
+    // Virtual index starts right after the prepended clones
+    let currentIndex = cloneCount;
+
+    const setPosition = (index, animated = true) => {
+      itemsPerView = getItemsPerView();
+      const allItems = content.querySelectorAll('.carousel-item');
       const itemWidthPercent = 100 / itemsPerView;
-      items.forEach(item => {
+
+      allItems.forEach(item => {
         item.style.flex = `0 0 ${itemWidthPercent}%`;
         item.style.maxWidth = `${itemWidthPercent}%`;
       });
 
-      const translateValue = currentIndex * itemWidthPercent;
-      content.style.transform = `translateX(-${translateValue}%)`;
+      if (!animated) {
+        content.style.transition = 'none';
+      } else {
+        content.style.transition = 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)';
+      }
 
-      // Update button disabled states
-      if (prevBtn) {
-        prevBtn.style.opacity = currentIndex === 0 ? '0.35' : '1';
-        prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
-      }
-      if (nextBtn) {
-        nextBtn.style.opacity = currentIndex === maxIndex ? '0.35' : '1';
-        nextBtn.style.pointerEvents = currentIndex === maxIndex ? 'none' : 'auto';
-      }
+      const translateValue = index * itemWidthPercent;
+      content.style.transform = `translateX(-${translateValue}%)`;
     };
 
+    // Keep navigation buttons always enabled for infinite looping
+    if (prevBtn) {
+      prevBtn.style.opacity = '1';
+      prevBtn.style.pointerEvents = 'auto';
+    }
+    if (nextBtn) {
+      nextBtn.style.opacity = '1';
+      nextBtn.style.pointerEvents = 'auto';
+    }
+
     const goNext = () => {
-      const itemsPerView = getItemsPerView();
-      const maxIndex = Math.max(0, items.length - itemsPerView);
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-      } else {
-        currentIndex = 0; // seamlessly loop back
-      }
-      updateCarousel();
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex++;
+      setPosition(currentIndex, true);
     };
 
     const goPrev = () => {
-      const itemsPerView = getItemsPerView();
-      const maxIndex = Math.max(0, items.length - itemsPerView);
-      if (currentIndex > 0) {
-        currentIndex--;
-      } else {
-        currentIndex = maxIndex;
-      }
-      updateCarousel();
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex--;
+      setPosition(currentIndex, true);
     };
+
+    // Transition end listener to seamlessly teleport when passing boundaries
+    content.addEventListener('transitionend', (e) => {
+      if (e.target !== content) return;
+
+      // Teleport when reaching or passing appended clones
+      if (currentIndex >= cloneCount + totalOriginals) {
+        content.style.transition = 'none';
+        currentIndex = currentIndex - totalOriginals;
+        const itemWidthPercent = 100 / itemsPerView;
+        content.style.transform = `translateX(-${currentIndex * itemWidthPercent}%)`;
+        void content.offsetHeight; // force reflow
+      } 
+      // Teleport when reaching or passing prepended clones
+      else if (currentIndex < cloneCount) {
+        content.style.transition = 'none';
+        currentIndex = currentIndex + totalOriginals;
+        const itemWidthPercent = 100 / itemsPerView;
+        content.style.transform = `translateX(-${currentIndex * itemWidthPercent}%)`;
+        void content.offsetHeight; // force reflow
+      }
+
+      isTransitioning = false;
+    });
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
@@ -91,7 +146,7 @@ export function initCarousel() {
       });
     }
 
-    // Auto-Play: "slowly move for further project automatic way"
+    // Auto-Play: continuous infinite forward movement
     const startAutoplay = () => {
       stopAutoplay();
       autoplayTimer = setInterval(goNext, autoplayInterval);
@@ -137,11 +192,15 @@ export function initCarousel() {
       }
     };
 
-    // Handle viewport resizing
-    window.addEventListener('resize', updateCarousel);
-    
-    // Initial render and start autoplay
-    updateCarousel();
+    // Resize handler
+    const onResize = () => {
+      itemsPerView = getItemsPerView();
+      setPosition(currentIndex, false);
+    };
+    window.addEventListener('resize', onResize);
+
+    // Initial setup without animation
+    setPosition(currentIndex, false);
     startAutoplay();
   });
 }

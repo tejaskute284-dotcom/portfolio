@@ -27,15 +27,15 @@ export function initCertificateModal() {
     document.body.style.overflow = 'auto';
   };
 
-  // Attach event listeners to all certificate triggers
-  document.querySelectorAll('[data-cert-img]').forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      const img = trigger.getAttribute('data-cert-img');
-      const title = trigger.getAttribute('data-cert-title') || 'Certificate of Appreciation';
-      const subtitle = trigger.getAttribute('data-cert-subtitle') || 'Official Credential';
-      window.openCertificateModal(img, title, subtitle);
-    });
+  // Attach event listeners to all certificate triggers (supports dynamic and cloned elements)
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-cert-img]');
+    if (!trigger) return;
+    e.preventDefault();
+    const img = trigger.getAttribute('data-cert-img');
+    const title = trigger.getAttribute('data-cert-title') || 'Certificate of Appreciation';
+    const subtitle = trigger.getAttribute('data-cert-subtitle') || 'Official Credential';
+    window.openCertificateModal(img, title, subtitle);
   });
 
   // Close button listener
