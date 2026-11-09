@@ -58,9 +58,9 @@ function projectCard(p) {
   </div>`;
 }
 
-function hackathonCard(h) {
+function hackathonMarqueeCard(h) {
   return `
-  <div class="carousel-item px-2">
+  <div class="marquee-card-item">
     <div class="ag-card premium-card h-full group hov-card-border transition cursor-pointer"
          data-cert-img="${h.img}"
          data-cert-title="${h.certTitle}"
@@ -88,6 +88,16 @@ function hackathonCard(h) {
           </button>
         </div>
       </div>
+    </div>
+  </div>`;
+}
+
+function hackathonMarqueeShell(cardsHtml) {
+  return `
+  <div class="infinite-marquee-viewport" aria-label="Infinite continuous certifications marquee">
+    <div class="infinite-marquee-track">
+      ${cardsHtml}
+      ${cardsHtml}
     </div>
   </div>`;
 }
@@ -143,7 +153,8 @@ export function renderAll() {
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
   if (hackEl) {
-    hackEl.innerHTML = carouselShell('hackathons', 3, 2, HACKATHONS.map(hackathonCard).join(''));
+    const cardsHtml = HACKATHONS.map(hackathonMarqueeCard).join('');
+    hackEl.innerHTML = hackathonMarqueeShell(cardsHtml);
   }
 
   const certEl = document.getElementById('certifications-carousel-mount');
