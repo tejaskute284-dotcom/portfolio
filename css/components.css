@@ -466,3 +466,54 @@ body:not(.landing-locked) #portfolio-main-content {
   }
 }
 
+/* Compact Infinite Loop Carousel Reel for Certifications */
+.infinite-marquee-viewport {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-block: 0.75rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.infinite-marquee-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: marqueeReel 30s linear infinite;
+  will-change: transform;
+}
+
+.infinite-marquee-viewport:hover .infinite-marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-card-item {
+  flex: 0 0 240px;
+  width: 240px;
+  max-width: 240px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .marquee-card-item {
+    flex: 0 0 200px;
+    width: 200px;
+    max-width: 200px;
+  }
+  .infinite-marquee-track {
+    gap: 0.85rem;
+    animation-duration: 22s;
+  }
+}
+
+@keyframes marqueeReel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+

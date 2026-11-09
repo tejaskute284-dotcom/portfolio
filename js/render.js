@@ -65,27 +65,29 @@ function hackathonMarqueeCard(h) {
          data-cert-img="${h.img}"
          data-cert-title="${h.certTitle}"
          data-cert-subtitle="${h.certSubtitle}">
-      <div class="ag-inner p-6 flex flex-col justify-between h-full">
+      <div class="ag-inner p-3.5 flex flex-col justify-between h-full">
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
-            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${h.badge.label}</span>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[9px] font-mono text-accentGold uppercase tracking-wider font-semibold truncate max-w-[130px]">${h.org}</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border border-accentGold/30 text-accentGold">${h.badge.label}</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
-          <p class="text-xs text-textSecondary mb-4">${h.subtitle}</p>
-          <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-4 bg-bgTertiary">
+          
+          <div class="relative overflow-hidden rounded border border-border aspect-video mb-2.5 bg-bgTertiary">
             <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-              <i data-lucide="maximize-2" class="w-4 h-4 text-accentGold"></i> View Certificate
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white font-mono text-[11px] font-medium">
+              <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-accentGold"></i> View
             </div>
           </div>
-          <p class="text-textSecondary text-xs leading-relaxed mb-4">${h.desc}</p>
+
+          <h3 class="text-sm font-serif font-bold text-textPrimary leading-snug mb-1 hov-card-title transition line-clamp-1">${h.title}</h3>
+          <p class="text-[11px] text-textSecondary line-clamp-1 mb-2">${h.subtitle}</p>
         </div>
-        <div class="border-t border-border pt-4 flex items-center justify-between mt-auto">
-          <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
-          <button class="text-xs font-medium text-accentGold flex items-center gap-1.5 group-hover:underline">
-            View Certificate <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
+
+        <div class="border-t border-border/70 pt-2 flex items-center justify-between mt-auto">
+          <span class="text-[10px] text-textMuted font-mono truncate max-w-[95px]">${h.footerLeft}</span>
+          <span class="text-[11px] font-medium text-accentGold flex items-center gap-1 group-hover:underline">
+            Inspect <i data-lucide="arrow-right" class="w-3 h-3"></i>
+          </span>
         </div>
       </div>
     </div>
