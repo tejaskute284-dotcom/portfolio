@@ -18,42 +18,48 @@ function collaborators(list) {
     </a>`).join('');
 }
 
-function projectCard(p) {
+function projectMarqueeCard(p) {
   const imgBlock = p.img ? `
-    <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm transform-gpu transition-all duration-500 hover:shadow-lg" style="transform: translateZ(16px);">
+    <div class="mb-3 overflow-hidden rounded border border-border aspect-video bg-bgTertiary shadow-sm">
       <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
   const footerLinks = p.internship
-    ? `<span class="text-xs text-textSecondary italic">${p.internship}</span>`
+    ? `<span class="text-[11px] text-textSecondary italic">${p.internship}</span>`
     : p.private
-      ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private Repository</span>`
-      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>
-         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
+      ? `<span class="flex items-center gap-1.5 text-[11px] text-textSecondary opacity-75">${githubUse} Private</span>`
+      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-[11px] font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} Code</a>
+         ${p.demo ? `<a href="${p.demo}" target="_blank" class="flex items-center gap-1.5 text-[11px] font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3 h-3"></i> Demo</a>` : ''}`;
 
   return `
-  <div class="carousel-item px-2">
-    <div class="ag-card premium-card h-full" style="perspective: 1000px; transform-style: preserve-3d;">
-      <div class="ag-inner p-5 sm:p-6 flex flex-col justify-between h-full" style="transform-style: preserve-3d;">
-        <div style="transform-style: preserve-3d;">
-          <div class="flex items-center justify-between mb-3" style="transform: translateZ(8px);">
-            <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
-            <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
+  <div class="project-marquee-card-item">
+    <div class="ag-card premium-card h-full flex flex-col justify-between">
+      <div class="ag-inner p-4 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-base font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
+            <span class="text-[9px] px-2 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
           </div>
-          <p class="text-xs font-medium text-accentGold mb-3" style="transform: translateZ(10px);">${p.tagline}</p>
+          <p class="text-[11px] font-medium text-accentGold mb-2.5 line-clamp-1">${p.tagline}</p>
           ${imgBlock}
-          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
-          <div class="mb-4" style="transform: translateZ(12px);">
-            <span class="text-[10px] font-mono text-textMuted block mb-1.5 uppercase tracking-wider">Collaborators</span>
-            <div class="flex flex-wrap gap-1.5">${collaborators(p.collaborators)}</div>
-          </div>
-          <div class="flex flex-wrap gap-1.5 mb-4" style="transform: translateZ(14px);">${tags(p.tags)}</div>
+          <p class="text-textSecondary text-xs leading-relaxed mb-3 line-clamp-2">${p.desc}</p>
+          <div class="flex flex-wrap gap-1 mb-3">${tags(p.tags.slice(0, 4))}</div>
         </div>
-        <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto" style="transform: translateZ(8px);">
-          <div class="flex items-center gap-4">${footerLinks}</div>
-          <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
+        <div class="border-t border-border/80 pt-2.5 flex items-center justify-between gap-2 mt-auto">
+          <div class="flex items-center gap-3">${footerLinks}</div>
+          <span class="text-[9px] text-textMuted font-mono block text-right truncate max-w-[110px]">${p.footer}</span>
         </div>
       </div>
+    </div>
+  </div>`;
+}
+
+function projectMarqueeShell(cardsHtml) {
+  return `
+  <div class="infinite-marquee-viewport" aria-label="Infinite continuous projects marquee">
+    <div class="infinite-marquee-track">
+      ${cardsHtml}
+      ${cardsHtml}
     </div>
   </div>`;
 }
@@ -150,7 +156,8 @@ function carouselShell(id, itemsLg, itemsMd, inner) {
 export function renderAll() {
   const projectsEl = document.getElementById('projects-carousel-mount');
   if (projectsEl) {
-    projectsEl.innerHTML = carouselShell('projects', 3, 2, PROJECTS.map(projectCard).join(''));
+    const cardsHtml = PROJECTS.map(projectMarqueeCard).join('');
+    projectsEl.innerHTML = projectMarqueeShell(cardsHtml);
   }
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
