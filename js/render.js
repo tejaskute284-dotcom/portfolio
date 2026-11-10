@@ -18,7 +18,7 @@ function collaborators(list) {
     </a>`).join('');
 }
 
-function projectCard(p) {
+function projectMarqueeCard(p) {
   const imgBlock = p.img ? `
     <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm">
       <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
@@ -29,10 +29,10 @@ function projectCard(p) {
     : p.private
       ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private Repository</span>`
       : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>
-         ${p.demo ? `<a href="${p.demo}" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
+         ${p.demo ? `<a href="${p.demo}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
 
   return `
-  <div class="carousel-item px-2">
+  <div class="project-marquee-card">
     <div class="premium-card h-full flex flex-col justify-between">
       <div class="p-5 sm:p-6 flex flex-col justify-between h-full">
         <div>
@@ -40,7 +40,7 @@ function projectCard(p) {
             <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
             <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
           </div>
-          <p class="text-xs font-medium text-accentGold mb-3">${p.tagline}</p>
+          <p class="text-xs font-medium text-accentGold mb-3 line-clamp-1">${p.tagline}</p>
           ${imgBlock}
           <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
           <div class="mb-4">
@@ -54,6 +54,16 @@ function projectCard(p) {
           <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
         </div>
       </div>
+    </div>
+  </div>`;
+}
+
+function projectMarqueeShell(cardsHtml) {
+  return `
+  <div class="project-marquee-viewport" aria-label="Infinite continuous projects marquee">
+    <div class="project-marquee-track">
+      ${cardsHtml}
+      ${cardsHtml}
     </div>
   </div>`;
 }
@@ -138,7 +148,8 @@ function carouselShell(id, itemsLg, itemsMd, inner) {
 export function renderAll() {
   const projectsEl = document.getElementById('projects-carousel-mount');
   if (projectsEl) {
-    projectsEl.innerHTML = carouselShell('projects', 3, 2, PROJECTS.map(projectCard).join(''));
+    const cardsHtml = PROJECTS.map(projectMarqueeCard).join('');
+    projectsEl.innerHTML = projectMarqueeShell(cardsHtml);
   }
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
