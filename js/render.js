@@ -1,4 +1,4 @@
-﻿// render.js — data-driven card renderer with Classic Luxury Editorial styling
+// render.js — data-driven card renderer with Classic Luxury Editorial styling
 import { PROJECTS }       from './data/projects.js';
 import { HACKATHONS }     from './data/hackathons.js';
 import { CERTIFICATIONS } from './data/certifications.js';
@@ -20,7 +20,7 @@ function collaborators(list) {
 
 function projectCard(p) {
   const imgBlock = p.img ? `
-    <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm transform-gpu transition-all duration-500 hover:shadow-lg" style="transform: translateZ(16px);">
+    <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm">
       <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
@@ -33,23 +33,23 @@ function projectCard(p) {
 
   return `
   <div class="carousel-item px-2">
-    <div class="ag-card premium-card h-full" style="perspective: 1000px; transform-style: preserve-3d;">
-      <div class="ag-inner p-5 sm:p-6 flex flex-col justify-between h-full" style="transform-style: preserve-3d;">
-        <div style="transform-style: preserve-3d;">
-          <div class="flex items-center justify-between mb-3" style="transform: translateZ(8px);">
+    <div class="premium-card h-full flex flex-col justify-between">
+      <div class="p-5 sm:p-6 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-3">
             <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
             <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
           </div>
-          <p class="text-xs font-medium text-accentGold mb-3" style="transform: translateZ(10px);">${p.tagline}</p>
+          <p class="text-xs font-medium text-accentGold mb-3">${p.tagline}</p>
           ${imgBlock}
           <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
-          <div class="mb-4" style="transform: translateZ(12px);">
+          <div class="mb-4">
             <span class="text-[10px] font-mono text-textMuted block mb-1.5 uppercase tracking-wider">Collaborators</span>
             <div class="flex flex-wrap gap-1.5">${collaborators(p.collaborators)}</div>
           </div>
-          <div class="flex flex-wrap gap-1.5 mb-4" style="transform: translateZ(14px);">${tags(p.tags)}</div>
+          <div class="flex flex-wrap gap-1.5 mb-4">${tags(p.tags)}</div>
         </div>
-        <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto" style="transform: translateZ(8px);">
+        <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto">
           <div class="flex items-center gap-4">${footerLinks}</div>
           <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
         </div>
@@ -61,11 +61,11 @@ function projectCard(p) {
 function hackathonCard(h) {
   return `
   <div class="carousel-item px-2">
-    <div class="ag-card premium-card h-full group hov-card-border transition cursor-pointer"
+    <div class="premium-card h-full group hov-card-border transition cursor-pointer"
          data-cert-img="${h.img}"
          data-cert-title="${h.certTitle}"
          data-cert-subtitle="${h.certSubtitle}">
-      <div class="ag-inner p-6 flex flex-col justify-between h-full">
+      <div class="p-6 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-3">
             <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
