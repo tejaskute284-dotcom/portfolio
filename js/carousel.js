@@ -1,4 +1,4 @@
-// Vanilla JS Infinite Loop Carousel Module with Seamless Cloned Buffers & Touch Support (Zero Autoplay)
+// Vanilla JS Infinite Loop Carousel Module with Full-Buffer Seamless Clones & Failsafe Unlocks
 
 export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
@@ -14,10 +14,11 @@ export function initCarousel() {
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
 
-    // Clean up any previously created clones (e.g. if re-initialized)
+    // Clean up any previously created clones
     content.querySelectorAll('.carousel-clone').forEach(el => el.remove());
 
     let isTransitioning = false;
+    let transitionSafetyTimer = null;
 
     // Viewport-based items calculation
     const getItemsPerView = () => {
@@ -31,35 +32,33 @@ export function initCarousel() {
     };
 
     let itemsPerView = getItemsPerView();
-    // Clones count buffer: clone itemsPerView from head and tail to guarantee infinite seamless wrap
-    let cloneCount = itemsPerView;
+    // Use an entire full copy buffer for seamless infinite runway
+    const cloneCount = totalOriginals;
 
-    // Clone tail items to prepend
-    const prependClones = [];
-    for (let i = 0; i < cloneCount; i++) {
-      const origIndex = (totalOriginals - cloneCount + i) % totalOriginals;
-      const clone = originalItems[(origIndex + totalOriginals) % totalOriginals].cloneNode(true);
+    // Clone full original set to prepend
+    const prependFragment = document.createDocumentFragment();
+    originalItems.forEach(item => {
+      const clone = item.cloneNode(true);
       clone.classList.add('carousel-clone');
-      prependClones.push(clone);
-    }
-    prependClones.reverse().forEach(clone => {
-      content.insertBefore(clone, content.firstChild);
+      prependFragment.appendChild(clone);
     });
+    content.insertBefore(prependFragment, content.firstChild);
 
-    // Clone head items to append
-    for (let i = 0; i < cloneCount; i++) {
-      const origIndex = i % totalOriginals;
-      const clone = originalItems[origIndex].cloneNode(true);
+    // Clone full original set to append
+    const appendFragment = document.createDocumentFragment();
+    originalItems.forEach(item => {
+      const clone = item.cloneNode(true);
       clone.classList.add('carousel-clone');
-      content.appendChild(clone);
-    }
+      appendFragment.appendChild(clone);
+    });
+    content.appendChild(appendFragment);
 
     // Refresh icons inside clones
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
 
-    // Virtual index starts right after the prepended clones
+    // Virtual index starts at the start of original cards
     let currentIndex = cloneCount;
 
     const setPosition = (index, animated = true) => {
@@ -75,14 +74,14 @@ export function initCarousel() {
       if (!animated) {
         content.style.transition = 'none';
       } else {
-        content.style.transition = 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)';
+        content.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
       }
 
       const translateValue = index * itemWidthPercent;
       content.style.transform = `translateX(-${translateValue}%)`;
     };
 
-    // Keep navigation buttons always enabled for infinite looping
+    // Ensure buttons remain fully interactive
     if (prevBtn) {
       prevBtn.style.opacity = '1';
       prevBtn.style.pointerEvents = 'auto';
@@ -92,25 +91,9 @@ export function initCarousel() {
       nextBtn.style.pointerEvents = 'auto';
     }
 
-    const goNext = () => {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      currentIndex++;
-      setPosition(currentIndex, true);
-    };
-
-    const goPrev = () => {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      currentIndex--;
-      setPosition(currentIndex, true);
-    };
-
-    // Transition end listener to seamlessly teleport when passing boundaries
-    content.addEventListener('transitionend', (e) => {
-      if (e.target !== content) return;
-
-      // Teleport when reaching or passing appended clones
+    const checkBoundariesAndReset = () => {
+      itemsPerView = getItemsPerView();
+      // Past the original set to the right
       if (currentIndex >= cloneCount + totalOriginals) {
         content.style.transition = 'none';
         currentIndex = currentIndex - totalOriginals;
@@ -118,7 +101,7 @@ export function initCarousel() {
         content.style.transform = `translateX(-${currentIndex * itemWidthPercent}%)`;
         void content.offsetHeight; // force reflow
       } 
-      // Teleport when reaching or passing prepended clones
+      // Before the original set to the left
       else if (currentIndex < cloneCount) {
         content.style.transition = 'none';
         currentIndex = currentIndex + totalOriginals;
@@ -128,6 +111,38 @@ export function initCarousel() {
       }
 
       isTransitioning = false;
+      if (transitionSafetyTimer) {
+        clearTimeout(transitionSafetyTimer);
+        transitionSafetyTimer = null;
+      }
+    };
+
+    const goNext = () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex++;
+      setPosition(currentIndex, true);
+
+      // Failsafe unlock timer in case transitionend is delayed
+      if (transitionSafetyTimer) clearTimeout(transitionSafetyTimer);
+      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 500);
+    };
+
+    const goPrev = () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex--;
+      setPosition(currentIndex, true);
+
+      // Failsafe unlock timer in case transitionend is delayed
+      if (transitionSafetyTimer) clearTimeout(transitionSafetyTimer);
+      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 500);
+    };
+
+    // Transition end listener for boundary teleportation
+    content.addEventListener('transitionend', (e) => {
+      if (e.target !== content) return;
+      checkBoundariesAndReset();
     });
 
     if (prevBtn) {
@@ -158,7 +173,7 @@ export function initCarousel() {
     }, { passive: true });
 
     const handleSwipe = () => {
-      const threshold = 40;
+      const threshold = 35;
       if (touchStartX - touchEndX > threshold) {
         goNext();
       } else if (touchEndX - touchStartX > threshold) {
