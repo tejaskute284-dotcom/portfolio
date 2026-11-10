@@ -1,22 +1,22 @@
 // Main Entry Point & Orchestrator
 
-import { renderAll }           from './render.js?v=2.3.5';
-import { renderGitHubGraph }   from './github-graph.js?v=2.3.5';
-import { initGitHubSync }      from './github-api.js?v=2.3.5';
-import { initTheme }           from './theme.js?v=2.3.5';
-import { initScroll }          from './scroll.js?v=2.3.5';
-import { initTypewriter }      from './typewriter.js?v=2.3.5';
-import { initCounter }         from './counter.js?v=2.3.5';
-import { initContact }         from './contact.js?v=2.3.5';
-import { initMobileNav }       from './mobile-nav.js?v=2.3.5';
-import { initCarousel }        from './carousel.js?v=2.3.5';
-import { initCertificateModal }from './certificate-modal.js?v=2.3.5';
-import { initResumeModal }      from './resume-modal.js?v=2.3.5';
-import { initVerifyModal }      from './verify-modal.js?v=2.3.5';
-import { initAntiGravity }     from './antigravity.js?v=2.3.5';
-import { initStepNavigation }  from './step-nav.js?v=2.3.5';
-import { initNeural3D }        from './neural-3d.js?v=2.3.5';
-import { initSkillsSphere }    from './skills-sphere.js?v=2.3.5';
+import { renderAll }           from './render.js?v=2.4.0';
+import { renderGitHubGraph }   from './github-graph.js?v=2.4.0';
+import { initGitHubSync }      from './github-api.js?v=2.4.0';
+import { initTheme }           from './theme.js?v=2.4.0';
+import { initScroll }          from './scroll.js?v=2.4.0';
+import { initTypewriter }      from './typewriter.js?v=2.4.0';
+import { initCounter }         from './counter.js?v=2.4.0';
+import { initContact }         from './contact.js?v=2.4.0';
+import { initMobileNav }       from './mobile-nav.js?v=2.4.0';
+import { initCarousel }        from './carousel.js?v=2.4.0';
+import { initCertificateModal }from './certificate-modal.js?v=2.4.0';
+import { initResumeModal }      from './resume-modal.js?v=2.4.0';
+import { initVerifyModal }      from './verify-modal.js?v=2.4.0';
+import { initAntiGravity }     from './antigravity.js?v=2.4.0';
+import { initStepNavigation }  from './step-nav.js?v=2.4.0';
+import { initNeural3D }        from './neural-3d.js?v=2.4.0';
+import { initSkillsSphere }    from './skills-sphere.js?v=2.4.0';
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAll();          // inject data-driven cards before anything else

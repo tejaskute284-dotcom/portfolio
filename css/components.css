@@ -1,4 +1,4 @@
-﻿/* Custom Component Styles — Classic Luxury Editorial × Modern Minimal */
+/* Custom Component Styles — Classic Luxury Editorial × Modern Minimal */
 
 /* Editorial Header & Glass Nav */
 .frosted-glass {
@@ -400,59 +400,9 @@ main[id] {
   scroll-margin-top: 5.5rem;
 }
 
-/* Landing Locked / Unlocked States */
-body.landing-locked {
-  overflow-x: hidden !important;
-}
-
-/* On mobile/tablets, allow natural vertical scrolling within hero so no content is cut off */
-@media (max-width: 1023px) {
-  body.landing-locked {
-    min-height: 100vh;
-    min-height: 100dvh;
-    overflow-y: auto !important;
-  }
-
-  body.landing-locked #hero {
-    min-height: 100vh;
-    min-height: 100dvh;
-    height: auto !important;
-    max-height: none !important;
-    overflow-x: hidden;
-  }
-}
-
-/* On desktop, lock to exact viewport height */
-@media (min-width: 1024px) {
-  body.landing-locked {
-    height: 100vh !important;
-    overflow: hidden !important;
-  }
-
-  body.landing-locked #hero {
-    height: 100vh !important;
-    min-height: 100vh !important;
-    max-height: 100vh !important;
-    overflow: hidden;
-  }
-}
-
-body.landing-locked #portfolio-main-content {
-  display: none !important;
-  opacity: 0;
-  visibility: hidden;
-}
-
-body.landing-locked #floating-step-guide {
-  display: none !important;
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Unlocked Transition */
-body:not(.landing-locked) #portfolio-main-content {
+/* Portfolio Main Content Natural Display */
+#portfolio-main-content {
   display: block;
-  animation: luxuryContentFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes luxuryContentFadeIn {
