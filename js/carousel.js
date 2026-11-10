@@ -1,4 +1,4 @@
-// Vanilla JS Infinite Loop Carousel Module with Seamless Cloned Buffers & Touch Support
+// Vanilla JS Infinite Loop Carousel Module with Seamless Cloned Buffers & Touch Support (Zero Autoplay)
 
 export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
@@ -17,8 +17,6 @@ export function initCarousel() {
     // Clean up any previously created clones (e.g. if re-initialized)
     content.querySelectorAll('.carousel-clone').forEach(el => el.remove());
 
-    let autoplayTimer = null;
-    const autoplayInterval = 4200; // 4.2s smooth advance
     let isTransitioning = false;
 
     // Viewport-based items calculation
@@ -133,40 +131,18 @@ export function initCarousel() {
     });
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         goPrev();
-        resetAutoplay();
       });
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         goNext();
-        resetAutoplay();
       });
     }
-
-    // Auto-Play: continuous infinite forward movement
-    const startAutoplay = () => {
-      stopAutoplay();
-      autoplayTimer = setInterval(goNext, autoplayInterval);
-    };
-
-    const stopAutoplay = () => {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    };
-
-    const resetAutoplay = () => {
-      stopAutoplay();
-      startAutoplay();
-    };
-
-    // Pause on hover
-    carousel.addEventListener('mouseenter', stopAutoplay);
-    carousel.addEventListener('mouseleave', startAutoplay);
 
     // Touch Swipe Support for mobile devices
     let touchStartX = 0;
@@ -174,13 +150,11 @@ export function initCarousel() {
 
     carousel.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
-      stopAutoplay();
     }, { passive: true });
 
     carousel.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
-      startAutoplay();
     }, { passive: true });
 
     const handleSwipe = () => {
@@ -201,6 +175,5 @@ export function initCarousel() {
 
     // Initial setup without animation
     setPosition(currentIndex, false);
-    startAutoplay();
   });
 }
