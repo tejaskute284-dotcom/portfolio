@@ -516,4 +516,54 @@ main[id] {
   }
 }
 
+/* Continuous Smooth Infinite Marquee Reel for Coursera Academic Credentials */
+.cert-marquee-viewport {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-block: 0.75rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.cert-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: certMarqueeContinuous 30s linear infinite;
+  will-change: transform;
+}
+
+.cert-marquee-viewport:hover .cert-marquee-track {
+  animation-play-state: paused;
+}
+
+.cert-marquee-card {
+  flex: 0 0 320px;
+  width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .cert-marquee-card {
+    flex: 0 0 260px;
+    width: 260px;
+    max-width: 260px;
+  }
+  .cert-marquee-track {
+    gap: 1rem;
+    animation-duration: 22s;
+  }
+}
+
+@keyframes certMarqueeContinuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 
