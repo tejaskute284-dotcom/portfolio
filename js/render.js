@@ -18,94 +18,75 @@ function collaborators(list) {
     </a>`).join('');
 }
 
-function projectMarqueeCard(p) {
+function projectGridCard(p) {
   const imgBlock = p.img ? `
-    <div class="mb-3 overflow-hidden rounded border border-border aspect-video bg-bgTertiary shadow-sm">
+    <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm">
       <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
   const footerLinks = p.internship
-    ? `<span class="text-[11px] text-textSecondary italic">${p.internship}</span>`
+    ? `<span class="text-xs text-textSecondary italic">${p.internship}</span>`
     : p.private
-      ? `<span class="flex items-center gap-1.5 text-[11px] text-textSecondary opacity-75">${githubUse} Private</span>`
-      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-[11px] font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} Code</a>
-         ${p.demo ? `<a href="${p.demo}" target="_blank" class="flex items-center gap-1.5 text-[11px] font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3 h-3"></i> Demo</a>` : ''}`;
+      ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private</span>`
+      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} Code</a>
+         ${p.demo ? `<a href="${p.demo}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
 
   return `
-  <div class="project-marquee-card-item">
-    <div class="ag-card premium-card h-full flex flex-col justify-between">
-      <div class="ag-inner p-4 flex flex-col justify-between h-full">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-base font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
-            <span class="text-[9px] px-2 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
-          </div>
-          <p class="text-[11px] font-medium text-accentGold mb-2.5 line-clamp-1">${p.tagline}</p>
-          ${imgBlock}
-          <p class="text-textSecondary text-xs leading-relaxed mb-3 line-clamp-2">${p.desc}</p>
-          <div class="flex flex-wrap gap-1 mb-3">${tags(p.tags.slice(0, 4))}</div>
+  <div class="ag-card premium-card h-full flex flex-col justify-between">
+    <div class="ag-inner p-5 sm:p-6 flex flex-col justify-between h-full">
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
+          <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
         </div>
-        <div class="border-t border-border/80 pt-2.5 flex items-center justify-between gap-2 mt-auto">
-          <div class="flex items-center gap-3">${footerLinks}</div>
-          <span class="text-[9px] text-textMuted font-mono block text-right truncate max-w-[110px]">${p.footer}</span>
+        <p class="text-xs font-medium text-accentGold mb-3">${p.tagline}</p>
+        ${imgBlock}
+        <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
+        <div class="mb-4">
+          <span class="text-[10px] font-mono text-textMuted block mb-1.5 uppercase tracking-wider">Collaborators</span>
+          <div class="flex flex-wrap gap-1.5">${collaborators(p.collaborators)}</div>
         </div>
+        <div class="flex flex-wrap gap-1.5 mb-4">${tags(p.tags)}</div>
+      </div>
+      <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto">
+        <div class="flex items-center gap-4">${footerLinks}</div>
+        <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
       </div>
     </div>
   </div>`;
 }
 
-function projectMarqueeShell(cardsHtml) {
+function hackathonGridCard(h) {
   return `
-  <div class="infinite-marquee-viewport" aria-label="Infinite continuous projects marquee">
-    <div class="infinite-marquee-track">
-      ${cardsHtml}
-      ${cardsHtml}
-    </div>
-  </div>`;
-}
-
-function hackathonMarqueeCard(h) {
-  return `
-  <div class="marquee-card-item">
-    <div class="ag-card premium-card h-full group hov-card-border transition cursor-pointer"
-         data-cert-img="${h.img}"
-         data-cert-title="${h.certTitle}"
-         data-cert-subtitle="${h.certSubtitle}">
-      <div class="ag-inner p-3.5 flex flex-col justify-between h-full">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[9px] font-mono text-accentGold uppercase tracking-wider font-semibold truncate max-w-[130px]">${h.org}</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border border-accentGold/30 text-accentGold">${h.badge.label}</span>
+  <div class="ag-card premium-card h-full group hov-card-border transition cursor-pointer"
+       data-cert-img="${h.img}"
+       data-cert-title="${h.certTitle}"
+       data-cert-subtitle="${h.certSubtitle}">
+    <div class="ag-inner p-5 flex flex-col justify-between h-full">
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <span class="text-[10px] font-mono text-accentGold uppercase tracking-wider font-semibold truncate max-w-[140px]">${h.org}</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded border border-accentGold/30 text-accentGold">${h.badge.label}</span>
+        </div>
+        
+        <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-3 bg-bgTertiary">
+          <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white font-mono text-xs font-medium">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-accentGold"></i> View Certificate
           </div>
-          
-          <div class="relative overflow-hidden rounded border border-border aspect-video mb-2.5 bg-bgTertiary">
-            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white font-mono text-[11px] font-medium">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-accentGold"></i> View
-            </div>
-          </div>
-
-          <h3 class="text-sm font-serif font-bold text-textPrimary leading-snug mb-1 hov-card-title transition line-clamp-1">${h.title}</h3>
-          <p class="text-[11px] text-textSecondary line-clamp-1 mb-2">${h.subtitle}</p>
         </div>
 
-        <div class="border-t border-border/70 pt-2 flex items-center justify-between mt-auto">
-          <span class="text-[10px] text-textMuted font-mono truncate max-w-[95px]">${h.footerLeft}</span>
-          <span class="text-[11px] font-medium text-accentGold flex items-center gap-1 group-hover:underline">
-            Inspect <i data-lucide="arrow-right" class="w-3 h-3"></i>
-          </span>
-        </div>
+        <h3 class="text-base font-serif font-bold text-textPrimary leading-snug mb-1 hov-card-title transition">${h.title}</h3>
+        <p class="text-xs text-textSecondary line-clamp-1 mb-3">${h.subtitle}</p>
+        <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-2">${h.desc}</p>
       </div>
-    </div>
-  </div>`;
-}
 
-function hackathonMarqueeShell(cardsHtml) {
-  return `
-  <div class="infinite-marquee-viewport" aria-label="Infinite continuous certifications marquee">
-    <div class="infinite-marquee-track">
-      ${cardsHtml}
-      ${cardsHtml}
+      <div class="border-t border-border/70 pt-3 flex items-center justify-between mt-auto">
+        <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
+        <span class="text-xs font-medium text-accentGold flex items-center gap-1 group-hover:underline">
+          View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </span>
+      </div>
     </div>
   </div>`;
 }
@@ -156,14 +137,18 @@ function carouselShell(id, itemsLg, itemsMd, inner) {
 export function renderAll() {
   const projectsEl = document.getElementById('projects-carousel-mount');
   if (projectsEl) {
-    const cardsHtml = PROJECTS.map(projectMarqueeCard).join('');
-    projectsEl.innerHTML = projectMarqueeShell(cardsHtml);
+    projectsEl.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        ${PROJECTS.map(projectGridCard).join('')}
+      </div>`;
   }
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
   if (hackEl) {
-    const cardsHtml = HACKATHONS.map(hackathonMarqueeCard).join('');
-    hackEl.innerHTML = hackathonMarqueeShell(cardsHtml);
+    hackEl.innerHTML = `
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        ${HACKATHONS.map(hackathonGridCard).join('')}
+      </div>`;
   }
 
   const certEl = document.getElementById('certifications-carousel-mount');
