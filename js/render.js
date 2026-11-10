@@ -68,6 +68,50 @@ function projectMarqueeShell(cardsHtml) {
   </div>`;
 }
 
+function hackathonMarqueeCard(h) {
+  return `
+  <div class="hackathon-marquee-card">
+    <div class="premium-card h-full flex flex-col justify-between group hov-card-border transition cursor-pointer"
+         data-cert-img="${h.img}"
+         data-cert-title="${h.certTitle}"
+         data-cert-subtitle="${h.certSubtitle}">
+      <div class="p-5 sm:p-6 flex flex-col justify-between h-full">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${h.badge.label}</span>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
+          <p class="text-xs text-textSecondary mb-3.5 line-clamp-1">${h.subtitle}</p>
+          <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-3.5 bg-bgTertiary shadow-sm">
+            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+              <i data-lucide="maximize-2" class="w-4 h-4 text-accentGold"></i> View Certificate
+            </div>
+          </div>
+          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${h.desc}</p>
+        </div>
+        <div class="border-t border-border pt-4 flex items-center justify-between mt-auto">
+          <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
+          <button type="button" class="text-xs font-medium text-accentGold flex items-center gap-1.5 group-hover:underline">
+            View Certificate <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function hackathonMarqueeShell(cardsHtml) {
+  return `
+  <div class="hackathon-marquee-viewport" aria-label="Infinite continuous hackathons marquee">
+    <div class="hackathon-marquee-track">
+      ${cardsHtml}
+      ${cardsHtml}
+    </div>
+  </div>`;
+}
+
 function hackathonCard(h) {
   return `
   <div class="carousel-item px-2">
@@ -154,7 +198,8 @@ export function renderAll() {
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
   if (hackEl) {
-    hackEl.innerHTML = carouselShell('hackathons', 3, 2, HACKATHONS.map(hackathonCard).join(''));
+    const cardsHtml = HACKATHONS.map(hackathonMarqueeCard).join('');
+    hackEl.innerHTML = hackathonMarqueeShell(cardsHtml);
   }
 
   const certEl = document.getElementById('certifications-carousel-mount');

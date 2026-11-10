@@ -466,4 +466,54 @@ main[id] {
   }
 }
 
+/* Continuous Smooth Infinite Marquee Reel for Hackathons & Achievements */
+.hackathon-marquee-viewport {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-block: 0.75rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.hackathon-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: hackathonMarqueeContinuous 34s linear infinite;
+  will-change: transform;
+}
+
+.hackathon-marquee-viewport:hover .hackathon-marquee-track {
+  animation-play-state: paused;
+}
+
+.hackathon-marquee-card {
+  flex: 0 0 340px;
+  width: 340px;
+  max-width: 340px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .hackathon-marquee-card {
+    flex: 0 0 280px;
+    width: 280px;
+    max-width: 280px;
+  }
+  .hackathon-marquee-track {
+    gap: 1rem;
+    animation-duration: 25s;
+  }
+}
+
+@keyframes hackathonMarqueeContinuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 
