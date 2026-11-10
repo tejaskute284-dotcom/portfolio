@@ -1,4 +1,4 @@
-// Vanilla JS Infinite Loop Carousel Module with Full-Buffer Seamless Clones & Failsafe Unlocks
+// Vanilla JS Infinite Loop Carousel Module with Continuous Auto-Play & Full Seamless Clones
 
 export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
@@ -19,6 +19,8 @@ export function initCarousel() {
 
     let isTransitioning = false;
     let transitionSafetyTimer = null;
+    let autoplayTimer = null;
+    const autoplayInterval = 3600; // 3.6s smooth continuous forward advance
 
     // Viewport-based items calculation
     const getItemsPerView = () => {
@@ -32,7 +34,7 @@ export function initCarousel() {
     };
 
     let itemsPerView = getItemsPerView();
-    // Use an entire full copy buffer for seamless infinite runway
+    // Full copy buffer on both sides for infinite runway
     const cloneCount = totalOriginals;
 
     // Clone full original set to prepend
@@ -74,14 +76,14 @@ export function initCarousel() {
       if (!animated) {
         content.style.transition = 'none';
       } else {
-        content.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+        content.style.transition = 'transform 0.55s cubic-bezier(0.25, 1, 0.5, 1)';
       }
 
       const translateValue = index * itemWidthPercent;
       content.style.transform = `translateX(-${translateValue}%)`;
     };
 
-    // Ensure buttons remain fully interactive
+    // Keep navigation buttons always enabled
     if (prevBtn) {
       prevBtn.style.opacity = '1';
       prevBtn.style.pointerEvents = 'auto';
@@ -123,9 +125,8 @@ export function initCarousel() {
       currentIndex++;
       setPosition(currentIndex, true);
 
-      // Failsafe unlock timer in case transitionend is delayed
       if (transitionSafetyTimer) clearTimeout(transitionSafetyTimer);
-      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 500);
+      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 600);
     };
 
     const goPrev = () => {
@@ -134,9 +135,8 @@ export function initCarousel() {
       currentIndex--;
       setPosition(currentIndex, true);
 
-      // Failsafe unlock timer in case transitionend is delayed
       if (transitionSafetyTimer) clearTimeout(transitionSafetyTimer);
-      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 500);
+      transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 600);
     };
 
     // Transition end listener for boundary teleportation
@@ -145,10 +145,33 @@ export function initCarousel() {
       checkBoundariesAndReset();
     });
 
+    // Auto-Play: continuous infinite forward movement
+    const startAutoplay = () => {
+      stopAutoplay();
+      autoplayTimer = setInterval(goNext, autoplayInterval);
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const resetAutoplay = () => {
+      stopAutoplay();
+      startAutoplay();
+    };
+
+    // Pause on hover so user can easily read or click cards
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
     if (prevBtn) {
       prevBtn.addEventListener('click', (e) => {
         e.preventDefault();
         goPrev();
+        resetAutoplay();
       });
     }
 
@@ -156,6 +179,7 @@ export function initCarousel() {
       nextBtn.addEventListener('click', (e) => {
         e.preventDefault();
         goNext();
+        resetAutoplay();
       });
     }
 
@@ -165,11 +189,13 @@ export function initCarousel() {
 
     carousel.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      stopAutoplay();
     }, { passive: true });
 
     carousel.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
+      startAutoplay();
     }, { passive: true });
 
     const handleSwipe = () => {
@@ -188,7 +214,8 @@ export function initCarousel() {
     };
     window.addEventListener('resize', onResize);
 
-    // Initial setup without animation
+    // Initial setup and start moving
     setPosition(currentIndex, false);
+    startAutoplay();
   });
 }
