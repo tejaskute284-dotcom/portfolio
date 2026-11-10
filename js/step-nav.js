@@ -1,4 +1,5 @@
 // Step-by-Step Interactive Section Navigator & Landing Gate Controller
+import { initCarousel } from './carousel.js?v=2.3.5';
 
 export function initStepNavigation() {
   const sections = [
@@ -24,6 +25,11 @@ export function initStepNavigation() {
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
+
+      // Re-initialize carousels now that #portfolio-main-content is visible
+      setTimeout(() => {
+        initCarousel();
+      }, 50);
 
       // Re-trigger window resize to recalculate canvas & animations
       window.dispatchEvent(new Event('resize'));

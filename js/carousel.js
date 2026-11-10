@@ -4,8 +4,17 @@ export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
 
   carousels.forEach(carousel => {
+    // If already running an autoplay timer on this carousel instance, clear it first
+    if (carousel._carouselAutoplayTimer) {
+      clearInterval(carousel._carouselAutoplayTimer);
+      carousel._carouselAutoplayTimer = null;
+    }
+
     const content = carousel.querySelector('.carousel-content');
     if (!content) return;
+
+    // Clean up any previously created clones so we can calculate fresh
+    content.querySelectorAll('.carousel-clone').forEach(el => el.remove());
 
     const originalItems = Array.from(content.children).filter(el => !el.classList.contains('carousel-clone'));
     const totalOriginals = originalItems.length;
@@ -14,13 +23,9 @@ export function initCarousel() {
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
 
-    // Clean up any previously created clones
-    content.querySelectorAll('.carousel-clone').forEach(el => el.remove());
-
     let isTransitioning = false;
     let transitionSafetyTimer = null;
-    let autoplayTimer = null;
-    const autoplayInterval = 3600; // 3.6s smooth continuous forward advance
+    const autoplayInterval = 3400; // 3.4s smooth continuous forward advance
 
     // Viewport-based items calculation
     const getItemsPerView = () => {
@@ -148,13 +153,13 @@ export function initCarousel() {
     // Auto-Play: continuous infinite forward movement
     const startAutoplay = () => {
       stopAutoplay();
-      autoplayTimer = setInterval(goNext, autoplayInterval);
+      carousel._carouselAutoplayTimer = setInterval(goNext, autoplayInterval);
     };
 
     const stopAutoplay = () => {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
+      if (carousel._carouselAutoplayTimer) {
+        clearInterval(carousel._carouselAutoplayTimer);
+        carousel._carouselAutoplayTimer = null;
       }
     };
 
@@ -168,19 +173,19 @@ export function initCarousel() {
     carousel.addEventListener('mouseleave', startAutoplay);
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
+      prevBtn.onclick = (e) => {
         e.preventDefault();
         goPrev();
         resetAutoplay();
-      });
+      };
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
+      nextBtn.onclick = (e) => {
         e.preventDefault();
         goNext();
         resetAutoplay();
-      });
+      };
     }
 
     // Touch Swipe Support for mobile devices
