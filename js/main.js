@@ -10,6 +10,7 @@ import { initCounter }          from './counter.js';
 import { initContact }          from './contact.js';
 import { initMobileNav }        from './mobile-nav.js';
 import { initCarousel }         from './carousel.js';
+import { initCardDeck }         from './card-deck.js';
 import { initCertificateModal } from './certificate-modal.js';
 import { initResumeModal }      from './resume-modal.js';
 import { initVerifyModal }      from './verify-modal.js';
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact();
   initMobileNav();
   initCarousel();       // picks up any standard .carousel-container elements
+  initCardDeck();       // interactive 3D stacked card deck for Hackathons & Achievements
   initCertificateModal();
   initResumeModal();
   initVerifyModal();

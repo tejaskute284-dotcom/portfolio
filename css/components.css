@@ -524,53 +524,117 @@ main[id] {
   }
 }
 
-/* Continuous Smooth Infinite Marquee Reel for Hackathons & Achievements */
-.hackathon-marquee-viewport {
-  overflow: hidden;
+/* Interactive 3D Stacked Card Deck for Hackathons & Achievements */
+.hackathon-deck-wrapper {
   position: relative;
   width: 100%;
-  padding-block: 0.75rem;
-  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  max-width: 680px;
+  margin-inline: auto;
+  outline: none;
 }
 
-.hackathon-marquee-track {
+.hackathon-deck-stage {
+  position: relative;
+  width: 100%;
+  height: 495px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
   display: flex;
-  gap: 1.5rem;
-  width: max-content;
-  animation: hackathonMarqueeContinuous 34s linear infinite;
-  will-change: transform;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
-.hackathon-marquee-viewport:hover .hackathon-marquee-track {
-  animation-play-state: paused;
+.hackathon-deck-card {
+  position: absolute;
+  width: 100%;
+  max-width: 390px;
+  height: 465px;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.55s ease,
+              box-shadow 0.4s ease;
+  will-change: transform, opacity;
 }
 
-.hackathon-marquee-card {
-  flex: 0 0 340px;
-  width: 340px;
-  max-width: 340px;
-  box-sizing: border-box;
+.hackathon-deck-card[data-deck-state="active"] .premium-card {
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-luxury), 0 18px 44px -14px var(--accent-gold-glow);
+}
+
+.hackathon-deck-card[data-deck-state="next-1"] .premium-card,
+.hackathon-deck-card[data-deck-state="next-2"] .premium-card,
+.hackathon-deck-card[data-deck-state="prev-1"] .premium-card {
+  filter: brightness(0.86);
+}
+
+.hackathon-deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.hackathon-deck-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-luxury);
+}
+
+.hackathon-deck-btn:hover {
+  background-color: var(--accent-gold);
+  color: #070B12;
+  border-color: var(--accent-gold);
+}
+
+.hackathon-deck-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hackathon-deck-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: var(--border);
+  border: 1px solid var(--accent-gold-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.hackathon-deck-dot.is-active {
+  width: 22px;
+  background-color: var(--accent-gold);
+  border-color: var(--accent-gold);
 }
 
 @media (max-width: 640px) {
-  .hackathon-marquee-card {
-    flex: 0 0 280px;
-    width: 280px;
-    max-width: 280px;
+  .hackathon-deck-stage {
+    height: 455px;
   }
-  .hackathon-marquee-track {
-    gap: 1rem;
-    animation-duration: 25s;
+  .hackathon-deck-card {
+    max-width: 300px;
+    height: 430px;
+  }
+  .hackathon-deck-dots {
+    display: none;
   }
 }
 
-@keyframes hackathonMarqueeContinuous {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
+@media (prefers-reduced-motion: reduce) {
+  .hackathon-deck-card {
+    transition: opacity 0.2s ease !important;
   }
 }
 

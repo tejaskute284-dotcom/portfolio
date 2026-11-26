@@ -108,10 +108,10 @@ function projectMarqueeShell(cardsHtml) {
   </div>`;
 }
 
-function hackathonMarqueeCard(h) {
+function hackathonDeckCard(h, index) {
   const safeImg = isSafeAssetPath(h.img) ? escapeHTML(h.img) : '';
   return `
-  <div class="hackathon-marquee-card">
+  <div class="hackathon-deck-card" data-deck-index="${index}">
     <div class="premium-card h-full flex flex-col justify-between group hov-card-border transition cursor-pointer"
          data-cert-img="${safeImg}"
          data-cert-title="${escapeHTML(h.certTitle)}"
@@ -144,12 +144,27 @@ function hackathonMarqueeCard(h) {
   </div>`;
 }
 
-function hackathonMarqueeShell(cardsHtml) {
+function hackathonDeckShell(cardsHtml, totalCount) {
+  const dotsHtml = Array.from({ length: totalCount }, (_, i) => `
+    <button type="button" class="hackathon-deck-dot" aria-label="Show achievement card ${i + 1}"></button>
+  `).join('');
+
   return `
-  <div class="hackathon-marquee-viewport" aria-label="Infinite continuous hackathons marquee">
-    <div class="hackathon-marquee-track">
+  <div id="hackathons-deck" class="hackathon-deck-wrapper" tabindex="0" role="region" aria-label="Hackathon and Workshop Credentials Card Deck">
+    <div class="hackathon-deck-stage">
       ${cardsHtml}
-      ${cardsHtml}
+    </div>
+    <div class="hackathon-deck-controls">
+      <button type="button" class="hackathon-deck-btn hackathon-deck-prev" aria-label="Previous Achievement Card">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <div class="flex items-center gap-3">
+        <span class="hackathon-deck-counter font-mono text-xs text-textSecondary">01 / ${String(totalCount).padStart(2, '0')}</span>
+        <div class="hackathon-deck-dots">${dotsHtml}</div>
+      </div>
+      <button type="button" class="hackathon-deck-btn hackathon-deck-next" aria-label="Next Achievement Card">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
     </div>
   </div>`;
 }
@@ -201,8 +216,8 @@ export function renderAll() {
 
   const hackEl = document.getElementById('hackathons-carousel-mount');
   if (hackEl) {
-    const cardsHtml = HACKATHONS.map(hackathonMarqueeCard).join('');
-    hackEl.innerHTML = hackathonMarqueeShell(cardsHtml);
+    const cardsHtml = HACKATHONS.map((h, i) => hackathonDeckCard(h, i)).join('');
+    hackEl.innerHTML = hackathonDeckShell(cardsHtml, HACKATHONS.length);
   }
 
   const certEl = document.getElementById('certifications-carousel-mount');
