@@ -1,693 +1,392 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { Brain, Code2, Database, Layout, Server, Terminal } from 'lucide-react';
-import { SKILLS_ORBIT_DATA } from '../data/skills.js';
-import { SkillIcon } from './Icons.jsx';
+import React, { useEffect, useRef, useState } from 'react';
 
-function createSoftDotTexture() {
-  const size = 48;
-  const canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return null;
+/* ─────────────────────────── skill data ─────────────────────────── */
+const SKILLS = [
+  { name: 'React 18',         status: 'mastered',  size: 'lg' },
+  { name: 'Express.js',       status: 'mastered',  size: 'lg' },
+  { name: 'RBAC',             status: 'mastered',  size: 'md' },
+  { name: 'SQL',              status: 'mastered',  size: 'md' },
+  { name: 'TypeScript',       status: 'mastered',  size: 'lg' },
+  { name: 'FastAPI',          status: 'learning',  size: 'lg' },
+  { name: 'MongoDB',          status: 'mastered',  size: 'md' },
+  { name: 'Prisma ORM',       status: 'learning',  size: 'lg' },
+  { name: 'Scikit-Learn',     status: 'mastered',  size: 'lg' },
+  { name: 'PostGIS',          status: 'learning',  size: 'md' },
+  { name: 'JWT Security',     status: 'mastered',  size: 'md' },
+  { name: 'NumPy',            status: 'mastered',  size: 'lg' },
+  { name: 'Postman',          status: 'mastered',  size: 'md' },
+  { name: 'Pandas',           status: 'mastered',  size: 'md' },
+  { name: 'TensorFlow',       status: 'learning',  size: 'lg' },
+  { name: 'Gemini Vision AI', status: 'learning',  size: 'lg' },
+  { name: 'Linux',            status: 'mastered',  size: 'md' },
+  { name: 'VS Code',          status: 'mastered',  size: 'md' },
+  { name: 'Lenis Scroll',     status: 'mastered',  size: 'sm' },
+  { name: 'PyTorch',          status: 'learning',  size: 'lg' },
+  { name: 'Node.js',          status: 'mastered',  size: 'lg' },
+  { name: 'Tailwind CSS',     status: 'mastered',  size: 'md' },
+  { name: 'Python',           status: 'mastered',  size: 'lg' },
+  { name: 'JavaScript',       status: 'mastered',  size: 'lg' },
+  { name: 'PostgreSQL',       status: 'mastered',  size: 'md' },
+  { name: 'MySQL',            status: 'mastered',  size: 'md' },
+  { name: 'REST APIs',        status: 'mastered',  size: 'md' },
+  { name: 'WebSockets',       status: 'learning',  size: 'md' },
+  { name: 'Framer Motion',    status: 'learning',  size: 'md' },
+  { name: 'Vite',             status: 'mastered',  size: 'md' },
+  { name: 'Chart.js',         status: 'mastered',  size: 'sm' },
+  { name: 'Git & GitHub',     status: 'mastered',  size: 'sm' },
+  { name: 'Cloudinary',       status: 'mastered',  size: 'sm' },
+  { name: 'Zod',              status: 'mastered',  size: 'sm' },
+  { name: 'DSA Algorithms',   status: 'mastered',  size: 'sm' },
+  { name: 'Leaflet.js',       status: 'mastered',  size: 'sm' },
+  { name: 'Supabase',         status: 'learning',  size: 'sm' },
+  { name: 'C / C++',          status: 'mastered',  size: 'md' },
+  { name: 'HTML5 / CSS',      status: 'mastered',  size: 'md' },
+];
 
-  const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-  g.addColorStop(0, 'rgba(255,255,255,1)');
-  g.addColorStop(0.32, 'rgba(255,255,255,0.82)');
-  g.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, size, size);
+/* Three concentric ellipses — rx/ry as fractions of container */
+const ORBITS = [
+  { rx: 0.30, ry: 0.21, tilt: -8,  count: 8  },
+  { rx: 0.52, ry: 0.34, tilt: -6,  count: 14 },
+  { rx: 0.72, ry: 0.44, tilt: -4,  count: 17 },
+];
 
-  const tex = new THREE.CanvasTexture(canvas);
-  tex.needsUpdate = true;
-  return tex;
+/* Distribute skills across orbits */
+function assignOrbits(skills, orbits) {
+  const result = [];
+  let idx = 0;
+  orbits.forEach((orbit, oIdx) => {
+    for (let i = 0; i < orbit.count && idx < skills.length; i++, idx++) {
+      const angle = (i / orbit.count) * 2 * Math.PI;
+      result.push({ ...skills[idx], orbit: oIdx, angle });
+    }
+  });
+  while (idx < skills.length) {
+    const oIdx = orbits.length - 1;
+    result.push({ ...skills[idx], orbit: oIdx, angle: Math.random() * 2 * Math.PI });
+    idx++;
+  }
+  return result;
 }
 
+/* Compute point on a tilted ellipse */
+function ellipsePoint(cx, cy, rx, ry, tiltDeg, angle) {
+  const rad = (tiltDeg * Math.PI) / 180;
+  const ex = rx * Math.cos(angle);
+  const ey = ry * Math.sin(angle);
+  return {
+    x: cx + ex * Math.cos(rad) - ey * Math.sin(rad),
+    y: cy + ex * Math.sin(rad) + ey * Math.cos(rad),
+  };
+}
+
+/* ─────────────────────────── component ─────────────────────────── */
 export default function TechnicalSkills() {
   const stageRef = useRef(null);
-  const canvasHostRef = useRef(null);
-  const badgesLayerRef = useRef(null);
-  const badgeElsRef = useRef([]);
+  const badgeRefs = useRef([]);
+  const animRef = useRef(null);
+  const [dims, setDims] = useState({ w: 1050, h: 580 });
 
-  const layoutBadges = () => {
-    const badgesLayer = badgesLayerRef.current;
-    if (!badgesLayer) return;
+  const assigned = assignOrbits(SKILLS, ORBITS);
 
-    const isMobile = window.innerWidth < 768;
-    const nodes = badgeElsRef.current.filter(Boolean);
+  /* — Canvas starfield — */
+  useEffect(() => {
+    const canvas = document.getElementById('skills-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = 0, h = 0;
 
-    if (isMobile) {
-      nodes.forEach((el) => {
-        el.style.removeProperty('--base-x');
-        el.style.removeProperty('--base-y');
-        el.style.transform = '';
-      });
-      return;
-    }
+    const resize = () => {
+      w = canvas.offsetWidth;
+      h = canvas.offsetHeight;
+      canvas.width = w;
+      canvas.height = h;
+    };
+    resize();
 
-    const W = badgesLayer.clientWidth || 1000;
-    const H = 580;
-    const padX = 32;
-    const padTop = 32;
-    const padBottom = 115;
-    const usableW = Math.max(W - padX * 2, 320);
-    const usableH = H - padTop - padBottom;
-    const centerX = W * 0.5;
-    const centerY = padTop + usableH * 0.48;
-
-    const items = nodes.map((el) => ({
-      el,
-      w: el.offsetWidth || 120,
-      h: el.offsetHeight || 36,
-      x: 0,
-      y: 0
+    const stars = Array.from({ length: 180 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.004 + 0.001,
     }));
 
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    const total = items.length;
+    let raf;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
 
-    items.forEach((b, i) => {
-      const normR = i === 0 ? 0 : Math.sqrt((i + 0.4) / total);
-      const theta = i * goldenAngle + 0.4;
-      const cx = centerX + Math.cos(theta) * (usableW * 0.46) * normR;
-      const cy = centerY + Math.sin(theta) * (usableH * 0.45) * normR;
-      b.x = cx - b.w * 0.5;
-      b.y = cy - b.h * 0.5;
-    });
+      /* deep dark gradient */
+      const bg = ctx.createRadialGradient(w * 0.5, h * 0.4, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.8);
+      bg.addColorStop(0, '#0d1626');
+      bg.addColorStop(0.6, '#080e1b');
+      bg.addColorStop(1, '#030509');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
 
-    const minGap = window.innerWidth >= 1024 ? 16 : 11;
-    for (let iter = 0; iter < 160; iter++) {
-      let moved = false;
-      for (let i = 0; i < items.length; i++) {
-        const a = items[i];
-        for (let j = i + 1; j < items.length; j++) {
-          const b = items[j];
-          const aCx = a.x + a.w * 0.5;
-          const aCy = a.y + a.h * 0.5;
-          const bCx = b.x + b.w * 0.5;
-          const bCy = b.y + b.h * 0.5;
+      /* gold centre glow */
+      const glow = ctx.createRadialGradient(w * 0.5, h * 0.52, 0, w * 0.5, h * 0.52, w * 0.4);
+      glow.addColorStop(0, 'rgba(185,154,94,0.09)');
+      glow.addColorStop(1, 'rgba(185,154,94,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, w, h);
 
-          const overlapX = (a.w + b.w) * 0.5 + minGap - Math.abs(aCx - bCx);
-          const overlapY = (a.h + b.h) * 0.5 + minGap - Math.abs(aCy - bCy);
+      stars.forEach(s => {
+        s.a += s.speed;
+        const alpha = Math.sin(s.a) * 0.4 + 0.5;
+        ctx.beginPath();
+        ctx.arc(s.x * w, s.y * h, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(209,183,126,${alpha * 0.65})`;
+        ctx.fill();
+      });
 
-          if (overlapX > 0 && overlapY > 0) {
-            moved = true;
-            if (overlapX < overlapY) {
-              const push = overlapX * 0.52;
-              const dir = aCx <= bCx ? -1 : 1;
-              a.x += dir * push;
-              b.x -= dir * push;
-            } else {
-              const push = overlapY * 0.52;
-              const dir = aCy <= bCy ? -1 : 1;
-              a.y += dir * push;
-              b.y -= dir * push;
-            }
-          }
-        }
-        a.x = Math.max(padX, Math.min(W - padX - a.w, a.x));
-        a.y = Math.max(padTop, Math.min(H - padBottom - a.h, a.y));
-      }
-      if (!moved) break;
-    }
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
 
-    items.forEach((b) => {
-      const bx = Math.round(b.x);
-      const by = Math.round(b.y);
-      b.el.style.setProperty('--base-x', `${bx}px`);
-      b.el.style.setProperty('--base-y', `${by}px`);
-      b.el.style.transform = `translate3d(${bx}px, ${by}px, 0)`;
-    });
-  };
-
-  useLayoutEffect(() => {
-    layoutBadges();
+    window.addEventListener('resize', resize);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, []);
 
+  /* — Badge float animation — */
   useEffect(() => {
-    const stage = stageRef.current;
-    const canvasHost = canvasHostRef.current;
-    if (!stage || !canvasHost) return;
-
-    const prefersReducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const getTier = () => (window.innerWidth >= 1024 ? 'desktop' : window.innerWidth >= 768 ? 'tablet' : 'mobile');
-
-    let cleanupThree = null;
-
-    const initThree = () => {
-      if (typeof cleanupThree === 'function') cleanupThree();
-
-      const tier = getTier();
-      const w = canvasHost.clientWidth || stage.clientWidth || window.innerWidth;
-      const h = canvasHost.clientHeight || stage.clientHeight || 380;
-      if (w <= 0 || h <= 0) return null;
-
-      let renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({
-          alpha: true,
-          antialias: tier !== 'mobile',
-          powerPreference: 'low-power'
-        });
-      } catch {
-        return null;
-      }
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, w / h, 1, 1000);
-      camera.position.z = 320;
-      renderer.setSize(w, h);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-      renderer.domElement.style.width = '100%';
-      renderer.domElement.style.height = '100%';
-      canvasHost.innerHTML = '';
-      canvasHost.appendChild(renderer.domElement);
-
-      const disposables = [];
-      const dotTex = createSoftDotTexture();
-      if (dotTex) disposables.push(dotTex);
-
-      const vFov = (camera.fov * Math.PI) / 180;
-      const worldH = 2 * Math.tan(vFov / 2) * camera.position.z;
-      const worldW = worldH * (w / h);
-
-      const orbitSpecs =
-        tier === 'mobile'
-          ? [{ rx: worldW * 0.42, ry: worldH * 0.34, rotZ: 0.12, rotX: 0.35, opacity: 0.28 }]
-          : [
-              { rx: worldW * 0.32, ry: worldH * 0.3, rotZ: -0.14, rotX: 0.45, opacity: 0.38 },
-              { rx: worldW * 0.42, ry: worldH * 0.37, rotZ: 0.12, rotX: 0.36, opacity: 0.28 },
-              { rx: worldW * 0.48, ry: worldH * 0.41, rotZ: -0.06, rotX: 0.28, opacity: 0.2 },
-              { rx: worldW * 0.24, ry: worldH * 0.22, rotZ: 0.2, rotX: 0.5, opacity: 0.3 }
-            ];
-
-      const orbitCurves = [];
-      const signalCount = tier === 'mobile' ? 4 : tier === 'tablet' ? 10 : 18;
-      const signalPos = new Float32Array(signalCount * 3);
-      const signalCol = new Float32Array(signalCount * 3);
-      const signalMeta = [];
-
-      orbitSpecs.forEach((spec, idx) => {
-        const segs = 110;
-        const pts = [];
-        for (let s = 0; s <= segs; s++) {
-          const a = (s / segs) * Math.PI * 2;
-          const px = Math.cos(a) * spec.rx;
-          const py = Math.sin(a) * spec.ry;
-          const pz = Math.sin(a * 2 + idx) * 20;
-
-          const cosZ = Math.cos(spec.rotZ);
-          const sinZ = Math.sin(spec.rotZ);
-          const rx1 = px * cosZ - py * sinZ;
-          const ry1 = px * sinZ + py * cosZ;
-
-          const cosX = Math.cos(spec.rotX);
-          const sinX = Math.sin(spec.rotX);
-          const ry2 = ry1 * cosX - pz * sinX + 10;
-          const rz2 = ry1 * sinX + pz * cosX - 30;
-          pts.push(new THREE.Vector3(rx1, ry2, rz2));
-        }
-        const oGeo = new THREE.BufferGeometry().setFromPoints(pts);
-        const oMat = new THREE.LineBasicMaterial({
-          color: idx % 2 === 0 ? 0xd1b77e : 0xb99a5e,
-          transparent: true,
-          opacity: spec.opacity,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false
-        });
-        scene.add(new THREE.Line(oGeo, oMat));
-        disposables.push(oGeo, oMat);
-        orbitCurves.push(pts);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const animate = (ts) => {
+      const t = ts * 0.0005;
+      badgeRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const fy = Math.sin(t * 0.9 + i * 0.73) * 3;
+        el.style.transform = `translate(-50%, calc(-50% + ${fy}px))`;
       });
-
-      for (let s = 0; s < signalCount; s++) {
-        const cIdx = s % orbitCurves.length;
-        const isBright = s % 2 === 0;
-        signalCol[s * 3] = isBright ? 0.92 : 0.78;
-        signalCol[s * 3 + 1] = isBright ? 0.84 : 0.65;
-        signalCol[s * 3 + 2] = isBright ? 0.62 : 0.42;
-        signalMeta.push({
-          curveIdx: cIdx,
-          t: Math.random(),
-          speed: 0.0009 + cIdx * 0.00025 + Math.random() * 0.0005
-        });
-      }
-
-      const signalGeo = new THREE.BufferGeometry();
-      signalGeo.setAttribute('position', new THREE.BufferAttribute(signalPos, 3));
-      signalGeo.setAttribute('color', new THREE.BufferAttribute(signalCol, 3));
-      const signalMat = new THREE.PointsMaterial({
-        size: tier === 'mobile' ? 4.2 : 6.0,
-        map: dotTex || undefined,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.95,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-      scene.add(new THREE.Points(signalGeo, signalMat));
-      disposables.push(signalGeo, signalMat);
-
-      if (tier !== 'mobile') {
-        const cornerNodes = [];
-        const cornerCount = 24;
-        const cPos = new Float32Array(cornerCount * 3);
-        for (let i = 0; i < cornerCount; i++) {
-          const isRight = i >= cornerCount / 2;
-          const x = (isRight ? 1 : -1) * (worldW * 0.3 + Math.random() * worldW * 0.22);
-          const y = worldH * 0.16 + Math.random() * worldH * 0.34;
-          const z = -60 - Math.random() * 80;
-          cPos[i * 3] = x;
-          cPos[i * 3 + 1] = y;
-          cPos[i * 3 + 2] = z;
-          cornerNodes.push(new THREE.Vector3(x, y, z));
-        }
-        const cGeo = new THREE.BufferGeometry();
-        cGeo.setAttribute('position', new THREE.BufferAttribute(cPos, 3));
-        const cMat = new THREE.PointsMaterial({
-          color: 0xd1b77e,
-          size: 3.4,
-          map: dotTex || undefined,
-          transparent: true,
-          opacity: 0.55,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false
-        });
-        scene.add(new THREE.Points(cGeo, cMat));
-        disposables.push(cGeo, cMat);
-
-        const linePts = [];
-        for (let i = 0; i < cornerNodes.length; i++) {
-          for (let j = i + 1; j < cornerNodes.length; j++) {
-            if (cornerNodes[i].distanceTo(cornerNodes[j]) < 85) {
-              linePts.push(cornerNodes[i], cornerNodes[j]);
-            }
-          }
-        }
-        if (linePts.length > 0) {
-          const lGeo = new THREE.BufferGeometry().setFromPoints(linePts);
-          const lMat = new THREE.LineBasicMaterial({
-            color: 0xb99a5e,
-            transparent: true,
-            opacity: 0.16,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-          });
-          scene.add(new THREE.LineSegments(lGeo, lMat));
-          disposables.push(lGeo, lMat);
-        }
-      }
-
-      let waveGeo = null;
-      let wavePos = null;
-      let waveCols = 0;
-      let waveRows = 0;
-
-      if (tier !== 'mobile') {
-        waveCols = tier === 'desktop' ? 54 : 32;
-        waveRows = tier === 'desktop' ? 14 : 10;
-        const totalWave = waveCols * waveRows;
-        wavePos = new Float32Array(totalWave * 3);
-        const waveCol = new Float32Array(totalWave * 3);
-        const waveW = worldW * 1.16;
-        const baseY = -worldH * 0.37;
-
-        let idx = 0;
-        for (let r = 0; r < waveRows; r++) {
-          const zNorm = r / (waveRows - 1);
-          const z = -95 + zNorm * 140;
-          const fade = Math.sin(zNorm * Math.PI) * 0.82 + 0.18;
-
-          for (let c = 0; c < waveCols; c++) {
-            const xNorm = c / (waveCols - 1);
-            wavePos[idx * 3] = (xNorm - 0.5) * waveW;
-            wavePos[idx * 3 + 1] = baseY;
-            wavePos[idx * 3 + 2] = z;
-
-            const isSpark = (r * 7 + c * 11) % 13 === 0;
-            waveCol[idx * 3] = (isSpark ? 0.94 : 0.78) * fade;
-            waveCol[idx * 3 + 1] = (isSpark ? 0.85 : 0.65) * fade;
-            waveCol[idx * 3 + 2] = (isSpark ? 0.6 : 0.4) * fade;
-            idx++;
-          }
-        }
-
-        waveGeo = new THREE.BufferGeometry();
-        waveGeo.setAttribute('position', new THREE.BufferAttribute(wavePos, 3));
-        waveGeo.setAttribute('color', new THREE.BufferAttribute(waveCol, 3));
-        const waveMat = new THREE.PointsMaterial({
-          size: 3.1,
-          map: dotTex || undefined,
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.92,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false
-        });
-        scene.add(new THREE.Points(waveGeo, waveMat));
-        disposables.push(waveGeo, waveMat);
-      }
-
-      let animId = null;
-      let isDisposed = false;
-      let isTabVisible = !document.hidden;
-      let isSectionInView = true;
-      let elapsed = 0;
-
-      const renderFrame = (step = true) => {
-        if (step) {
-          elapsed += 0.016;
-          for (let s = 0; s < signalMeta.length; s++) {
-            const m = signalMeta[s];
-            m.t = (m.t + m.speed) % 1;
-            const pts = orbitCurves[m.curveIdx];
-            const maxI = pts.length - 1;
-            const f = m.t * maxI;
-            const i0 = Math.floor(f);
-            const i1 = Math.min(i0 + 1, maxI);
-            const frac = f - i0;
-            signalPos[s * 3] = pts[i0].x + (pts[i1].x - pts[i0].x) * frac;
-            signalPos[s * 3 + 1] = pts[i0].y + (pts[i1].y - pts[i0].y) * frac;
-            signalPos[s * 3 + 2] = pts[i0].z + (pts[i1].z - pts[i0].z) * frac;
-          }
-          signalGeo.attributes.position.needsUpdate = true;
-
-          if (waveGeo && wavePos) {
-            const baseY = -worldH * 0.37;
-            let idx = 0;
-            for (let r = 0; r < waveRows; r++) {
-              for (let c = 0; c < waveCols; c++) {
-                const x = wavePos[idx * 3];
-                const z = wavePos[idx * 3 + 2];
-                wavePos[idx * 3 + 1] =
-                  baseY +
-                  Math.sin(x * 0.016 - elapsed * 0.72) * 14 +
-                  Math.cos(z * 0.024 + elapsed * 0.45) * 9;
-                idx++;
-              }
-            }
-            waveGeo.attributes.position.needsUpdate = true;
-          }
-        }
-        renderer.render(scene, camera);
-      };
-
-      const animate = () => {
-        if (isDisposed || !isTabVisible || !isSectionInView || prefersReducedQuery.matches) {
-          animId = null;
-          return;
-        }
-        animId = requestAnimationFrame(animate);
-        renderFrame(true);
-      };
-
-      const startLoop = () => {
-        if (prefersReducedQuery.matches) {
-          renderFrame(false);
-          return;
-        }
-        if (!isDisposed && isTabVisible && isSectionInView && animId === null) {
-          animId = requestAnimationFrame(animate);
-        }
-      };
-
-      const stopLoop = () => {
-        if (animId !== null) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-      };
-
-      const onVisibilityChange = () => {
-        isTabVisible = !document.hidden;
-        if (isTabVisible) startLoop();
-        else stopLoop();
-      };
-
-      const onMotionChange = () => {
-        if (prefersReducedQuery.matches) {
-          stopLoop();
-          renderFrame(false);
-        } else {
-          startLoop();
-        }
-      };
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            isSectionInView = entry.isIntersecting;
-            if (isSectionInView) startLoop();
-            else stopLoop();
-          });
-        },
-        { threshold: 0.05 }
-      );
-      observer.observe(stage);
-
-      let resizeTimer = null;
-      const onResize = () => {
-        if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          if (isDisposed) return;
-          layoutBadges();
-          if (getTier() !== tier) {
-            cleanupThree = initThree();
-            return;
-          }
-          const nw = canvasHost.clientWidth || stage.clientWidth;
-          const nh = canvasHost.clientHeight || stage.clientHeight;
-          if (nw > 0 && nh > 0) {
-            camera.aspect = nw / nh;
-            camera.updateProjectionMatrix();
-            renderer.setSize(nw, nh);
-          }
-        }, 150);
-      };
-
-      document.addEventListener('visibilitychange', onVisibilityChange);
-      window.addEventListener('resize', onResize, { passive: true });
-      prefersReducedQuery.addEventListener('change', onMotionChange);
-
-      startLoop();
-
-      return () => {
-        isDisposed = true;
-        stopLoop();
-        observer.disconnect();
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('resize', onResize);
-        prefersReducedQuery.removeEventListener('change', onMotionChange);
-        disposables.forEach((d) => {
-          if (d && typeof d.dispose === 'function') d.dispose();
-        });
-        renderer.dispose();
-        canvasHost.innerHTML = '';
-      };
+      animRef.current = requestAnimationFrame(animate);
     };
-
-    cleanupThree = initThree();
-
-    let fallbackResizeTimer = null;
-    const onFallbackResize = () => {
-      if (fallbackResizeTimer) clearTimeout(fallbackResizeTimer);
-      fallbackResizeTimer = setTimeout(layoutBadges, 150);
-    };
-    if (!cleanupThree) window.addEventListener('resize', onFallbackResize, { passive: true });
-
-    return () => {
-      if (typeof cleanupThree === 'function') cleanupThree();
-      if (!cleanupThree) window.removeEventListener('resize', onFallbackResize);
-    };
+    animRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animRef.current);
   }, []);
+
+  /* — Track container dims — */
+  useEffect(() => {
+    const update = () => {
+      const el = stageRef.current;
+      if (el) setDims({ w: el.clientWidth || 1050, h: el.clientHeight || 580 });
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const cx = dims.w * 0.5;
+  const cy = dims.h * 0.52;
 
   return (
-    <section id="skills" className="section-obsidian reveal revealed">
-      <div className="layout-container">
-        <div className="section-header">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">
-            08 / Capabilities
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-4">Technical Competencies</h2>
-          <div className="flex items-center justify-center gap-3 max-w-xs mx-auto mb-5" aria-hidden="true">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-accentGold/60" />
-            <span className="w-2 h-2 rotate-45 border border-accentGold bg-accentGold/30" />
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-accentGold/60" />
+    <section
+      id="skills"
+      className="relative py-20 overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #050a12 0%, #070b18 100%)' }}
+    >
+      {/* Canvas starfield */}
+      <canvas
+        id="skills-canvas"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 0 }}
+      />
+
+      <div className="relative z-10 layout-container">
+        {/* ── Heading ── */}
+        <div className="text-center mb-2">
+          <h2
+            className="font-display font-bold mb-2"
+            style={{
+              fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+              background: 'linear-gradient(135deg, #e2c991 0%, #b99a5e 50%, #d1b77e 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Technical Competencies
+          </h2>
+
+          {/* gold divider */}
+          <div className="flex items-center justify-center gap-1 mb-3">
+            <div className="h-px w-20" style={{ background: 'linear-gradient(to right, transparent, #b99a5e)' }} />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#b99a5e', boxShadow: '0 0 6px #b99a5e' }} />
+            <div className="h-px w-20" style={{ background: 'linear-gradient(to left, transparent, #b99a5e)' }} />
           </div>
-          <div className="flex items-center justify-center gap-6 text-xs font-mono text-textSecondary">
-            <span className="inline-flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-sm bg-bgSecondary border border-border" />
-              <span>Production Mastered</span>
+
+          {/* Legend */}
+          <div className="flex items-center justify-center gap-8 font-mono text-xs tracking-widest uppercase">
+            <span className="flex items-center gap-2 text-gray-400">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#4a7fcb', boxShadow: '0 0 7px #4a7fcb88' }} />
+              Production Mastered
             </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-accentGold animate-pulse" />
-              <span className="text-accentGoldLight font-medium">Learning in Progress</span>
+            <span className="flex items-center gap-2 text-gray-400">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#c4a04a', boxShadow: '0 0 7px #c4a04a88' }} />
+              Learning in Progress
             </span>
           </div>
         </div>
 
-        {/* Cinematic Golden Orbit & Floating Skills Constellation */}
-        <div id="skills-sphere-mount" className="relative w-full mb-12">
-          <div className="skills-orbit-stage" ref={stageRef}>
-            <div className="skills-orbit-canvas" ref={canvasHostRef} aria-hidden="true" />
-            <div className="skills-badges-layer" ref={badgesLayerRef}>
-              {SKILLS_ORBIT_DATA.map((skill, idx) => {
-                const isLearning = skill.status === 'learning';
-                const dirX = idx % 2 === 0 ? 1 : -1;
-                const dirY = idx % 3 === 0 ? -1 : 1;
-                return (
-                  <div
-                    key={skill.name}
-                    ref={(el) => {
-                      badgeElsRef.current[idx] = el;
-                    }}
-                    className={`skill-orbit-badge tier-${skill.tier} ${isLearning ? 'is-learning' : 'is-mastered'}`}
-                    title={`${skill.name} — ${isLearning ? 'Learning in Progress' : 'Production Mastered'}`}
+        {/* ── Orbital stage — desktop ── */}
+        <div
+          ref={stageRef}
+          className="relative hidden md:block mx-auto"
+          style={{ width: '100%', maxWidth: 1050, height: 580 }}
+        >
+          {/* SVG ellipse rings */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox={`0 0 ${dims.w} ${dims.h}`}
+            preserveAspectRatio="xMidYMid meet"
+            style={{ overflow: 'visible' }}
+          >
+            <defs>
+              <filter id="sk-glow">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            {ORBITS.map((o, i) => (
+              <ellipse
+                key={i}
+                cx={cx}
+                cy={cy}
+                rx={o.rx * dims.w}
+                ry={o.ry * dims.h}
+                transform={`rotate(${o.tilt}, ${cx}, ${cy})`}
+                fill="none"
+                stroke={`rgba(185,154,94,${i === 0 ? 0.35 : i === 1 ? 0.22 : 0.14})`}
+                strokeWidth={i === 0 ? 1.4 : i === 1 ? 1.1 : 0.8}
+                filter={i === 0 ? 'url(#sk-glow)' : undefined}
+              />
+            ))}
+          </svg>
+
+          {/* Centre core pulse */}
+          <div
+            className="absolute rounded-full"
+            style={{
+              left: cx, top: cy,
+              width: 80, height: 80,
+              transform: 'translate(-50%, -50%)',
+              background: 'radial-gradient(circle, rgba(185,154,94,0.18) 0%, rgba(185,154,94,0.04) 60%, transparent 100%)',
+              border: '1px solid rgba(185,154,94,0.35)',
+              boxShadow: '0 0 50px rgba(185,154,94,0.22)',
+              zIndex: 5,
+              animation: 'pulse 3s ease-in-out infinite',
+            }}
+          />
+
+          {/* Skill badges */}
+          {assigned.map((skill, i) => {
+            const o = ORBITS[skill.orbit];
+            const pt = ellipsePoint(cx, cy, o.rx * dims.w, o.ry * dims.h, o.tilt, skill.angle);
+            const isMastered = skill.status === 'mastered';
+            const isLg = skill.size === 'lg';
+            const isSm = skill.size === 'sm';
+
+            return (
+              <div
+                key={`${skill.name}-${i}`}
+                ref={el => { badgeRefs.current[i] = el; }}
+                className="absolute select-none"
+                style={{
+                  left: pt.x,
+                  top: pt.y,
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10,
+                  willChange: 'transform',
+                }}
+              >
+                <span
+                  className="flex items-center gap-1.5 rounded-full font-mono whitespace-nowrap cursor-default transition-all duration-200 hover:scale-110"
+                  style={{
+                    padding: isLg ? '5px 14px' : isSm ? '3px 9px' : '4px 11px',
+                    fontSize: isLg ? '0.76rem' : isSm ? '0.58rem' : '0.67rem',
+                    fontWeight: isLg ? 700 : 600,
+                    background: 'rgba(10,18,36,0.92)',
+                    border: isMastered
+                      ? '1px solid rgba(74,127,203,0.5)'
+                      : '1px solid rgba(196,160,74,0.6)',
+                    color: isMastered ? '#b8ccec' : '#d4b46a',
+                    boxShadow: isMastered
+                      ? '0 2px 14px rgba(74,127,203,0.14), inset 0 1px 0 rgba(255,255,255,0.04)'
+                      : '0 2px 14px rgba(196,160,74,0.18), inset 0 1px 0 rgba(255,255,255,0.04)',
+                    backdropFilter: 'blur(10px)',
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  <span
+                    className="rounded-full shrink-0"
                     style={{
-                      '--float-x': `${dirX * (2.5 + (idx % 3) * 1.0)}px`,
-                      '--float-y': `${dirY * (3 + (idx % 4) * 1.0)}px`,
-                      '--float-rot': `${dirX * 0.4}deg`,
-                      '--float-dur': `${5.6 + (idx % 5) * 0.9}s`,
-                      '--float-delay': `${-(idx % 7) * 0.65}s`
+                      width: isLg ? 7 : 6,
+                      height: isLg ? 7 : 6,
+                      background: isMastered ? '#4a7fcb' : '#c4a04a',
+                      boxShadow: isMastered ? '0 0 5px #4a7fcb' : '0 0 5px #c4a04a',
                     }}
-                  >
-                    <span className="skill-badge-icon" aria-hidden="true">
-                      <SkillIcon name={skill.icon} />
-                    </span>
-                    <span>{skill.name}</span>
-                    {isLearning && <span className="skill-badge-status" aria-hidden="true" />}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                  />
+                  {skill.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Structured Reference Grid */}
-        <div id="skills-fallback-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>Core Languages</span>
-              <Code2 className="w-5 h-5 text-accentGold" />
-            </h3>
-            <ul className="space-y-4 font-mono text-xs">
-              <li className="flex items-center justify-between pb-2 border-b border-border/50">
-                <span className="text-textSecondary">Python</span>
-                <span className="text-accentGold font-bold">Proficient</span>
-              </li>
-              <li className="flex items-center justify-between pb-2 border-b border-border/50">
-                <span className="text-textSecondary">JavaScript / TypeScript</span>
-                <span className="text-accentGold font-bold">Proficient</span>
-              </li>
-              <li className="flex items-center justify-between pb-2 border-b border-border/50">
-                <span className="text-textSecondary">C / C++</span>
-                <span className="text-accentGold font-bold">Intermediate</span>
-              </li>
-              <li className="flex items-center justify-between pb-2 border-b border-border/50">
-                <span className="text-textSecondary">SQL (MySQL, PostGIS)</span>
-                <span className="text-accentGold font-bold">Intermediate</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-textSecondary">HTML5 / Modern CSS</span>
-                <span className="text-accentGold font-bold">Advanced</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>Frontend Architecture</span>
-              <Layout className="w-5 h-5 text-accentGold" />
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'Leaflet.js', 'Chart.js', 'Lenis Scroll'].map((t) => (
-                <span key={t} className="tech-tag">
-                  {t}
-                </span>
-              ))}
-              <span className="tech-tag tech-tag-learning" title="Learning in Progress">
-                <span className="learning-beacon" />
-                <span>Framer Motion</span>
+        {/* ── Mobile fallback ── */}
+        <div className="md:hidden mt-6 flex flex-wrap gap-2 justify-center max-w-sm mx-auto">
+          {SKILLS.map((skill, i) => {
+            const isMastered = skill.status === 'mastered';
+            return (
+              <span
+                key={i}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-[0.65rem] font-semibold"
+                style={{
+                  background: 'rgba(10,18,36,0.9)',
+                  border: isMastered ? '1px solid rgba(74,127,203,0.45)' : '1px solid rgba(196,160,74,0.5)',
+                  color: isMastered ? '#b8ccec' : '#d4b46a',
+                }}
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{ background: isMastered ? '#4a7fcb' : '#c4a04a' }}
+                />
+                {skill.name}
               </span>
-            </div>
-          </div>
+            );
+          })}
+        </div>
 
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>Backend &amp; Services</span>
-              <Server className="w-5 h-5 text-accentGold" />
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['Node.js', 'Express.js', 'REST APIs', 'JWT Security', 'RBAC'].map((t) => (
-                <span key={t} className="tech-tag">
-                  {t}
-                </span>
-              ))}
-              {['FastAPI', 'WebSockets'].map((t) => (
-                <span key={t} className="tech-tag tech-tag-learning" title="Learning in Progress">
-                  <span className="learning-beacon" />
-                  <span>{t}</span>
-                </span>
-              ))}
+        {/* ── Category summary cards ── */}
+        <div className="mt-8 grid grid-cols-3 md:grid-cols-6 gap-3">
+          {[
+            { label: 'Languages',  count: 5  },
+            { label: 'Frontend',   count: 7  },
+            { label: 'Backend',    count: 6  },
+            { label: 'Databases',  count: 6  },
+            { label: 'AI / ML',    count: 7  },
+            { label: 'Toolchain',  count: 8  },
+          ].map(cat => (
+            <div
+              key={cat.label}
+              className="text-center px-2 py-3 rounded-xl"
+              style={{
+                background: 'rgba(10,18,36,0.75)',
+                border: '1px solid rgba(185,154,94,0.14)',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              <div className="font-mono text-[9px] tracking-widest uppercase text-gray-500 mb-0.5">{cat.label}</div>
+              <div className="font-bold text-base" style={{ color: '#b99a5e' }}>{cat.count}+</div>
             </div>
-          </div>
-
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>Persistence &amp; Storage</span>
-              <Database className="w-5 h-5 text-accentGold" />
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['MySQL', 'MongoDB & Atlas', 'PostgreSQL'].map((t) => (
-                <span key={t} className="tech-tag">
-                  {t}
-                </span>
-              ))}
-              {['PostGIS (Geospatial)', 'Prisma ORM', 'Supabase'].map((t) => (
-                <span key={t} className="tech-tag tech-tag-learning" title="Learning in Progress">
-                  <span className="learning-beacon" />
-                  <span>{t}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>AI / ML &amp; Mathematics</span>
-              <Brain className="w-5 h-5 text-accentGold" />
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['NumPy', 'Pandas', 'DSA Algorithms', 'Scikit-Learn'].map((t) => (
-                <span key={t} className="tech-tag">
-                  {t}
-                </span>
-              ))}
-              {['TensorFlow', 'PyTorch', 'Gemini Vision AI'].map((t) => (
-                <span key={t} className="tech-tag tech-tag-learning" title="Learning in Progress">
-                  <span className="learning-beacon" />
-                  <span>{t}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="premium-card">
-            <h3 className="text-xl font-bold text-textPrimary mb-6 flex items-center justify-between">
-              <span>Toolchain &amp; Workflow</span>
-              <Terminal className="w-5 h-5 text-accentGold" />
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {['Git & GitHub', 'Postman', 'Linux', 'VS Code', 'Cloudinary', 'Zod'].map((t) => (
-                <span key={t} className="tech-tag">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+          50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+        }
+      `}</style>
     </section>
   );
 }

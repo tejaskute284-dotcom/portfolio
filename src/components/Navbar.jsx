@@ -2,6 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FileText, Menu, X } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from './Icons.jsx';
 
+/* Smooth-scroll to section with 80 px navbar offset */
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export default function Navbar({ activeSection, onOpenResume }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const menuBtnRef = useRef(null);
@@ -32,32 +40,36 @@ export default function Navbar({ activeSection, onOpenResume }) {
   }, [drawerOpen]);
 
   const navLinks = [
-    { href: '#hero', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#contact', label: 'Contact' }
+    { id: 'hero',       label: 'Home' },
+    { id: 'about',      label: 'About' },
+    { id: 'skills',     label: 'Skills' },
+    { id: 'projects',   label: 'Projects' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'contact',    label: 'Contact' }
   ];
 
   const drawerLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#hackathons', label: 'Achievements' },
-    { href: '#education', label: 'Education' },
-    { href: '#certifications', label: 'Credentials' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#github-stats', label: 'GitHub' },
-    { href: '#future-vision', label: 'Research' },
-    { href: '#contact', label: 'Contact' }
+    { id: 'about',        label: 'About' },
+    { id: 'projects',     label: 'Projects' },
+    { id: 'experience',   label: 'Experience' },
+    { id: 'hackathons',   label: 'Achievements' },
+    { id: 'education',    label: 'Education' },
+    { id: 'certifications', label: 'Credentials' },
+    { id: 'skills',       label: 'Skills' },
+    { id: 'github-stats', label: 'GitHub' },
+    { id: 'future-vision',label: 'Research' },
+    { id: 'contact',      label: 'Contact' }
   ];
 
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-40 frosted-glass transition-colors duration-400">
         <div className="layout-container h-20 flex items-center justify-between gap-4">
-          <a href="#hero" className="monogram-mark text-xl tracking-wider hover:opacity-90 transition shrink-0">
+          <a
+            href="#hero"
+            onClick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
+            className="monogram-mark text-xl tracking-wider hover:opacity-90 transition shrink-0"
+          >
             <span className="w-8 h-8 rounded-full border border-accentGoldMuted/70 flex items-center justify-center text-xs font-display font-bold text-accentGoldMuted">
               TK
             </span>
@@ -68,15 +80,16 @@ export default function Navbar({ activeSection, onOpenResume }) {
 
           <nav className="hidden xl:flex items-center gap-7 font-mono text-[11px] tracking-widest uppercase font-medium text-textSecondary shrink">
             {navLinks.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={`nav-link hover:text-textPrimary transition whitespace-nowrap ${
-                  activeSection === item.href.slice(1) ? 'active text-textPrimary' : ''
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => scrollToSection(item.id)}
+                className={`nav-link hover:text-textPrimary transition whitespace-nowrap bg-transparent border-none cursor-pointer ${
+                  activeSection === item.id ? 'active text-textPrimary' : ''
                 }`}
               >
                 {item.label}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -168,14 +181,14 @@ export default function Navbar({ activeSection, onOpenResume }) {
 
           <nav className="flex flex-col gap-3 mt-6 font-mono text-xs tracking-wider uppercase font-medium text-textSecondary">
             {drawerLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => closeDrawer(false)}
-                className="hover:text-accentGold transition py-2 border-b border-border/50"
+              <button
+                key={link.id}
+                type="button"
+                onClick={() => { scrollToSection(link.id); closeDrawer(false); }}
+                className="text-left hover:text-accentGold transition py-2 border-b border-border/50 bg-transparent border-t-0 border-x-0 cursor-pointer"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
             <button
               type="button"
