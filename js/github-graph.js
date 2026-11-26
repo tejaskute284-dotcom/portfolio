@@ -32,19 +32,19 @@ export function renderGitHubGraph(liveContributions = null, statusMessage = null
   const getCellStyles = (level) => {
     if (isDark) {
       switch (level) {
-        case 1: return { fill: '#6B5424', stroke: 'rgba(213, 178, 107, 0.4)' };
-        case 2: return { fill: '#A37E32', stroke: 'rgba(213, 178, 107, 0.6)' };
-        case 3: return { fill: '#D5B26B', stroke: '#E8C56E' };
-        case 4: return { fill: '#F2D38B', stroke: '#FFF0B8' };
-        default: return { fill: '#1A1A22', stroke: 'rgba(255, 255, 255, 0.05)' };
+        case 1: return { fill: '#4A4336', stroke: 'rgba(198, 167, 106, 0.35)' };
+        case 2: return { fill: '#7A6744', stroke: 'rgba(198, 167, 106, 0.55)' };
+        case 3: return { fill: '#A88C55', stroke: '#C6A76A' };
+        case 4: return { fill: '#C6A76A', stroke: '#D8BC85' };
+        default: return { fill: '#0B1424', stroke: '#2C394D' };
       }
     } else {
       switch (level) {
-        case 1: return { fill: '#E8D4A8', stroke: '#D5B26B' };
-        case 2: return { fill: '#D5B26B', stroke: '#B88E3E' };
-        case 3: return { fill: '#BA8D36', stroke: '#966D20' };
-        case 4: return { fill: '#8C6415', stroke: '#694705' };
-        default: return { fill: '#E6E0D6', stroke: 'rgba(26, 26, 28, 0.08)' };
+        case 1: return { fill: '#E6D6B8', stroke: '#D8BC85' };
+        case 2: return { fill: '#D8BC85', stroke: '#C6A76A' };
+        case 3: return { fill: '#C6A76A', stroke: '#8E7037' };
+        case 4: return { fill: '#8E7037', stroke: '#202A38' };
+        default: return { fill: '#ECE9E1', stroke: '#E5E0D5' };
       }
     }
   };
@@ -84,7 +84,7 @@ export function renderGitHubGraph(liveContributions = null, statusMessage = null
   });
 
   let svgContent = '';
-  const labelColor = isDark ? '#8E8A84' : '#6A655E';
+  const labelColor = isDark ? '#B7C0CE' : '#667085';
 
   Object.keys(monthHeaderMap).forEach((wStr) => {
     const w = parseInt(wStr, 10);

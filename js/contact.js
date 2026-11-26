@@ -76,18 +76,18 @@ export function initContact() {
 
       // Client-side validation
       if (!name || name.length < 2) {
-        showStatus("Please enter your name (at least 2 characters).", "text-xs font-mono text-red-400 font-semibold");
+        showStatus("Please enter your name (at least 2 characters).", "text-xs font-mono status-error font-semibold");
         return;
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
       if (!email || !emailRegex.test(email)) {
-        showStatus("Please enter a valid email address.", "text-xs font-mono text-red-400 font-semibold");
+        showStatus("Please enter a valid email address.", "text-xs font-mono status-error font-semibold");
         return;
       }
 
       if (!message || message.length < 10) {
-        showStatus("Please enter a message (at least 10 characters).", "text-xs font-mono text-red-400 font-semibold");
+        showStatus("Please enter a message (at least 10 characters).", "text-xs font-mono status-error font-semibold");
         return;
       }
 
@@ -99,7 +99,7 @@ export function initContact() {
         submitBtn.textContent = "Sending...";
       }
 
-      showStatus("Sending message to Tejas...", "text-xs font-mono text-accentBlue flex items-center gap-2");
+      showStatus("Sending message to Tejas...", "text-xs font-mono text-accentGold flex items-center gap-2");
 
       try {
         const controller = new AbortController();
@@ -128,7 +128,7 @@ export function initContact() {
         if (response.ok && result.success) {
           showStatus(
             "✓ Message sent successfully! Notification delivered to Tejas.",
-            "text-xs font-mono text-emerald-400 font-semibold",
+            "text-xs font-mono status-success font-semibold",
             8000
           );
           contactForm.reset();
@@ -139,7 +139,7 @@ export function initContact() {
         console.error('Contact form submission failed:', error);
         showStatus(
           "✕ Delivery failed due to a network or API error. Please email tejaskute284@gmail.com directly.",
-          "text-xs font-mono text-red-400 font-semibold"
+          "text-xs font-mono status-error font-semibold"
         );
       } finally {
         isSubmitting = false;

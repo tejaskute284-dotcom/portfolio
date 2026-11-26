@@ -1,29 +1,33 @@
-﻿/* CSS Custom Properties & Design Tokens — Classic Luxury Editorial x Modern Minimal */
+/* CSS Custom Properties & Design Tokens — Midnight Navy × Muted Gold × Off-White */
 :root {
-  /* Warm Ivory Editorial Light Mode */
-  --bg-primary: #FAF8F5;
+  /* Light Theme: Off-White & Midnight Navy */
+  --bg-primary: #F5F3EE;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F3EFEA;
+  --bg-tertiary: #ECE9E1;
   --bg-elevated: #FFFFFF;
-  
-  /* Champagne Gold & Muted Metallic Accents */
-  --accent-gold: #C5A880;
-  --accent-gold-muted: #D5B26B;
-  --accent-gold-light: #DFC7A5;
-  --accent-gold-dark: #9A7B56;
-  --accent-gold-glow: rgba(213, 178, 107, 0.22);
-  --accent-gold-border: rgba(213, 178, 107, 0.35);
+  --bg-navy: #101A2C;
+  --bg-deep-navy: #0B1424;
 
-  /* Deep Charcoal & Editorial Black Typography */
-  --text-primary: #1A1A1C;
-  --text-secondary: #5C5854;
-  --text-muted: #8E8A84;
+  /* Muted Gold & Soft Gold Accents */
+  --accent-gold: #C6A76A;
+  --accent-gold-muted: #C6A76A;
+  --accent-gold-light: #D8BC85;
+  --accent-gold-dark: #8E7037;
+  --accent-gold-glow: rgba(198, 167, 106, 0.18);
+  --accent-gold-border: rgba(198, 167, 106, 0.4);
 
-  /* Refined Hairline Borders & Shadows */
-  --border: rgba(26, 26, 28, 0.08);
-  --border-gold: rgba(197, 168, 128, 0.35);
-  --shadow-luxury: 0 16px 40px -12px rgba(26, 26, 28, 0.06);
-  --shadow-gold: 0 20px 48px -12px rgba(197, 168, 128, 0.22);
+  /* Typography Colours on Light */
+  --text-primary: #202A38;
+  --text-secondary: #667085;
+  --text-muted: #667085;
+
+  /* Borders, Status & Shadows */
+  --border: #E5E0D5;
+  --border-gold: rgba(198, 167, 106, 0.45);
+  --color-success: #287A58;
+  --color-error: #C14F4F;
+  --shadow-luxury: 0 16px 40px -12px rgba(16, 26, 44, 0.08);
+  --shadow-gold: 0 20px 48px -12px rgba(198, 167, 106, 0.18);
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -32,34 +36,40 @@
   --font-display: 'Playfair Display', Georgia, serif;
 
   /* Vertical Section Rhythm & Spacing Tokens */
-  --section-gap: clamp(4rem, 8vw, 7rem);       /* between sections */
-  --section-title-gap: clamp(2rem, 4vw, 3rem); /* title → content */
-  --card-gap: 1.5rem;                           /* gap between cards in a grid */
-  --card-padding: clamp(1.25rem, 3vw, 2rem);   /* internal card padding */
+  --section-gap: clamp(4rem, 8vw, 7rem);
+  --section-title-gap: clamp(2rem, 4vw, 3rem);
+  --card-gap: 1.5rem;
+  --card-padding: clamp(1.25rem, 3vw, 2rem);
 }
 
 [data-theme="dark"] {
-  /* Deep Noir Obsidian Luxury Dark Mode */
-  --bg-primary: #0C0C0E;
-  --bg-secondary: #141418;
-  --bg-tertiary: #1C1C22;
-  --bg-elevated: #181820;
+  /* Dark Theme: Midnight Navy & Deep Navy */
+  --bg-primary: #101A2C;
+  --bg-secondary: #17243A;
+  --bg-tertiary: #0B1424;
+  --bg-elevated: #17243A;
+  --bg-navy: #101A2C;
+  --bg-deep-navy: #0B1424;
 
-  --accent-gold: #D4AF37;
-  --accent-gold-muted: #D5B26B;
-  --accent-gold-light: #E7C968;
-  --accent-gold-dark: #A98322;
-  --accent-gold-glow: rgba(213, 178, 107, 0.22);
-  --accent-gold-border: rgba(213, 178, 107, 0.35);
+  --accent-gold: #C6A76A;
+  --accent-gold-muted: #D8BC85;
+  --accent-gold-light: #D8BC85;
+  --accent-gold-dark: #A88B52;
+  --accent-gold-glow: rgba(198, 167, 106, 0.2);
+  --accent-gold-border: rgba(198, 167, 106, 0.35);
 
-  --text-primary: #F5F2EB;
-  --text-secondary: #A8A49C;
-  --text-muted: #6E6A63;
+  /* Typography Colours on Dark */
+  --text-primary: #F5F3EE;
+  --text-secondary: #B7C0CE;
+  --text-muted: #8C99AD;
 
-  --border: rgba(245, 242, 235, 0.08);
-  --border-gold: rgba(212, 175, 55, 0.3);
-  --shadow-luxury: 0 16px 40px -12px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 20px 48px -12px rgba(212, 175, 55, 0.15);
+  /* Borders, Status & Shadows */
+  --border: #2C394D;
+  --border-gold: rgba(198, 167, 106, 0.35);
+  --color-success: #3AA879;
+  --color-error: #E06C6C;
+  --shadow-luxury: 0 16px 40px -12px rgba(11, 20, 36, 0.65);
+  --shadow-gold: 0 20px 48px -12px rgba(198, 167, 106, 0.14);
 }
 
 /* Base Styles */
@@ -177,5 +187,5 @@ section {
 /* Selection highlight */
 ::selection {
   background-color: var(--accent-gold);
-  color: #1A1A1C;
+  color: #101A2C;
 }

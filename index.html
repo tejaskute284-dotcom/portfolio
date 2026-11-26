@@ -6,18 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tejas Sharad Kute — AI/ML Enthusiast & Full-Stack Developer</title>
 
-  <!-- Critical Anti-FOUC Paint: Prevents any white flash on refresh -->
+  <!-- Critical Anti-FOUC Paint: Prevents any flash on refresh -->
   <style>
     html,
     body {
-      background-color: #0C0C0E !important;
-      color: #F5F2EB;
+      background-color: #101A2C !important;
+      color: #F5F3EE;
     }
 
     html[data-theme="light"],
     html[data-theme="light"] body {
-      background-color: #FAF8F5 !important;
-      color: #1A1A1C;
+      background-color: #F5F3EE !important;
+      color: #202A38;
     }
   </style>
   <script>
@@ -62,6 +62,8 @@
             bgSecondary: 'var(--bg-secondary)',
             bgTertiary: 'var(--bg-tertiary)',
             bgElevated: 'var(--bg-elevated)',
+            bgNavy: 'var(--bg-navy)',
+            bgDeepNavy: 'var(--bg-deep-navy)',
             accentGold: 'var(--accent-gold)',
             accentGoldMuted: 'var(--accent-gold-muted)',
             accentGoldLight: 'var(--accent-gold-light)',
@@ -69,8 +71,11 @@
             textPrimary: 'var(--text-primary)',
             textSecondary: 'var(--text-secondary)',
             textMuted: 'var(--text-muted)',
+            border: 'var(--border)',
             borderBase: 'var(--border)',
             borderGold: 'var(--border-gold)',
+            successColor: 'var(--color-success)',
+            errorColor: 'var(--color-error)',
           },
           fontFamily: {
             serif: ['Cormorant Garamond', 'Georgia', 'serif'],
@@ -132,7 +137,7 @@
       <div class="flex items-center gap-3 shrink-0">
         <!-- Resume Trigger Button -->
         <button type="button"
-          class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#1A1A1C] transition duration-300">
+          class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#101A2C] transition duration-300">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           <span>Resume</span>
         </button>
@@ -1216,7 +1221,7 @@
             </div>
             <!-- Tooltip -->
             <span
-              class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#1A1A1C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
+              class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#101A2C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
               Click to Copy
             </span>
           </a>

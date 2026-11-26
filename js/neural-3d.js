@@ -71,7 +71,7 @@ export function initNeural3D() {
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
   const particleMat = new THREE.PointsMaterial({
-    color: 0xD5B26B,
+    color: 0xC6A76A,
     size: 4.5,
     transparent: true,
     opacity: 0.75,
@@ -164,9 +164,9 @@ export function initNeural3D() {
           linePositions[lineIdx++] = pos[j * 3 + 2];
 
           for (let k = 0; k < 2; k++) {
-            lineColors[colorIdx++] = 0.835 * alpha;
-            lineColors[colorIdx++] = 0.698 * alpha;
-            lineColors[colorIdx++] = 0.420 * alpha;
+            lineColors[colorIdx++] = 0.776 * alpha;
+            lineColors[colorIdx++] = 0.655 * alpha;
+            lineColors[colorIdx++] = 0.416 * alpha;
           }
           connectedLines++;
         }

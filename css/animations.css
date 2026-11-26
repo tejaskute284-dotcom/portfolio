@@ -5,15 +5,13 @@
   display: inline-block;
   transform-style: preserve-3d;
   perspective: 800px;
-  text-shadow: 0 1px 0 rgba(213, 178, 107, 0.4),
-               0 2px 0 rgba(213, 178, 107, 0.25),
-               0 6px 14px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 0 rgba(198, 167, 106, 0.3),
+               0 4px 12px rgba(16, 26, 44, 0.14);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
 }
 [data-theme="dark"] .hero-name-3d {
-  text-shadow: 0 1px 0 rgba(213, 178, 107, 0.35),
-               0 2px 4px rgba(0, 0, 0, 0.8),
-               0 8px 24px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 1px 0 rgba(198, 167, 106, 0.25),
+               0 4px 18px rgba(11, 20, 36, 0.85);
 }
 
 /* Stat Cards — Clean Flat Luxury Styling */
@@ -47,7 +45,7 @@
 }
 
 .gold-gradient-text {
-  background: linear-gradient(120deg, #9A7B56 0%, #C5A880 25%, #EEDBBF 50%, #C5A880 75%, #9A7B56 100%);
+  background: linear-gradient(120deg, #8E7037 0%, #C6A76A 35%, #D8BC85 50%, #C6A76A 65%, #8E7037 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -56,7 +54,7 @@
 }
 
 [data-theme="dark"] .gold-gradient-text {
-  background: linear-gradient(120deg, #D4AF37 0%, #F5E1A4 30%, #FFF3D1 50%, #F5E1A4 70%, #D4AF37 100%);
+  background: linear-gradient(120deg, #C6A76A 0%, #D8BC85 35%, #F5F3EE 50%, #D8BC85 65%, #C6A76A 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
