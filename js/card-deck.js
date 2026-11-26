@@ -25,7 +25,6 @@ export function initCardDeck() {
   const total = cards.length;
   let activeIndex = 0;
   let autoTimer = null;
-  let isHovered = false;
   let isInView = true;
 
   const updateDeck = () => {
@@ -107,8 +106,12 @@ export function initCardDeck() {
 
   const startAuto = () => {
     stopAuto();
-    if (prefersReducedQuery.matches || document.hidden || isHovered || !isInView) return;
-    autoTimer = setInterval(goNext, 4800);
+    if (prefersReducedQuery.matches || document.hidden || !isInView) return;
+    autoTimer = setInterval(() => {
+      const certModal = document.getElementById('certificate-modal');
+      if (certModal && !certModal.classList.contains('hidden')) return;
+      goNext();
+    }, 2600);
   };
 
   const resetAuto = () => {
@@ -185,6 +188,7 @@ export function initCardDeck() {
     if (e.button !== 0) return;
     isPointerDown = true;
     startX = e.clientX;
+    stopAuto();
   };
 
   const onMouseUp = (e) => {
@@ -202,19 +206,12 @@ export function initCardDeck() {
 
       if (diff > 0) goNext();
       else goPrev();
-      resetAuto();
     }
-  };
-
-  const onMouseEnter = () => {
-    isHovered = true;
-    stopAuto();
+    resetAuto();
   };
 
   const onMouseLeave = () => {
-    isHovered = false;
     isPointerDown = false;
-    startAuto();
   };
 
   const onVisibilityChange = () => {
@@ -241,7 +238,6 @@ export function initCardDeck() {
   stage.addEventListener('touchend', onTouchEnd, { passive: true });
   stage.addEventListener('mousedown', onMouseDown);
   window.addEventListener('mouseup', onMouseUp);
-  deckRoot.addEventListener('mouseenter', onMouseEnter);
   deckRoot.addEventListener('mouseleave', onMouseLeave);
   document.addEventListener('visibilitychange', onVisibilityChange);
   window.addEventListener('resize', onResize, { passive: true });
@@ -261,7 +257,6 @@ export function initCardDeck() {
     stage.removeEventListener('touchend', onTouchEnd);
     stage.removeEventListener('mousedown', onMouseDown);
     window.removeEventListener('mouseup', onMouseUp);
-    deckRoot.removeEventListener('mouseenter', onMouseEnter);
     deckRoot.removeEventListener('mouseleave', onMouseLeave);
     document.removeEventListener('visibilitychange', onVisibilityChange);
     window.removeEventListener('resize', onResize);
