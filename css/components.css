@@ -89,12 +89,17 @@
 }
 .portrait-backdrop-organic {
   position: absolute;
-  inset: -18px;
-  background: radial-gradient(circle at 50% 45%, rgba(185, 154, 94, 0.22) 0%, rgba(209, 183, 126, 0.08) 45%, transparent 72%);
-  border-radius: 50%;
-  filter: blur(32px);
+  inset: -14px;
+  background: radial-gradient(ellipse 68% 72% at 50% 46%, rgba(185, 154, 94, 0.24) 0%, rgba(209, 183, 126, 0.08) 46%, transparent 72%);
+  border-radius: 220px 220px 32px 32px;
+  filter: blur(26px);
   z-index: 0;
   pointer-events: none;
+  animation: portraitHaloBreath 8s ease-in-out infinite;
+}
+@keyframes portraitHaloBreath {
+  0%, 100% { opacity: 0.72; transform: scale(0.99); }
+  50% { opacity: 1; transform: scale(1.015); }
 }
 .portrait-arch-frame {
   position: relative;
@@ -103,17 +108,39 @@
   max-height: 480px;
   border-radius: 200px 200px 20px 20px;
   padding: 8px;
+  overflow: hidden;
   background: linear-gradient(180deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, var(--accent-gold-dark) 100%);
-  box-shadow: 0 25px 60px -15px var(--accent-gold-glow);
+  box-shadow: 0 24px 56px -16px rgba(185, 154, 94, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
-  transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}
+.portrait-arch-frame::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(209, 183, 126, 0.45) 48%,
+    rgba(233, 231, 225, 0.55) 50%,
+    rgba(209, 183, 126, 0.45) 52%,
+    transparent 62%
+  );
+  transform: translateX(-60%) rotate(12deg);
+  animation: archMetallicSweep 11s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes archMetallicSweep {
+  0%, 15% { transform: translateX(-65%) rotate(12deg); opacity: 0; }
+  35% { opacity: 0.85; }
+  65% { opacity: 0.85; }
+  85%, 100% { transform: translateX(65%) rotate(12deg); opacity: 0; }
 }
 .portrait-container:hover .portrait-arch-frame {
-  transform: translateY(-6px) rotateY(-3deg) rotateX(2deg);
-  box-shadow: 0 35px 70px -18px var(--accent-gold-glow);
+  box-shadow: 0 28px 64px -16px rgba(185, 154, 94, 0.32);
 }
 @media (max-width: 768px) {
   .portrait-arch-frame {
@@ -129,11 +156,12 @@
   background: var(--bg-tertiary);
   overflow: hidden;
   position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(233, 231, 225, 0.16);
 }
 @media (max-width: 768px) {
   .portrait-inner {
@@ -301,7 +329,7 @@
   color: var(--color-error);
 }
 
-/* Particles / subtle canvas overlay */
+/* Particles / subtle cinematic AI universe background */
 #particles-js {
   position: absolute;
   top: 0;
@@ -310,9 +338,20 @@
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  background-size: 32px 32px;
-  background-image: radial-gradient(var(--accent-gold-border) 0.8px, transparent 0.8px);
-  opacity: 0.65;
+  background-color: #070B12;
+  background-image:
+    radial-gradient(ellipse 46% 58% at 74% 50%, rgba(18, 29, 48, 0.72) 0%, rgba(11, 20, 36, 0.45) 55%, transparent 100%),
+    radial-gradient(ellipse 50% 65% at 24% 50%, rgba(7, 11, 18, 0.92) 0%, transparent 100%),
+    linear-gradient(to right, rgba(185, 154, 94, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(185, 154, 94, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+}
+html[data-theme="light"] #particles-js {
+  background-color: var(--bg-section-midnight);
+  background-image:
+    linear-gradient(to right, rgba(185, 154, 94, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(185, 154, 94, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
 }
 
 /* Carousel Layout & Control Styles */
@@ -589,8 +628,14 @@ main[id] {
 @media (prefers-reduced-motion: reduce) {
   .project-marquee-track,
   .hackathon-marquee-track,
-  .cert-marquee-track {
+  .cert-marquee-track,
+  .portrait-backdrop-organic,
+  .portrait-arch-frame::before {
     animation: none !important;
+  }
+  .project-marquee-track,
+  .hackathon-marquee-track,
+  .cert-marquee-track {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
