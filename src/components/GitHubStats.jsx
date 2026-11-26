@@ -157,40 +157,74 @@ export default function GitHubStats() {
     statusMessage: 'Loading live GitHub contribution matrix...'
   });
 
+  /* ── streak helper (same logic as server) ── */
+  function computeStreak(contributions) {
+    if (!Array.isArray(contributions) || contributions.length === 0) return 0;
+    const sorted = [...contributions]
+      .filter(c => c && typeof c.date === 'string' && typeof c.count === 'number')
+      .sort((a, b) => a.date.localeCompare(b.date));
+    let max = 0, cur = 0, prev = null;
+    const ONE_DAY = 86400000;
+    for (const e of sorted) {
+      const t = Date.parse(e.date + 'T00:00:00Z');
+      if (isNaN(t)) continue;
+      if (e.count > 0) {
+        cur = (prev !== null && Math.round((t - prev) / ONE_DAY) === 1) ? cur + 1 : 1;
+        if (cur > max) max = cur;
+      } else { cur = 0; }
+      prev = t;
+    }
+    return max;
+  }
+
   useEffect(() => {
     let cancelled = false;
     const controller = new AbortController();
 
     async function loadGitHub() {
+      const username = GITHUB_STATS.username;
       try {
-        const res = await fetch('/api/github', { signal: controller.signal });
+        /* ── Fetch directly from public contributions API (no backend needed) ── */
+        const res = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(username)}?y=last`,
+          { signal: controller.signal }
+        );
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         if (cancelled) return;
 
-        if (res.ok && data.available) {
+        const contributions = Array.isArray(data.contributions) ? data.contributions : [];
+        const total = (data.total && typeof data.total.lastYear === 'number')
+          ? data.total.lastYear
+          : GITHUB_STATS.totalCommits;
+        const streak = computeStreak(contributions);
+
+        if (contributions.length > 0) {
           setStats({
-            totalContributions: data.totalContributions,
-            totalRepos: data.totalRepos,
-            longestStreak: data.longestStreak,
-            contributions: data.contributions,
-            summaryText: `${data.totalContributions} contributions in the last year`,
+            totalContributions: total,
+            totalRepos: GITHUB_STATS.totalRepos,
+            longestStreak: streak || GITHUB_STATS.longestStreak,
+            contributions,
+            summaryText: `${total} contributions in the last year`,
             statusMessage: null
           });
         } else {
           setStats((prev) => ({
             ...prev,
             contributions: null,
-            summaryText: 'Live contribution activity unavailable',
-            statusMessage: data.message || 'Live GitHub contribution data temporarily unavailable.'
+            summaryText: `${total} contributions in the last year`,
+            statusMessage: 'Contribution graph temporarily unavailable.'
           }));
         }
       } catch {
         if (cancelled) return;
+        /* ── Graceful fallback: show static numbers, hide graph ── */
         setStats((prev) => ({
           ...prev,
           contributions: null,
-          summaryText: 'Live contribution activity unavailable',
-          statusMessage: 'Unable to reach GitHub API service.'
+          summaryText: `${GITHUB_STATS.totalCommits}+ contributions in the last year`,
+          statusMessage: 'Live graph temporarily unavailable — visit GitHub profile for full history.'
         }));
       }
     }
