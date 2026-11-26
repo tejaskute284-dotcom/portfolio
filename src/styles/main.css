@@ -1,0 +1,203 @@
+/* CSS Custom Properties & Design Tokens — Deep Obsidian × Midnight Navy × Antique Gold */
+:root {
+  /* Light Theme Fallback (Off-White & Midnight Navy) */
+  --bg-primary: #F4F2ED;
+  --bg-section-midnight: #ECE9E1;
+  --bg-section-navy: #E5E0D5;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #EAE7DF;
+  --bg-elevated: #FFFFFF;
+
+  /* Antique Gold & Champagne Accents */
+  --accent-gold: #B99A5E;
+  --accent-gold-muted: #B99A5E;
+  --accent-gold-light: #D1B77E;
+  --accent-gold-dark: #7E622E;
+  --accent-gold-glow: rgba(185, 154, 94, 0.15);
+  --accent-gold-border: rgba(185, 154, 94, 0.4);
+
+  /* Typography Colours on Light */
+  --text-primary: #0B1424;
+  --text-secondary: #475467;
+  --text-muted: #667085;
+
+  /* Borders, Status & Shadows */
+  --border: rgba(11, 20, 36, 0.1);
+  --border-gold: rgba(185, 154, 94, 0.45);
+  --color-success: #287A58;
+  --color-error: #C14F4F;
+  --shadow-luxury: 0 16px 40px -12px rgba(7, 11, 18, 0.08);
+  --shadow-gold: 0 20px 48px -12px rgba(185, 154, 94, 0.16);
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Playfair Display', Georgia, serif;
+
+  /* Vertical Section Rhythm & Spacing Tokens */
+  --section-gap: clamp(4rem, 8vw, 7rem);
+  --section-title-gap: clamp(2rem, 4vw, 3rem);
+  --card-gap: 1.5rem;
+  --card-padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+[data-theme="dark"] {
+  /* Ultra-Dark Cinematic Theme: Obsidian Black × Deep Midnight × Dark Navy */
+  --bg-primary: #070B12;
+  --bg-section-midnight: #0B1424;
+  --bg-section-navy: #121D30;
+  --bg-secondary: #182337;
+  --bg-tertiary: #0B1424;
+  --bg-elevated: #182337;
+
+  --accent-gold: #B99A5E;
+  --accent-gold-muted: #B99A5E;
+  --accent-gold-light: #D1B77E;
+  --accent-gold-dark: #8E723C;
+  --accent-gold-glow: rgba(185, 154, 94, 0.16);
+  --accent-gold-border: rgba(185, 154, 94, 0.35);
+
+  /* Warm White & Muted Grey Typography */
+  --text-primary: #E9E7E1;
+  --text-secondary: #929BAA;
+  --text-muted: #7A8496;
+
+  /* Borders, Status & Shadows */
+  --border: rgba(146, 155, 170, 0.14);
+  --border-gold: rgba(185, 154, 94, 0.35);
+  --color-success: #3AA879;
+  --color-error: #E06C6C;
+  --shadow-luxury: 0 20px 50px -12px rgba(0, 0, 0, 0.72);
+  --shadow-gold: 0 18px 44px -12px rgba(185, 154, 94, 0.14);
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Section Alternating Surface Hierarchy */
+.section-obsidian {
+  background-color: var(--bg-primary);
+}
+.section-midnight {
+  background-color: var(--bg-section-midnight);
+}
+.section-navy {
+  background-color: var(--bg-section-navy);
+}
+
+/* Theme switch transition only on active user toggle, not on initial refresh */
+html.theme-transitioning,
+html.theme-transitioning body,
+html.theme-transitioning section,
+html.theme-transitioning .premium-card,
+html.theme-transitioning .frosted-glass {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Typography Hierarchy Enforced */
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Consistent Layout Containers */
+.layout-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+
+/* Carousel Section container with extra gutter protection */
+.layout-container-carousel {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: clamp(2rem, 6vw, 5rem);
+}
+
+/* Standardized Vertical Rhythm across sections */
+section {
+  padding-block: var(--section-gap);
+}
+
+.section-header {
+  margin-bottom: var(--section-title-gap);
+  text-align: center;
+}
+
+.section-intro-text {
+  max-width: 60ch;
+  margin-inline: auto;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* Stat strip numbers */
+.stat-strip-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--accent-gold);
+  color: #070B12;
+}

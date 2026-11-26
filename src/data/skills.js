@@ -1,0 +1,46 @@
+export const SKILLS_ORBIT_DATA = [
+  // Primary (Tier 1)
+  { name: 'Python', tier: 'primary', status: 'mastered', icon: 'python' },
+  { name: 'JavaScript', tier: 'primary', status: 'mastered', icon: 'js' },
+  { name: 'TypeScript', tier: 'primary', status: 'mastered', icon: 'ts' },
+  { name: 'React 18', tier: 'primary', status: 'mastered', icon: 'react' },
+  { name: 'Node.js', tier: 'primary', status: 'mastered', icon: 'node' },
+  { name: 'FastAPI', tier: 'primary', status: 'learning', icon: 'fastapi' },
+  { name: 'PyTorch', tier: 'primary', status: 'learning', icon: 'pytorch' },
+  { name: 'TensorFlow', tier: 'primary', status: 'learning', icon: 'tf' },
+  { name: 'PostgreSQL', tier: 'primary', status: 'mastered', icon: 'db' },
+  { name: 'Gemini Vision AI', tier: 'primary', status: 'learning', icon: 'ai' },
+
+  // Secondary (Tier 2)
+  { name: 'C / C++', tier: 'secondary', status: 'mastered', icon: 'code' },
+  { name: 'HTML5 / Modern CSS', tier: 'secondary', status: 'mastered', icon: 'html' },
+  { name: 'SQL', tier: 'secondary', status: 'mastered', icon: 'db' },
+  { name: 'Express.js', tier: 'secondary', status: 'mastered', icon: 'node' },
+  { name: 'Tailwind CSS', tier: 'secondary', status: 'mastered', icon: 'wind' },
+  { name: 'Vite', tier: 'secondary', status: 'mastered', icon: 'bolt' },
+  { name: 'MySQL', tier: 'secondary', status: 'mastered', icon: 'db' },
+  { name: 'MongoDB & Atlas', tier: 'secondary', status: 'mastered', icon: 'leaf' },
+  { name: 'REST APIs', tier: 'secondary', status: 'mastered', icon: 'api' },
+  { name: 'JWT Security', tier: 'secondary', status: 'mastered', icon: 'shield' },
+  { name: 'Scikit-Learn', tier: 'secondary', status: 'mastered', icon: 'ml' },
+  { name: 'NumPy', tier: 'secondary', status: 'mastered', icon: 'cube' },
+  { name: 'Pandas', tier: 'secondary', status: 'mastered', icon: 'chart' },
+  { name: 'PostGIS', tier: 'secondary', status: 'learning', icon: 'db' },
+  { name: 'Prisma ORM', tier: 'secondary', status: 'learning', icon: 'prism' },
+  { name: 'Supabase', tier: 'secondary', status: 'learning', icon: 'bolt' },
+  { name: 'WebSockets', tier: 'secondary', status: 'learning', icon: 'api' },
+  { name: 'Framer Motion', tier: 'secondary', status: 'learning', icon: 'motion' },
+
+  // Additional (Tier 3)
+  { name: 'DSA Algorithms', tier: 'additional', status: 'mastered', icon: 'code' },
+  { name: 'RBAC', tier: 'additional', status: 'mastered', icon: 'shield' },
+  { name: 'Leaflet.js', tier: 'additional', status: 'mastered', icon: 'leaf' },
+  { name: 'Chart.js', tier: 'additional', status: 'mastered', icon: 'chart' },
+  { name: 'Lenis Scroll', tier: 'additional', status: 'mastered', icon: 'wind' },
+  { name: 'Git & GitHub', tier: 'additional', status: 'mastered', icon: 'git' },
+  { name: 'Postman', tier: 'additional', status: 'mastered', icon: 'rocket' },
+  { name: 'Linux', tier: 'additional', status: 'mastered', icon: 'terminal' },
+  { name: 'VS Code', tier: 'additional', status: 'mastered', icon: 'vscode' },
+  { name: 'Cloudinary', tier: 'additional', status: 'mastered', icon: 'cloud' },
+  { name: 'Zod', tier: 'additional', status: 'mastered', icon: 'shield' }
+];

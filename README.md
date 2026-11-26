@@ -1,38 +1,30 @@
 # Personal Portfolio — Tejas Sharad Kute
 
-A professional, high-performance personal portfolio website for **Tejas Sharad Kute**, B.Tech student specializing in Artificial Intelligence & Machine Learning and Full-Stack Software Developer.
+A professional, full-stack **React + Node.js** personal portfolio website for **Tejas Sharad Kute**, B.Tech student specializing in Artificial Intelligence & Machine Learning and Full-Stack Software Developer.
 
-![Tech Stack](https://img.shields.io/badge/Tech%20Stack-HTML5%20%7C%20CSS3%20%7C%20JavaScript%20(ES6%2B)-blue?style=flat-square)
-![Frameworks](https://img.shields.io/badge/Libraries-Tailwind%20%7C%20GSAP%20%7C%20Lenis-violet?style=flat-square)
+![Tech Stack](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20%7C%20Three.js-blue?style=flat-square)
+![Backend](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-green?style=flat-square)
 ![License](https://img.shields.io/badge/License-ISC-emerald?style=flat-square)
 
 ---
 
 ## ⚡ Tech Stack
 
-- **Core Technologies**: Pure HTML5, CSS3, Vanilla JavaScript (ES6 Modules)
-- **Styling**: Tailwind CSS (Utility classes via CDN), Custom CSS variables (`main.css`, `components.css`, `animations.css`)
-- **Animations & Effects**: 
-  - [GSAP](https://greensock.com/gsap/) for smooth section entrance animations
-  - [Lenis](https://lenis.darkroom.engineering/) for inertia smooth scrolling
-  - [tsParticles](https://particles.js.org/) for subtle dynamic hero background
-- **Icons & Typography**:
-  - [Lucide Icons](https://lucide.dev/)
-  - Google Fonts: *Inter* (Body), *Space Grotesk* (Headings), *JetBrains Mono* (Code & Tags)
+- **Frontend**: React 18, Vite 5, Tailwind CSS, Three.js (GLSL 3D Golden Particle Wave & Technical Skills Orbital Canvas), Lucide React Icons
+- **Backend**: Node.js + Express (`server/index.js`) with REST endpoints (`/api/health`, `/api/portfolio`, `/api/github`, `/api/contact`)
+- **Design System**: Deep Obsidian (`#070B12`) × Midnight Navy (`#0B1424` / `#121D30`) × Antique Gold (`#B99A5E`) × Warm White (`#E9E7E1`)
 
 ---
 
 ## ✨ Features
 
-- 🌓 **Dark / Light Theme Toggle**: Persistent theme state via `localStorage` with smooth transitions.
-- 📱 **Fully Responsive Layout**: Frosted glass sticky navbar, collapsible mobile navigation drawer.
-- 🚀 **Interactive Hero Section**: Live availability status badge (`Available for Internships`), typewriter text effects, and quick contact action buttons.
-- 💼 **Single-Page Data Architecture**: Data-driven rendering for Projects, Hackathons/Certificates, and Coursera Credentials.
-- 🖼️ **Interactive Modals & Lightbox**:
-  - **Resume Viewer Modal**: Embedded PDF previewer with direct download options.
-  - **Certificate Verification Modal**: Full-screen photo verification lightbox.
-- 📋 **Click-to-Copy Utility**: One-click email copying with tooltip feedback.
-- 📊 **Animated Statistics Counter**: IntersectionObserver-triggered smooth counter increments.
+- 🌌 **3D Cinematic Golden Particle Wave**: Custom GLSL `ShaderMaterial` Three.js wave landscape in the Hero section.
+- 🃏 **Interactive 3D Card Deck**: Stacked 3D card deck for Hackathons & Achievements with automatic cycling, drag/swipe, and keyboard navigation.
+- 🪐 **Golden Orbit Technical Skills**: Deterministic Vogel-phyllotaxis + AABB collision-free floating technology badges with SVG brand icons and Three.js orbital paths.
+- 💼 **Infinite Marquee Reels**: Smooth continuous marquee reels for Projects and Coursera Academic Credentials.
+- 📊 **Node.js GitHub Sync API**: Server-cached `/api/github` endpoint with accurate consecutive calendar-day streak calculation and honest offline fallback.
+- ✉️ **Validated Correspondence API**: Server-backed `/api/contact` endpoint with strict validation and Web3Forms delivery.
+- 🖼️ **Accessible Modals**: Resume PDF Viewer, Certificate Lightbox, and Credential Verification dialogs with Escape-to-close and focus restoration.
 
 ---
 
@@ -40,36 +32,19 @@ A professional, high-performance personal portfolio website for **Tejas Sharad K
 
 ```
 portfolio/
-├── index.html                  # Main entry page and layout
-├── README.md                   # Project documentation
-├── package.json                # Dependencies and npm scripts
-├── assets/                     # Media & Document Assets
-│   ├── Tejas_Kute_CV.pdf       # Resume document (PDF)
-│   ├── cryonex.jpg             # Project preview images
-│   ├── flowstate.jpg
-│   ├── nexuschat.jpg
-│   └── certificates/           # Hackathon & certificate verification photos
-├── css/                        # Stylesheets
-│   ├── main.css                # CSS Variables, resets, and core themes
-│   ├── components.css          # Cards, buttons, tabs, and layout utility styles
-│   └── animations.css          # Keyframes, hover physics, and pulse animations
-└── js/                         # JavaScript ES6 Modules
-    ├── main.js                 # Orchestrator & DOM initialization
-    ├── render.js               # Dynamic component renderer
-    ├── theme.js                # Dark/Light mode state controller
-    ├── scroll.js               # Lenis smooth scroll & IntersectionObserver reveal
-    ├── typewriter.js           # Hero typing text animations
-    ├── counter.js              # Animated stat counters
-    ├── contact.js              # Contact form & email copy handler
-    ├── mobile-nav.js           # Mobile navigation drawer controller
-    ├── carousel.js             # Projects & Hackathons carousel slider
-    ├── certificate-modal.js    # Certificate photo lightbox modal
-    ├── resume-modal.js         # Resume PDF viewer modal
-    ├── verify-modal.js         # Certification verification modal
-    └── data/                   # Single source of truth data modules
-        ├── projects.js         # Production & internship projects data
-        ├── hackathons.js       # Hackathons & certificate credentials data
-        └── certifications.js   # Coursera academic certifications data
+├── index.html                  # Vite React entry HTML
+├── package.json                # Full-stack scripts & dependencies
+├── vite.config.js              # Vite bundler & /api proxy configuration
+├── server/
+│   └── index.js                # Node.js Express server & REST APIs
+├── public/assets/              # Static images, certificates, and CV PDF
+└── src/
+    ├── main.jsx                # React root mount
+    ├── App.jsx                 # Page orchestrator & modal state
+    ├── styles/                 # main.css, components.css, animations.css
+    ├── data/                   # Single source of truth data modules
+    ├── utils/                  # URL & asset path validation helpers
+    └── components/             # Modular React UI & Three.js components
 ```
 
 ---
@@ -78,23 +53,24 @@ portfolio/
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or npx
+- npm
 
 ### Setup & Run
 
-1. Clone or open the project directory:
+1. Install dependencies:
    ```bash
-   cd portfolio
+   npm install
    ```
 
-2. Start the local development server:
+2. Start both the Node.js API server (`:5000`) and Vite React dev server (`:3000`):
    ```bash
    npm run dev
    ```
 
-3. Open your browser and navigate to:
-   ```
-   http://localhost:3000
+3. Build and run the production bundle via Node.js:
+   ```bash
+   npm run build
+   npm start
    ```
 
 ---
