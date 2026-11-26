@@ -1,33 +1,33 @@
-/* CSS Custom Properties & Design Tokens — Midnight Navy × Muted Gold × Off-White */
+/* CSS Custom Properties & Design Tokens — Deep Obsidian × Midnight Navy × Antique Gold */
 :root {
-  /* Light Theme: Off-White & Midnight Navy */
-  --bg-primary: #F5F3EE;
+  /* Light Theme Fallback (Off-White & Midnight Navy) */
+  --bg-primary: #F4F2ED;
+  --bg-section-midnight: #ECE9E1;
+  --bg-section-navy: #E5E0D5;
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #ECE9E1;
+  --bg-tertiary: #EAE7DF;
   --bg-elevated: #FFFFFF;
-  --bg-navy: #101A2C;
-  --bg-deep-navy: #0B1424;
 
-  /* Muted Gold & Soft Gold Accents */
-  --accent-gold: #C6A76A;
-  --accent-gold-muted: #C6A76A;
-  --accent-gold-light: #D8BC85;
-  --accent-gold-dark: #8E7037;
-  --accent-gold-glow: rgba(198, 167, 106, 0.18);
-  --accent-gold-border: rgba(198, 167, 106, 0.4);
+  /* Antique Gold & Champagne Accents */
+  --accent-gold: #B99A5E;
+  --accent-gold-muted: #B99A5E;
+  --accent-gold-light: #D1B77E;
+  --accent-gold-dark: #7E622E;
+  --accent-gold-glow: rgba(185, 154, 94, 0.15);
+  --accent-gold-border: rgba(185, 154, 94, 0.4);
 
   /* Typography Colours on Light */
-  --text-primary: #202A38;
-  --text-secondary: #667085;
+  --text-primary: #0B1424;
+  --text-secondary: #475467;
   --text-muted: #667085;
 
   /* Borders, Status & Shadows */
-  --border: #E5E0D5;
-  --border-gold: rgba(198, 167, 106, 0.45);
+  --border: rgba(11, 20, 36, 0.1);
+  --border-gold: rgba(185, 154, 94, 0.45);
   --color-success: #287A58;
   --color-error: #C14F4F;
-  --shadow-luxury: 0 16px 40px -12px rgba(16, 26, 44, 0.08);
-  --shadow-gold: 0 20px 48px -12px rgba(198, 167, 106, 0.18);
+  --shadow-luxury: 0 16px 40px -12px rgba(7, 11, 18, 0.08);
+  --shadow-gold: 0 20px 48px -12px rgba(185, 154, 94, 0.16);
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -43,33 +43,33 @@
 }
 
 [data-theme="dark"] {
-  /* Dark Theme: Midnight Navy & Deep Navy */
-  --bg-primary: #101A2C;
-  --bg-secondary: #17243A;
+  /* Ultra-Dark Cinematic Theme: Obsidian Black × Deep Midnight × Dark Navy */
+  --bg-primary: #070B12;
+  --bg-section-midnight: #0B1424;
+  --bg-section-navy: #121D30;
+  --bg-secondary: #182337;
   --bg-tertiary: #0B1424;
-  --bg-elevated: #17243A;
-  --bg-navy: #101A2C;
-  --bg-deep-navy: #0B1424;
+  --bg-elevated: #182337;
 
-  --accent-gold: #C6A76A;
-  --accent-gold-muted: #D8BC85;
-  --accent-gold-light: #D8BC85;
-  --accent-gold-dark: #A88B52;
-  --accent-gold-glow: rgba(198, 167, 106, 0.2);
-  --accent-gold-border: rgba(198, 167, 106, 0.35);
+  --accent-gold: #B99A5E;
+  --accent-gold-muted: #B99A5E;
+  --accent-gold-light: #D1B77E;
+  --accent-gold-dark: #8E723C;
+  --accent-gold-glow: rgba(185, 154, 94, 0.16);
+  --accent-gold-border: rgba(185, 154, 94, 0.35);
 
-  /* Typography Colours on Dark */
-  --text-primary: #F5F3EE;
-  --text-secondary: #B7C0CE;
-  --text-muted: #8C99AD;
+  /* Warm White & Muted Grey Typography */
+  --text-primary: #E9E7E1;
+  --text-secondary: #929BAA;
+  --text-muted: #7A8496;
 
   /* Borders, Status & Shadows */
-  --border: #2C394D;
-  --border-gold: rgba(198, 167, 106, 0.35);
+  --border: rgba(146, 155, 170, 0.14);
+  --border-gold: rgba(185, 154, 94, 0.35);
   --color-success: #3AA879;
   --color-error: #E06C6C;
-  --shadow-luxury: 0 16px 40px -12px rgba(11, 20, 36, 0.65);
-  --shadow-gold: 0 20px 48px -12px rgba(198, 167, 106, 0.14);
+  --shadow-luxury: 0 20px 50px -12px rgba(0, 0, 0, 0.72);
+  --shadow-gold: 0 18px 44px -12px rgba(185, 154, 94, 0.14);
 }
 
 /* Base Styles */
@@ -88,9 +88,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Section Alternating Surface Hierarchy */
+.section-obsidian {
+  background-color: var(--bg-primary);
+}
+.section-midnight {
+  background-color: var(--bg-section-midnight);
+}
+.section-navy {
+  background-color: var(--bg-section-navy);
+}
+
 /* Theme switch transition only on active user toggle, not on initial refresh */
 html.theme-transitioning,
 html.theme-transitioning body,
+html.theme-transitioning section,
 html.theme-transitioning .premium-card,
 html.theme-transitioning .frosted-glass {
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -187,5 +199,5 @@ section {
 /* Selection highlight */
 ::selection {
   background-color: var(--accent-gold);
-  color: #101A2C;
+  color: #070B12;
 }

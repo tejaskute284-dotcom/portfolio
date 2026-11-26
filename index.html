@@ -10,14 +10,14 @@
   <style>
     html,
     body {
-      background-color: #101A2C !important;
-      color: #F5F3EE;
+      background-color: #070B12 !important;
+      color: #E9E7E1;
     }
 
     html[data-theme="light"],
     html[data-theme="light"] body {
-      background-color: #F5F3EE !important;
-      color: #202A38;
+      background-color: #F4F2ED !important;
+      color: #0B1424;
     }
   </style>
   <script>
@@ -62,8 +62,8 @@
             bgSecondary: 'var(--bg-secondary)',
             bgTertiary: 'var(--bg-tertiary)',
             bgElevated: 'var(--bg-elevated)',
-            bgNavy: 'var(--bg-navy)',
-            bgDeepNavy: 'var(--bg-deep-navy)',
+            bgNavy: 'var(--bg-section-navy)',
+            bgDeepNavy: 'var(--bg-section-midnight)',
             accentGold: 'var(--accent-gold)',
             accentGoldMuted: 'var(--accent-gold-muted)',
             accentGoldLight: 'var(--accent-gold-light)',
@@ -137,7 +137,7 @@
       <div class="flex items-center gap-3 shrink-0">
         <!-- Resume Trigger Button -->
         <button type="button"
-          class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#101A2C] transition duration-300">
+          class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#070B12] transition duration-300">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           <span>Resume</span>
         </button>
@@ -242,7 +242,7 @@
   </div>
 
   <!-- 2. HERO LANDING PAGE SECTION -->
-  <section id="hero" class="relative min-h-[100dvh] flex flex-col justify-center overflow-x-hidden pt-20 sm:pt-24 pb-8 sm:pb-12">
+  <section id="hero" class="section-midnight relative min-h-[100dvh] flex flex-col justify-center overflow-x-hidden pt-20 sm:pt-24 pb-8 sm:pb-12">
     <!-- Subtle architectural dot pattern -->
     <div id="particles-js"></div>
 
@@ -444,7 +444,7 @@
     </section>
 
     <!-- 3. ABOUT SECTION -->
-    <section id="about" class="reveal">
+    <section id="about" class="section-obsidian reveal">
       <div class="layout-container">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -545,7 +545,7 @@
     </section>
 
     <!-- 4. PROJECTS SECTION -->
-    <section id="projects" class="reveal">
+    <section id="projects" class="section-navy reveal">
       <div class="layout-container-carousel">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">02
@@ -562,7 +562,7 @@
     </section>
 
     <!-- 5. EXPERIENCE SECTION -->
-    <section id="experience" class="reveal">
+    <section id="experience" class="section-obsidian reveal">
       <div class="layout-container">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">03
@@ -631,7 +631,7 @@
     </section>
 
     <!-- 6. HACKATHONS & ACHIEVEMENTS SECTION -->
-    <section id="hackathons" class="reveal">
+    <section id="hackathons" class="section-midnight reveal">
       <div class="layout-container-carousel">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">04
@@ -648,7 +648,7 @@
     </section>
 
     <!-- 7. EDUCATION SECTION -->
-    <section id="education" class="reveal">
+    <section id="education" class="section-obsidian reveal">
       <div class="layout-container">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">05
@@ -709,7 +709,7 @@
     </section>
 
     <!-- 8. GITHUB STATS SECTION -->
-    <section id="github-stats" class="reveal">
+    <section id="github-stats" class="section-navy reveal">
       <div class="layout-container">
 
         <!-- Section Header -->
@@ -911,7 +911,7 @@
     </section>
 
     <!-- 8. CERTIFICATIONS SECTION -->
-    <section id="certifications" class="reveal">
+    <section id="certifications" class="section-midnight reveal">
       <div class="layout-container-carousel">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">07
@@ -925,7 +925,7 @@
     </section>
 
     <!-- 9. SKILLS SECTION -->
-    <section id="skills" class="reveal">
+    <section id="skills" class="section-obsidian reveal">
       <div class="layout-container">
         <!-- Section Header -->
         <div class="section-header">
@@ -1097,7 +1097,7 @@
     </section>
 
     <!-- 10. RESEARCH & FUTURE VISION -->
-    <section id="future-vision" class="reveal">
+    <section id="future-vision" class="section-navy reveal">
       <div class="layout-container">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">09
@@ -1191,7 +1191,7 @@
     </section>
 
     <!-- 12. CONTACT SECTION -->
-    <section id="contact" class="reveal">
+    <section id="contact" class="section-midnight reveal">
       <div class="layout-container">
         <div class="section-header">
           <span class="text-[11px] font-mono uppercase tracking-widest text-accentGoldMuted font-semibold mb-2 block">10
@@ -1221,7 +1221,7 @@
             </div>
             <!-- Tooltip -->
             <span
-              class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#101A2C] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
+              class="copy-tooltip absolute right-6 top-1/2 -translate-y-1/2 bg-accentGold text-[#070B12] text-xs px-2.5 py-1 rounded opacity-0 transition-opacity duration-300 pointer-events-none font-semibold">
               Click to Copy
             </span>
           </a>
@@ -1317,7 +1317,7 @@
     </section>
 
     <!-- 13. FOOTER -->
-    <footer class="border-t border-border py-12 bg-bgSecondary">
+    <footer class="border-t border-border py-12 bg-bgPrimary">
       <div class="layout-container flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
           <span class="w-6 h-6 rounded-full border border-accentGold/60 flex items-center justify-center text-[10px] font-display font-bold text-accentGold">TK</span>
