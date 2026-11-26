@@ -638,6 +638,168 @@ main[id] {
   }
 }
 
+/* Cinematic Golden Orbit Technical Skills Stage & Floating Badges */
+.skills-orbit-stage {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(18, 29, 48, 0.72) 0%, rgba(11, 20, 36, 0.9) 55%, #070B12 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-luxury);
+}
+
+.skills-orbit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.skills-badges-layer {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  z-index: 2;
+}
+
+.skill-orbit-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  user-select: none;
+  cursor: default;
+  background: rgba(18, 29, 48, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  border: 1px solid rgba(146, 155, 170, 0.24);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.65);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              background-color 0.3s ease;
+  animation: skillBadgeFloat var(--float-dur, 7s) ease-in-out var(--float-delay, 0s) infinite alternate;
+  will-change: transform;
+}
+
+/* Tier 1: Primary Skills */
+.skill-orbit-badge.tier-primary {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.5rem 1.05rem;
+  border-color: rgba(185, 154, 94, 0.55);
+  background: rgba(24, 35, 55, 0.82);
+  box-shadow: 0 10px 28px -10px rgba(185, 154, 94, 0.28);
+}
+
+/* Tier 2: Secondary Skills */
+.skill-orbit-badge.tier-secondary {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.88rem;
+  border-color: rgba(146, 155, 170, 0.28);
+}
+
+/* Tier 3: Additional Skills */
+.skill-orbit-badge.tier-additional {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  padding: 0.32rem 0.75rem;
+  color: var(--text-secondary);
+  border-color: rgba(146, 155, 170, 0.2);
+}
+
+/* Learning in Progress indicator inside badge */
+.skill-orbit-badge.is-learning {
+  border-style: dashed;
+  border-color: rgba(209, 183, 126, 0.55);
+}
+
+.skill-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: var(--text-secondary);
+  opacity: 0.55;
+}
+
+.skill-orbit-badge.is-learning .skill-badge-dot {
+  background-color: var(--accent-gold-light);
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(209, 183, 126, 0.75);
+}
+
+.skill-orbit-badge:hover {
+  z-index: 40 !important;
+  border-color: var(--accent-gold-light);
+  background: rgba(24, 35, 55, 0.96);
+  color: var(--text-primary);
+  box-shadow: 0 12px 30px -8px rgba(185, 154, 94, 0.42);
+  animation-play-state: paused;
+  transform: translate3d(var(--base-x, 0px), var(--base-y, 0px), 0) scale(1.07) !important;
+}
+
+@keyframes skillBadgeFloat {
+  0% {
+    transform: translate3d(var(--base-x, 0px), var(--base-y, 0px), 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(
+      calc(var(--base-x, 0px) + var(--float-x, 4px)),
+      calc(var(--base-y, 0px) + var(--float-y, -5px)),
+      0
+    ) rotate(var(--float-rot, 0.5deg));
+  }
+}
+
+/* Compact Mobile Layout (zero overlap, no horizontal scroll) */
+@media (max-width: 767px) {
+  .skills-orbit-stage {
+    min-height: auto;
+    padding: 1.5rem 1rem 2rem;
+  }
+  .skills-badges-layer {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .skill-orbit-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    animation: skillBadgeFloatMobile var(--float-dur, 6s) ease-in-out var(--float-delay, 0s) infinite alternate;
+  }
+  .skill-orbit-badge:hover {
+    transform: scale(1.05) !important;
+  }
+}
+
+@keyframes skillBadgeFloatMobile {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-orbit-badge {
+    animation: none !important;
+  }
+}
+
 /* Continuous Smooth Infinite Marquee Reel for Coursera Academic Credentials */
 .cert-marquee-viewport {
   overflow: hidden;
