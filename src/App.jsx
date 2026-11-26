@@ -11,7 +11,6 @@ import Certifications from './components/Certifications.jsx';
 import TechnicalSkills from './components/TechnicalSkills.jsx';
 import ResearchVision from './components/ResearchVision.jsx';
 import Contact from './components/Contact.jsx';
-import StepNavigator from './components/StepNavigator.jsx';
 import { GitHubIcon, LinkedInIcon } from './components/Icons.jsx';
 import { CertificateModal, ResumeModal, VerifyModal } from './components/Modals.jsx';
 
@@ -134,8 +133,6 @@ export default function App() {
           </div>
         </footer>
       </main>
-
-      <StepNavigator currentIndex={currentSectionIndex} />
 
       <ResumeModal
         isOpen={resumeOpen}
