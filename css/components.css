@@ -329,7 +329,7 @@
   color: var(--color-error);
 }
 
-/* Particles / subtle cinematic AI universe background */
+/* Particles / subtle ultra-dark atmospheric backdrop */
 #particles-js {
   position: absolute;
   top: 0;
@@ -340,18 +340,12 @@
   pointer-events: none;
   background-color: #070B12;
   background-image:
-    radial-gradient(ellipse 46% 58% at 74% 50%, rgba(18, 29, 48, 0.72) 0%, rgba(11, 20, 36, 0.45) 55%, transparent 100%),
-    radial-gradient(ellipse 50% 65% at 24% 50%, rgba(7, 11, 18, 0.92) 0%, transparent 100%),
-    linear-gradient(to right, rgba(185, 154, 94, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(185, 154, 94, 0.035) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+    radial-gradient(ellipse 65% 48% at 62% 72%, rgba(18, 29, 48, 0.55) 0%, rgba(11, 20, 36, 0.35) 52%, transparent 100%),
+    radial-gradient(ellipse 55% 60% at 24% 42%, rgba(7, 11, 18, 0.94) 0%, transparent 100%);
 }
 html[data-theme="light"] #particles-js {
   background-color: var(--bg-section-midnight);
-  background-image:
-    linear-gradient(to right, rgba(185, 154, 94, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(185, 154, 94, 0.08) 1px, transparent 1px);
-  background-size: 56px 56px, 56px 56px;
+  background-image: none;
 }
 
 /* Carousel Layout & Control Styles */
