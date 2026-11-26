@@ -1,9 +1,22 @@
 // github-graph.js — High-End Tactile Vector GitHub Contribution Matrix
-// Features high-contrast visible grid in both light & dark themes, vibrant champagne gold cells, and interactive hover elevation
+// Renders verified live contribution data or an honest unavailable state (never fabricated activity).
 
-export function renderGitHubGraph(liveContributions = null) {
+export function renderGitHubGraph(liveContributions = null, statusMessage = null) {
   const container = document.getElementById('github-graph-mount');
   if (!container) return;
+
+  if (!Array.isArray(liveContributions) || liveContributions.length === 0) {
+    const message = statusMessage || 'Live GitHub contribution graph is currently unavailable. Please check your connection or view directly on GitHub.';
+    container.innerHTML = `
+      <div class="py-10 px-4 text-center flex flex-col items-center justify-center gap-2">
+        <p class="text-xs font-mono text-textSecondary">${escapeText(message)}</p>
+        <a href="https://github.com/tejaskute284-dotcom" target="_blank" rel="noopener noreferrer"
+           class="text-xs font-mono text-accentGold hover:underline mt-1">
+          github.com/tejaskute284-dotcom &rarr;
+        </a>
+      </div>`;
+    return;
+  }
 
   const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
 
@@ -16,7 +29,6 @@ export function renderGitHubGraph(liveContributions = null) {
   const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // Palette: Tactile visible cells in both light and dark modes
   const getCellStyles = (level) => {
     if (isDark) {
       switch (level) {
@@ -37,71 +49,49 @@ export function renderGitHubGraph(liveContributions = null) {
     }
   };
 
-  let grid = [];
-  for (let w = 0; w < weeks; w++) {
-    grid[w] = new Array(7).fill(null);
-  }
-
+  const grid = Array.from({ length: weeks }, () => new Array(7).fill(null));
   const monthHeaderMap = {};
 
-  if (Array.isArray(liveContributions) && liveContributions.length > 0) {
-    const firstDate = new Date(liveContributions[0].date);
-    let startDay = firstDate.getDay(); // 0 = Sun
-    
-    let currentWeek = 0;
-    let currentDay = startDay;
-    let lastMonth = -1;
+  const firstDate = new Date(liveContributions[0].date + 'T00:00:00Z');
+  let startDay = Number.isNaN(firstDate.getTime()) ? 0 : firstDate.getUTCDay();
 
-    liveContributions.forEach((item) => {
-      if (currentWeek >= weeks) return;
-      grid[currentWeek][currentDay] = item;
+  let currentWeek = 0;
+  let currentDay = startDay;
+  let lastMonth = -1;
 
-      const itemDate = new Date(item.date);
-      const m = itemDate.getMonth();
+  liveContributions.forEach((item) => {
+    if (currentWeek >= weeks) return;
+    if (!item || typeof item.count !== 'number') return;
+
+    grid[currentWeek][currentDay] = item;
+
+    const itemDate = new Date(item.date + 'T00:00:00Z');
+    if (!Number.isNaN(itemDate.getTime())) {
+      const m = itemDate.getUTCMonth();
       if (m !== lastMonth) {
         if (!monthHeaderMap[currentWeek]) {
           monthHeaderMap[currentWeek] = monthNames[m];
         }
         lastMonth = m;
       }
-
-      currentDay++;
-      if (currentDay > 6) {
-        currentDay = 0;
-        currentWeek++;
-      }
-    });
-  } else {
-    // Fallback populated pattern
-    let lastMonth = -1;
-    for (let w = 0; w < weeks; w++) {
-      const approxMonth = (10 + Math.floor(w / 4.3)) % 12;
-      if (approxMonth !== lastMonth) {
-        monthHeaderMap[w] = monthNames[approxMonth];
-        lastMonth = approxMonth;
-      }
-      for (let d = 0; d < 7; d++) {
-        const lvl = (w >= 44 && w <= 50) ? (d % 2 === 0 ? 3 : 4) : (w % 6 === 0 ? 1 : 0);
-        grid[w][d] = {
-          level: lvl,
-          count: lvl === 4 ? 18 : lvl === 3 ? 8 : lvl === 1 ? 2 : 0,
-          date: ''
-        };
-      }
     }
-  }
+
+    currentDay++;
+    if (currentDay > 6) {
+      currentDay = 0;
+      currentWeek++;
+    }
+  });
 
   let svgContent = '';
-
-  // Month Labels
   const labelColor = isDark ? '#8E8A84' : '#6A655E';
+
   Object.keys(monthHeaderMap).forEach((wStr) => {
     const w = parseInt(wStr, 10);
     const x = 32 + w * step;
     svgContent += `<text x="${x}" y="12" fill="${labelColor}" font-family="var(--font-mono)" font-size="9.5" font-weight="600" letter-spacing="0.06em">${monthHeaderMap[w]}</text>`;
   });
 
-  // Day Labels
   dayLabels.forEach((d, idx) => {
     if (d) {
       const y = idx * step + 32;
@@ -109,7 +99,6 @@ export function renderGitHubGraph(liveContributions = null) {
     }
   });
 
-  // Render Grid Squares with visible border & tactile depth
   for (let w = 0; w < weeks; w++) {
     for (let d = 0; d < days; d++) {
       const item = grid[w][d];
@@ -118,7 +107,10 @@ export function renderGitHubGraph(liveContributions = null) {
       const x = 32 + w * step;
       const y = 22 + d * step;
       const { fill, stroke } = getCellStyles(item.level);
-      const titleText = item.date ? `${item.count} contribution${item.count === 1 ? '' : 's'} on ${item.date}` : `${item.count} contributions`;
+      const safeDate = escapeText(item.date || '');
+      const titleText = safeDate
+        ? `${item.count} contribution${item.count === 1 ? '' : 's'} on ${safeDate}`
+        : `${item.count} contributions`;
 
       svgContent += `
         <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2.5" fill="${fill}" stroke="${stroke}" stroke-width="0.75" class="contrib-cell cursor-pointer" data-count="${item.count}">
@@ -131,7 +123,16 @@ export function renderGitHubGraph(liveContributions = null) {
   const svgHeight = 22 + days * step + 16;
 
   container.innerHTML = `
-    <svg viewBox="0 0 ${svgWidth} ${svgHeight}" class="w-full min-w-[760px] select-none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 ${svgWidth} ${svgHeight}" class="w-full min-w-[760px] select-none" role="img" aria-label="GitHub contribution activity matrix" xmlns="http://www.w3.org/2000/svg">
       ${svgContent}
     </svg>`;
+}
+
+function escapeText(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

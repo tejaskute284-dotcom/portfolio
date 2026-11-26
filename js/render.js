@@ -4,32 +4,72 @@ import { HACKATHONS }     from './data/hackathons.js';
 import { CERTIFICATIONS } from './data/certifications.js';
 
 // Shared SVG paths via <use> — defined once in index.html as <symbol>
-const githubUse  = `<svg class="w-4 h-4 fill-current" aria-hidden="true"><use href="#icon-github"/></svg>`;
+const githubUse = `<svg class="w-4 h-4 fill-current" aria-hidden="true"><use href="#icon-github"/></svg>`;
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function isValidHttpUrl(url) {
+  if (typeof url !== 'string' || !url.trim()) return false;
+  try {
+    const parsed = new URL(url.trim());
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
+function isSafeAssetPath(path) {
+  if (typeof path !== 'string') return false;
+  const trimmed = path.trim();
+  return /^assets\/[a-zA-Z0-9_\-./]+$/.test(trimmed) && !trimmed.includes('..');
+}
 
 function tags(arr) {
-  return arr.map(t => `<span class="tech-tag text-[10px] px-2 py-0.5">${t}</span>`).join('');
+  return (arr || []).map(t => `<span class="tech-tag text-[10px] px-2 py-0.5">${escapeHTML(t)}</span>`).join('');
 }
 
 function collaborators(list) {
-  return list.map(c => `
-    <a href="${c.url}" target="_blank" rel="noopener noreferrer"
-       class="text-[11px] px-2 py-0.5 rounded border border-border bg-bgTertiary ${c.owner ? 'text-textPrimary font-semibold' : 'text-textSecondary'} hover:border-accentGold hover:text-accentGoldDark transition inline-block">
-      ${c.name}
-    </a>`).join('');
+  return (list || []).map(c => {
+    const safeName = escapeHTML(c.name);
+    const weightClass = c.owner ? 'text-textPrimary font-semibold' : 'text-textSecondary';
+    if (isValidHttpUrl(c.url)) {
+      return `
+        <a href="${escapeHTML(c.url)}" target="_blank" rel="noopener noreferrer"
+           class="text-[11px] px-2 py-0.5 rounded border border-border bg-bgTertiary ${weightClass} hover:border-accentGold hover:text-accentGoldDark transition inline-block">
+          ${safeName}
+        </a>`;
+    }
+    return `
+      <span class="text-[11px] px-2 py-0.5 rounded border border-border bg-bgTertiary ${weightClass} inline-block">
+        ${safeName}
+      </span>`;
+  }).join('');
 }
 
 function projectMarqueeCard(p) {
-  const imgBlock = p.img ? `
+  const safeImg = isSafeAssetPath(p.img) ? escapeHTML(p.img) : '';
+  const imgBlock = safeImg ? `
     <div class="mb-3.5 overflow-hidden rounded-lg border border-border aspect-video bg-bgTertiary shadow-sm">
-      <img src="${p.img}" alt="${p.imgAlt}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
+      <img src="${safeImg}" alt="${escapeHTML(p.imgAlt || p.name)}" loading="lazy" decoding="async" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
     </div>` : '';
 
+  const hasValidGithub = isValidHttpUrl(p.github);
+  const hasValidDemo = isValidHttpUrl(p.demo);
+
   const footerLinks = p.internship
-    ? `<span class="text-xs text-textSecondary italic">${p.internship}</span>`
+    ? `<span class="text-xs text-textSecondary italic">${escapeHTML(p.internship)}</span>`
     : p.private
       ? `<span class="flex items-center gap-1.5 text-xs text-textSecondary opacity-75">${githubUse} Private Repository</span>`
-      : `<a href="${p.github}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>
-         ${p.demo ? `<a href="${p.demo}" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
+      : `${hasValidGithub ? `<a href="${escapeHTML(p.github)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-semibold text-textPrimary hover:text-accentGoldDark transition">${githubUse} GitHub</a>` : ''}
+         ${hasValidDemo ? `<a href="${escapeHTML(p.demo)}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-semibold text-accentGold hover:underline transition"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo</a>` : ''}`;
 
   return `
   <div class="project-marquee-card">
@@ -37,12 +77,12 @@ function projectMarqueeCard(p) {
       <div class="p-5 sm:p-6 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${p.name}</h3>
-            <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${p.badge.label}</span>
+            <h3 class="text-xl font-serif font-bold text-textPrimary tracking-tight">${escapeHTML(p.name)}</h3>
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full border border-accentGold/40 text-accentGold font-mono">${escapeHTML(p.badge?.label)}</span>
           </div>
-          <p class="text-xs font-medium text-accentGold mb-3 line-clamp-1">${p.tagline}</p>
+          <p class="text-xs font-medium text-accentGold mb-3 line-clamp-1">${escapeHTML(p.tagline)}</p>
           ${imgBlock}
-          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${p.desc}</p>
+          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${escapeHTML(p.desc)}</p>
           <div class="mb-4">
             <span class="text-[10px] font-mono text-textMuted block mb-1.5 uppercase tracking-wider">Collaborators</span>
             <div class="flex flex-wrap gap-1.5">${collaborators(p.collaborators)}</div>
@@ -51,7 +91,7 @@ function projectMarqueeCard(p) {
         </div>
         <div class="border-t border-border pt-4 flex items-center justify-between gap-3 mt-auto">
           <div class="flex items-center gap-4">${footerLinks}</div>
-          <span class="text-[10px] text-textMuted font-mono block text-right">${p.footer}</span>
+          <span class="text-[10px] text-textMuted font-mono block text-right">${escapeHTML(p.footer)}</span>
         </div>
       </div>
     </div>
@@ -69,30 +109,32 @@ function projectMarqueeShell(cardsHtml) {
 }
 
 function hackathonMarqueeCard(h) {
+  const safeImg = isSafeAssetPath(h.img) ? escapeHTML(h.img) : '';
   return `
   <div class="hackathon-marquee-card">
     <div class="premium-card h-full flex flex-col justify-between group hov-card-border transition cursor-pointer"
-         data-cert-img="${h.img}"
-         data-cert-title="${h.certTitle}"
-         data-cert-subtitle="${h.certSubtitle}">
+         data-cert-img="${safeImg}"
+         data-cert-title="${escapeHTML(h.certTitle)}"
+         data-cert-subtitle="${escapeHTML(h.certSubtitle)}">
       <div class="p-5 sm:p-6 flex flex-col justify-between h-full">
         <div>
           <div class="flex items-center justify-between mb-3">
-            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
-            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${h.badge.label}</span>
+            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${escapeHTML(h.org)}</span>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${escapeHTML(h.badge?.label)}</span>
           </div>
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
-          <p class="text-xs text-textSecondary mb-3.5 line-clamp-1">${h.subtitle}</p>
+          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${escapeHTML(h.title)}</h3>
+          <p class="text-xs text-textSecondary mb-3.5 line-clamp-1">${escapeHTML(h.subtitle)}</p>
+          ${safeImg ? `
           <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-3.5 bg-bgTertiary shadow-sm">
-            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <img src="${safeImg}" alt="${escapeHTML(h.imgAlt || h.title)}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
               <i data-lucide="maximize-2" class="w-4 h-4 text-accentGold"></i> View Certificate
             </div>
-          </div>
-          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${h.desc}</p>
+          </div>` : ''}
+          <p class="text-textSecondary text-xs leading-relaxed mb-4 line-clamp-3">${escapeHTML(h.desc)}</p>
         </div>
         <div class="border-t border-border pt-4 flex items-center justify-between mt-auto">
-          <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
+          <span class="text-[11px] text-textMuted font-mono">${escapeHTML(h.footerLeft)}</span>
           <button type="button" class="text-xs font-medium text-accentGold flex items-center gap-1.5 group-hover:underline">
             View Certificate <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
@@ -112,41 +154,8 @@ function hackathonMarqueeShell(cardsHtml) {
   </div>`;
 }
 
-function hackathonCard(h) {
-  return `
-  <div class="carousel-item px-2">
-    <div class="premium-card h-full group hov-card-border transition cursor-pointer"
-         data-cert-img="${h.img}"
-         data-cert-title="${h.certTitle}"
-         data-cert-subtitle="${h.certSubtitle}">
-      <div class="p-6 flex flex-col justify-between h-full">
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">${h.org}</span>
-            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-accentGold/30 text-accentGold">${h.badge.label}</span>
-          </div>
-          <h3 class="text-xl font-serif font-bold text-textPrimary mb-2 hov-card-title transition">${h.title}</h3>
-          <p class="text-xs text-textSecondary mb-4">${h.subtitle}</p>
-          <div class="relative overflow-hidden rounded-lg border border-border aspect-video mb-4 bg-bgTertiary">
-            <img src="${h.img}" alt="${h.imgAlt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-              <i data-lucide="maximize-2" class="w-4 h-4 text-accentGold"></i> View Certificate
-            </div>
-          </div>
-          <p class="text-textSecondary text-xs leading-relaxed mb-4">${h.desc}</p>
-        </div>
-        <div class="border-t border-border pt-4 flex items-center justify-between mt-auto">
-          <span class="text-[11px] text-textMuted font-mono">${h.footerLeft}</span>
-          <button class="text-xs font-medium text-accentGold flex items-center gap-1.5 group-hover:underline">
-            View Certificate <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
 function certMarqueeCard(c) {
+  const safeUrl = isValidHttpUrl(c.url) ? escapeHTML(c.url) : '';
   return `
   <div class="cert-marquee-card">
     <div class="premium-card h-full flex flex-col justify-between">
@@ -158,14 +167,15 @@ function certMarqueeCard(c) {
               <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified
             </span>
           </div>
-          <h3 class="text-base font-serif font-bold text-textPrimary leading-snug mb-2">${c.title}</h3>
-          <p class="text-xs text-textSecondary font-sans mt-1">Domain: ${c.domain}</p>
+          <h3 class="text-base font-serif font-bold text-textPrimary leading-snug mb-2">${escapeHTML(c.title)}</h3>
+          <p class="text-xs text-textSecondary font-sans mt-1">Domain: ${escapeHTML(c.domain)}</p>
         </div>
         <div class="border-t border-border pt-4 mt-6 flex justify-between items-center mt-auto">
-          <span class="text-[10px] text-textMuted font-mono">ID: ${c.id}</span>
-          <button type="button" class="text-xs font-semibold text-accentGold hover:text-accentGoldDark hover:underline flex items-center gap-1.5 transition js-verify-cert" data-cert-url="${c.url}" data-cert-id="${c.id}" data-cert-title="${c.title}">
+          <span class="text-[10px] text-textMuted font-mono">ID: ${escapeHTML(c.id)}</span>
+          ${safeUrl ? `
+          <button type="button" class="text-xs font-semibold text-accentGold hover:text-accentGoldDark hover:underline flex items-center gap-1.5 transition js-verify-cert" data-cert-url="${safeUrl}" data-cert-id="${escapeHTML(c.id)}" data-cert-title="${escapeHTML(c.title)}">
             Verify Credential <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          </button>
+          </button>` : '<span class="text-[10px] text-textMuted font-mono">Verified</span>'}
         </div>
       </div>
     </div>
@@ -179,49 +189,6 @@ function certMarqueeShell(cardsHtml) {
       ${cardsHtml}
       ${cardsHtml}
     </div>
-  </div>`;
-}
-
-function certCard(c) {
-  return `
-  <div class="carousel-item px-2">
-    <div class="premium-card h-full">
-      <div class="p-6 flex flex-col justify-between h-full">
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-[10px] font-mono text-accentGold uppercase tracking-widest font-semibold">COURSERA ACADEMIC</span>
-            <span class="text-accentGold text-xs font-mono flex items-center gap-1 font-semibold">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified
-            </span>
-          </div>
-          <h3 class="text-base font-serif font-bold text-textPrimary leading-snug mb-2">${c.title}</h3>
-          <p class="text-xs text-textSecondary font-sans mt-1">Domain: ${c.domain}</p>
-        </div>
-        <div class="border-t border-border pt-4 mt-6 flex justify-between items-center mt-auto">
-          <span class="text-[10px] text-textMuted font-mono">ID: ${c.id}</span>
-          <button class="text-xs font-semibold text-accentGold hover:text-accentGoldDark hover:underline flex items-center gap-1.5 transition js-verify-cert" data-cert-url="${c.url}" data-cert-id="${c.id}" data-cert-title="${c.title}">
-            Verify Credential <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function carouselShell(id, itemsLg, itemsMd, inner) {
-  return `
-  <div class="carousel-container relative" data-items-lg="${itemsLg}" data-items-md="${itemsMd}" data-items-sm="1">
-    <div class="carousel-viewport py-4">
-      <div class="carousel-content flex transition-transform duration-500 ease-out">
-        ${inner}
-      </div>
-    </div>
-    <button class="carousel-control carousel-prev" aria-label="Previous Slide">
-      <i data-lucide="chevron-left" class="w-5 h-5"></i>
-    </button>
-    <button class="carousel-control carousel-next" aria-label="Next Slide">
-      <i data-lucide="chevron-right" class="w-5 h-5"></i>
-    </button>
   </div>`;
 }
 

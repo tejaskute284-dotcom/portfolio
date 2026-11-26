@@ -2,12 +2,13 @@
 
 export function initCarousel() {
   const carousels = document.querySelectorAll('.carousel-container');
+  const prefersReducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   carousels.forEach(carousel => {
-    // If already running an autoplay timer on this carousel instance, clear it first
-    if (carousel._carouselAutoplayTimer) {
-      clearInterval(carousel._carouselAutoplayTimer);
-      carousel._carouselAutoplayTimer = null;
+    // Clean up any existing listeners or timers attached to this carousel instance
+    if (typeof carousel._carouselCleanup === 'function') {
+      carousel._carouselCleanup();
+      carousel._carouselCleanup = null;
     }
 
     const content = carousel.querySelector('.carousel-content');
@@ -25,6 +26,7 @@ export function initCarousel() {
 
     let isTransitioning = false;
     let transitionSafetyTimer = null;
+    let autoplayTimer = null;
     const autoplayInterval = 3400; // 3.4s smooth continuous forward advance
 
     // Viewport-based items calculation
@@ -39,7 +41,6 @@ export function initCarousel() {
     };
 
     let itemsPerView = getItemsPerView();
-    // Full copy buffer on both sides for infinite runway
     const cloneCount = totalOriginals;
 
     // Clone full original set to prepend
@@ -47,6 +48,7 @@ export function initCarousel() {
     originalItems.forEach(item => {
       const clone = item.cloneNode(true);
       clone.classList.add('carousel-clone');
+      clone.setAttribute('aria-hidden', 'true');
       prependFragment.appendChild(clone);
     });
     content.insertBefore(prependFragment, content.firstChild);
@@ -56,16 +58,15 @@ export function initCarousel() {
     originalItems.forEach(item => {
       const clone = item.cloneNode(true);
       clone.classList.add('carousel-clone');
+      clone.setAttribute('aria-hidden', 'true');
       appendFragment.appendChild(clone);
     });
     content.appendChild(appendFragment);
 
-    // Refresh icons inside clones
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
 
-    // Virtual index starts at the start of original cards
     let currentIndex = cloneCount;
 
     const setPosition = (index, animated = true) => {
@@ -78,7 +79,7 @@ export function initCarousel() {
         item.style.maxWidth = `${itemWidthPercent}%`;
       });
 
-      if (!animated) {
+      if (!animated || prefersReducedQuery.matches) {
         content.style.transition = 'none';
       } else {
         content.style.transition = 'transform 0.55s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -88,7 +89,6 @@ export function initCarousel() {
       content.style.transform = `translateX(-${translateValue}%)`;
     };
 
-    // Keep navigation buttons always enabled
     if (prevBtn) {
       prevBtn.style.opacity = '1';
       prevBtn.style.pointerEvents = 'auto';
@@ -100,21 +100,18 @@ export function initCarousel() {
 
     const checkBoundariesAndReset = () => {
       itemsPerView = getItemsPerView();
-      // Past the original set to the right
       if (currentIndex >= cloneCount + totalOriginals) {
         content.style.transition = 'none';
         currentIndex = currentIndex - totalOriginals;
         const itemWidthPercent = 100 / itemsPerView;
         content.style.transform = `translateX(-${currentIndex * itemWidthPercent}%)`;
-        void content.offsetHeight; // force reflow
-      } 
-      // Before the original set to the left
-      else if (currentIndex < cloneCount) {
+        void content.offsetHeight;
+      } else if (currentIndex < cloneCount) {
         content.style.transition = 'none';
         currentIndex = currentIndex + totalOriginals;
         const itemWidthPercent = 100 / itemsPerView;
         content.style.transform = `translateX(-${currentIndex * itemWidthPercent}%)`;
-        void content.offsetHeight; // force reflow
+        void content.offsetHeight;
       }
 
       isTransitioning = false;
@@ -144,23 +141,23 @@ export function initCarousel() {
       transitionSafetyTimer = setTimeout(checkBoundariesAndReset, 600);
     };
 
-    // Transition end listener for boundary teleportation
-    content.addEventListener('transitionend', (e) => {
+    const onTransitionEnd = (e) => {
       if (e.target !== content) return;
       checkBoundariesAndReset();
-    });
-
-    // Auto-Play: continuous infinite forward movement
-    const startAutoplay = () => {
-      stopAutoplay();
-      carousel._carouselAutoplayTimer = setInterval(goNext, autoplayInterval);
     };
+    content.addEventListener('transitionend', onTransitionEnd);
 
     const stopAutoplay = () => {
-      if (carousel._carouselAutoplayTimer) {
-        clearInterval(carousel._carouselAutoplayTimer);
-        carousel._carouselAutoplayTimer = null;
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
       }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (prefersReducedQuery.matches || document.hidden) return;
+      autoplayTimer = setInterval(goNext, autoplayInterval);
     };
 
     const resetAutoplay = () => {
@@ -168,58 +165,89 @@ export function initCarousel() {
       startAutoplay();
     };
 
-    // Pause on hover so user can easily read or click cards
-    carousel.addEventListener('mouseenter', stopAutoplay);
-    carousel.addEventListener('mouseleave', startAutoplay);
+    const onPrevClick = (e) => {
+      e.preventDefault();
+      goPrev();
+      resetAutoplay();
+    };
 
-    if (prevBtn) {
-      prevBtn.onclick = (e) => {
+    const onNextClick = (e) => {
+      e.preventDefault();
+      goNext();
+      resetAutoplay();
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', onPrevClick);
+    if (nextBtn) nextBtn.addEventListener('click', onNextClick);
+
+    const onKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
         e.preventDefault();
         goPrev();
         resetAutoplay();
-      };
-    }
-
-    if (nextBtn) {
-      nextBtn.onclick = (e) => {
+      } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         goNext();
         resetAutoplay();
-      };
-    }
+      }
+    };
+    carousel.addEventListener('keydown', onKeyDown);
 
-    // Touch Swipe Support for mobile devices
+    // Touch Swipe Support
     let touchStartX = 0;
     let touchEndX = 0;
 
-    carousel.addEventListener('touchstart', (e) => {
+    const onTouchStart = (e) => {
       touchStartX = e.changedTouches[0].screenX;
       stopAutoplay();
-    }, { passive: true });
+    };
 
-    carousel.addEventListener('touchend', (e) => {
+    const onTouchEnd = (e) => {
       touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-      startAutoplay();
-    }, { passive: true });
-
-    const handleSwipe = () => {
       const threshold = 35;
       if (touchStartX - touchEndX > threshold) {
         goNext();
       } else if (touchEndX - touchStartX > threshold) {
         goPrev();
       }
+      startAutoplay();
     };
 
-    // Resize handler
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('touchstart', onTouchStart, { passive: true });
+    carousel.addEventListener('touchend', onTouchEnd, { passive: true });
+
     const onResize = () => {
       itemsPerView = getItemsPerView();
       setPosition(currentIndex, false);
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
 
-    // Initial setup and start moving
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    carousel._carouselCleanup = () => {
+      stopAutoplay();
+      if (transitionSafetyTimer) clearTimeout(transitionSafetyTimer);
+      content.removeEventListener('transitionend', onTransitionEnd);
+      if (prevBtn) prevBtn.removeEventListener('click', onPrevClick);
+      if (nextBtn) nextBtn.removeEventListener('click', onNextClick);
+      carousel.removeEventListener('keydown', onKeyDown);
+      carousel.removeEventListener('mouseenter', stopAutoplay);
+      carousel.removeEventListener('mouseleave', startAutoplay);
+      carousel.removeEventListener('touchstart', onTouchStart);
+      carousel.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+
     setPosition(currentIndex, false);
     startAutoplay();
   });

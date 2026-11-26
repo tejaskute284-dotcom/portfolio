@@ -1,7 +1,12 @@
 // Step-by-Step Interactive Section Navigator & Landing Gate Controller
-import { initCarousel } from './carousel.js?v=2.3.5';
+import { initCarousel } from './carousel.js';
+
+let stepNavInitialized = false;
 
 export function initStepNavigation() {
+  if (stepNavInitialized) return;
+  stepNavInitialized = true;
+
   const sections = [
     { id: 'hero', label: 'Landing' },
     { id: 'about', label: 'About' },
@@ -20,24 +25,22 @@ export function initStepNavigation() {
   function unlockPortfolio(targetId) {
     if (document.body.classList.contains('landing-locked')) {
       document.body.classList.remove('landing-locked');
-      
-      // Refresh icon rendering and trigger observers if needed
+
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
 
-      // Re-initialize carousels now that #portfolio-main-content is visible
       setTimeout(() => {
         initCarousel();
       }, 50);
 
-      // Re-trigger window resize to recalculate canvas & animations
       window.dispatchEvent(new Event('resize'));
     }
 
-    if (targetId) {
+    if (targetId && targetId.startsWith('#')) {
       setTimeout(() => {
-        const targetEl = document.querySelector(targetId);
+        const cleanId = targetId.slice(1);
+        const targetEl = document.getElementById(cleanId);
         if (targetEl) {
           const navbarHeight = 80;
           const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;

@@ -1,12 +1,16 @@
 // Contact Form & Clipboard Copy Module
 
+let contactInitialized = false;
+
 export function initContact() {
+  if (contactInitialized) return;
+  contactInitialized = true;
+
   // 1. Copy-to-Clipboard (Email / Username)
   const copyElements = document.querySelectorAll('.copy-trigger');
-  
+
   copyElements.forEach(el => {
-    el.addEventListener('click', async (e) => {
-      // Do NOT preventDefault — allow mailto: to navigate
+    el.addEventListener('click', async () => {
       const textToCopy = el.getAttribute('data-copy');
       const tooltip = el.querySelector('.copy-tooltip');
 
@@ -14,8 +18,7 @@ export function initContact() {
 
       try {
         await navigator.clipboard.writeText(textToCopy);
-        
-        // Show success tooltip
+
         if (tooltip) {
           const originalText = tooltip.textContent;
           tooltip.textContent = "Copied!";
@@ -25,7 +28,6 @@ export function initContact() {
           setTimeout(() => {
             tooltip.classList.remove('opacity-100');
             tooltip.classList.add('opacity-0');
-            // Wait for transition to complete before resetting text
             setTimeout(() => {
               tooltip.textContent = originalText;
             }, 300);
@@ -37,73 +39,114 @@ export function initContact() {
     });
   });
 
-  // 2. Form Submission with Email Notification to Admin (tejaskute284@gmail.com)
+  // 2. Form Submission with Validation & Reliable Delivery Handling
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
 
   if (contactForm && formStatus) {
+    let isSubmitting = false;
+    let statusHideTimer = null;
+
+    const showStatus = (message, classes, autoHideMs = 0) => {
+      if (statusHideTimer) {
+        clearTimeout(statusHideTimer);
+        statusHideTimer = null;
+      }
+      formStatus.textContent = message;
+      formStatus.className = classes;
+      formStatus.classList.remove('hidden');
+
+      if (autoHideMs > 0) {
+        statusHideTimer = setTimeout(() => {
+          formStatus.className = "hidden";
+          formStatus.textContent = "";
+        }, autoHideMs);
+      }
+    };
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
+      if (isSubmitting) return;
 
       const formData = new FormData(contactForm);
-      const payload = Object.fromEntries(formData.entries());
+      const name = String(formData.get('name') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const subject = String(formData.get('subject') || '').trim();
+      const message = String(formData.get('message') || '').trim();
 
-      // Add target recipient for email service
-      payload.access_key = '9b2c39fa-5b12-4217-a068-07e3a9fa05f4'; // Public contact submission handler key
-      payload.to_email = 'tejaskute284@gmail.com';
-      payload.subject = `[Portfolio Contact] ${payload.subject || 'New Inquiry'}`;
+      // Client-side validation
+      if (!name || name.length < 2) {
+        showStatus("Please enter your name (at least 2 characters).", "text-xs font-mono text-red-400 font-semibold");
+        return;
+      }
 
-      // Update UI status
-      formStatus.classList.remove('hidden');
-      formStatus.textContent = "Sending message to Tejas...";
-      formStatus.className = "text-xs font-mono text-accentBlue flex items-center gap-2";
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      if (!email || !emailRegex.test(email)) {
+        showStatus("Please enter a valid email address.", "text-xs font-mono text-red-400 font-semibold");
+        return;
+      }
+
+      if (!message || message.length < 10) {
+        showStatus("Please enter a message (at least 10 characters).", "text-xs font-mono text-red-400 font-semibold");
+        return;
+      }
+
+      isSubmitting = true;
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+      }
+
+      showStatus("Sending message to Tejas...", "text-xs font-mono text-accentBlue flex items-center gap-2");
 
       try {
-        // Send request to Web3Forms free contact API
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 12000);
+
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
+          signal: controller.signal,
           body: JSON.stringify({
             access_key: '9b2c39fa-5b12-4217-a068-07e3a9fa05f4',
-            name: payload.name,
-            email: payload.email,
-            subject: payload.subject,
-            message: payload.message,
-            from_name: `${payload.name} (Portfolio Website)`
+            name,
+            email,
+            subject: `[Portfolio Contact] ${subject || 'New Inquiry'}`,
+            message,
+            from_name: `${name} (Portfolio Website)`
           })
         });
 
+        clearTimeout(timeoutId);
         const result = await response.json();
 
-        if (response.ok || result.success) {
-          formStatus.textContent = "✓ Message sent successfully! Notification delivered to Tejas.";
-          formStatus.className = "text-xs font-mono text-emerald-400 font-semibold";
+        if (response.ok && result.success) {
+          showStatus(
+            "✓ Message sent successfully! Notification delivered to Tejas.",
+            "text-xs font-mono text-emerald-400 font-semibold",
+            8000
+          );
           contactForm.reset();
         } else {
-          throw new Error(result.message || 'Failed to dispatch email');
+          throw new Error(result.message || 'Server returned an unsuccessful response.');
         }
       } catch (error) {
-        console.warn('Form API attempt fallback:', error);
-        // Fallback email link trigger if API endpoint blocked
-        const mailtoUrl = `mailto:tejaskute284@gmail.com?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(`From: ${payload.name} (${payload.email})\n\nMessage:\n${payload.message}`)}`;
-        window.open(mailtoUrl, '_blank');
-
-        formStatus.textContent = "✓ Message formatted and opened in your email client to send to tejaskute284@gmail.com!";
-        formStatus.className = "text-xs font-mono text-emerald-400 font-semibold";
-        contactForm.reset();
+        console.error('Contact form submission failed:', error);
+        showStatus(
+          "✕ Delivery failed due to a network or API error. Please email tejaskute284@gmail.com directly.",
+          "text-xs font-mono text-red-400 font-semibold"
+        );
       } finally {
-        if (submitBtn) submitBtn.disabled = false;
-        
-        setTimeout(() => {
-          formStatus.className = "hidden";
-          formStatus.textContent = "";
-        }, 8000);
+        isSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
       }
     });
   }

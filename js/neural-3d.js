@@ -1,15 +1,22 @@
 // neural-3d.js — Subtle 3D Neural Particle Constellation Background (Three.js)
-// Desktop-only (>=768px), respects prefers-reduced-motion, low-opacity champagne gold
+// Desktop-only (>=768px), respects prefers-reduced-motion, pauses offscreen & on hidden tab
+
+let activeNeuralCleanup = null;
 
 export function initNeural3D() {
+  if (typeof activeNeuralCleanup === 'function') {
+    activeNeuralCleanup();
+    activeNeuralCleanup = null;
+  }
+
   const container = document.getElementById('particles-js');
   if (!container) return;
 
-  // Mobile & reduced motion checks: show lightweight static dots
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.innerWidth < 768;
+  const prefersReducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const shouldDisable = () => window.innerWidth < 768 || prefersReducedQuery.matches || typeof THREE === 'undefined';
 
-  if (prefersReduced || isMobile || typeof THREE === 'undefined') {
+  if (shouldDisable()) {
+    container.innerHTML = '';
     container.style.opacity = '0.35';
     return;
   }
@@ -37,10 +44,9 @@ export function initNeural3D() {
   renderer.domElement.style.left = '0';
   renderer.domElement.style.width = '100%';
   renderer.domElement.style.height = '100%';
-  renderer.domElement.style.opacity = '0.45'; // Restrained luxury presence
+  renderer.domElement.style.opacity = '0.45';
   container.appendChild(renderer.domElement);
 
-  // 42 subtle floating neural particles
   const particleCount = 42;
   const positions = new Float32Array(particleCount * 3);
   const velocities = [];
@@ -61,7 +67,6 @@ export function initNeural3D() {
     });
   }
 
-  // Particle Geometry & Material (Champagne Gold #D5B26B)
   const particleGeo = new THREE.BufferGeometry();
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
@@ -76,8 +81,7 @@ export function initNeural3D() {
   const particleSystem = new THREE.Points(particleGeo, particleMat);
   scene.add(particleSystem);
 
-  // Line Mesh for Inter-Particle Synapses
-  const maxConnections = particleCount * (particleCount - 1) / 2;
+  const maxConnections = (particleCount * (particleCount - 1)) / 2;
   const linePositions = new Float32Array(maxConnections * 6);
   const lineColors = new Float32Array(maxConnections * 6);
 
@@ -95,7 +99,6 @@ export function initNeural3D() {
   const lineSystem = new THREE.LineSegments(lineGeo, lineMat);
   scene.add(lineSystem);
 
-  // Mouse Interaction: Subtle ambient parallax
   let mouseX = 0;
   let mouseY = 0;
   let targetMouseX = 0;
@@ -107,23 +110,22 @@ export function initNeural3D() {
   };
   window.addEventListener('mousemove', onMouseMove, { passive: true });
 
-  // Animation Loop with Visibility Optimization
   let animId = null;
-  let isVisible = true;
-
-  const onVisibilityChange = () => {
-    isVisible = !document.hidden;
-  };
-  document.addEventListener('visibilitychange', onVisibilityChange);
+  let isTabVisible = !document.hidden;
+  let isHeroInView = true;
+  let isDisposed = false;
 
   const connectDist = 95;
   const connectDistSq = connectDist * connectDist;
 
   const animate = () => {
-    animId = requestAnimationFrame(animate);
-    if (!isVisible) return;
+    if (isDisposed || !isTabVisible || !isHeroInView || shouldDisable()) {
+      animId = null;
+      return;
+    }
 
-    // Smooth lerp mouse parallax
+    animId = requestAnimationFrame(animate);
+
     mouseX += (targetMouseX - mouseX) * 0.04;
     mouseY += (targetMouseY - mouseY) * 0.04;
     camera.position.x = mouseX;
@@ -140,12 +142,10 @@ export function initNeural3D() {
       pos[i * 3 + 1] += velocities[i].y;
       pos[i * 3 + 2] += velocities[i].z;
 
-      // Bounce gracefully at bounding envelope
       if (Math.abs(pos[i * 3]) > boundsX)     velocities[i].x *= -1;
       if (Math.abs(pos[i * 3 + 1]) > boundsY) velocities[i].y *= -1;
       if (Math.abs(pos[i * 3 + 2]) > boundsZ) velocities[i].z *= -1;
 
-      // Connect nearby particles
       for (let j = i + 1; j < particleCount; j++) {
         const dx = pos[i * 3] - pos[j * 3];
         const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
@@ -153,8 +153,8 @@ export function initNeural3D() {
         const dSq = dx * dx + dy * dy + dz * dz;
 
         if (dSq < connectDistSq) {
-          const alpha = (1 - Math.sqrt(dSq) / connectDist) * 0.35; // Fine hairline champagne transparency
-          
+          const alpha = (1 - Math.sqrt(dSq) / connectDist) * 0.35;
+
           linePositions[lineIdx++] = pos[i * 3];
           linePositions[lineIdx++] = pos[i * 3 + 1];
           linePositions[lineIdx++] = pos[i * 3 + 2];
@@ -163,7 +163,6 @@ export function initNeural3D() {
           linePositions[lineIdx++] = pos[j * 3 + 1];
           linePositions[lineIdx++] = pos[j * 3 + 2];
 
-          // Gold RGB: (0.835, 0.698, 0.420)
           for (let k = 0; k < 2; k++) {
             lineColors[colorIdx++] = 0.835 * alpha;
             lineColors[colorIdx++] = 0.698 * alpha;
@@ -182,21 +181,78 @@ export function initNeural3D() {
     renderer.render(scene, camera);
   };
 
-  animate();
+  const startLoop = () => {
+    if (!isDisposed && isTabVisible && isHeroInView && !shouldDisable() && animId === null) {
+      animId = requestAnimationFrame(animate);
+    }
+  };
 
-  // Resize Listener
+  const stopLoop = () => {
+    if (animId !== null) {
+      cancelAnimationFrame(animId);
+      animId = null;
+    }
+  };
+
+  const disposeResources = () => {
+    if (isDisposed) return;
+    isDisposed = true;
+    stopLoop();
+    observer.disconnect();
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('resize', onResize);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+    prefersReducedQuery.removeEventListener('change', onResize);
+
+    particleGeo.dispose();
+    particleMat.dispose();
+    lineGeo.dispose();
+    lineMat.dispose();
+    renderer.dispose();
+    container.innerHTML = '';
+  };
+
+  const onVisibilityChange = () => {
+    isTabVisible = !document.hidden;
+    if (isTabVisible) {
+      startLoop();
+    } else {
+      stopLoop();
+    }
+  };
+
   const onResize = () => {
-    if (window.innerWidth < 768) {
-      if (animId) cancelAnimationFrame(animId);
-      container.innerHTML = '';
+    if (shouldDisable()) {
+      disposeResources();
       return;
     }
     const newW = container.clientWidth || window.innerWidth;
     const newH = container.clientHeight || window.innerHeight;
-    camera.aspect = newW / newH;
-    camera.updateProjectionMatrix();
-    renderer.setSize(newW, newH);
+    if (newW > 0 && newH > 0) {
+      camera.aspect = newW / newH;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newW, newH);
+    }
   };
-  window.addEventListener('resize', onResize);
-}
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isHeroInView = entry.isIntersecting;
+      if (isHeroInView) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    });
+  }, { threshold: 0.05 });
+
+  const heroSection = document.getElementById('hero') || container;
+  observer.observe(heroSection);
+
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  window.addEventListener('resize', onResize, { passive: true });
+  prefersReducedQuery.addEventListener('change', onResize);
+
+  activeNeuralCleanup = disposeResources;
+  startLoop();
+}

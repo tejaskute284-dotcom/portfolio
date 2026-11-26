@@ -566,4 +566,27 @@ main[id] {
   }
 }
 
+/* Reduced Motion & Keyboard Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .project-marquee-track,
+  .hackathon-marquee-track,
+  .cert-marquee-track {
+    animation: none !important;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+  .project-marquee-viewport,
+  .hackathon-marquee-viewport,
+  .cert-marquee-viewport {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
 

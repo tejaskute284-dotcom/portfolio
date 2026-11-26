@@ -22,7 +22,7 @@ export function initTheme() {
 
     // Re-render vector graph with theme-optimized cell contrast
     try {
-      const cached = localStorage.getItem('tk_github_live_stats_v3');
+      const cached = localStorage.getItem('tk_github_live_stats_v4');
       if (cached) {
         const parsed = JSON.parse(cached);
         renderGitHubGraph(parsed.data?.contributions);
@@ -49,14 +49,5 @@ function updateToggleIcon(theme) {
   } else {
     moonIcon.classList.add('hidden');
     sunIcon.classList.remove('hidden');
-  }
-}
-
-function updateGraphColor(theme) {
-  const graph = document.getElementById('github-contrib-graph');
-  if (graph) {
-    const goldLight = 'C5A880';
-    const goldDark  = 'D4AF37';
-    graph.src = `https://ghchart.rshah.org/${theme === 'dark' ? goldDark : goldLight}/tejaskute284`;
   }
 }

@@ -1,49 +1,63 @@
 // Resume Lightbox / Viewer Modal Controller
 
+let resumeModalInitialized = false;
+
 export function initResumeModal() {
+  if (resumeModalInitialized) return;
+
   const modal = document.getElementById('resume-modal');
   const closeBtn = document.getElementById('close-resume-modal');
   const viewBtns = document.querySelectorAll('.js-open-resume-modal');
 
   if (!modal) return;
+  resumeModalInitialized = true;
 
-  // Open modal function
-  window.openResumeModal = function() {
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+
+  let lastFocusedElement = null;
+
+  window.openResumeModal = function(triggerEl = null) {
+    lastFocusedElement = triggerEl || document.activeElement;
     modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) {
+      setTimeout(() => closeBtn.focus(), 50);
+    }
   };
 
-  // Close modal function
   window.closeResumeModal = function() {
+    if (modal.classList.contains('hidden')) return;
     modal.classList.add('hidden');
     document.body.style.overflow = '';
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+      lastFocusedElement = null;
+    }
   };
 
-  // Event Listeners for trigger buttons
   viewBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.openResumeModal();
+      window.openResumeModal(btn);
     });
   });
 
-  // Close button click
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
       window.closeResumeModal();
     });
   }
 
-  // Backdrop click to close
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       window.closeResumeModal();
     }
   });
 
-  // ESC key to close
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      e.preventDefault();
       window.closeResumeModal();
     }
   });

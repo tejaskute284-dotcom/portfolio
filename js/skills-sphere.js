@@ -1,6 +1,6 @@
 // skills-sphere.js — Interactive 3D Technology Sphere (Fibonacci distribution)
 // Pure Vanilla JS + CSS 3D Transforms. Smooth rotation with pause-on-hover & mouse steering.
-// Displays actual verified technologies from the portfolio.
+// Preserves immutable base coordinates to eliminate floating-point drift.
 
 const SKILLS_LIST = [
   'Python', 'JavaScript', 'TypeScript', 'C / C++', 'SQL', 'MySQL',
@@ -11,23 +11,31 @@ const SKILLS_LIST = [
   'Git & GitHub', 'Postman', 'Linux', 'VS Code', 'Lenis Scroll'
 ];
 
+let activeCleanup = null;
+
 export function initSkillsSphere() {
+  if (typeof activeCleanup === 'function') {
+    activeCleanup();
+    activeCleanup = null;
+  }
+
   const mountEl = document.getElementById('skills-sphere-mount');
+  const fallbackGrid = document.getElementById('skills-fallback-grid');
   if (!mountEl) return;
 
-  // Check if reduced motion or mobile: keep clean responsive grid fallback
-  const isMobile = window.innerWidth < 1024;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const shouldUseFallback = () => window.innerWidth < 1024 || prefersReducedQuery.matches;
 
-  if (isMobile || prefersReduced) {
+  const showFallback = () => {
     mountEl.style.display = 'none';
-    const fallbackGrid = document.getElementById('skills-fallback-grid');
     if (fallbackGrid) fallbackGrid.style.display = 'grid';
-    return;
+  };
+
+  if (shouldUseFallback()) {
+    showFallback();
   }
 
   mountEl.innerHTML = '';
-  mountEl.style.display = 'block';
 
   // Outer 3D perspective stage
   const stage = document.createElement('div');
@@ -41,14 +49,12 @@ export function initSkillsSphere() {
   stage.appendChild(sphere);
   mountEl.appendChild(stage);
 
-  // Fibonacci Sphere distribution
+  // Fibonacci Sphere distribution with immutable base coordinates
   const total = SKILLS_LIST.length;
   const radius = 175; // px sphere radius
   const phi = Math.PI * (3 - Math.sqrt(5)); // Golden ratio angle
 
-  const items = [];
-
-  SKILLS_LIST.forEach((skill, i) => {
+  const items = SKILLS_LIST.map((skill, i) => {
     const y = 1 - (i / (total - 1)) * 2; // -1 to 1
     const radiusAtY = Math.sqrt(1 - y * y);
     const theta = phi * i;
@@ -64,77 +70,81 @@ export function initSkillsSphere() {
 
     sphere.appendChild(el);
 
-    items.push({
+    return {
       el,
-      x: x * radius,
-      y: y * radius,
-      z: z * radius
-    });
+      baseX: x * radius,
+      baseY: y * radius,
+      baseZ: z * radius
+    };
   });
 
-  // Smooth Rotation State
-  let rotX = 0;
-  let rotY = 0;
-  let targetRotX = 0;
-  let targetRotY = 0.0028; // slow continuous idle spin
-  let isHovered = false;
+  // Cumulative rotation angles & angular velocities
+  let angleX = 0;
+  let angleY = 0;
+  let velX = 0;
+  let velY = 0.0028; // slow continuous idle spin
+  let targetVelX = 0;
+  let targetVelY = 0.0028;
   let animId = null;
+  let isSphereVisible = true;
 
-  stage.addEventListener('mouseenter', () => {
-    isHovered = true;
-  });
+  const onMouseEnter = () => {
+    // Keep interactive mouse steering active
+  };
 
-  stage.addEventListener('mouseleave', () => {
-    isHovered = false;
-    targetRotX = 0;
-    targetRotY = 0.0028;
-  });
+  const onMouseLeave = () => {
+    targetVelX = 0;
+    targetVelY = 0.0028;
+  };
 
-  stage.addEventListener('mousemove', (e) => {
+  const onMouseMove = (e) => {
     const rect = stage.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    // Interactive mouse steering
-    targetRotY = (e.clientX - cx) * 0.00008;
-    targetRotX = -(e.clientY - cy) * 0.00008;
-  });
+    targetVelY = (e.clientX - cx) * 0.00008;
+    targetVelX = -(e.clientY - cy) * 0.00008;
+  };
+
+  stage.addEventListener('mouseenter', onMouseEnter);
+  stage.addEventListener('mouseleave', onMouseLeave);
+  stage.addEventListener('mousemove', onMouseMove, { passive: true });
 
   const renderFrame = () => {
+    if (shouldUseFallback() || !isSphereVisible || document.hidden) {
+      animId = null;
+      return;
+    }
+
     animId = requestAnimationFrame(renderFrame);
 
-    // Apply rotation
-    rotX += (targetRotX - rotX) * 0.05;
-    rotY += (targetRotY - rotY) * 0.05;
+    velX += (targetVelX - velX) * 0.05;
+    velY += (targetVelY - velY) * 0.05;
 
-    const sinX = Math.sin(rotX);
-    const cosX = Math.cos(rotX);
-    const sinY = Math.sin(rotY);
-    const cosY = Math.cos(rotY);
+    angleX += velX;
+    angleY += velY;
+
+    const sinX = Math.sin(angleX);
+    const cosX = Math.cos(angleX);
+    const sinY = Math.sin(angleY);
+    const cosY = Math.cos(angleY);
 
     items.forEach(item => {
-      // Rotate around Y axis
-      let rx1 = item.x * cosY - item.z * sinY;
-      let rz1 = item.z * cosY + item.x * sinY;
+      // Compute rotation from immutable base coordinates
+      const rx1 = item.baseX * cosY - item.baseZ * sinY;
+      const rz1 = item.baseZ * cosY + item.baseX * sinY;
 
-      // Rotate around X axis
-      let ry2 = item.y * cosX - rz1 * sinX;
-      let rz2 = rz1 * cosX + item.y * sinX;
+      const ry2 = item.baseY * cosX - rz1 * sinX;
+      const rz2 = rz1 * cosX + item.baseY * sinX;
 
-      item.x = rx1;
-      item.y = ry2;
-      item.z = rz2;
-
-      // Depth perception: scale & opacity based on Z coordinate
-      const depthScale = (item.z + radius) / (2 * radius); // 0 (far) to 1 (near)
-      const scale = 0.75 + depthScale * 0.45;              // 0.75 to 1.2
-      const alpha = 0.35 + depthScale * 0.65;              // 0.35 to 1.0
+      const depthScale = (rz2 + radius) / (2 * radius); // 0 (far) to 1 (near)
+      const scale = 0.75 + depthScale * 0.45;
+      const alpha = 0.35 + depthScale * 0.65;
       const zIndex = Math.round(depthScale * 100);
 
-      item.el.style.transform = `translate3d(-50%, -50%, 0) translate3d(${item.x}px, ${item.y}px, ${item.z}px) scale(${scale})`;
-      item.el.style.opacity = alpha;
+      item.el.style.transform = `translate3d(-50%, -50%, 0) translate3d(${rx1.toFixed(2)}px, ${ry2.toFixed(2)}px, ${rz2.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+      item.el.style.opacity = alpha.toFixed(3);
       item.el.style.zIndex = zIndex;
 
-      // Enhance front-facing items with champagne gold border
       if (depthScale > 0.8) {
         item.el.classList.add('border-accentGoldMuted');
         item.el.classList.remove('border-border');
@@ -145,18 +155,68 @@ export function initSkillsSphere() {
     });
   };
 
-  renderFrame();
+  const startLoop = () => {
+    if (!shouldUseFallback() && isSphereVisible && !document.hidden && animId === null) {
+      mountEl.style.display = 'block';
+      animId = requestAnimationFrame(renderFrame);
+    }
+  };
 
-  // Resize handler
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 1024) {
-      if (animId) cancelAnimationFrame(animId);
-      mountEl.style.display = 'none';
-      const fallbackGrid = document.getElementById('skills-fallback-grid');
-      if (fallbackGrid) fallbackGrid.style.display = 'grid';
+  const stopLoop = () => {
+    if (animId !== null) {
+      cancelAnimationFrame(animId);
+      animId = null;
+    }
+  };
+
+  const onResizeOrMotionChange = () => {
+    if (shouldUseFallback()) {
+      stopLoop();
+      showFallback();
     } else {
       mountEl.style.display = 'block';
+      startLoop();
     }
-  });
-}
+  };
 
+  const onVisibilityChange = () => {
+    if (document.hidden) {
+      stopLoop();
+    } else {
+      startLoop();
+    }
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isSphereVisible = entry.isIntersecting;
+      if (isSphereVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(mountEl);
+
+  window.addEventListener('resize', onResizeOrMotionChange, { passive: true });
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  prefersReducedQuery.addEventListener('change', onResizeOrMotionChange);
+
+  if (!shouldUseFallback()) {
+    mountEl.style.display = 'block';
+    startLoop();
+  }
+
+  activeCleanup = () => {
+    stopLoop();
+    observer.disconnect();
+    stage.removeEventListener('mouseenter', onMouseEnter);
+    stage.removeEventListener('mouseleave', onMouseLeave);
+    stage.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('resize', onResizeOrMotionChange);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+    prefersReducedQuery.removeEventListener('change', onResizeOrMotionChange);
+  };
+}

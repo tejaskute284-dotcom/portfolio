@@ -56,7 +56,6 @@ export const PROJECTS = [
     ],
     tags: ['HTML5', 'CSS3', 'JavaScript ES6', 'Tailwind CSS', 'Leaflet.js', 'Anime.js', 'Chart.js', 'Lenis'],
     github: 'https://github.com/WisdomKingAR/Cryonex',
-    demo: '#',
     footer: 'Telemetry · Global map · Procurement Wizard'
   },
   {
