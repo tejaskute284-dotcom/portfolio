@@ -21,17 +21,8 @@
     }
   </style>
   <script>
-    // Synchronous immediate theme restoration before HTML rendering
-    (function () {
-      try {
-        var savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          document.documentElement.setAttribute('data-theme', savedTheme);
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-      } catch (e) { }
-    })();
+    // Enforce unified ultra-dark cinematic theme on load
+    document.documentElement.setAttribute('data-theme', 'dark');
   </script>
 
   <!-- SEO & Open Graph Meta Tags -->
@@ -140,22 +131,6 @@
           class="js-open-resume-modal hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-accentGold text-[11px] font-mono tracking-wider uppercase font-semibold text-accentGold hover:bg-accentGold hover:text-[#070B12] transition duration-300">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           <span>Resume</span>
-        </button>
-
-        <!-- Theme Toggle -->
-        <button id="theme-toggle"
-          class="p-2 rounded-md bg-bgSecondary border border-border text-textSecondary hover:text-accentGold transition duration-300"
-          aria-label="Toggle Theme">
-          <svg id="theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            class="w-4 h-4">
-            <circle cx="12" cy="12" r="5" />
-            <path
-              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-          </svg>
-          <svg id="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            class="w-4 h-4 hidden">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
         </button>
 
         <!-- Social Icons -->
