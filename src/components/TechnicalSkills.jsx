@@ -306,28 +306,7 @@ export default function TechnicalSkills() {
         </svg>
       </div>
 
-      {/* ── mobile: wrap pill list ── */}
-      <div
-        className="md:hidden"
-        style={{ display:'flex', flexWrap:'wrap', gap:8, justifyContent:'center', padding:'12px 16px 0', maxWidth:480, margin:'0 auto' }}
-      >
-        {SKILLS.map((skill, i) => {
-          const isMastered = skill.status === 'mastered';
-          return (
-            <span key={i} style={{
-              display:'inline-flex', alignItems:'center', gap:6,
-              padding:'5px 12px', borderRadius:999,
-              fontFamily:'monospace', fontSize:11, fontWeight:600,
-              background:'rgba(8,15,30,0.9)',
-              border: isMastered ? '1px solid rgba(74,127,203,0.45)' : '1px solid rgba(196,160,74,0.5)',
-              color: isMastered ? '#b8ccec' : '#d4b46a',
-            }}>
-              <span style={{ width:7, height:7, borderRadius:'50%', flexShrink:0, background: isMastered ? '#4a7fcb' : '#c4a04a' }}/>
-              {skill.name}
-            </span>
-          );
-        })}
-      </div>
+
 
       {/* ── category summary cards ── */}
       <div style={{ display:'grid', gridTemplateColumns:'repeat(6,1fr)', gap:12, maxWidth:900, margin:'32px auto 0', padding:'0 24px' }} className="grid-cols-3 md:grid-cols-6">
