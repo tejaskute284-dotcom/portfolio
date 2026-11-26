@@ -1,10 +1,10 @@
-// neural-3d.js — Ultra-Dark Cinematic AI Universe (Three.js)
-// Multi-layer, portrait-aware 3D environment:
-//   Layer 1: Deep-space atmospheric dust
-//   Layer 2: Multi-depth floating particles (mostly navy/slate, selective antique gold)
-//   Layer 3: Proximity neural network weighted away from left text & portrait face
-//   Layer 4: Flowing antique-gold energy trails & traveling data signals
-//   Layer 5: Elliptical 3D orbital particles hugging the outer portrait arch
+// neural-3d.js — Dark Cinematic Neural Orbit & Particle Wave Universe (Three.js)
+// Layers:
+//   1. Obsidian / Midnight atmospheric backdrop + deep-space dust
+//   2. Multi-depth floating golden & slate-navy particles (with depth-of-field sizing)
+//   3. Delicate neural network connections + traveling golden light signals along edges
+//   4. 3D flowing golden particle wave landscape along the bottom of the hero
+//   5. Elliptical golden orbital rings + traveling orbital particles outside the portrait arch
 
 let activeNeuralCleanup = null;
 
@@ -18,8 +18,8 @@ function createSoftParticleTexture() {
 
   const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
   grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-  grad.addColorStop(0.35, 'rgba(255, 255, 255, 0.72)');
-  grad.addColorStop(0.7, 'rgba(255, 255, 255, 0.16)');
+  grad.addColorStop(0.32, 'rgba(255, 255, 255, 0.78)');
+  grad.addColorStop(0.68, 'rgba(255, 255, 255, 0.18)');
   grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
   ctx.fillStyle = grad;
@@ -37,7 +37,13 @@ export function initNeural3D() {
   }
 
   const container = document.getElementById('particles-js');
-  if (!container || typeof THREE === 'undefined') return;
+  if (!container) return;
+
+  // Lightweight fallback if Three.js failed to load
+  if (typeof THREE === 'undefined') {
+    container.style.opacity = '0.85';
+    return;
+  }
 
   const prefersReducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointerQuery = window.matchMedia('(pointer: fine)');
@@ -60,15 +66,23 @@ export function initNeural3D() {
   let width = container.clientWidth || window.innerWidth;
   let height = container.clientHeight || window.innerHeight;
 
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: tier !== 'mobile',
+      powerPreference: 'low-power'
+    });
+  } catch {
+    // Graceful WebGL fallback: keep CSS obsidian/midnight radial & grid background
+    container.style.opacity = '0.85';
+    return;
+  }
+
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(46, width / Math.max(height, 1), 1, 1200);
+  const camera = new THREE.PerspectiveCamera(46, width / Math.max(height, 1), 1, 1400);
   camera.position.z = 360;
 
-  const renderer = new THREE.WebGLRenderer({
-    alpha: true,
-    antialias: tier !== 'mobile',
-    powerPreference: 'low-power'
-  });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.domElement.style.position = 'absolute';
@@ -87,10 +101,10 @@ export function initNeural3D() {
   const portraitMetrics = {
     worldX: 115,
     worldY: 0,
-    exclRadiusX: 85,
-    exclRadiusY: 110,
-    orbitRadiusX: 108,
-    orbitRadiusY: 132
+    exclRadiusX: 88,
+    exclRadiusY: 112,
+    orbitRadiusX: 112,
+    orbitRadiusY: 134
   };
 
   const updatePortraitMetrics = () => {
@@ -118,18 +132,19 @@ export function initNeural3D() {
         const halfW = (aRect.width / cRect.width) * worldWidth * 0.5;
         const halfH = (aRect.height / cRect.height) * worldHeight * 0.5;
 
-        portraitMetrics.exclRadiusX = halfW + 14;
-        portraitMetrics.exclRadiusY = halfH + 14;
-        portraitMetrics.orbitRadiusX = halfW + 26;
-        portraitMetrics.orbitRadiusY = halfH + 24;
+        portraitMetrics.exclRadiusX = halfW + 16;
+        portraitMetrics.exclRadiusY = halfH + 16;
+        portraitMetrics.orbitRadiusX = halfW + 28;
+        portraitMetrics.orbitRadiusY = halfH + 26;
       }
     }
     return { worldWidth, worldHeight };
   };
 
   const { worldWidth, worldHeight } = updatePortraitMetrics();
+  const halfW = worldWidth * 0.5;
+  const halfH = worldHeight * 0.5;
 
-  // Helper: keep particles outside portrait face area
   const isInsidePortraitExclusion = (x, y) => {
     const dx = (x - portraitMetrics.worldX) / portraitMetrics.exclRadiusX;
     const dy = (y - portraitMetrics.worldY) / portraitMetrics.exclRadiusY;
@@ -139,25 +154,24 @@ export function initNeural3D() {
   // =========================================================================
   // LAYER 1: Deep-space atmospheric dust (slowest parallax)
   // =========================================================================
-  const spaceCount = tier === 'desktop' ? 75 : tier === 'tablet' ? 45 : 22;
+  const spaceCount = tier === 'desktop' ? 70 : tier === 'tablet' ? 40 : 20;
   const spacePos = new Float32Array(spaceCount * 3);
   const spaceColors = new Float32Array(spaceCount * 3);
 
   for (let i = 0; i < spaceCount; i++) {
     spacePos[i * 3]     = (Math.random() - 0.5) * worldWidth * 1.4;
     spacePos[i * 3 + 1] = (Math.random() - 0.5) * worldHeight * 1.3;
-    spacePos[i * 3 + 2] = -140 - Math.random() * 180;
+    spacePos[i * 3 + 2] = -150 - Math.random() * 190;
 
-    // Mostly muted slate/navy (#24334C / #929BAA), sparse dim gold
-    const isGold = Math.random() < 0.14;
+    const isGold = Math.random() < 0.22;
     if (isGold) {
-      spaceColors[i * 3]     = 0.725 * 0.45;
-      spaceColors[i * 3 + 1] = 0.604 * 0.45;
-      spaceColors[i * 3 + 2] = 0.369 * 0.45;
+      spaceColors[i * 3]     = 0.725 * 0.5;
+      spaceColors[i * 3 + 1] = 0.604 * 0.5;
+      spaceColors[i * 3 + 2] = 0.369 * 0.5;
     } else {
-      spaceColors[i * 3]     = 0.32;
-      spaceColors[i * 3 + 1] = 0.38;
-      spaceColors[i * 3 + 2] = 0.50;
+      spaceColors[i * 3]     = 0.25;
+      spaceColors[i * 3 + 1] = 0.32;
+      spaceColors[i * 3 + 2] = 0.44;
     }
   }
 
@@ -165,7 +179,7 @@ export function initNeural3D() {
   spaceGeo.setAttribute('position', new THREE.BufferAttribute(spacePos, 3));
   spaceGeo.setAttribute('color', new THREE.BufferAttribute(spaceColors, 3));
   const spaceMat = new THREE.PointsMaterial({
-    size: 2.6,
+    size: 2.5,
     map: softTexture || undefined,
     vertexColors: true,
     transparent: true,
@@ -177,28 +191,24 @@ export function initNeural3D() {
   disposables.push(spaceGeo, spaceMat);
 
   // =========================================================================
-  // LAYER 2 & 3: Multi-depth Floating 3D Particles + Neural Network Connections
-  // Weighted right/outer-space so left headline stays calm and readable
+  // LAYER 2 & 3: Golden Neural Network Particles + Connecting Lines + Signals
   // =========================================================================
-  const nodeCount = tier === 'desktop' ? 44 : tier === 'tablet' ? 24 : 10;
+  const nodeCount = tier === 'desktop' ? 48 : tier === 'tablet' ? 26 : 12;
   const nodePos = new Float32Array(nodeCount * 3);
   const nodeColors = new Float32Array(nodeCount * 3);
   const nodeMeta = [];
 
-  const halfW = worldWidth * 0.5;
-  const halfH = worldHeight * 0.5;
-
   for (let i = 0; i < nodeCount; i++) {
-    // 78% weighted to right/outer areas; 22% sparse quiet left perimeter
     let x, y;
     let attempts = 0;
     do {
-      if (i < nodeCount * 0.78) {
-        x = -halfW * 0.12 + Math.random() * (halfW * 1.15);
+      // 76% weighted right/upper-center; 24% sparse quiet left perimeter
+      if (i < nodeCount * 0.76) {
+        x = -halfW * 0.14 + Math.random() * (halfW * 1.16);
       } else {
-        x = -halfW * 0.95 + Math.random() * (halfW * 0.8);
+        x = -halfW * 0.94 + Math.random() * (halfW * 0.76);
       }
-      y = (Math.random() - 0.5) * worldHeight * 0.96;
+      y = (Math.random() - 0.5) * worldHeight * 0.92;
       attempts++;
     } while (isInsidePortraitExclusion(x, y) && attempts < 14);
 
@@ -206,29 +216,27 @@ export function initNeural3D() {
       x = portraitMetrics.worldX + (x >= portraitMetrics.worldX ? 1 : -1) * (portraitMetrics.exclRadiusX + 18);
     }
 
-    const z = -90 + Math.random() * 130;
+    const z = -95 + Math.random() * 135;
     nodePos[i * 3]     = x;
     nodePos[i * 3 + 1] = y;
     nodePos[i * 3 + 2] = z;
 
-    const isGold = Math.random() < 0.28;
-    if (isGold) {
-      nodeColors[i * 3]     = 0.725; // #B99A5E
-      nodeColors[i * 3 + 1] = 0.604;
-      nodeColors[i * 3 + 2] = 0.369;
+    const brightness = 0.55 + Math.random() * 0.45;
+    const isChampagne = Math.random() < 0.35;
+    if (isChampagne) {
+      nodeColors[i * 3]     = 0.820 * brightness; // #D1B77E
+      nodeColors[i * 3 + 1] = 0.718 * brightness;
+      nodeColors[i * 3 + 2] = 0.494 * brightness;
     } else {
-      nodeColors[i * 3]     = 0.28;  // Dark blue-grey #475875
-      nodeColors[i * 3 + 1] = 0.35;
-      nodeColors[i * 3 + 2] = 0.46;
+      nodeColors[i * 3]     = 0.725 * brightness; // #B99A5E
+      nodeColors[i * 3 + 1] = 0.604 * brightness;
+      nodeColors[i * 3 + 2] = 0.369 * brightness;
     }
 
     nodeMeta.push({
-      isGold,
-      baseX: x,
-      baseY: y,
-      vx: (Math.random() - 0.5) * 0.08,
-      vy: (Math.random() - 0.5) * 0.08,
-      vz: (Math.random() - 0.5) * 0.04,
+      vx: (Math.random() - 0.5) * 0.075,
+      vy: (Math.random() - 0.5) * 0.075,
+      vz: (Math.random() - 0.5) * 0.038,
       phase: Math.random() * Math.PI * 2
     });
   }
@@ -237,11 +245,11 @@ export function initNeural3D() {
   nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePos, 3));
   nodeGeo.setAttribute('color', new THREE.BufferAttribute(nodeColors, 3));
   const nodeMat = new THREE.PointsMaterial({
-    size: tier === 'mobile' ? 4.2 : 5.2,
+    size: tier === 'mobile' ? 4.0 : 5.0,
     map: softTexture || undefined,
     vertexColors: true,
     transparent: true,
-    opacity: 0.82,
+    opacity: 0.85,
     blending: THREE.AdditiveBlending,
     depthWrite: false
   });
@@ -249,12 +257,18 @@ export function initNeural3D() {
   scene.add(nodePoints);
   disposables.push(nodeGeo, nodeMat);
 
-  // Neural connections (Desktop & Tablet only, capped connections per node to avoid clutter)
+  // Neural connections & traveling edge light signals
   let lineGeo = null;
   let lineMat = null;
   let linePos = null;
   let lineCol = null;
-  const maxTotalLines = tier === 'desktop' ? 90 : tier === 'tablet' ? 35 : 0;
+  const maxTotalLines = tier === 'desktop' ? 96 : tier === 'tablet' ? 38 : 0;
+
+  let edgeSignalGeo = null;
+  let edgeSignalMat = null;
+  let edgeSignalPos = null;
+  const edgeSignalCount = tier === 'desktop' ? 10 : tier === 'tablet' ? 5 : 0;
+  const edgeSignals = [];
 
   if (maxTotalLines > 0) {
     linePos = new Float32Array(maxTotalLines * 6);
@@ -268,83 +282,139 @@ export function initNeural3D() {
       blending: THREE.AdditiveBlending,
       depthWrite: false
     });
-    const lineSegs = new THREE.LineSegments(lineGeo, lineMat);
-    scene.add(lineSegs);
+    scene.add(new THREE.LineSegments(lineGeo, lineMat));
     disposables.push(lineGeo, lineMat);
+
+    if (edgeSignalCount > 0) {
+      edgeSignalPos = new Float32Array(edgeSignalCount * 3);
+      edgeSignalGeo = new THREE.BufferGeometry();
+      edgeSignalGeo.setAttribute('position', new THREE.BufferAttribute(edgeSignalPos, 3));
+      edgeSignalMat = new THREE.PointsMaterial({
+        color: 0xD1B77E,
+        size: 6.2,
+        map: softTexture || undefined,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      scene.add(new THREE.Points(edgeSignalGeo, edgeSignalMat));
+      disposables.push(edgeSignalGeo, edgeSignalMat);
+
+      for (let s = 0; s < edgeSignalCount; s++) {
+        edgeSignals.push({
+          edgeIdx: s * 4,
+          t: Math.random(),
+          speed: 0.008 + Math.random() * 0.007
+        });
+      }
+    }
   }
 
   // =========================================================================
-  // LAYER 4: Flowing Antique-Gold Energy Trails & Occasional Data Signals
-  // Positioned along outer hero arcs, avoiding left headline text
+  // LAYER 4: Animated Golden Particle Waves along the Bottom of the Hero
+  // Hundreds of tiny golden particles forming a smooth 3D flowing landscape
   // =========================================================================
-  const trails = [];
-  if (tier !== 'mobile') {
-    const trailSpecs = [
-      // Upper-right sweeping arc
-      [
-        new THREE.Vector3(-halfW * 0.05, halfH * 0.85, -45),
-        new THREE.Vector3(portraitMetrics.worldX * 0.65, halfH * 0.58, -25),
-        new THREE.Vector3(halfW * 0.96, halfH * 0.15, -55)
-      ],
-      // Lower-right sweeping arc
-      [
-        new THREE.Vector3(halfW * 0.12, -halfH * 0.88, -60),
-        new THREE.Vector3(portraitMetrics.worldX * 0.85, -halfH * 0.52, -20),
-        new THREE.Vector3(halfW * 0.98, -halfH * 0.08, -40)
-      ],
-      // Far-right vertical constellation wave
-      [
-        new THREE.Vector3(halfW * 0.78, -halfH * 0.85, -80),
-        new THREE.Vector3(halfW * 0.92, 0, -35),
-        new THREE.Vector3(halfW * 0.72, halfH * 0.82, -70)
-      ]
-    ];
+  let waveGeo = null;
+  let waveMat = null;
+  let wavePos = null;
+  let waveCol = null;
+  let waveCols = 0;
+  let waveRows = 0;
 
-    const activeTrails = tier === 'desktop' ? trailSpecs : trailSpecs.slice(0, 2);
-    const signalPositions = new Float32Array(activeTrails.length * 3);
-    const signalGeo = new THREE.BufferGeometry();
-    signalGeo.setAttribute('position', new THREE.BufferAttribute(signalPositions, 3));
-    const signalMat = new THREE.PointsMaterial({
-      color: 0xD1B77E, // Champagne Light signal
-      size: 6.5,
+  if (tier !== 'mobile') {
+    waveCols = tier === 'desktop' ? 42 : 26;
+    waveRows = tier === 'desktop' ? 13 : 9;
+    const waveTotal = waveCols * waveRows;
+
+    wavePos = new Float32Array(waveTotal * 3);
+    waveCol = new Float32Array(waveTotal * 3);
+
+    const waveWidth = worldWidth * 1.18;
+    const waveDepth = 190;
+    const baseY = -halfH * 0.62;
+
+    let idx = 0;
+    for (let r = 0; r < waveRows; r++) {
+      const zNorm = r / (waveRows - 1);
+      const z = -120 + zNorm * waveDepth;
+      // Fade brightness smoothly toward front/back edges
+      const rowFade = Math.sin(zNorm * Math.PI) * 0.72 + 0.18;
+
+      for (let c = 0; c < waveCols; c++) {
+        const xNorm = c / (waveCols - 1);
+        const x = (xNorm - 0.5) * waveWidth;
+
+        wavePos[idx * 3]     = x;
+        wavePos[idx * 3 + 1] = baseY;
+        wavePos[idx * 3 + 2] = z;
+
+        const isSpark = (r * 7 + c * 13) % 19 === 0;
+        if (isSpark) {
+          waveCol[idx * 3]     = 0.820 * rowFade; // #D1B77E
+          waveCol[idx * 3 + 1] = 0.718 * rowFade;
+          waveCol[idx * 3 + 2] = 0.494 * rowFade;
+        } else {
+          waveCol[idx * 3]     = 0.725 * rowFade * 0.75; // #B99A5E
+          waveCol[idx * 3 + 1] = 0.604 * rowFade * 0.75;
+          waveCol[idx * 3 + 2] = 0.369 * rowFade * 0.75;
+        }
+        idx++;
+      }
+    }
+
+    waveGeo = new THREE.BufferGeometry();
+    waveGeo.setAttribute('position', new THREE.BufferAttribute(wavePos, 3));
+    waveGeo.setAttribute('color', new THREE.BufferAttribute(waveCol, 3));
+    waveMat = new THREE.PointsMaterial({
+      size: tier === 'desktop' ? 2.8 : 2.5,
       map: softTexture || undefined,
+      vertexColors: true,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.78,
       blending: THREE.AdditiveBlending,
       depthWrite: false
     });
-    const signalPoints = new THREE.Points(signalGeo, signalMat);
-    scene.add(signalPoints);
-    disposables.push(signalGeo, signalMat);
-
-    activeTrails.forEach((pts, idx) => {
-      const curve = new THREE.CatmullRomCurve3(pts);
-      const sampled = curve.getPoints(44);
-      const tGeo = new THREE.BufferGeometry().setFromPoints(sampled);
-      const tMat = new THREE.LineBasicMaterial({
-        color: 0xB99A5E,
-        transparent: true,
-        opacity: 0.14,
-        depthWrite: false
-      });
-      const tLine = new THREE.Line(tGeo, tMat);
-      scene.add(tLine);
-      disposables.push(tGeo, tMat);
-
-      trails.push({
-        samples: sampled,
-        t: idx * 0.37,
-        speed: 0.0014 + idx * 0.0003,
-        signalGeo,
-        signalPositions
-      });
-    });
+    scene.add(new THREE.Points(waveGeo, waveMat));
+    disposables.push(waveGeo, waveMat);
   }
 
   // =========================================================================
-  // LAYER 5: Elliptical 3D Orbital Particles around Portrait Arch
-  // Strictly outside the portrait frame & face area
+  // LAYER 5: Portrait-Orbit Animation (Golden Orbital Rings + Particles)
+  // Positioned strictly outside the portrait arch frame
   // =========================================================================
+  const ringSegments = 72;
+  const ringSpecs = tier === 'mobile'
+    ? [{ scale: 1.02, z: -22, opacity: 0.22 }]
+    : [
+        { scale: 1.0,  z: -24, opacity: 0.26 },
+        { scale: 1.14, z: -42, opacity: 0.14 }
+      ];
+
+  const orbitalRings = [];
+  ringSpecs.forEach((spec, rIdx) => {
+    const pts = new Float32Array(ringSegments * 3);
+    for (let s = 0; s < ringSegments; s++) {
+      const a = (s / ringSegments) * Math.PI * 2;
+      pts[s * 3]     = portraitMetrics.worldX + Math.cos(a) * portraitMetrics.orbitRadiusX * spec.scale;
+      pts[s * 3 + 1] = portraitMetrics.worldY + Math.sin(a) * portraitMetrics.orbitRadiusY * spec.scale;
+      pts[s * 3 + 2] = spec.z + Math.sin(a + rIdx) * 10;
+    }
+    const rGeo = new THREE.BufferGeometry();
+    rGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
+    const rMat = new THREE.LineBasicMaterial({
+      color: rIdx === 0 ? 0xB99A5E : 0xD1B77E,
+      transparent: true,
+      opacity: spec.opacity,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const rLoop = new THREE.LineLoop(rGeo, rMat);
+    scene.add(rLoop);
+    disposables.push(rGeo, rMat);
+    orbitalRings.push({ geo: rGeo, pos: pts, scale: spec.scale, z: spec.z, phase: rIdx * 1.2 });
+  });
+
   const orbitalCount = tier === 'desktop' ? 22 : tier === 'tablet' ? 14 : 8;
   const orbitalPos = new Float32Array(orbitalCount * 3);
   const orbitalCol = new Float32Array(orbitalCount * 3);
@@ -352,32 +422,24 @@ export function initNeural3D() {
 
   for (let i = 0; i < orbitalCount; i++) {
     const angle = (i / orbitalCount) * Math.PI * 2;
-    const depthLayer = i % 3; // 3 orbital depths
-    const radiusScale = 1.0 + depthLayer * 0.11;
-    const rx = portraitMetrics.orbitRadiusX * radiusScale;
-    const ry = portraitMetrics.orbitRadiusY * radiusScale;
-    const zBase = -35 + depthLayer * 18;
+    const ringChoice = i % ringSpecs.length;
+    const spec = ringSpecs[ringChoice];
 
-    orbitalPos[i * 3]     = portraitMetrics.worldX + Math.cos(angle) * rx;
-    orbitalPos[i * 3 + 1] = portraitMetrics.worldY + Math.sin(angle) * ry;
-    orbitalPos[i * 3 + 2] = zBase;
+    orbitalPos[i * 3]     = portraitMetrics.worldX + Math.cos(angle) * portraitMetrics.orbitRadiusX * spec.scale;
+    orbitalPos[i * 3 + 1] = portraitMetrics.worldY + Math.sin(angle) * portraitMetrics.orbitRadiusY * spec.scale;
+    orbitalPos[i * 3 + 2] = spec.z;
 
     const isChampagne = i % 3 === 0;
-    if (isChampagne) {
-      orbitalCol[i * 3]     = 0.820; // #D1B77E Champagne Light
-      orbitalCol[i * 3 + 1] = 0.718;
-      orbitalCol[i * 3 + 2] = 0.494;
-    } else {
-      orbitalCol[i * 3]     = 0.725; // #B99A5E Antique Gold
-      orbitalCol[i * 3 + 1] = 0.604;
-      orbitalCol[i * 3 + 2] = 0.369;
-    }
+    orbitalCol[i * 3]     = isChampagne ? 0.820 : 0.725;
+    orbitalCol[i * 3 + 1] = isChampagne ? 0.718 : 0.604;
+    orbitalCol[i * 3 + 2] = isChampagne ? 0.494 : 0.369;
 
     orbitalMeta.push({
       angle,
-      radiusScale,
-      speed: (0.0011 + depthLayer * 0.00035) * (i % 2 === 0 ? 1 : 0.85),
-      zBase
+      scale: spec.scale,
+      zBase: spec.z,
+      phase: ringChoice * 1.2,
+      speed: (0.0011 + ringChoice * 0.0004) * (i % 2 === 0 ? 1 : 0.82)
     });
   }
 
@@ -385,20 +447,19 @@ export function initNeural3D() {
   orbitalGeo.setAttribute('position', new THREE.BufferAttribute(orbitalPos, 3));
   orbitalGeo.setAttribute('color', new THREE.BufferAttribute(orbitalCol, 3));
   const orbitalMat = new THREE.PointsMaterial({
-    size: tier === 'mobile' ? 3.2 : 4.0,
+    size: tier === 'mobile' ? 3.2 : 4.2,
     map: softTexture || undefined,
     vertexColors: true,
     transparent: true,
-    opacity: 0.72,
+    opacity: 0.82,
     blending: THREE.AdditiveBlending,
     depthWrite: false
   });
-  const orbitalPoints = new THREE.Points(orbitalGeo, orbitalMat);
-  scene.add(orbitalPoints);
+  scene.add(new THREE.Points(orbitalGeo, orbitalMat));
   disposables.push(orbitalGeo, orbitalMat);
 
   // =========================================================================
-  // Subtle Mouse Parallax (Desktop fine-pointer only; disabled on touch)
+  // Subtle Mouse Parallax (Desktop fine-pointer only)
   // =========================================================================
   let mouseX = 0;
   let mouseY = 0;
@@ -408,8 +469,8 @@ export function initNeural3D() {
   const enableParallax = tier === 'desktop' && finePointerQuery.matches;
   const onMouseMove = (e) => {
     if (!enableParallax) return;
-    targetMouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-    targetMouseY = (e.clientY / window.innerHeight - 0.5) * 14;
+    targetMouseX = (e.clientX / window.innerWidth - 0.5) * 18;
+    targetMouseY = (e.clientY / window.innerHeight - 0.5) * 12;
   };
   if (enableParallax) {
     window.addEventListener('mousemove', onMouseMove, { passive: true });
@@ -421,39 +482,36 @@ export function initNeural3D() {
   let isDisposed = false;
   let elapsed = 0;
 
-  const connectDist = tier === 'desktop' ? 95 : 80;
+  const connectDist = tier === 'desktop' ? 98 : 82;
   const connectDistSq = connectDist * connectDist;
   const degreeCounts = new Uint8Array(nodeCount);
 
   const renderSingleFrame = (step = true) => {
     if (step) elapsed += 0.016;
 
-    // Gentle camera parallax
     mouseX += (targetMouseX - mouseX) * 0.03;
     mouseY += (targetMouseY - mouseY) * 0.03;
     camera.position.x = mouseX;
     camera.position.y = -mouseY;
     camera.lookAt(0, 0, 0);
 
-    // Subtle deep-space drift
     if (step) {
-      spacePoints.rotation.y = Math.sin(elapsed * 0.04) * 0.025;
-      spacePoints.rotation.x = Math.cos(elapsed * 0.03) * 0.015;
+      spacePoints.rotation.y = Math.sin(elapsed * 0.035) * 0.025;
+      spacePoints.rotation.x = Math.cos(elapsed * 0.028) * 0.015;
     }
 
     // Update Layer 2/3 nodes
     if (step) {
       for (let i = 0; i < nodeCount; i++) {
         const m = nodeMeta[i];
-        let x = nodePos[i * 3] + m.vx + Math.sin(elapsed * 0.4 + m.phase) * 0.02;
-        let y = nodePos[i * 3 + 1] + m.vy + Math.cos(elapsed * 0.35 + m.phase) * 0.02;
+        let x = nodePos[i * 3] + m.vx + Math.sin(elapsed * 0.4 + m.phase) * 0.018;
+        let y = nodePos[i * 3 + 1] + m.vy + Math.cos(elapsed * 0.35 + m.phase) * 0.018;
         let z = nodePos[i * 3 + 2] + m.vz;
 
         if (x < -halfW || x > halfW) m.vx *= -1;
         if (Math.abs(y) > halfH)     m.vy *= -1;
-        if (z < -100 || z > 50)      m.vz *= -1;
+        if (z < -105 || z > 55)      m.vz *= -1;
 
-        // Gently deflect if approaching portrait arch exclusion zone
         if (isInsidePortraitExclusion(x, y)) {
           m.vx *= -1;
           m.vy *= -1;
@@ -468,16 +526,15 @@ export function initNeural3D() {
       nodeGeo.attributes.position.needsUpdate = true;
     }
 
-    // Update Layer 3 proximity connections (capped degree <= 3 to avoid clutter)
+    // Update Layer 3 neural connections & traveling edge light signals
+    let connected = 0;
     if (lineGeo && linePos && lineCol) {
       degreeCounts.fill(0);
       let lineIdx = 0;
       let colorIdx = 0;
-      let connected = 0;
 
       for (let i = 0; i < nodeCount && connected < maxTotalLines; i++) {
         if (degreeCounts[i] >= 3) continue;
-        // Keep left-side text zone free of prominent crossings
         if (nodePos[i * 3] < -halfW * 0.25) continue;
 
         for (let j = i + 1; j < nodeCount && connected < maxTotalLines; j++) {
@@ -489,8 +546,7 @@ export function initNeural3D() {
           const dSq = dx * dx + dy * dy + dz * dz;
 
           if (dSq < connectDistSq) {
-            const alpha = (1 - Math.sqrt(dSq) / connectDist) * 0.32;
-            const goldLink = nodeMeta[i].isGold && nodeMeta[j].isGold;
+            const alpha = (1 - Math.sqrt(dSq) / connectDist) * 0.34;
 
             linePos[lineIdx++] = nodePos[i * 3];
             linePos[lineIdx++] = nodePos[i * 3 + 1];
@@ -499,9 +555,9 @@ export function initNeural3D() {
             linePos[lineIdx++] = nodePos[j * 3 + 1];
             linePos[lineIdx++] = nodePos[j * 3 + 2];
 
-            const r = goldLink ? 0.725 * alpha * 1.35 : 0.20 * alpha;
-            const g = goldLink ? 0.604 * alpha * 1.35 : 0.28 * alpha;
-            const b = goldLink ? 0.369 * alpha * 1.35 : 0.42 * alpha;
+            const r = 0.725 * alpha;
+            const g = 0.604 * alpha;
+            const b = 0.369 * alpha;
 
             lineCol[colorIdx++] = r;
             lineCol[colorIdx++] = g;
@@ -520,39 +576,72 @@ export function initNeural3D() {
       lineGeo.setDrawRange(0, connected * 2);
       lineGeo.attributes.position.needsUpdate = true;
       lineGeo.attributes.color.needsUpdate = true;
-    }
 
-    // Update Layer 4 energy signals along curved trails
-    if (step && trails.length > 0) {
-      for (let i = 0; i < trails.length; i++) {
-        const tr = trails[i];
-        tr.t = (tr.t + tr.speed) % 1;
-        const maxIdx = tr.samples.length - 1;
-        const fIdx = tr.t * maxIdx;
-        const i0 = Math.floor(fIdx);
-        const i1 = Math.min(i0 + 1, maxIdx);
-        const frac = fIdx - i0;
+      // Update golden signals gliding along active connecting lines
+      if (edgeSignalGeo && edgeSignalPos && connected > 0) {
+        for (let s = 0; s < edgeSignals.length; s++) {
+          const sig = edgeSignals[s];
+          if (step) {
+            sig.t += sig.speed;
+            if (sig.t >= 1) {
+              sig.t = 0;
+              sig.edgeIdx = Math.floor(Math.random() * connected);
+            }
+          }
+          const eIdx = (sig.edgeIdx % connected) * 6;
+          const x1 = linePos[eIdx];
+          const y1 = linePos[eIdx + 1];
+          const z1 = linePos[eIdx + 2];
+          const x2 = linePos[eIdx + 3];
+          const y2 = linePos[eIdx + 4];
+          const z2 = linePos[eIdx + 5];
 
-        const p0 = tr.samples[i0];
-        const p1 = tr.samples[i1];
-        tr.signalPositions[i * 3]     = p0.x + (p1.x - p0.x) * frac;
-        tr.signalPositions[i * 3 + 1] = p0.y + (p1.y - p0.y) * frac;
-        tr.signalPositions[i * 3 + 2] = p0.z + (p1.z - p0.z) * frac;
+          edgeSignalPos[s * 3]     = x1 + (x2 - x1) * sig.t;
+          edgeSignalPos[s * 3 + 1] = y1 + (y2 - y1) * sig.t;
+          edgeSignalPos[s * 3 + 2] = z1 + (z2 - z1) * sig.t;
+        }
+        edgeSignalGeo.attributes.position.needsUpdate = true;
       }
-      trails[0].signalGeo.attributes.position.needsUpdate = true;
     }
 
-    // Update Layer 5 elliptical orbital particles around portrait arch
+    // Update Layer 4 bottom golden particle wave landscape
+    if (waveGeo && wavePos && step) {
+      const baseY = -halfH * 0.64;
+      let idx = 0;
+      for (let r = 0; r < waveRows; r++) {
+        for (let c = 0; c < waveCols; c++) {
+          const x = wavePos[idx * 3];
+          const z = wavePos[idx * 3 + 2];
+          const elevation =
+            Math.sin(x * 0.016 + elapsed * 0.65) * 11 +
+            Math.cos(z * 0.025 + elapsed * 0.45) * 7 +
+            Math.sin((x + z) * 0.01 + elapsed * 0.35) * 5;
+          wavePos[idx * 3 + 1] = baseY + elevation;
+          idx++;
+        }
+      }
+      waveGeo.attributes.position.needsUpdate = true;
+    }
+
+    // Update Layer 5 orbital rings & particles around portrait arch
     if (step) {
+      for (let r = 0; r < orbitalRings.length; r++) {
+        const ring = orbitalRings[r];
+        for (let s = 0; s < ringSegments; s++) {
+          const a = (s / ringSegments) * Math.PI * 2;
+          ring.pos[s * 3]     = portraitMetrics.worldX + Math.cos(a) * portraitMetrics.orbitRadiusX * ring.scale;
+          ring.pos[s * 3 + 1] = portraitMetrics.worldY + Math.sin(a) * portraitMetrics.orbitRadiusY * ring.scale;
+          ring.pos[s * 3 + 2] = ring.z + Math.sin(a + ring.phase + elapsed * 0.25) * 10;
+        }
+        ring.geo.attributes.position.needsUpdate = true;
+      }
+
       for (let i = 0; i < orbitalCount; i++) {
         const o = orbitalMeta[i];
         o.angle += o.speed;
-        const rx = portraitMetrics.orbitRadiusX * o.radiusScale;
-        const ry = portraitMetrics.orbitRadiusY * o.radiusScale;
-
-        orbitalPos[i * 3]     = portraitMetrics.worldX + Math.cos(o.angle) * rx;
-        orbitalPos[i * 3 + 1] = portraitMetrics.worldY + Math.sin(o.angle) * ry;
-        orbitalPos[i * 3 + 2] = o.zBase + Math.sin(o.angle * 2) * 14;
+        orbitalPos[i * 3]     = portraitMetrics.worldX + Math.cos(o.angle) * portraitMetrics.orbitRadiusX * o.scale;
+        orbitalPos[i * 3 + 1] = portraitMetrics.worldY + Math.sin(o.angle) * portraitMetrics.orbitRadiusY * o.scale;
+        orbitalPos[i * 3 + 2] = o.zBase + Math.sin(o.angle + o.phase + elapsed * 0.25) * 10;
       }
       orbitalGeo.attributes.position.needsUpdate = true;
     }
@@ -628,7 +717,6 @@ export function initNeural3D() {
       if (isDisposed) return;
       const newTier = getDeviceTier();
       if (newTier !== tier) {
-        // Re-initialize cleanly when crossing desktop/tablet/mobile breakpoints
         initNeural3D();
         return;
       }
