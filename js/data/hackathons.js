@@ -44,11 +44,11 @@ export const HACKATHONS = [
     subtitleColor: 'text-accentViolet',
     img: 'assets/certificates/cyber_cypher_finalist_nmims.png',
     imgAlt: 'Cyber Cypher 5.0 Finalist Certificate Photo',
-    desc: 'Qualified for and completed Round 2 (Final Round) of Cyber Cypher 5.0 at NMIMS MPSTME, Mumbai on 7th &amp; 8th March.',
+    desc: 'Qualified for and completed Round 2 (Final Round) of Cyber Cypher 5.0 at NMIMS MPSTME, Mumbai on 7th & 8th March.',
     footerLeft: 'Date: 7-8 March',
     btnColor: 'text-accentViolet',
     certTitle: 'Cyber Cypher 5.0 — Finalist Certificate',
-    certSubtitle: 'NMIMS Mukesh Patel School of Technology Management &amp; Engineering'
+    certSubtitle: 'NMIMS Mukesh Patel School of Technology Management & Engineering'
   },
   {
     org: 'ATHARVA UNIVERSITY MUMBAI',
@@ -64,7 +64,7 @@ export const HACKATHONS = [
     footerLeft: 'Atharva University',
     btnColor: 'text-accentCyan',
     certTitle: "IEEE Techithon '26 Hackdeck 2.0 Certificate",
-    certSubtitle: 'Atharva University Mumbai &amp; IEEE Atharva SBC'
+    certSubtitle: 'Atharva University Mumbai & IEEE Atharva SBC'
   },
   {
     org: 'DJSCE MUMBAI',
@@ -72,7 +72,7 @@ export const HACKATHONS = [
     accentHex: '#4F8EF7',
     badge: { label: 'ROUND 1', cls: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
     title: 'LOC 8.0 Hackathon',
-    subtitle: 'ACM DJSCE &amp; IIC Innovation Council',
+    subtitle: 'ACM DJSCE & IIC Innovation Council',
     subtitleColor: 'text-accentBlue',
     img: 'assets/certificates/loc_8_hackathon_djsce.jpg',
     imgAlt: 'LOC 8.0 Hackathon Certificate Photo',
@@ -80,7 +80,7 @@ export const HACKATHONS = [
     footerLeft: 'Date: 21-22 Feb 2026',
     btnColor: 'text-accentBlue',
     certTitle: 'LOC 8.0 Hackathon Certificate',
-    certSubtitle: 'DJ Sanghvi College of Engineering (DJSCE ACM &amp; IIC)'
+    certSubtitle: 'DJ Sanghvi College of Engineering (DJSCE ACM & IIC)'
   },
   {
     org: 'SPCE / SPIT',
@@ -96,7 +96,7 @@ export const HACKATHONS = [
     footerLeft: 'SPCE Mumbai',
     btnColor: 'text-accentBlue',
     certTitle: 'SPIT Hackathon Round 1 Certificate',
-    certSubtitle: 'Sardar Patel College of Engineering &amp; SPIT'
+    certSubtitle: 'Sardar Patel College of Engineering & SPIT'
   },
   {
     org: 'GOOGLE',
@@ -128,6 +128,6 @@ export const HACKATHONS = [
     footerLeft: 'Date: 20-21 April 2026',
     btnColor: 'text-accentViolet',
     certTitle: 'Hackprep 7.0 Workshop Certificate',
-    certSubtitle: 'DJS Unicode &amp; HOD Computer Dept, DJSCE'
+    certSubtitle: 'DJS Unicode & HOD Computer Dept, DJSCE'
   }
 ];
