@@ -35,7 +35,7 @@ export default function Education() {
             <h3 className="text-xl font-bold mt-3 text-textPrimary">HSC (12th Grade — Science)</h3>
             <p className="text-sm text-textSecondary font-medium mt-1">R.P. Junior College</p>
             <p className="text-textSecondary text-sm mt-2 font-mono">
-              Academic Score: <span className="text-accentGold font-bold">78.67%</span>
+              Academic Score: <span className="text-accentGold font-bold">81%</span>
             </p>
           </div>
 
