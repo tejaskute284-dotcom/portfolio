@@ -310,7 +310,7 @@ export default function TechnicalSkills() {
 
 
       {/* ── category summary cards ── */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(6,1fr)', gap:12, maxWidth:900, margin:'32px auto 0', padding:'0 24px' }} className="grid-cols-3 md:grid-cols-6">
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-[900px] mx-auto mt-8 px-6">
         {[
           { label:'Languages',  count:5  },
           { label:'Frontend',   count:7  },
