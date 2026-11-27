@@ -199,9 +199,9 @@ export default function TechnicalSkills() {
         </div>
       </div>
 
-      {/* ── orbital stage — desktop ── */}
+      {/* ── orbital stage — all screens ── */}
       <div
-        className="hidden md:block"
+        className="block"
         style={{ position:'relative', width:'100%', overflow:'hidden' }}
       >
         {/* canvas background */}
@@ -213,7 +213,8 @@ export default function TechnicalSkills() {
         {/* SVG: viewBox keeps everything in proportion; overflow visible so badges aren't clipped */}
         <svg
           viewBox={`0 0 ${VW} ${VH}`}
-          style={{ display:'block', width:'100%', height:'auto', minHeight:380, maxHeight:600, position:'relative', zIndex:1, overflow:'visible' }}
+          className="w-full h-auto md:min-h-[380px] max-h-[600px]"
+          style={{ display:'block', position:'relative', zIndex:1, overflow:'visible' }}
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
